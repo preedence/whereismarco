@@ -1,0 +1,32 @@
+name: Simulate SPOT position
+
+on:
+  workflow_dispatch: {}
+  schedule:
+    - cron: "0 * * * *"   # ogni ora (UTC)
+
+jobs:
+  simulate-spot:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write    # necessario per fare push con GITHUB_TOKEN
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Generate fake positions.geojson
+        run: |
+          python scripts/simulate_spot.py
+
+      - name: Commit and push positions.geojson
+        uses: stefanzweifel/git-auto-commit-action@v7
+        with:
+          file_pattern: data/positions.geojson
+          commit_message: "Simulazione SPOT: aggiorna positions.geojson"
