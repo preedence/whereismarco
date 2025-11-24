@@ -85,6 +85,27 @@ map.on("load", () => {
     },
   });
 
+  // Sorgente per i punti di fine giornata
+  map.addSource("day-ends", {
+    type: "geojson",
+    data: {
+      type: "FeatureCollection",
+      features: [],
+    },
+  });
+
+  map.addLayer({
+    id: "day-end-points",
+    type: "circle",
+    source: "day-ends",
+    paint: {
+      "circle-radius": 5,
+      "circle-color": "#38536b", // blu/steel
+      "circle-stroke-color": "#ffffff",
+      "circle-stroke-width": 1.5,
+    },
+  });
+
   // Primo aggiornamento + refresh periodico
   updateData().catch((err) => {
     console.error(err);
@@ -100,7 +121,7 @@ map.on("load", () => {
   }, 60000); // ogni 60 secondi
 });
 
-// Funzione che aggiorna traccia + punto live
+// Funzione che aggiorna traccia + punto live + punti fine giornata
 async function updateData() {
   const geo = await fetchPositions();
 
@@ -133,23 +154,65 @@ async function updateData() {
   const [lon, lat] = last.geometry.coordinates;
   const ts = last.properties?.timestamp || "";
 
+  // Calcola i punti "fine giornata"
+  const dayEnds = [];
+  let lastDate = null;
+  let currentLast = null;
+
+  for (const f of features) {
+    const tsF = f.properties?.timestamp;
+    if (!tsF) {
+      currentLast = f;
+      continue;
+    }
+    const d = tsF.slice(0, 10); // "YYYY-MM-DD"
+    if (d !== lastDate) {
+      if (currentLast) dayEnds.push(currentLast);
+      lastDate = d;
+    }
+    currentLast = f;
+  }
+  if (currentLast) dayEnds.push(currentLast);
+
   // Aggiorna sorgenti sulla mappa
   map.getSource("track").setData(trackFeature);
   map.getSource("live").setData({
     type: "FeatureCollection",
     features: [last],
   });
+  map.getSource("day-ends").setData({
+    type: "FeatureCollection",
+    features: dayEnds,
+  });
 
   // Aggiorna coordinate e timestamp nel pannello
   updateInfo(lat, lon, ts);
 
-  // Opzionale: centra la mappa sull'ultima posizione
-  map.flyTo({
-    center: [lon, lat],
-    zoom: 7,
-    speed: 0.8,
-    curve: 1.4,
-  });
+  // Adatta la mappa per mostrare l'intero percorso
+  const coords = features.map((f) => f.geometry.coordinates);
+  let minLon = coords[0][0];
+  let maxLon = coords[0][0];
+  let minLat = coords[0][1];
+  let maxLat = coords[0][1];
+
+  for (const [cLon, cLat] of coords) {
+    if (cLon < minLon) minLon = cLon;
+    if (cLon > maxLon) maxLon = cLon;
+    if (cLat < minLat) minLat = cLat;
+    if (cLat > maxLat) maxLat = cLat;
+  }
+
+  map.fitBounds(
+    [
+      [minLon, minLat],
+      [maxLon, maxLat],
+    ],
+    {
+      padding: 50,
+      maxZoom: 8,
+      duration: 800,
+    }
+  );
 }
 
 // Carica il riepilogo da data/summary.json e popola il pannello
