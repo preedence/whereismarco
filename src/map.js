@@ -91,6 +91,8 @@ map.on("load", () => {
     const s = document.getElementById("summary-content");
     if (s) s.textContent = "Errore caricamento dati";
   });
+  
+  loadSummary();
 
   setInterval(() => {
     updateData().catch((err) => console.error(err));

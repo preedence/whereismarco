@@ -1,0 +1,12 @@
+{
+  "days": [
+    {
+      "date": "2025-04-01",
+      "label": "Milano → Brescia",
+      "distance_km": 105.3,
+      "elevation_up_m": 920,
+      "moving_time_h": 4.8,
+      "gpx_file": "2025-04-01-milano-brescia.gpx"
+    }
+  ]
+}
