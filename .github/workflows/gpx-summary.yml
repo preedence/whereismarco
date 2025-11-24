@@ -1,0 +1,31 @@
+name: Generate GPX summary
+
+on:
+  push:
+    paths:
+      - 'gpx/**.gpx'
+  workflow_dispatch:
+
+jobs:
+  summary:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: Install deps
+        run: pip install gpxpy
+
+      - name: Generate summary
+        run: python scripts/generate_summary.py
+
+      - name: Commit summary
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "Aggiorna summary.json dai GPX"
+          file_pattern: data/summary.json

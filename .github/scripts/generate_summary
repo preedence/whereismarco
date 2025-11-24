@@ -1,0 +1,31 @@
+#!/usr/bin/env python3
+from pathlib import Path
+import json
+import gpxpy
+
+GPX_DIR = Path("gpx")
+OUT = Path("data/summary.json")
+
+def analyze_gpx(path):
+    g = gpxpy.parse(path.read_text())
+    dist_km = g.length_3d() / 1000.0
+    up, down = g.get_uphill_downhill()
+    name = path.stem
+    return {"file": path.name, "name": name, "distance_km": round(dist_km,2), "up_m": round(up), "down_m": round(down)}
+
+def main():
+    items = []
+    if not GPX_DIR.exists():
+        OUT.write_text(json.dumps(items, indent=2))
+        return
+    for f in sorted(GPX_DIR.glob("*.gpx")):
+        try:
+            items.append(analyze_gpx(f))
+        except Exception as e:
+            print("Errore su", f, e)
+    OUT.parent.mkdir(parents=True, exist_ok=True)
+    OUT.write_text(json.dumps(items, indent=2))
+    print("Wrote", OUT)
+
+if __name__ == "__main__":
+    main()

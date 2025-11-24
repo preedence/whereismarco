@@ -1,0 +1,11 @@
+# Python
+__pycache__/
+*.pyc
+
+# Local data
+data/*
+!data/positions.geojson
+!data/summary.json
+
+# GPX (you may want to keep them locally until ready)
+gpx/*.gpx

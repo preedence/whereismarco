@@ -1,0 +1,20 @@
+:root{
+  --sand: #f5f2e9;
+  --rust: #c66a3a;
+  --ochre: #d2b574;
+  --tundra: #5a6e50;
+  --steel: #38536b;
+}
+
+html,body{ height:100%; margin:0; font-family: Inter, system-ui, sans-serif; background:var(--sand); color:var(--steel); }
+#map { position: absolute; inset: 0 300px 0 0; }
+#panel {
+  position: absolute; right:0; top:0; bottom:0; width:300px;
+  background: rgba(255,255,255,0.95);
+  padding:18px; box-shadow: -8px 0 20px rgba(20,20,20,0.05);
+  overflow:auto;
+}
+#panel h1{ margin:0 0 10px 0; font-size:18px; color:var(--steel); }
+#info div{ margin-bottom:8px; }
+#summary h2{ margin-top:14px; font-size:15px; }
+.marker-live { background: var(--rust); width:14px; height:14px; border-radius:50%; border:2px solid white; box-shadow: 0 2px 6px rgba(0,0,0,0.2); }
