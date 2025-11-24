@@ -2,10 +2,8 @@
 __pycache__/
 *.pyc
 
-# Local data
-data/*
-!data/positions.geojson
-!data/summary.json
+# Local data (tieni tutti i file, non ignoriamo data/)
+# (se vorrai ignorare qualcosa di specifico lo aggiungiamo dopo)
 
-# GPX (you may want to keep them locally until ready)
-gpx/*.gpx
+# GPX (vogliamo TRACCIARE i .gpx, quindi non ignorarli)
+# gpx/*.gpx
