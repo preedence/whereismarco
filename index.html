@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Milano – Tokyo Live</title>
+
+    <!-- MapLibre -->
+    <link
+      href="https://unpkg.com/maplibre-gl/dist/maplibre-gl.css"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/maplibre-gl/dist/maplibre-gl.js"></script>
+
+    <!-- Il tuo CSS ora sta in src/style.css -->
+    <link rel="stylesheet" href="src/style.css" />
+  </head>
+
+  <body>
+    <div id="map"></div>
+
+    <aside id="panel">
+      <h1>Milano – Tokyo Live</h1>
+
+      <div id="info">
+        <div>
+          Ultima posizione:
+          <span id="last-pos">—</span>
+        </div>
+        <div>
+          Timestamp:
+          <span id="last-time">—</span>
+        </div>
+      </div>
+
+      <div id="summary">
+        <h2>Riepilogo</h2>
+        <div id="summary-content">Caricamento…</div>
+      </div>
+    </aside>
+
+    <!-- La logica della mappa ora è in src/map.js -->
+    <script src="src/map.js"></script>
+  </body>
+</html>

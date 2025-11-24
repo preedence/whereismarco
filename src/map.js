@@ -1,86 +1,150 @@
-// map.js — dipende da MapLibre GL
-const MAP_STYLE = '/styles/map-style.json';
-const POS_URL = '/data/positions.geojson';
+// Percorsi relativi alla pagina index.html (che ora è in root)
+const MAP_STYLE_URL = "styles/map-style.json";
+const POSITIONS_URL = "data/positions.geojson";
 
+// Centro iniziale (Milano) e zoom di partenza
+const INITIAL_CENTER = [9.19, 45.4642];
+const INITIAL_ZOOM = 4;
+
+// Inizializza la mappa MapLibre
 const map = new maplibregl.Map({
-  container: 'map',
-  style: MAP_STYLE,
-  center: [9.19, 45.4642],
-  zoom: 4
+  container: "map",
+  style: MAP_STYLE_URL,
+  center: INITIAL_CENTER,
+  zoom: INITIAL_ZOOM,
 });
 
-map.on('load', () => {
-  // sorgente e layer per la traccia
-  map.addSource('track', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
-  map.addLayer({
-    id: 'track-line',
-    type: 'line',
-    source: 'track',
-    layout: { 'line-join': 'round', 'line-cap': 'round' },
-    paint: { 'line-color': '#d2b574', 'line-width': 4, 'line-opacity': 0.9 }
-  });
+// Aggiorna UI info
+function updateInfo(lat, lon, timestamp) {
+  const posEl = document.getElementById("last-pos");
+  const timeEl = document.getElementById("last-time");
 
-  // source & layer per marker live
-  map.addSource('live', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
-  map.addLayer({
-    id: 'live-point',
-    type: 'circle',
-    source: 'live',
-    paint: {
-      'circle-radius': 8,
-      'circle-color': '#c66a3a',
-      'circle-stroke-color': '#fff',
-      'circle-stroke-width': 2
-    }
-  });
-
-  // prima fetch
-  updateData();
-  // refresh ogni 60s
-  setInterval(updateData, 60000);
-});
-
-async function updateData() {
-  try {
-    const res = await fetch(POS_URL + '?_=' + Date.now());
-    if (!res.ok) throw new Error('Impossibile recuperare positions.geojson');
-    const geo = await res.json();
-
-    // aggiorna traccia se presente
-    const trackFeature = {
-      type: 'FeatureCollection',
-      features: []
-    };
-
-    if (geo.features && geo.features.length) {
-      // assume: punti ordinati da vecchi a nuovi
-      trackFeature.features = [{
-        type: 'Feature',
-        geometry: {
-          type: 'LineString',
-          coordinates: geo.features.map(f => f.geometry.coordinates)
-        }
-      }];
-
-      // ultimo punto
-      const last = geo.features[geo.features.length - 1];
-      map.getSource('live').setData({
-        type: 'FeatureCollection',
-        features: [last]
-      });
-
-      map.getSource('track').setData(trackFeature);
-
-      const coords = last.geometry.coordinates;
-      document.getElementById('lastpos').innerText = coords[1].toFixed(5) + ', ' + coords[0].toFixed(5);
-      document.getElementById('lasttime').innerText = last.properties.timestamp || '—';
-      // opzionale: centra la mappa sul marker se vuoi
-      // map.flyTo({ center: coords, zoom: 7 });
-    } else {
-      document.getElementById('summary-content').innerText = 'Nessuna posizione ancora.';
-    }
-  } catch (err) {
-    console.error(err);
-    document.getElementById('summary-content').innerText = 'Errore caricamento dati';
+  if (!posEl || !timeEl) {
+    return;
   }
+
+  posEl.textContent = `${lat.toFixed(5)}, ${lon.toFixed(5)}`;
+  timeEl.textContent = timestamp || "—";
+}
+
+// Carica dati dal GeoJSON generato (positions.geojson)
+async function fetchPositions() {
+  const url = `${POSITIONS_URL}?cache=${Date.now()}`;
+
+  const res = await fetch(url);
+  if (!res.ok) {
+    throw new Error("Impossibile caricare positions.geojson");
+  }
+  return res.json();
+}
+
+// Dopo che lo stile è caricato, aggiungo sorgenti e layer
+map.on("load", () => {
+  // Sorgente per la traccia (linea)
+  map.addSource("track", {
+    type: "geojson",
+    data: {
+      type: "FeatureCollection",
+      features: [],
+    },
+  });
+
+  map.addLayer({
+    id: "track-line",
+    type: "line",
+    source: "track",
+    layout: {
+      "line-join": "round",
+      "line-cap": "round",
+    },
+    paint: {
+      "line-color": "#d2b574", // ocra
+      "line-width": 4,
+      "line-opacity": 0.9,
+    },
+  });
+
+  // Sorgente per il punto live
+  map.addSource("live", {
+    type: "geojson",
+    data: {
+      type: "FeatureCollection",
+      features: [],
+    },
+  });
+
+  map.addLayer({
+    id: "live-point",
+    type: "circle",
+    source: "live",
+    paint: {
+      "circle-radius": 8,
+      "circle-color": "#c66a3a", // ruggine
+      "circle-stroke-color": "#ffffff",
+      "circle-stroke-width": 2,
+    },
+  });
+
+  // Primo aggiornamento + refresh periodico
+  updateData().catch((err) => {
+    console.error(err);
+    const s = document.getElementById("summary-content");
+    if (s) s.textContent = "Errore caricamento dati";
+  });
+
+  setInterval(() => {
+    updateData().catch((err) => console.error(err));
+  }, 60000); // ogni 60 secondi
+});
+
+// Funzione che aggiorna traccia + punto live
+async function updateData() {
+  const geo = await fetchPositions();
+
+  // Ci aspettiamo un FeatureCollection con punti ordinati cronologicamente
+  if (!geo || !geo.features || !geo.features.length) {
+    const s = document.getElementById("summary-content");
+    if (s) s.textContent = "Nessuna posizione ancora.";
+    return;
+  }
+
+  const features = geo.features;
+
+  // Costruisci la LineString per la traccia
+  const trackFeature = {
+    type: "FeatureCollection",
+    features: [
+      {
+        type: "Feature",
+        geometry: {
+          type: "LineString",
+          coordinates: features.map((f) => f.geometry.coordinates),
+        },
+        properties: {},
+      },
+    ],
+  };
+
+  // Ultimo punto (più recente)
+  const last = features[features.length - 1];
+  const [lon, lat] = last.geometry.coordinates;
+  const ts = last.properties?.timestamp || "";
+
+  // Aggiorna sorgenti sulla mappa
+  map.getSource("track").setData(trackFeature);
+  map.getSource("live").setData({
+    type: "FeatureCollection",
+    features: [last],
+  });
+
+  // Aggiorna coordinate e timestamp nel pannello
+  updateInfo(lat, lon, ts);
+
+  // Opzionale: centra la mappa sull'ultima posizione
+  map.flyTo({
+    center: [lon, lat],
+    zoom: 7,
+    speed: 0.8,
+    curve: 1.4,
+  });
 }
