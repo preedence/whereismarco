@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <title>Milano → Tokyo – Mappa live</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+    <!-- MapLibre CSS/JS -->
+    <link
+      href="https://unpkg.com/maplibre-gl@3.6.1/dist/maplibre-gl.css"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/maplibre-gl@3.6.1/dist/maplibre-gl.js"></script>
+
+    <!-- Stili minimi: mappa a tutto schermo -->
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
+      #map {
+        position: absolute;
+        inset: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+
+    <!-- Riusa lo stesso JS della pagina principale -->
+    <script src="src/map.js"></script>
+  </body>
+</html>
