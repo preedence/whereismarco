@@ -91,7 +91,8 @@ map.on("load", () => {
     const s = document.getElementById("summary-content");
     if (s) s.textContent = "Errore caricamento dati";
   });
-  
+
+  // Carica il riepilogo (se esiste data/summary.json)
   loadSummary();
 
   setInterval(() => {
@@ -149,4 +150,66 @@ async function updateData() {
     speed: 0.8,
     curve: 1.4,
   });
+}
+
+// Carica il riepilogo da data/summary.json e popola il pannello
+async function loadSummary() {
+  const el = document.getElementById("summary-content");
+  if (!el) return;
+
+  try {
+    const res = await fetch("data/summary.json?cache=" + Date.now());
+    if (!res.ok) {
+      el.textContent = "Nessun riepilogo disponibile.";
+      return;
+    }
+
+    const data = await res.json();
+    if (!data.days || !data.days.length) {
+      el.textContent = "Nessuna tappa ancora.";
+      return;
+    }
+
+    const rows = data.days
+      .map((d) => {
+        const dist = d.distance_km?.toFixed
+          ? d.distance_km.toFixed(1)
+          : d.distance_km;
+        const up = d.elevation_up_m ?? "—";
+        const time = d.moving_time_h?.toFixed
+          ? d.moving_time_h.toFixed(1)
+          : d.moving_time_h ?? "—";
+
+        return `
+          <tr>
+            <td>${d.date}</td>
+            <td>${d.label || ""}</td>
+            <td style="text-align:right;">${dist ?? "—"}</td>
+            <td style="text-align:right;">${up}</td>
+            <td style="text-align:right;">${time}</td>
+          </tr>
+        `;
+      })
+      .join("");
+
+    el.innerHTML = `
+      <table style="width:100%; border-collapse:collapse; font-size:13px;">
+        <thead>
+          <tr>
+            <th style="text-align:left;">Data</th>
+            <th style="text-align:left;">Tappa</th>
+            <th style="text-align:right;">km</th>
+            <th style="text-align:right;">↑ m</th>
+            <th style="text-align:right;">h</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${rows}
+        </tbody>
+      </table>
+    `;
+  } catch (err) {
+    console.error(err);
+    el.textContent = "Errore nel caricamento del riepilogo.";
+  }
 }
