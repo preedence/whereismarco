@@ -3,8 +3,27 @@
   "features": [
     {
       "type": "Feature",
-      "geometry": { "type": "Point", "coordinates": [9.19, 45.4642] },
-      "properties": { "timestamp": "2025-11-24T22:00:00Z", "source": "mock" }
+      "geometry": {
+        "type": "Point",
+        "coordinates": [9.19, 45.4642]
+      },
+      "properties": {
+        "timestamp": "2025-11-24T12:00:00Z",
+        "label": "Milano (simulato)",
+        "source": "manual_mock"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [13.7768, 45.6500]
+      },
+      "properties": {
+        "timestamp": "2025-11-24T18:00:00Z",
+        "label": "Trieste (simulato)",
+        "source": "manual_mock"
+      }
     }
   ]
 }
