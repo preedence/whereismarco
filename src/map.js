@@ -2,7 +2,7 @@
 const MAP_STYLE_URL = "styles/map-style.json";
 const POSITIONS_URL = "data/positions.geojson";
 
-// Centro iniziale (Milano) e zoom di partenza
+// Centro iniziale e zoom di partenza
 const INITIAL_CENTER = [9.19, 45.4642];
 const INITIAL_ZOOM = 4;
 
@@ -17,7 +17,7 @@ const map = new maplibregl.Map({
   zoom: INITIAL_ZOOM,
 });
 
-// Aggiorna UI info (al momento non usata, ma tenuta per estensioni future)
+// Aggiorna UI info (al momento non usata)
 function updateInfo(lat, lon, timestamp) {
   const posEl = document.getElementById("last-pos");
   const timeEl = document.getElementById("last-time");
@@ -128,7 +128,7 @@ map.on("load", () => {
         "text-halo-width": 2,
       },
     },
-    "live-point" // sotto il punto live, sopra la traccia
+    "live-point"
   );
 
   // Popup con riepilogo giornata sui pallini di fine tappa
@@ -164,10 +164,10 @@ map.on("load", () => {
     if (s) s.textContent = "Errore caricamento dati";
   });
 
-  // Carica il riepilogo (se esiste data/summary.json)
+  // Riepilogo (summary.json)
   loadSummary();
 
-  // Carica marker foto geotaggate (se esiste data/photos.json)
+  // Foto geotaggate (photos.json)
   loadPhotos();
 
   setInterval(() => {
@@ -277,4 +277,224 @@ async function updateData() {
       clone.properties.summary_html = `
         <strong>${dateStr}</strong><br>
         ${s.label || ""}<br>
-        ${dist} km, ↑
+        ${dist} km, ↑ ${up} m, ${time} h
+      `;
+    }
+
+    dayEnds.push(clone);
+  }
+
+  // Aggiorna sorgenti sulla mappa
+  map.getSource("track").setData(trackFeature);
+  map.getSource("live").setData({
+    type: "FeatureCollection",
+    features: [last],
+  });
+  map.getSource("day-ends").setData({
+    type: "FeatureCollection",
+    features: dayEnds,
+  });
+
+  // (updateInfo al momento non trova gli elementi e quindi non fa nulla)
+  updateInfo(lat, lon, ts);
+
+  // Adatta la mappa per mostrare l'intero percorso
+  const coords = features.map((f) => f.geometry.coordinates);
+  let minLon = coords[0][0];
+  let maxLon = coords[0][0];
+  let minLat = coords[0][1];
+  let maxLat = coords[0][1];
+
+  for (const [cLon, cLat] of coords) {
+    if (cLon < minLon) minLon = cLon;
+    if (cLon > maxLon) maxLon = cLon;
+    if (cLat < minLat) minLat = cLat;
+    if (cLat > maxLat) maxLat = cLat;
+  }
+
+  map.fitBounds(
+    [
+      [minLon, minLat],
+      [maxLon, maxLat],
+    ],
+    {
+      padding: 50,
+      maxZoom: 8,
+      duration: 800,
+    }
+  );
+}
+
+// Carica il riepilogo da data/summary.json e popola pannello + totali
+async function loadSummary() {
+  const el = document.getElementById("summary-content");
+  if (!el) return;
+
+  try {
+    const res = await fetch("data/summary.json?cache=" + Date.now());
+    if (!res.ok) {
+      el.textContent = "Nessun riepilogo disponibile.";
+      return;
+    }
+
+    const data = await res.json();
+    if (!data.days || !data.days.length) {
+      el.textContent = "Nessuna tappa ancora.";
+      return;
+    }
+
+    const days = data.days;
+
+    // Mappa date -> oggetto riepilogo per collegare tappe ai pallini
+    summaryByDate = {};
+    days.forEach((d) => {
+      if (d.date) {
+        summaryByDate[d.date] = d;
+      }
+    });
+
+    // Calcolo totali
+    const totalDays = days.length;
+    const totalKm = days.reduce(
+      (sum, d) => sum + (typeof d.distance_km === "number" ? d.distance_km : 0),
+      0
+    );
+    const totalUp = days.reduce(
+      (sum, d) =>
+        sum + (typeof d.elevation_up_m === "number" ? d.elevation_up_m : 0),
+      0
+    );
+    const totalHours = days.reduce(
+      (sum, d) =>
+        sum + (typeof d.moving_time_h === "number" ? d.moving_time_h : 0),
+      0
+    );
+
+    const avgKmDay = totalDays > 0 ? totalKm / totalDays : 0;
+    const avgSpeed = totalHours > 0 ? totalKm / totalHours : 0;
+
+    // Giorno più lungo per distanza
+    let longest = null;
+    for (const d of days) {
+      if (
+        typeof d.distance_km === "number" &&
+        (!longest || d.distance_km > longest.distance_km)
+      ) {
+        longest = d;
+      }
+    }
+
+    // Aggiorna i numeri nel blocco info (se esistono)
+    const daysEl = document.getElementById("total-days");
+    const kmEl = document.getElementById("total-km");
+    const upEl = document.getElementById("total-up");
+    const hoursEl = document.getElementById("total-hours");
+    const avgKmEl = document.getElementById("avg-km-day");
+    const avgSpeedEl = document.getElementById("avg-speed");
+    const longestEl = document.getElementById("longest-day");
+
+    if (daysEl) daysEl.textContent = totalDays.toString();
+    if (kmEl) kmEl.textContent = totalKm.toFixed(1);
+    if (upEl) upEl.textContent = Math.round(totalUp).toString();
+    if (hoursEl) hoursEl.textContent = totalHours.toFixed(1);
+    if (avgKmEl) avgKmEl.textContent = avgKmDay.toFixed(1);
+    if (avgSpeedEl) avgSpeedEl.textContent = avgSpeed.toFixed(1);
+    if (longestEl) {
+      if (longest) {
+        const distStr =
+          typeof longest.distance_km === "number"
+            ? longest.distance_km.toFixed(1)
+            : longest.distance_km;
+        longestEl.textContent = `${longest.date} – ${
+          longest.label || ""
+        } (${distStr} km)`;
+      } else {
+        longestEl.textContent = "—";
+      }
+    }
+
+    // Tabella giornaliera
+    const rows = days
+      .map((d) => {
+        const dist =
+          typeof d.distance_km === "number"
+            ? d.distance_km.toFixed(1)
+            : d.distance_km ?? "—";
+        const up = d.elevation_up_m ?? "—";
+        const time =
+          typeof d.moving_time_h === "number"
+            ? d.moving_time_h.toFixed(1)
+            : d.moving_time_h ?? "—";
+
+        return `
+          <tr>
+            <td>${d.date}</td>
+            <td>${d.label || ""}</td>
+            <td style="text-align:right;">${dist}</td>
+            <td style="text-align:right;">${up}</td>
+            <td style="text-align:right;">${time}</td>
+          </tr>
+        `;
+      })
+      .join("");
+
+    el.innerHTML = `
+      <table style="width:100%; border-collapse:collapse; font-size:13px;">
+        <thead>
+          <tr>
+            <th style="text-align:left;">Data</th>
+            <th style="text-align:left;">Tappa</th>
+            <th style="text-align:right;">km</th>
+            <th style="text-align:right;">↑ m</th>
+            <th style="text-align:right;">h</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${rows}
+        </tbody>
+      </table>
+    `;
+  } catch (err) {
+    console.error(err);
+    el.textContent = "Errore nel caricamento del riepilogo.";
+  }
+}
+
+// Carica foto geotaggate da data/photos.json e aggiunge marker con popup
+async function loadPhotos() {
+  try {
+    const res = await fetch("data/photos.json?cache=" + Date.now());
+    if (!res.ok) {
+      return;
+    }
+    const data = await res.json();
+    if (!data.photos || !data.photos.length) {
+      return;
+    }
+
+    data.photos.forEach((p) => {
+      if (typeof p.lon !== "number" || typeof p.lat !== "number") return;
+
+      const popupHtml = `
+        <div style="max-width:220px;">
+          <strong>${p.title || "Foto"}</strong><br>
+          <img src="${p.file}" style="width:100%;margin-top:6px;border-radius:4px;">
+          ${
+            p.caption
+              ? `<div style="margin-top:6px;font-size:12px;">${p.caption}</div>`
+              : ""
+          }
+        </div>
+      `;
+
+      const popup = new maplibregl.Popup({ offset: 20 }).setHTML(popupHtml);
+
+      new maplibregl.Marker({ color: "#c66a3a" })
+        .setLngLat([p.lon, p.lat])
+        .setPopup(popup)
+        .addTo(map);
+    });
+  } catch (err) {
+    console.error("Errore nel caricamento delle foto:", err);
+  }
+}
