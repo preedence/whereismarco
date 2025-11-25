@@ -1,6 +1,7 @@
 {
   "version": 8,
-  "name": "MilanoTokyo-Style",
+  "name": "Eurasia crossing",
+  "glyphs": "https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf",
   "sources": {
     "osm": {
       "type": "raster",
@@ -9,7 +10,19 @@
     }
   },
   "layers": [
-    { "id": "background", "type": "background", "paint": { "background-color": "#f5f2e9" } },
-    { "id": "osm", "type": "raster", "source": "osm", "minzoom": 0, "maxzoom": 19 }
+    {
+      "id": "background",
+      "type": "background",
+      "paint": {
+        "background-color": "#f5f2e9"
+      }
+    },
+    {
+      "id": "osm",
+      "type": "raster",
+      "source": "osm",
+      "minzoom": 0,
+      "maxzoom": 19
+    }
   ]
 }
