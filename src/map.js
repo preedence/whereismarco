@@ -94,17 +94,38 @@ map.on("load", () => {
     },
   });
 
+  // Cerchietti fine giornata
   map.addLayer({
     id: "day-end-points",
     type: "circle",
     source: "day-ends",
     paint: {
-      "circle-radius": 5,
+      "circle-radius": 6,
       "circle-color": "#38536b", // blu/steel
       "circle-stroke-color": "#ffffff",
-      "circle-stroke-width": 1.5,
+      "circle-stroke-width": 2,
     },
   });
+
+  // Numeri sopra i cerchi fine giornata
+  map.addLayer(
+    {
+      id: "day-end-labels",
+      type: "symbol",
+      source: "day-ends",
+      layout: {
+        "text-field": ["to-string", ["get", "dayIndex"]],
+        "text-size": 11,
+        "text-font": ["Open Sans Regular", "Arial Unicode MS Regular"],
+        "text-anchor": "center",
+        "text-offset": [0, 0.05],
+      },
+      paint: {
+        "text-color": "#ffffff",
+      },
+    },
+    "live-point" // sotto il punto live, sopra la traccia
+  );
 
   // Primo aggiornamento + refresh periodico
   updateData().catch((err) => {
@@ -154,25 +175,34 @@ async function updateData() {
   const [lon, lat] = last.geometry.coordinates;
   const ts = last.properties?.timestamp || "";
 
-  // Calcola i punti "fine giornata"
+  // Calcola i punti "fine giornata" con indice progressivo
   const dayEnds = [];
   let lastDate = null;
   let currentLast = null;
+  let dayCount = 0;
 
   for (const f of features) {
     const tsF = f.properties?.timestamp;
-    if (!tsF) {
-      currentLast = f;
-      continue;
-    }
-    const d = tsF.slice(0, 10); // "YYYY-MM-DD"
+    const d = tsF ? tsF.slice(0, 10) : null; // "YYYY-MM-DD"
     if (d !== lastDate) {
-      if (currentLast) dayEnds.push(currentLast);
+      if (currentLast) {
+        dayCount++;
+        const clone = JSON.parse(JSON.stringify(currentLast));
+        clone.properties = clone.properties || {};
+        clone.properties.dayIndex = dayCount;
+        dayEnds.push(clone);
+      }
       lastDate = d;
     }
     currentLast = f;
   }
-  if (currentLast) dayEnds.push(currentLast);
+  if (currentLast) {
+    dayCount++;
+    const clone = JSON.parse(JSON.stringify(currentLast));
+    clone.properties = clone.properties || {};
+    clone.properties.dayIndex = dayCount;
+    dayEnds.push(clone);
+  }
 
   // Aggiorna sorgenti sulla mappa
   map.getSource("track").setData(trackFeature);
