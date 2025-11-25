@@ -6,6 +6,9 @@ const POSITIONS_URL = "data/positions.geojson";
 const INITIAL_CENTER = [9.19, 45.4642];
 const INITIAL_ZOOM = 4;
 
+// Riepilogo per data (riempito da loadSummary)
+let summaryByDate = {};
+
 // Inizializza la mappa MapLibre
 const map = new maplibregl.Map({
   container: "map",
@@ -14,8 +17,7 @@ const map = new maplibregl.Map({
   zoom: INITIAL_ZOOM,
 });
 
-// Aggiorna UI info (attualmente non usata perché abbiamo riepilogo totale,
-// ma resta pronta se in futuro vuoi riaggiungere "ultima posizione")
+// Aggiorna UI info (al momento non usata, ma tenuta per estensioni future)
 function updateInfo(lat, lon, timestamp) {
   const posEl = document.getElementById("last-pos");
   const timeEl = document.getElementById("last-time");
@@ -101,7 +103,7 @@ map.on("load", () => {
     type: "circle",
     source: "day-ends",
     paint: {
-      "circle-radius": 8,
+      "circle-radius": 10,
       "circle-color": "#38536b", // blu/steel
       "circle-stroke-color": "#ffffff",
       "circle-stroke-width": 2,
@@ -116,18 +118,44 @@ map.on("load", () => {
       source: "day-ends",
       layout: {
         "text-field": ["to-string", ["get", "dayIndex"]],
-        "text-size": 12,
+        "text-size": 14,
         "text-font": ["Open Sans Regular", "Arial Unicode MS Regular"],
         "text-anchor": "center",
       },
       paint: {
         "text-color": "#ffffff",
         "text-halo-color": "#000000",
-        "text-halo-width": 1.2,
+        "text-halo-width": 2,
       },
     },
     "live-point" // sotto il punto live, sopra la traccia
   );
+
+  // Popup con riepilogo giornata sui pallini di fine tappa
+  const dayEndPopup = new maplibregl.Popup({
+    closeButton: false,
+    closeOnClick: false,
+  });
+
+  function showDayEndPopup(e) {
+    const f = e.features && e.features[0];
+    if (!f) return;
+    const html =
+      f.properties && f.properties.summary_html
+        ? f.properties.summary_html
+        : `<strong>Giorno ${f.properties?.dayIndex || ""}</strong>`;
+    map.getCanvas().style.cursor = "pointer";
+    dayEndPopup.setLngLat(f.geometry.coordinates).setHTML(html).addTo(map);
+  }
+
+  function hideDayEndPopup() {
+    map.getCanvas().style.cursor = "";
+    dayEndPopup.remove();
+  }
+
+  map.on("mouseenter", "day-end-points", showDayEndPopup);
+  map.on("mouseleave", "day-end-points", hideDayEndPopup);
+  map.on("click", "day-end-points", showDayEndPopup);
 
   // Primo aggiornamento + refresh periodico
   updateData().catch((err) => {
@@ -177,7 +205,7 @@ async function updateData() {
   const [lon, lat] = last.geometry.coordinates;
   const ts = last.properties?.timestamp || "";
 
-  // Calcola i punti "fine giornata" con indice progressivo
+  // Calcola i punti "fine giornata" con indice progressivo e riepilogo HTML
   const dayEnds = [];
   let lastDate = null;
   let currentLast = null;
@@ -192,17 +220,64 @@ async function updateData() {
         const clone = JSON.parse(JSON.stringify(currentLast));
         clone.properties = clone.properties || {};
         clone.properties.dayIndex = dayCount;
+
+        const dateStr = clone.properties.timestamp
+          ? clone.properties.timestamp.slice(0, 10)
+          : null;
+        const s = dateStr ? summaryByDate[dateStr] : null;
+        if (s) {
+          const dist =
+            typeof s.distance_km === "number"
+              ? s.distance_km.toFixed(1)
+              : s.distance_km ?? "—";
+          const up = s.elevation_up_m ?? "—";
+          const time =
+            typeof s.moving_time_h === "number"
+              ? s.moving_time_h.toFixed(1)
+              : s.moving_time_h ?? "—";
+
+          clone.properties.summary_html = `
+            <strong>${dateStr}</strong><br>
+            ${s.label || ""}<br>
+            ${dist} km, ↑ ${up} m, ${time} h
+          `;
+        }
+
         dayEnds.push(clone);
       }
       lastDate = d;
     }
     currentLast = f;
   }
+
   if (currentLast) {
     dayCount++;
     const clone = JSON.parse(JSON.stringify(currentLast));
     clone.properties = clone.properties || {};
     clone.properties.dayIndex = dayCount;
+
+    const dateStr = clone.properties.timestamp
+      ? clone.properties.timestamp.slice(0, 10)
+      : null;
+    const s = dateStr ? summaryByDate[dateStr] : null;
+    if (s) {
+      const dist =
+        typeof s.distance_km === "number"
+          ? s.distance_km.toFixed(1)
+          : s.distance_km ?? "—";
+      const up = s.elevation_up_m ?? "—";
+      const time =
+        typeof s.moving_time_h === "number"
+          ? s.moving_time_h.toFixed(1)
+          : s.moving_time_h ?? "—";
+
+      clone.properties.summary_html = `
+        <strong>${dateStr}</strong><br>
+        ${s.label || ""}<br>
+        ${dist} km, ↑ ${up} m, ${time} h
+      `;
+    }
+
     dayEnds.push(clone);
   }
 
@@ -267,6 +342,14 @@ async function loadSummary() {
 
     const days = data.days;
 
+    // Mappa date -> oggetto riepilogo per collegare tappe ai pallini
+    summaryByDate = {};
+    days.forEach((d) => {
+      if (d.date) {
+        summaryByDate[d.date] = d;
+      }
+    });
+
     // Calcolo totali
     const totalDays = days.length;
     const totalKm = days.reduce(
@@ -282,16 +365,48 @@ async function loadSummary() {
       0
     );
 
+    const avgKmDay = totalDays > 0 ? totalKm / totalDays : 0;
+    const avgSpeed = totalHours > 0 ? totalKm / totalHours : 0;
+
+    // Giorno più lungo per distanza
+    let longest = null;
+    for (const d of days) {
+      if (
+        typeof d.distance_km === "number" &&
+        (!longest || d.distance_km > longest.distance_km)
+      ) {
+        longest = d;
+      }
+    }
+
     // Aggiorna i numeri nel blocco info (se esistono)
     const daysEl = document.getElementById("total-days");
     const kmEl = document.getElementById("total-km");
     const upEl = document.getElementById("total-up");
     const hoursEl = document.getElementById("total-hours");
+    const avgKmEl = document.getElementById("avg-km-day");
+    const avgSpeedEl = document.getElementById("avg-speed");
+    const longestEl = document.getElementById("longest-day");
 
     if (daysEl) daysEl.textContent = totalDays.toString();
     if (kmEl) kmEl.textContent = totalKm.toFixed(1);
     if (upEl) upEl.textContent = Math.round(totalUp).toString();
     if (hoursEl) hoursEl.textContent = totalHours.toFixed(1);
+    if (avgKmEl) avgKmEl.textContent = avgKmDay.toFixed(1);
+    if (avgSpeedEl) avgSpeedEl.textContent = avgSpeed.toFixed(1);
+    if (longestEl) {
+      if (longest) {
+        const distStr =
+          typeof longest.distance_km === "number"
+            ? longest.distance_km.toFixed(1)
+            : longest.distance_km;
+        longestEl.textContent = `${longest.date} – ${
+          longest.label || ""
+        } (${distStr} km)`;
+      } else {
+        longestEl.textContent = "—";
+      }
+    }
 
     // Tabella giornaliera
     const rows = days
