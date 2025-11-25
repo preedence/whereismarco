@@ -14,7 +14,8 @@ const map = new maplibregl.Map({
   zoom: INITIAL_ZOOM,
 });
 
-// Aggiorna UI info
+// Aggiorna UI info (attualmente non usata perché abbiamo riepilogo totale,
+// ma resta pronta se in futuro vuoi riaggiungere "ultima posizione")
 function updateInfo(lat, lon, timestamp) {
   const posEl = document.getElementById("last-pos");
   const timeEl = document.getElementById("last-time");
@@ -100,7 +101,7 @@ map.on("load", () => {
     type: "circle",
     source: "day-ends",
     paint: {
-      "circle-radius": 6,
+      "circle-radius": 8,
       "circle-color": "#38536b", // blu/steel
       "circle-stroke-color": "#ffffff",
       "circle-stroke-width": 2,
@@ -115,13 +116,14 @@ map.on("load", () => {
       source: "day-ends",
       layout: {
         "text-field": ["to-string", ["get", "dayIndex"]],
-        "text-size": 11,
+        "text-size": 12,
         "text-font": ["Open Sans Regular", "Arial Unicode MS Regular"],
         "text-anchor": "center",
-        "text-offset": [0, 0.05],
       },
       paint: {
         "text-color": "#ffffff",
+        "text-halo-color": "#000000",
+        "text-halo-width": 1.2,
       },
     },
     "live-point" // sotto il punto live, sopra la traccia
@@ -215,7 +217,7 @@ async function updateData() {
     features: dayEnds,
   });
 
-  // Aggiorna coordinate e timestamp nel pannello
+  // (updateInfo al momento non trova gli elementi e quindi non fa nulla)
   updateInfo(lat, lon, ts);
 
   // Adatta la mappa per mostrare l'intero percorso
@@ -245,7 +247,7 @@ async function updateData() {
   );
 }
 
-// Carica il riepilogo da data/summary.json e popola il pannello
+// Carica il riepilogo da data/summary.json e popola pannello + totali
 async function loadSummary() {
   const el = document.getElementById("summary-content");
   if (!el) return;
@@ -263,21 +265,52 @@ async function loadSummary() {
       return;
     }
 
-    const rows = data.days
+    const days = data.days;
+
+    // Calcolo totali
+    const totalDays = days.length;
+    const totalKm = days.reduce(
+      (sum, d) => sum + (typeof d.distance_km === "number" ? d.distance_km : 0),
+      0
+    );
+    const totalUp = days.reduce(
+      (sum, d) => sum + (typeof d.elevation_up_m === "number" ? d.elevation_up_m : 0),
+      0
+    );
+    const totalHours = days.reduce(
+      (sum, d) => sum + (typeof d.moving_time_h === "number" ? d.moving_time_h : 0),
+      0
+    );
+
+    // Aggiorna i numeri nel blocco info (se esistono)
+    const daysEl = document.getElementById("total-days");
+    const kmEl = document.getElementById("total-km");
+    const upEl = document.getElementById("total-up");
+    const hoursEl = document.getElementById("total-hours");
+
+    if (daysEl) daysEl.textContent = totalDays.toString();
+    if (kmEl) kmEl.textContent = totalKm.toFixed(1);
+    if (upEl) upEl.textContent = Math.round(totalUp).toString();
+    if (hoursEl) hoursEl.textContent = totalHours.toFixed(1);
+
+    // Tabella giornaliera
+    const rows = days
       .map((d) => {
-        const dist = d.distance_km?.toFixed
-          ? d.distance_km.toFixed(1)
-          : d.distance_km;
+        const dist =
+          typeof d.distance_km === "number"
+            ? d.distance_km.toFixed(1)
+            : d.distance_km ?? "—";
         const up = d.elevation_up_m ?? "—";
-        const time = d.moving_time_h?.toFixed
-          ? d.moving_time_h.toFixed(1)
-          : d.moving_time_h ?? "—";
+        const time =
+          typeof d.moving_time_h === "number"
+            ? d.moving_time_h.toFixed(1)
+            : d.moving_time_h ?? "—";
 
         return `
           <tr>
             <td>${d.date}</td>
             <td>${d.label || ""}</td>
-            <td style="text-align:right;">${dist ?? "—"}</td>
+            <td style="text-align:right;">${dist}</td>
             <td style="text-align:right;">${up}</td>
             <td style="text-align:right;">${time}</td>
           </tr>

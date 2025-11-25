@@ -2,44 +2,50 @@
 <html lang="it">
   <head>
     <meta charset="utf-8" />
+    <title>Eurasia crossing – Live map</title>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Eurasia crossing</title>
 
-    <!-- MapLibre -->
+    <!-- Stili progetto -->
+    <link rel="stylesheet" href="src/style.css" />
+
+    <!-- MapLibre GL JS -->
     <link
-      href="https://unpkg.com/maplibre-gl/dist/maplibre-gl.css"
+      href="https://unpkg.com/maplibre-gl@3.6.1/dist/maplibre-gl.css"
       rel="stylesheet"
     />
-    <script src="https://unpkg.com/maplibre-gl/dist/maplibre-gl.js"></script>
-
-    <!-- Il tuo CSS ora sta in src/style.css -->
-    <link rel="stylesheet" href="src/style.css" />
+    <script src="https://unpkg.com/maplibre-gl@3.6.1/dist/maplibre-gl.js"></script>
   </head>
-
   <body>
     <div id="map"></div>
 
-    <aside id="panel">
+    <div id="panel">
       <h1>Eurasia crossing</h1>
 
       <div id="info">
         <div>
-          Ultima posizione:
-          <span id="last-pos">—</span>
+          Giorni in bici:
+          <strong><span id="total-days">—</span></strong>
         </div>
         <div>
-          Timestamp:
-          <span id="last-time">—</span>
+          Km totali:
+          <strong><span id="total-km">—</span></strong>
+        </div>
+        <div>
+          Dislivello ↑ totale:
+          <strong><span id="total-up">—</span></strong>
+        </div>
+        <div>
+          Ore in sella:
+          <strong><span id="total-hours">—</span></strong>
         </div>
       </div>
 
       <div id="summary">
-        <h2>Riepilogo</h2>
+        <h2>Riepilogo tappe</h2>
         <div id="summary-content">Caricamento…</div>
       </div>
-    </aside>
+    </div>
 
-    <!-- La logica della mappa ora è in src/map.js -->
     <script src="src/map.js"></script>
   </body>
 </html>
