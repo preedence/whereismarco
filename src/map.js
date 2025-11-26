@@ -9,6 +9,9 @@ const INITIAL_ZOOM = 4;
 // Riepilogo per data (riempito da loadSummary)
 let summaryByDate = {};
 
+// Marker avatar live
+let liveAvatarMarker = null;
+
 // Inizializza la mappa MapLibre
 const map = new maplibregl.Map({
   container: "map",
@@ -26,6 +29,19 @@ function updateInfo(lat, lon, timestamp) {
   }
   posEl.textContent = `${lat.toFixed(5)}, ${lon.toFixed(5)}`;
   timeEl.textContent = timestamp || "—";
+}
+
+// Aggiorna/crea l'avatar live
+function updateLiveAvatar(lon, lat) {
+  if (!liveAvatarMarker) {
+    const el = document.createElement("div");
+    el.className = "wm-live-avatar";
+    liveAvatarMarker = new maplibregl.Marker({ element: el })
+      .setLngLat([lon, lat])
+      .addTo(map);
+  } else {
+    liveAvatarMarker.setLngLat([lon, lat]);
+  }
 }
 
 // Carica dati dal GeoJSON generato (positions.geojson)
@@ -64,7 +80,7 @@ map.on("load", () => {
     },
   });
 
-  // Sorgente per il punto live
+  // Sorgente per il punto live (per eventuali layer, anche se ora usi l'avatar)
   map.addSource("live", {
     type: "geojson",
     data: {
@@ -78,10 +94,10 @@ map.on("load", () => {
     type: "circle",
     source: "live",
     paint: {
-      "circle-radius": 8,
-      "circle-color": "#c66a3a", // ruggine
+      "circle-radius": 0, // nascosto, usi l'avatar
+      "circle-color": "#c66a3a",
       "circle-stroke-color": "#ffffff",
-      "circle-stroke-width": 2,
+      "circle-stroke-width": 0,
     },
   });
 
@@ -259,10 +275,23 @@ async function updateData() {
               ? s.moving_time_h.toFixed(1)
               : s.moving_time_h ?? "—";
 
+          const niceLabel = (s.label || "").replace(/_/g, " ");
+
           clone.properties.summary_html = `
-<strong>${dateStr}</strong><br>
-${s.label || ""}<br>
-${dist} km, ↑ ${up} m, ${time} h`;
+  <div class="wm-popup-day">
+    <div class="wm-popup-day-title">
+      <span class="wm-popup-day-date">${dateStr}</span>
+      ${
+        niceLabel
+          ? ` – <span class="wm-popup-day-label">${niceLabel}</span>`
+          : ""
+      }
+    </div>
+    <div class="wm-popup-day-meta">
+      ${dist} km, ↑ ${up} m, ${time} h
+    </div>
+  </div>
+`;
         }
 
         dayEnds.push(clone);
@@ -295,10 +324,23 @@ ${dist} km, ↑ ${up} m, ${time} h`;
           ? s.moving_time_h.toFixed(1)
           : s.moving_time_h ?? "—";
 
+      const niceLabel = (s.label || "").replace(/_/g, " ");
+
       clone.properties.summary_html = `
-<strong>${dateStr}</strong><br>
-${s.label || ""}<br>
-${dist} km, ↑ ${up} m, ${time} h`;
+  <div class="wm-popup-day">
+    <div class="wm-popup-day-title">
+      <span class="wm-popup-day-date">${dateStr}</span>
+      ${
+        niceLabel
+          ? ` – <span class="wm-popup-day-label">${niceLabel}</span>`
+          : ""
+      }
+    </div>
+    <div class="wm-popup-day-meta">
+      ${dist} km, ↑ ${up} m, ${time} h
+    </div>
+  </div>
+`;
     }
 
     dayEnds.push(clone);
@@ -316,6 +358,7 @@ ${dist} km, ↑ ${up} m, ${time} h`;
   });
 
   updateInfo(lat, lon, ts);
+  updateLiveAvatar(lon, lat);
 
   // Adatta la mappa per mostrare l'intero percorso
   const coords = features.map((f) => f.geometry.coordinates);
@@ -500,20 +543,20 @@ async function loadPhotos() {
       const file = p.file || p.url || "";
 
       const popupHtml = `
-        <div style="max-width:220px;">
-          <strong>${title}</strong><br>
-          ${
-            file
-              ? `<img src="${file}" alt="${title}" style="width:100%;margin-top:6px;border-radius:4px;">`
-              : ""
-          }
-          ${
-            caption
-              ? `<div style="margin-top:6px;font-size:12px;">${caption}</div>`
-              : ""
-          }
-        </div>
-      `;
+  <div class="wm-photo-popup" style="max-width:220px;">
+    <strong>${title}</strong><br>
+    ${
+      file
+        ? `<img src="${file}" alt="${title}" style="width:100%;margin-top:6px;border-radius:4px;">`
+        : ""
+    }
+    ${
+      caption
+        ? `<div style="margin-top:6px;font-size:12px;">${caption}</div>`
+        : ""
+    }
+  </div>
+`;
 
       const popup = new maplibregl.Popup({ offset: 20 }).setHTML(popupHtml);
 
