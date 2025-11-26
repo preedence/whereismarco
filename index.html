@@ -3,12 +3,17 @@
   <head>
     <meta charset="utf-8" />
     <title>Eurasia Crossing – Live Map</title>
-    <meta name="description" content="Live tracking of my bicycle trip across Eurasia." />
+    <meta
+      name="description"
+      content="Live tracking of my bicycle trip across Eurasia."
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <link rel="stylesheet" href="src/style.css" />
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.1/dist/leaflet.css"
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.1/dist/leaflet.css"
       integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14="
       crossorigin=""
     />
@@ -28,9 +33,13 @@
         </a>
 
         <nav class="wm-nav">
-          <a href="#map">Mappa live</a>
+          <a href="#map-section">Mappa live</a>
           <a href="#about">About</a>
-          <a href="https://github.com/preedence/whereismarco" target="_blank" rel="noopener">
+          <a
+            href="https://github.com/preedence/whereismarco"
+            target="_blank"
+            rel="noopener"
+          >
             Codice sorgente
           </a>
         </nav>
@@ -38,15 +47,42 @@
     </header>
 
     <main>
-      <section id="map" class="wm-map-section">
+      <section id="map-section" class="wm-map-section">
         <div id="map"></div>
+
+        <aside id="panel">
+          <h1>Eurasia crossing</h1>
+
+          <div id="info">
+            <div>Ultima posizione: <span id="last-pos">—</span></div>
+            <div>Ultimo aggiornamento: <span id="last-time">—</span></div>
+          </div>
+
+          <section id="summary">
+            <h2>Riepilogo</h2>
+            <div id="summary-content">
+              Caricamento dati in corso…
+            </div>
+
+            <div id="totals">
+              <div>Giorni: <span id="total-days">—</span></div>
+              <div>Distanza totale: <span id="total-km">—</span> km</div>
+              <div>Dislivello totale: <span id="total-up">—</span> m</div>
+              <div>Ore in movimento: <span id="total-hours">—</span> h</div>
+              <div>Media km/giorno: <span id="avg-km-day">—</span></div>
+              <div>Velocità media: <span id="avg-speed">—</span> km/h</div>
+              <div>Giorno più lungo: <span id="longest-day">—</span></div>
+            </div>
+          </section>
+        </aside>
       </section>
 
       <section id="about" class="wm-about">
         <h1>Eurasia crossing</h1>
         <p>
-          Live tracking del viaggio in bicicletta verso est, aggiornato automaticamente
-          da SPOT e GitHub Actions. La mappa mostra l’ultima posizione rilevata e la traccia del percorso.
+          Live tracking del viaggio in bicicletta verso est, aggiornato
+          automaticamente da SPOT e GitHub Actions. La mappa mostra
+          l’ultima posizione rilevata e la traccia del percorso.
         </p>
       </section>
     </main>
