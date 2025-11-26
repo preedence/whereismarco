@@ -128,6 +128,27 @@ map.on("load", () => {
     "live-point"
   );
 
+  // Sorgente per le foto geotaggate (per layer vettoriale se serve in futuro)
+  map.addSource("photos", {
+    type: "geojson",
+    data: {
+      type: "FeatureCollection",
+      features: [],
+    },
+  });
+
+  map.addLayer({
+    id: "photo-points",
+    type: "circle",
+    source: "photos",
+    paint: {
+      "circle-radius": 5,
+      "circle-color": "#f97316",
+      "circle-stroke-color": "#ffffff",
+      "circle-stroke-width": 1.5,
+    },
+  });
+
   // Popup con riepilogo giornata sui pallini di fine tappa
   const dayEndPopup = new maplibregl.Popup({
     closeButton: false,
@@ -153,6 +174,8 @@ map.on("load", () => {
   map.on("mouseenter", "day-end-points", showDayEndPopup);
   map.on("mouseleave", "day-end-points", hideDayEndPopup);
   map.on("click", "day-end-points", showDayEndPopup);
+
+  // Popup per le foto (usato dai marker individuali creati in loadPhotos)
 
   // Primo aggiornamento + refresh periodico
   updateData().catch((err) => {
@@ -294,7 +317,7 @@ ${dist} km, ↑ ${up} m, ${time} h`;
     features: dayEnds,
   });
 
-  // Aggiorna pannello
+  // Aggiorna pannello (se in futuro riabiliti last-pos/last-time)
   updateInfo(lat, lon, ts);
 
   // Adatta la mappa per mostrare l'intero percorso
@@ -398,7 +421,6 @@ async function loadSummary() {
     if (hoursEl) hoursEl.textContent = totalHours.toFixed(1);
     if (avgKmEl) avgKmEl.textContent = avgKmDay.toFixed(1);
     if (avgSpeedEl) avgSpeedEl.textContent = avgSpeed.toFixed(1);
-
     if (longestEl) {
       if (longest) {
         const distStr =
@@ -413,30 +435,96 @@ async function loadSummary() {
       }
     }
 
-    // Tabella giornaliera (markdown-like, se mai la userai)
-    const rows = days
-      .map((d) => {
-        const dist =
-          typeof d.distance_km === "number"
-            ? d.distance_km.toFixed(1)
-            : d.distance_km ?? "—";
-        const up = d.elevation_up_m ?? "—";
-        const time =
-          typeof d.moving_time_h === "number"
-            ? d.moving_time_h.toFixed(1)
-            : d.moving_time_h ?? "—";
-        return `|${d.date || "—"}|${d.label || ""}|${dist}|${up}|${time}|`;
-      })
-      .join("\n");
+    // Riepilogo compatto: una riga per tappa, non markdown
+    const lines = days.map((d) => {
+      const dist =
+        typeof d.distance_km === "number"
+          ? d.distance_km.toFixed(1)
+          : d.distance_km ?? "—";
+      const up = d.elevation_up_m ?? "—";
+      const time =
+        typeof d.moving_time_h === "number"
+          ? d.moving_time_h.toFixed(1)
+          : d.moving_time_h ?? "—";
+      const label = d.label || "";
+      return `${d.date || "—"} – ${label} – ${dist} km, ↑ ${up} m, ${time} h`;
+    });
 
-    el.textContent = rows;
+    el.textContent = lines.join("\n");
   } catch (err) {
     console.error(err);
     el.textContent = "Errore caricamento riepilogo.";
   }
 }
 
-// Foto geotaggate (stub: da implementare o lasciare vuoto)
+// Foto geotaggate da data/photos.json e marker/popup sulla mappa
 async function loadPhotos() {
-  // Placeholder per future foto geotaggate
+  try {
+    const res = await fetch("data/photos.json?cache=" + Date.now());
+    if (!res.ok) {
+      return; // niente file, niente foto
+    }
+    const data = await res.json();
+
+    if (!data.photos || !data.photos.length) {
+      return;
+    }
+
+    // Se vuoi anche aggiornare la sorgente vettoriale "photos"
+    const features = [];
+
+    data.photos.forEach((p) => {
+      if (typeof p.lon !== "number" || typeof p.lat !== "number") return;
+
+      const title = p.title || "Foto";
+      const caption = p.caption || "";
+      const file = p.file || p.url || "";
+
+      const popupHtml = `
+        <div style="max-width:220px;">
+          <strong>${title}</strong><br>
+          ${
+            file
+              ? `<img src="${file}" alt="${title}" style="width:100%;margin-top:6px;border-radius:4px;">`
+              : ""
+          }
+          ${
+            caption
+              ? `<div style="margin-top:6px;font-size:12px;">${caption}</div>`
+              : ""
+          }
+        </div>
+      `;
+
+      const popup = new maplibregl.Popup({ offset: 20 }).setHTML(popupHtml);
+
+      new maplibregl.Marker({ color: "#c66a3a" })
+        .setLngLat([p.lon, p.lat])
+        .setPopup(popup)
+        .addTo(map);
+
+      // Costruisci anche feature GeoJSON per la sorgente "photos"
+      features.push({
+        type: "Feature",
+        geometry: {
+          type: "Point",
+          coordinates: [p.lon, p.lat],
+        },
+        properties: {
+          title,
+          caption,
+          file,
+        },
+      });
+    });
+
+    if (map.getSource("photos")) {
+      map.getSource("photos").setData({
+        type: "FeatureCollection",
+        features,
+      });
+    }
+  } catch (err) {
+    console.error("Errore nel caricamento delle foto:", err);
+  }
 }
