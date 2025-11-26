@@ -4,18 +4,9 @@
   --ochre: #d2b574;
   --tundra: #5a6e50;
   --steel: #38536b;
-
-  /* Per top bar / testo */
-  --night: #101827;
-  --night-soft: rgba(16, 24, 39, 0.94);
-  --ink: #111827;
-  --text-main: #111827;
-  --text-soft: #4b5563;
-  --text-on-dark: #e5e7eb;
-  --border-soft: rgba(148, 163, 184, 0.45);
 }
 
-/* Base: desktop blocca lo scroll globale, mobile no (gestito in media query) */
+/* Base */
 
 html,
 body {
@@ -25,88 +16,13 @@ body {
     sans-serif;
   background: var(--sand);
   color: var(--steel);
-  overflow: hidden; /* solo per desktop, mobile lo sovrascrive sotto */
-}
-
-/* Top bar */
-
-.wm-topbar {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  backdrop-filter: blur(14px);
-  background: var(--night-soft);
-  border-bottom: 1px solid var(--border-soft);
-}
-
-.wm-topbar-inner {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0.6rem 1.2rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
-}
-
-.wm-logo {
-  display: flex;
-  flex-direction: column;
-  text-decoration: none;
-  color: var(--text-on-dark);
-}
-
-.wm-logo-title {
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  font-size: 0.9rem;
-}
-
-.wm-logo-subtitle {
-  font-size: 0.75rem;
-  color: rgba(209, 213, 219, 0.8);
-}
-
-.wm-nav {
-  display: flex;
-  align-items: center;
-  gap: 1.4rem;
-}
-
-.wm-nav a {
-  font-size: 0.85rem;
-  text-decoration: none;
-  color: rgba(209, 213, 219, 0.8);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  padding-bottom: 0.15rem;
-  border-bottom: 2px solid transparent;
-  transition: color 0.15s ease, border-color 0.15s ease;
-}
-
-.wm-nav a:hover {
-  color: var(--text-on-dark);
-  border-color: var(--rust);
-}
-
-/* Desktop: main e sezione mappa riempiono lo schermo sotto la topbar */
-
-main {
-  height: calc(100vh - 56px); /* topbar ~56px */
-  min-height: 0;
-}
-
-.wm-map-section {
-  position: relative;
-  height: 100%;
 }
 
 /* Layout desktop: mappa a sinistra, pannello a destra */
 
 #map {
   position: absolute;
-  inset: 0 300px 0 0; /* 300px = larghezza pannello */
+  inset: 0 300px 0 0;
 }
 
 #panel {
@@ -115,52 +31,60 @@ main {
   top: 0;
   bottom: 0;
   width: 300px;
-  background: rgba(255, 255, 255, 0.97);
-  padding: 12px 14px 14px;
-  box-shadow: -8px 0 24px rgba(15, 23, 42, 0.18);
-  overflow-y: auto;   /* solo il pannello scrolla */
-  overflow-x: hidden;
-  color: var(--text-main);
-  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.96);
+  padding: 18px;
+  box-shadow: -8px 0 20px rgba(20, 20, 20, 0.05);
+  overflow: auto;
 }
 
 #panel h1 {
-  margin: 0 0 6px 0;
-  font-size: 16px;
-  color: var(--ink);
+  margin: 0 0 10px 0;
+  font-size: 18px;
+  color: var(--steel);
 }
 
-/* Nasconde blocco "Ultima posizione / aggiornamento" */
+/* blocco info */
 
-#info {
-  display: none;
+#info div {
+  margin-bottom: 8px;
 }
 
-/* Riepilogo e totali */
+/* titolo riepilogo */
 
 #summary h2 {
-  margin: 6px 0 4px;
-  font-size: 14px;
-  color: var(--ink);
+  margin-top: 14px;
+  font-size: 15px;
 }
 
-#summary-content {
-  font-size: 0.85rem;
-  line-height: 1.3;
-  white-space: pre-wrap;
+/* Righe riepilogo giornaliero */
+
+.wm-day-row {
   margin-bottom: 6px;
+  padding-bottom: 4px;
+  border-bottom: 1px dashed rgba(148, 163, 184, 0.4);
 }
 
-#totals {
-  font-size: 0.9rem;
-  line-height: 1.4;
+.wm-day-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #111827;
 }
 
-#totals div {
-  margin-bottom: 3px;
+.wm-day-date {
+  font-variant-numeric: tabular-nums;
 }
 
-/* Punto live (per eventuale marker custom) */
+.wm-day-label {
+  font-weight: 500;
+}
+
+.wm-day-meta {
+  font-size: 0.8rem;
+  color: #4b5563;
+  margin-top: 1px;
+}
+
+/* aspetto del punto live se usi un marker custom in futuro */
 
 .marker-live {
   background: var(--rust);
@@ -171,78 +95,33 @@ main {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
-/* Sezione About (riutilizzata su about.html) */
-
-.wm-about {
-  max-width: 900px;
-  margin: 2.5rem auto 3.5rem;
-  padding: 0 1.2rem;
-  color: var(--text-soft);
-}
-
-.wm-about h1 {
-  font-size: 1.9rem;
-  margin-bottom: 0.4rem;
-  color: var(--ink);
-}
-
-.wm-about p {
-  line-height: 1.6;
-  font-size: 0.95rem;
-}
-
-/* Layout dedicato alla pagina about.html */
-
-.wm-about-page {
-  min-height: calc(100vh - 56px);
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  padding-top: 2.5rem;
-}
-
-/* MOBILE */
+/* Layout mobile: mappa sopra, pannello sotto */
 
 @media screen and (max-width: 768px) {
-  /* Su mobile lascia scrollare il body normalmente */
   html,
   body {
-    height: auto;
-    min-height: 100%;
-    overflow: auto;
-  }
-
-  /* La topbar rimane in cima, il resto fluisce sotto */
-  main {
-    height: auto;
-    min-height: 0;
-  }
-
-  .wm-map-section {
-    position: relative;
-    height: auto;
-    min-height: 60vh; /* mappa almeno 60% viewport, poi il resto scorre */
+    height: 100%;
+    overflow: hidden;
   }
 
   #map {
-    position: relative;
-    inset: auto;
-    width: 100%;
-    height: 60vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60vh; /* 60% altezza viewport per la mappa */
+    bottom: auto;
   }
 
   #panel {
-    position: relative;
-    width: 100%;
-    top: auto;
-    right: auto;
-    bottom: auto;
-    left: auto;
-    box-shadow: 0 -6px 16px rgba(20, 20, 20, 0.18);
-    padding: 14px 16px 18px;
-    max-height: none;      /* niente clipping */
-    overflow-y: visible;   /* scroll gestito dalla pagina, non solo dal panel */
-    margin-bottom: 1.5rem; /* spazio respirabile sotto */
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 60vh; /* pannello nell'ultimo 40% */
+    width: auto;
+    box-shadow: 0 -6px 16px rgba(20, 20, 20, 0.08);
+    padding: 14px;
   }
 
   #panel h1 {
@@ -252,22 +131,5 @@ main {
 
   #summary h2 {
     font-size: 14px;
-  }
-
-  .wm-topbar-inner {
-    padding: 0.5rem 0.8rem;
-  }
-
-  .wm-nav {
-    gap: 0.8rem;
-  }
-
-  .wm-nav a {
-    font-size: 0.75rem;
-    letter-spacing: 0.06em;
-  }
-
-  .wm-about {
-    margin: 1.8rem auto 2.5rem;
   }
 }

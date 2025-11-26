@@ -17,7 +17,7 @@ const map = new maplibregl.Map({
   zoom: INITIAL_ZOOM,
 });
 
-// Aggiorna UI info
+// Aggiorna UI info (al momento non usata)
 function updateInfo(lat, lon, timestamp) {
   const posEl = document.getElementById("last-pos");
   const timeEl = document.getElementById("last-time");
@@ -128,27 +128,6 @@ map.on("load", () => {
     "live-point"
   );
 
-  // Sorgente per le foto geotaggate (per layer vettoriale se serve in futuro)
-  map.addSource("photos", {
-    type: "geojson",
-    data: {
-      type: "FeatureCollection",
-      features: [],
-    },
-  });
-
-  map.addLayer({
-    id: "photo-points",
-    type: "circle",
-    source: "photos",
-    paint: {
-      "circle-radius": 5,
-      "circle-color": "#f97316",
-      "circle-stroke-color": "#ffffff",
-      "circle-stroke-width": 1.5,
-    },
-  });
-
   // Popup con riepilogo giornata sui pallini di fine tappa
   const dayEndPopup = new maplibregl.Popup({
     closeButton: false,
@@ -175,7 +154,26 @@ map.on("load", () => {
   map.on("mouseleave", "day-end-points", hideDayEndPopup);
   map.on("click", "day-end-points", showDayEndPopup);
 
-  // Popup per le foto (usato dai marker individuali creati in loadPhotos)
+  // Sorgente per le foto (usata anche per eventuali layer futuri)
+  map.addSource("photos", {
+    type: "geojson",
+    data: {
+      type: "FeatureCollection",
+      features: [],
+    },
+  });
+
+  map.addLayer({
+    id: "photo-points",
+    type: "circle",
+    source: "photos",
+    paint: {
+      "circle-radius": 5,
+      "circle-color": "#f97316",
+      "circle-stroke-color": "#ffffff",
+      "circle-stroke-width": 1.5,
+    },
+  });
 
   // Primo aggiornamento + refresh periodico
   updateData().catch((err) => {
@@ -317,7 +315,7 @@ ${dist} km, ↑ ${up} m, ${time} h`;
     features: dayEnds,
   });
 
-  // Aggiorna pannello (se in futuro riabiliti last-pos/last-time)
+  // (updateInfo al momento non trova gli elementi e quindi non fa nulla)
   updateInfo(lat, lon, ts);
 
   // Adatta la mappa per mostrare l'intero percorso
@@ -435,22 +433,43 @@ async function loadSummary() {
       }
     }
 
-    // Riepilogo compatto: una riga per tappa, non markdown
-    const lines = days.map((d) => {
-      const dist =
-        typeof d.distance_km === "number"
-          ? d.distance_km.toFixed(1)
-          : d.distance_km ?? "—";
-      const up = d.elevation_up_m ?? "—";
-      const time =
-        typeof d.moving_time_h === "number"
-          ? d.moving_time_h.toFixed(1)
-          : d.moving_time_h ?? "—";
-      const label = d.label || "";
-      return `${d.date || "—"} – ${label} – ${dist} km, ↑ ${up} m, ${time} h`;
-    });
+    // Riepilogo formattato in HTML
+    const itemsHtml = days
+      .map((d) => {
+        const dist =
+          typeof d.distance_km === "number"
+            ? d.distance_km.toFixed(1)
+            : d.distance_km ?? "—";
+        const up = d.elevation_up_m ?? "—";
+        const time =
+          typeof d.moving_time_h === "number"
+            ? d.moving_time_h.toFixed(1)
+            : d.moving_time_h ?? "—";
 
-    el.textContent = lines.join("\n");
+        const rawLabel = d.label || "";
+        const niceLabel = rawLabel.replace(/_/g, " ");
+
+        const date = d.date || "—";
+
+        return `
+          <div class="wm-day-row">
+            <div class="wm-day-title">
+              <span class="wm-day-date">${date}</span>
+              ${
+                niceLabel
+                  ? ` – <span class="wm-day-label">${niceLabel}</span>`
+                  : ""
+              }
+            </div>
+            <div class="wm-day-meta">
+              ${dist} km, ↑ ${up} m, ${time} h
+            </div>
+          </div>
+        `;
+      })
+      .join("");
+
+    el.innerHTML = itemsHtml;
   } catch (err) {
     console.error(err);
     el.textContent = "Errore caricamento riepilogo.";
@@ -470,7 +489,6 @@ async function loadPhotos() {
       return;
     }
 
-    // Se vuoi anche aggiornare la sorgente vettoriale "photos"
     const features = [];
 
     data.photos.forEach((p) => {
@@ -503,7 +521,6 @@ async function loadPhotos() {
         .setPopup(popup)
         .addTo(map);
 
-      // Costruisci anche feature GeoJSON per la sorgente "photos"
       features.push({
         type: "Feature",
         geometry: {
