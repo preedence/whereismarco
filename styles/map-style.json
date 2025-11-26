@@ -1,6 +1,6 @@
 {
   "version": 8,
-  "name": "Eurasia crossing – Classic",
+  "name": "Eurasia crossing",
   "glyphs": "https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf",
   "sources": {
     "osm": {

@@ -1,11 +1,5 @@
-// Stili cartografici disponibili (relativi a index.html)
-const MAP_STYLES = {
-  classic: "styles/map-style.json",
-  terrain: "styles/map-style-terrain.json"
-};
-
-let currentStyle = "classic";
-
+// Percorsi relativi alla pagina index.html (che ora è in root)
+const MAP_STYLE_URL = "styles/map-style.json";
 const POSITIONS_URL = "data/positions.geojson";
 
 // Centro iniziale e zoom di partenza
@@ -15,18 +9,15 @@ const INITIAL_ZOOM = 4;
 // Riepilogo per data (riempito da loadSummary)
 let summaryByDate = {};
 
-// Popup per i fine tappa (deve essere accessibile da installLayers)
-const dayEndPopup = new maplibregl.Popup({
-  closeButton: false,
-  closeOnClick: false
-});
+// Tema attuale (chiaro/scuro)
+let isDark = false;
 
 // Inizializza la mappa MapLibre
 const map = new maplibregl.Map({
   container: "map",
-  style: MAP_STYLES[currentStyle],
+  style: MAP_STYLE_URL,
   center: INITIAL_CENTER,
-  zoom: INITIAL_ZOOM
+  zoom: INITIAL_ZOOM,
 });
 
 // Aggiorna UI info (al momento non usata)
@@ -53,145 +44,145 @@ async function fetchPositions() {
   return res.json();
 }
 
-// Handler popup giorno (definiti una volta sola)
-function showDayEndPopup(e) {
-  const f = e.features && e.features[0];
-  if (!f) return;
-  const html =
-    f.properties && f.properties.summary_html
-      ? f.properties.summary_html
-      : `<strong>Giorno ${f.properties?.dayIndex || ""}</strong>`;
-  map.getCanvas().style.cursor = "pointer";
-  dayEndPopup.setLngLat(f.geometry.coordinates).setHTML(html).addTo(map);
-}
+// Dopo che lo stile è caricato, aggiungo sorgenti e layer
+map.on("load", () => {
+  // Sorgente per la traccia (linea)
+  map.addSource("track", {
+    type: "geojson",
+    data: {
+      type: "FeatureCollection",
+      features: [],
+    },
+  });
 
-function hideDayEndPopup() {
-  map.getCanvas().style.cursor = "";
-  dayEndPopup.remove();
-}
+  map.addLayer({
+    id: "track-line",
+    type: "line",
+    source: "track",
+    layout: {
+      "line-join": "round",
+      "line-cap": "round",
+    },
+    paint: {
+      "line-color": "#d2b574", // ocra
+      "line-width": 4,
+      "line-opacity": 0.9,
+    },
+  });
 
-// Aggiunge (se mancano) le sorgenti/layer personalizzati sulla mappa corrente
-function installLayers() {
-  const style = map.getStyle();
-  if (!style) return;
+  // Sorgente per il punto live
+  map.addSource("live", {
+    type: "geojson",
+    data: {
+      type: "FeatureCollection",
+      features: [],
+    },
+  });
 
-  // Traccia
-  if (!map.getSource("track")) {
-    map.addSource("track", {
-      type: "geojson",
-      data: { type: "FeatureCollection", features: [] }
-    });
+  map.addLayer({
+    id: "live-point",
+    type: "circle",
+    source: "live",
+    paint: {
+      "circle-radius": 8,
+      "circle-color": "#c66a3a", // ruggine
+      "circle-stroke-color": "#ffffff",
+      "circle-stroke-width": 2,
+    },
+  });
 
-    map.addLayer({
-      id: "track-line",
-      type: "line",
-      source: "track",
-      layout: {
-        "line-join": "round",
-        "line-cap": "round"
-      },
-      paint: {
-        "line-color": "#d2b574", // ocra
-        "line-width": 4,
-        "line-opacity": 0.9
-      }
-    });
-  }
+  // Sorgente per i punti di fine giornata
+  map.addSource("day-ends", {
+    type: "geojson",
+    data: {
+      type: "FeatureCollection",
+      features: [],
+    },
+  });
 
-  // Punto live
-  if (!map.getSource("live")) {
-    map.addSource("live", {
-      type: "geojson",
-      data: { type: "FeatureCollection", features: [] }
-    });
+  // Cerchietti fine giornata
+  map.addLayer({
+    id: "day-end-points",
+    type: "circle",
+    source: "day-ends",
+    paint: {
+      "circle-radius": 10,
+      "circle-color": "#38536b", // blu/steel
+      "circle-stroke-color": "#ffffff",
+      "circle-stroke-width": 2,
+    },
+  });
 
-    map.addLayer({
-      id: "live-point",
-      type: "circle",
-      source: "live",
-      paint: {
-        "circle-radius": 8,
-        "circle-color": "#c66a3a", // ruggine
-        "circle-stroke-color": "#ffffff",
-        "circle-stroke-width": 2
-      }
-    });
-  }
-
-  // Fine giornata
-  if (!map.getSource("day-ends")) {
-    map.addSource("day-ends", {
-      type: "geojson",
-      data: { type: "FeatureCollection", features: [] }
-    });
-
-    map.addLayer({
-      id: "day-end-points",
-      type: "circle",
+  // Numeri sopra i cerchi fine giornata
+  map.addLayer(
+    {
+      id: "day-end-labels",
+      type: "symbol",
       source: "day-ends",
-      paint: {
-        "circle-radius": 10,
-        "circle-color": "#38536b", // blu/steel
-        "circle-stroke-color": "#ffffff",
-        "circle-stroke-width": 2
-      }
-    });
-  }
-
-  if (!map.getLayer("day-end-labels")) {
-    map.addLayer(
-      {
-        id: "day-end-labels",
-        type: "symbol",
-        source: "day-ends",
-        layout: {
-          "text-field": ["to-string", ["get", "dayIndex"]],
-          "text-size": 14,
-          "text-font": ["Open Sans Regular", "Arial Unicode MS Regular"],
-          "text-anchor": "center"
-        },
-        paint: {
-          "text-color": "#ffffff",
-          "text-halo-color": "#000000",
-          "text-halo-width": 2
-        }
+      layout: {
+        "text-field": ["to-string", ["get", "dayIndex"]],
+        "text-size": 14,
+        "text-font": ["Open Sans Regular", "Arial Unicode MS Regular"],
+        "text-anchor": "center",
       },
-      "live-point"
-    );
+      paint: {
+        "text-color": "#ffffff",
+        "text-halo-color": "#000000",
+        "text-halo-width": 2,
+      },
+    },
+    "live-point"
+  );
+
+  // Popup con riepilogo giornata sui pallini di fine tappa
+  const dayEndPopup = new maplibregl.Popup({
+    closeButton: false,
+    closeOnClick: false,
+  });
+
+  function showDayEndPopup(e) {
+    const f = e.features && e.features[0];
+    if (!f) return;
+    const html =
+      f.properties && f.properties.summary_html
+        ? f.properties.summary_html
+        : `<strong>Giorno ${f.properties?.dayIndex || ""}</strong>`;
+    map.getCanvas().style.cursor = "pointer";
+    dayEndPopup.setLngLat(f.geometry.coordinates).setHTML(html).addTo(map);
   }
 
-  // Ricollega gli handler popup (li stacchiamo/riattacchiamo ad ogni cambio style)
-  map.off("mouseenter", "day-end-points", showDayEndPopup);
-  map.off("mouseleave", "day-end-points", hideDayEndPopup);
-  map.off("click", "day-end-points", showDayEndPopup);
+  function hideDayEndPopup() {
+    map.getCanvas().style.cursor = "";
+    dayEndPopup.remove();
+  }
 
   map.on("mouseenter", "day-end-points", showDayEndPopup);
   map.on("mouseleave", "day-end-points", hideDayEndPopup);
   map.on("click", "day-end-points", showDayEndPopup);
-}
 
-// Setup iniziale
-map.on("load", () => {
-  installLayers();
-
+  // Primo aggiornamento + refresh periodico
   updateData().catch((err) => {
     console.error(err);
     const s = document.getElementById("summary-content");
     if (s) s.textContent = "Errore caricamento dati";
   });
 
+  // Riepilogo (summary.json)
   loadSummary();
+
+  // Foto geotaggate (photos.json)
   loadPhotos();
 
   setInterval(() => {
     updateData().catch((err) => console.error(err));
-  }, 60000);
+  }, 60000); // ogni 60 secondi
 });
 
 // Funzione che aggiorna traccia + punto live + punti fine giornata
 async function updateData() {
   const geo = await fetchPositions();
 
+  // Ci aspettiamo un FeatureCollection con punti ordinati cronologicamente
   if (!geo || !geo.features || !geo.features.length) {
     const s = document.getElementById("summary-content");
     if (s) s.textContent = "Nessuna posizione ancora.";
@@ -200,6 +191,7 @@ async function updateData() {
 
   const features = geo.features;
 
+  // Costruisci la LineString per la traccia
   const trackFeature = {
     type: "FeatureCollection",
     features: [
@@ -207,17 +199,19 @@ async function updateData() {
         type: "Feature",
         geometry: {
           type: "LineString",
-          coordinates: features.map((f) => f.geometry.coordinates)
+          coordinates: features.map((f) => f.geometry.coordinates),
         },
-        properties: {}
-      }
-    ]
+        properties: {},
+      },
+    ],
   };
 
+  // Ultimo punto (più recente)
   const last = features[features.length - 1];
   const [lon, lat] = last.geometry.coordinates;
   const ts = last.properties?.timestamp || "";
 
+  // Calcola i punti "fine giornata" con indice progressivo e riepilogo HTML
   const dayEnds = [];
   let lastDate = null;
   let currentLast = null;
@@ -225,7 +219,7 @@ async function updateData() {
 
   for (const f of features) {
     const tsF = f.properties?.timestamp;
-    const d = tsF ? tsF.slice(0, 10) : null;
+    const d = tsF ? tsF.slice(0, 10) : null; // "YYYY-MM-DD"
     if (d !== lastDate) {
       if (currentLast) {
         dayCount++;
@@ -293,24 +287,21 @@ async function updateData() {
     dayEnds.push(clone);
   }
 
-  if (map.getSource("track")) {
-    map.getSource("track").setData(trackFeature);
-  }
-  if (map.getSource("live")) {
-    map.getSource("live").setData({
-      type: "FeatureCollection",
-      features: [last]
-    });
-  }
-  if (map.getSource("day-ends")) {
-    map.getSource("day-ends").setData({
-      type: "FeatureCollection",
-      features: dayEnds
-    });
-  }
+  // Aggiorna sorgenti sulla mappa
+  map.getSource("track").setData(trackFeature);
+  map.getSource("live").setData({
+    type: "FeatureCollection",
+    features: [last],
+  });
+  map.getSource("day-ends").setData({
+    type: "FeatureCollection",
+    features: dayEnds,
+  });
 
+  // (updateInfo al momento non trova gli elementi e quindi non fa nulla)
   updateInfo(lat, lon, ts);
 
+  // Adatta la mappa per mostrare l'intero percorso
   const coords = features.map((f) => f.geometry.coordinates);
   let minLon = coords[0][0];
   let maxLon = coords[0][0];
@@ -327,12 +318,12 @@ async function updateData() {
   map.fitBounds(
     [
       [minLon, minLat],
-      [maxLon, maxLat]
+      [maxLon, maxLat],
     ],
     {
       padding: 50,
       maxZoom: 8,
-      duration: 800
+      duration: 800,
     }
   );
 }
@@ -357,6 +348,7 @@ async function loadSummary() {
 
     const days = data.days;
 
+    // Mappa date -> oggetto riepilogo per collegare tappe ai pallini
     summaryByDate = {};
     days.forEach((d) => {
       if (d.date) {
@@ -364,6 +356,7 @@ async function loadSummary() {
       }
     });
 
+    // Calcolo totali
     const totalDays = days.length;
     const totalKm = days.reduce(
       (sum, d) => sum + (typeof d.distance_km === "number" ? d.distance_km : 0),
@@ -383,6 +376,7 @@ async function loadSummary() {
     const avgKmDay = totalDays > 0 ? totalKm / totalDays : 0;
     const avgSpeed = totalHours > 0 ? totalKm / totalHours : 0;
 
+    // Giorno più lungo per distanza
     let longest = null;
     for (const d of days) {
       if (
@@ -393,6 +387,7 @@ async function loadSummary() {
       }
     }
 
+    // Aggiorna i numeri nel blocco info (se esistono)
     const daysEl = document.getElementById("total-days");
     const kmEl = document.getElementById("total-km");
     const upEl = document.getElementById("total-up");
@@ -421,6 +416,7 @@ async function loadSummary() {
       }
     }
 
+    // Tabella giornaliera
     const rows = days
       .map((d) => {
         const dist =
@@ -506,22 +502,29 @@ async function loadPhotos() {
   }
 }
 
-// Switch stile mappa (Classic / Terrain)
+// Switch semplice di tema (Classic / Dark) sullo stesso stile
 document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll(".style-btn").forEach((btn) => {
+  const buttons = document.querySelectorAll(".style-btn");
+  buttons.forEach((btn) => {
     btn.addEventListener("click", () => {
-      const key = btn.getAttribute("data-style");
-      if (!key || !MAP_STYLES[key] || key === currentStyle) return;
+      const styleKey = btn.getAttribute("data-style");
+      if (!styleKey) return;
 
-      currentStyle = key;
+      const dark = styleKey === "dark";
+      if (dark === isDark) return;
+      isDark = dark;
 
-      // Quando il nuovo style è pronto, reinstallo layer e ricarico dati
-      map.once("styledata", () => {
-        installLayers();
-        updateData().catch((err) => console.error(err));
-      });
+      const style = map.getStyle();
+      if (!style || !style.layers) return;
 
-      map.setStyle(MAP_STYLES[currentStyle]);
+      // trova il layer di background e cambia colore
+      const bgLayer = style.layers.find((l) => l.id === "background");
+      if (!bgLayer) return;
+
+      bgLayer.paint = bgLayer.paint || {};
+      bgLayer.paint["background-color"] = dark ? "#1c1f26" : "#f5f2e9";
+
+      map.setStyle(style);
     });
   });
 });
