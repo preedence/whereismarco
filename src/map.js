@@ -80,7 +80,7 @@ map.on("load", () => {
     },
   });
 
-  // Sorgente per il punto live (per eventuali layer, anche se ora usi l'avatar)
+  // Sorgente per il punto live
   map.addSource("live", {
     type: "geojson",
     data: {
@@ -89,12 +89,13 @@ map.on("load", () => {
     },
   });
 
+  // Layer cerchio live (nascosto, usiamo avatar)
   map.addLayer({
     id: "live-point",
     type: "circle",
     source: "live",
     paint: {
-      "circle-radius": 0, // nascosto, usi l'avatar
+      "circle-radius": 0,
       "circle-color": "#c66a3a",
       "circle-stroke-color": "#ffffff",
       "circle-stroke-width": 0,

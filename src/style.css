@@ -215,8 +215,17 @@ main {
   border-top-color: #fdfaf3 !important;
 }
 
-/* Punto live avatar */
+/* aspetto del punto live se usi un marker custom in futuro */
+.marker-live {
+  background: var(--rust);
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
 
+/* Avatar live basato su img/avatar.png */
 .wm-live-avatar {
   width: 26px;
   height: 26px;
