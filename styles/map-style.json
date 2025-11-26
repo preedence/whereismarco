@@ -5,7 +5,7 @@
   "sources": {
     "osm": {
       "type": "raster",
-      "tiles": ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
+      "tiles": ["https://tile.opentopomap.org/{z}/{x}/{y}.png"],
       "tileSize": 256
     }
   },
@@ -22,7 +22,7 @@
       "type": "raster",
       "source": "osm",
       "minzoom": 0,
-      "maxzoom": 19
+      "maxzoom": 17
     }
   ]
 }
