@@ -15,7 +15,7 @@
   --border-soft: rgba(148, 163, 184, 0.45);
 }
 
-/* Base */
+/* Base: niente scroll globale */
 
 html,
 body {
@@ -25,6 +25,7 @@ body {
     sans-serif;
   background: var(--sand);
   color: var(--steel);
+  overflow: hidden; /* blocca lo scroll dell'intera pagina */
 }
 
 /* Top bar */
@@ -89,22 +90,23 @@ body {
   border-color: var(--rust);
 }
 
-/* Sezione mappa sotto la top bar */
+/* Main e sezione mappa riempiono lo schermo sotto la topbar */
 
 main {
-  min-height: 100vh;
+  height: calc(100vh - 56px); /* topbar ~56px */
+  min-height: 0;
 }
 
 .wm-map-section {
   position: relative;
-  height: calc(100vh - 56px);
+  height: 100%;
 }
 
 /* Layout desktop: mappa a sinistra, pannello a destra */
 
 #map {
   position: absolute;
-  inset: 0 320px 0 0; /* 320px per avere un pannello un po’ più comodo */
+  inset: 0 300px 0 0; /* 300px = larghezza pannello */
 }
 
 #panel {
@@ -112,6 +114,150 @@ main {
   right: 0;
   top: 0;
   bottom: 0;
-  width: 320px;
+  width: 300px;
   background: rgba(255, 255, 255, 0.97);
-  padding
+  padding: 12px 14px 14px;
+  box-shadow: -8px 0 24px rgba(15, 23, 42, 0.18);
+  overflow-y: auto;   /* solo il pannello scrolla */
+  overflow-x: hidden;
+  color: var(--text-main);
+  box-sizing: border-box;
+}
+
+#panel h1 {
+  margin: 0 0 6px 0;
+  font-size: 16px;
+  color: var(--ink);
+}
+
+/* Nasconde blocco "Ultima posizione / aggiornamento" */
+
+#info {
+  display: none;
+}
+
+/* Riepilogo e totali */
+
+#summary h2 {
+  margin: 6px 0 4px;
+  font-size: 14px;
+  color: var(--ink);
+}
+
+#summary-content {
+  font-size: 0.85rem;
+  line-height: 1.3;
+  white-space: pre-wrap;
+  margin-bottom: 6px;
+}
+
+#totals {
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+#totals div {
+  margin-bottom: 3px;
+}
+
+/* Punto live (per eventuale marker custom) */
+
+.marker-live {
+  background: var(--rust);
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Sezione About (riutilizzata su about.html) */
+
+.wm-about {
+  max-width: 900px;
+  margin: 2.5rem auto 3.5rem;
+  padding: 0 1.2rem;
+  color: var(--text-soft);
+}
+
+.wm-about h1 {
+  font-size: 1.9rem;
+  margin-bottom: 0.4rem;
+  color: var(--ink);
+}
+
+.wm-about p {
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+/* Layout dedicato alla pagina about.html */
+
+.wm-about-page {
+  min-height: calc(100vh - 56px);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 2.5rem;
+}
+
+/* Mobile: mappa sopra, pannello sotto */
+
+@media screen and (max-width: 768px) {
+  html,
+  body {
+    height: 100%;
+    overflow: hidden; /* anche su mobile nessuno scroll globale */
+  }
+
+  .wm-map-section {
+    height: 60vh;
+  }
+
+  #map {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60vh;
+    bottom: auto;
+    inset: auto;
+  }
+
+  #panel {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 60vh;
+    width: auto;
+    box-shadow: 0 -6px 16px rgba(20, 20, 20, 0.18);
+    padding: 14px 16px;
+  }
+
+  #panel h1 {
+    font-size: 16px;
+    margin-bottom: 6px;
+  }
+
+  #summary h2 {
+    font-size: 14px;
+  }
+
+  .wm-topbar-inner {
+    padding: 0.5rem 0.8rem;
+  }
+
+  .wm-nav {
+    gap: 0.8rem;
+  }
+
+  .wm-nav a {
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+  }
+
+  .wm-about {
+    margin: 1.8rem auto 2.5rem;
+  }
+}
