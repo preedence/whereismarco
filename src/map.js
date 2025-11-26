@@ -2,6 +2,10 @@
 const MAP_STYLE_URL = "styles/map-style.json";
 const POSITIONS_URL = "data/positions.geojson";
 
+// Stile mappa (unico)
+const MAP_STYLE_URL = "https://tiles.openfreemap.org/styles/terrain"; // stile outdoor tipo bikepacking
+const POSITIONS_URL = "data/positions.geojson";
+
 // Centro iniziale e zoom di partenza
 const INITIAL_CENTER = [9.19, 45.4642];
 const INITIAL_ZOOM = 4;
