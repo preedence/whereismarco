@@ -4,7 +4,18 @@
   --ochre: #d2b574;
   --tundra: #5a6e50;
   --steel: #38536b;
+
+  /* Nuovi per top bar / testo */
+  --night: #101827;
+  --night-soft: rgba(16, 24, 39, 0.94);
+  --ink: #111827;
+  --text-main: #111827;
+  --text-soft: #4b5563;
+  --text-on-dark: #e5e7eb;
+  --border-soft: rgba(148, 163, 184, 0.5);
 }
+
+/* Layout base mappa + pannello */
 
 html,
 body {
@@ -16,85 +27,89 @@ body {
   color: var(--steel);
 }
 
-/* Layout desktop: mappa a sinistra, pannello a destra */
+/* Top bar */
+
+.wm-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  backdrop-filter: blur(16px);
+  background: var(--night-soft);
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.wm-topbar-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0.6rem 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.wm-logo {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: var(--text-on-dark);
+}
+
+.wm-logo-title {
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+.wm-logo-subtitle {
+  font-size: 0.75rem;
+  color: rgba(209, 213, 219, 0.8);
+}
+
+.wm-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+}
+
+.wm-nav a {
+  font-size: 0.85rem;
+  text-decoration: none;
+  color: rgba(209, 213, 219, 0.8);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding-bottom: 0.15rem;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.wm-nav a:hover {
+  color: var(--text-on-dark);
+  border-color: var(--rust);
+}
+
+/* Sezioni principali */
+
+main {
+  min-height: 100vh;
+}
+
+/* Mappa full-bleed sotto la top bar */
+
+.wm-map-section {
+  height: calc(100vh - 56px);
+  position: relative;
+}
+
+/* Il tuo container mappa */
 
 #map {
   position: absolute;
-  inset: 0 300px 0 0;
+  inset: 0;
 }
+
+/* Il pannello ora può “galleggiare” sopra la mappa, stile card */
 
 #panel {
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 300px;
-  background: rgba(255, 255, 255, 0.96);
-  padding: 18px;
-  box-shadow: -8px 0 20px rgba(20, 20, 20, 0.05);
-  overflow: auto;
-}
-
-#panel h1 {
-  margin: 0 0 10px 0;
-  font-size: 18px;
-  color: var(--steel);
-}
-
-#info div {
-  margin-bottom: 8px;
-}
-
-#summary h2 {
-  margin-top: 14px;
-  font-size: 15px;
-}
-
-/* aspetto del punto live se usi un marker custom in futuro */
-.marker-live {
-  background: var(--rust);
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  border: 2px solid #ffffff;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-}
-
-/* Layout mobile: mappa sopra, pannello sotto */
-
-@media screen and (max-width: 768px) {
-  html,
-  body {
-    height: 100%;
-    overflow: hidden;
-  }
-
-  #map {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 60vh; /* 60% altezza viewport per la mappa */
-    bottom: auto;
-  }
-
-  #panel {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: 60vh;     /* pannello nell'ultimo 40% */
-    width: auto;
-    box-shadow: 0 -6px 16px rgba(20, 20, 20, 0.08);
-    padding: 14px;
-  }
-
-  #panel h1 {
-    font-size: 16px;
-    margin-bottom: 6px;
-  }
-
-  #summary h2 {
-    font-size: 14px;
-  }
-}
+  position
