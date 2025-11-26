@@ -1,5 +1,11 @@
-// Percorsi relativi alla pagina index.html (che ora è in root)
-const MAP_STYLE_URL = "styles/map-style.json";
+// Mappa degli stili (Classic / Dark) relativi a index.html
+const MAP_STYLES = {
+  classic: "styles/map-style.json",
+  dark: "styles/map-style-dark.json",
+};
+
+let currentStyle = "classic";
+
 const POSITIONS_URL = "data/positions.geojson";
 
 // Centro iniziale e zoom di partenza
@@ -12,7 +18,7 @@ let summaryByDate = {};
 // Inizializza la mappa MapLibre
 const map = new maplibregl.Map({
   container: "map",
-  style: MAP_STYLE_URL,
+  style: MAP_STYLES[currentStyle],
   center: INITIAL_CENTER,
   zoom: INITIAL_ZOOM,
 });
@@ -498,3 +504,18 @@ async function loadPhotos() {
     console.error("Errore nel caricamento delle foto:", err);
   }
 }
+
+// Switch semplice di stile mappa (Classic / Dark)
+document.addEventListener("DOMContentLoaded", () => {
+  const buttons = document.querySelectorAll(".style-btn");
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const styleKey = btn.getAttribute("data-style");
+      if (!styleKey || !MAP_STYLES[styleKey] || styleKey === currentStyle) {
+        return;
+      }
+      currentStyle = styleKey;
+      map.setStyle(MAP_STYLES[currentStyle]);
+    });
+  });
+});
