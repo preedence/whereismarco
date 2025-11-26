@@ -154,7 +154,7 @@ map.on("load", () => {
   map.on("mouseleave", "day-end-points", hideDayEndPopup);
   map.on("click", "day-end-points", showDayEndPopup);
 
-  // Sorgente per le foto (usata anche per eventuali layer futuri)
+  // Sorgente per le foto
   map.addSource("photos", {
     type: "geojson",
     data: {
@@ -315,7 +315,6 @@ ${dist} km, ↑ ${up} m, ${time} h`;
     features: dayEnds,
   });
 
-  // (updateInfo al momento non trova gli elementi e quindi non fa nulla)
   updateInfo(lat, lon, ts);
 
   // Adatta la mappa per mostrare l'intero percorso
@@ -425,9 +424,11 @@ async function loadSummary() {
           typeof longest.distance_km === "number"
             ? longest.distance_km.toFixed(1)
             : longest.distance_km;
-        longestEl.textContent = `${longest.date} – ${
-          longest.label || ""
-        } (${distStr} km)`;
+
+        const rawLongestLabel = longest.label || "";
+        const niceLongestLabel = rawLongestLabel.replace(/_/g, " ");
+
+        longestEl.textContent = `${longest.date} – ${niceLongestLabel} (${distStr} km)`;
       } else {
         longestEl.textContent = "—";
       }
