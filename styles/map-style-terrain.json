@@ -1,6 +1,6 @@
 {
   "version": 8,
-  "name": "Eurasia crossing – Classic",
+  "name": "Eurasia crossing – Terrain",
   "glyphs": "https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf",
   "sources": {
     "osm": {
@@ -14,7 +14,7 @@
       "id": "background",
       "type": "background",
       "paint": {
-        "background-color": "#f5f2e9"
+        "background-color": "#dde3ea"
       }
     },
     {
