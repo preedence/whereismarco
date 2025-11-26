@@ -15,7 +15,7 @@
   --border-soft: rgba(148, 163, 184, 0.45);
 }
 
-/* Base: niente scroll globale */
+/* Base: desktop blocca lo scroll globale, mobile no (gestito in media query) */
 
 html,
 body {
@@ -25,7 +25,7 @@ body {
     sans-serif;
   background: var(--sand);
   color: var(--steel);
-  overflow: hidden; /* blocca lo scroll dell'intera pagina */
+  overflow: hidden; /* solo per desktop, mobile lo sovrascrive sotto */
 }
 
 /* Top bar */
@@ -90,7 +90,7 @@ body {
   border-color: var(--rust);
 }
 
-/* Main e sezione mappa riempiono lo schermo sotto la topbar */
+/* Desktop: main e sezione mappa riempiono lo schermo sotto la topbar */
 
 main {
   height: calc(100vh - 56px); /* topbar ~56px */
@@ -201,38 +201,48 @@ main {
   padding-top: 2.5rem;
 }
 
-/* Mobile: mappa sopra, pannello sotto */
+/* MOBILE */
 
 @media screen and (max-width: 768px) {
+  /* Su mobile lascia scrollare il body normalmente */
   html,
   body {
-    height: 100%;
-    overflow: hidden; /* anche su mobile nessuno scroll globale */
+    height: auto;
+    min-height: 100%;
+    overflow: auto;
+  }
+
+  /* La topbar rimane in cima, il resto fluisce sotto */
+  main {
+    height: auto;
+    min-height: 0;
   }
 
   .wm-map-section {
-    height: 60vh;
+    position: relative;
+    height: auto;
+    min-height: 60vh; /* mappa almeno 60% viewport, poi il resto scorre */
   }
 
   #map {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 60vh;
-    bottom: auto;
+    position: relative;
     inset: auto;
+    width: 100%;
+    height: 60vh;
   }
 
   #panel {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: 60vh;
-    width: auto;
+    position: relative;
+    width: 100%;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    left: auto;
     box-shadow: 0 -6px 16px rgba(20, 20, 20, 0.18);
-    padding: 14px 16px;
+    padding: 14px 16px 18px;
+    max-height: none;      /* niente clipping */
+    overflow-y: visible;   /* scroll gestito dalla pagina, non solo dal panel */
+    margin-bottom: 1.5rem; /* spazio respirabile sotto */
   }
 
   #panel h1 {
