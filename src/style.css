@@ -230,7 +230,7 @@ main {
   width: 26px;
   height: 26px;
   border-radius: 50%;
-  background: url("../img/avatar.png") center/cover no-repeat, var(--rust);
+  background: url("img/avatar.png") center/cover no-repeat, var(--rust);
   border: 2px solid #ffffff;
   box-shadow: 0 2px 6px rgba(15, 23, 42, 0.45);
 }
