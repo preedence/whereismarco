@@ -1,17 +1,12 @@
 <!doctype html>
-<html lang="en">
+<html lang="it">
   <head>
     <meta charset="utf-8" />
-    <title>Eurasia Crossing – About</title>
-    <meta
-      name="description"
-      content="About this live tracking project and the bicycle trip towards the East."
-    />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Eurasia crossing – About</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
 
     <link rel="stylesheet" href="src/style.css" />
   </head>
-
   <body>
     <header class="wm-topbar">
       <div class="wm-topbar-inner">
@@ -20,7 +15,7 @@
           <span class="wm-logo-subtitle">A long-distance bike journey</span>
         </a>
         <nav class="wm-nav">
-          <a href="index.html#map-section">Map</a>
+          <a href="index.html">Map</a>
           <a href="about.html">About</a>
           <a
             href="https://github.com/preedence/whereismarco"
@@ -33,13 +28,29 @@
       </div>
     </header>
 
-    <main class="wm-about-page">
-      <section class="wm-about">
-        <h1>About</h1>
+    <main>
+      <section class="wm-page">
+        <h1>About this map</h1>
         <p>
-          Live tracking del viaggio in bicicletta verso est, aggiornato
-          automaticamente da SPOT e GitHub Actions. La mappa mostra
-          l’ultima posizione rilevata e la traccia del percorso.
+          Questa mappa mostra il percorso in bici attraverso Eurasia usando
+          OpenStreetMap come base, una traccia aggiornata periodicamente e i
+          punti di fine tappa calcolati dai dati GPS.
+        </p>
+        <p>
+          Le statistiche (giorni in bici, chilometri totali, dislivello,
+          velocità media) vengono generate da uno script che elabora i file
+          registrati sul campo e produce un GeoJSON per la traccia, un
+          riepilogo giornaliero e un elenco di foto geotaggate.
+        </p>
+        <p>
+          Il codice sorgente di questo progetto è disponibile su
+          <a
+            href="https://github.com/preedence/whereismarco"
+            target="_blank"
+            rel="noopener"
+            >GitHub</a
+          >, insieme agli script che preparano i dati e al workflow usato per
+          aggiornare la mappa in automatico.
         </p>
       </section>
     </main>
