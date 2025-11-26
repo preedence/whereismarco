@@ -4,6 +4,14 @@
   --ochre: #d2b574;
   --tundra: #5a6e50;
   --steel: #38536b;
+
+  --night: #101827;
+  --night-soft: rgba(16, 24, 39, 0.94);
+  --ink: #111827;
+  --text-main: #111827;
+  --text-soft: #4b5563;
+  --text-on-dark: #e5e7eb;
+  --border-soft: rgba(148, 163, 184, 0.45);
 }
 
 /* Base */
@@ -16,6 +24,81 @@ body {
     sans-serif;
   background: var(--sand);
   color: var(--steel);
+  overflow: hidden;
+}
+
+/* Top bar */
+
+.wm-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  backdrop-filter: blur(14px);
+  background: var(--night-soft);
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.wm-topbar-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0.6rem 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.wm-logo {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: var(--text-on-dark);
+}
+
+.wm-logo-title {
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+.wm-logo-subtitle {
+  font-size: 0.75rem;
+  color: rgba(209, 213, 219, 0.8);
+}
+
+.wm-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+}
+
+.wm-nav a {
+  font-size: 0.85rem;
+  text-decoration: none;
+  color: rgba(209, 213, 219, 0.8);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding-bottom: 0.15rem;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.wm-nav a:hover {
+  color: var(--text-on-dark);
+  border-color: var(--rust);
+}
+
+/* Main e sezione mappa riempiono lo schermo sotto la topbar */
+
+main {
+  height: calc(100vh - 56px);
+  min-height: 0;
+}
+
+.wm-map-section {
+  position: relative;
+  height: 100%;
 }
 
 /* Layout desktop: mappa a sinistra, pannello a destra */
@@ -33,14 +116,16 @@ body {
   width: 300px;
   background: rgba(255, 255, 255, 0.96);
   padding: 18px;
-  box-shadow: -8px 0 20px rgba(20, 20, 20, 0.05);
+  box-shadow: -8px 0 20px rgba(20, 20, 20, 0.08);
   overflow: auto;
+  box-sizing: border-box;
+  color: var(--text-main);
 }
 
 #panel h1 {
   margin: 0 0 10px 0;
   font-size: 18px;
-  color: var(--steel);
+  color: var(--ink);
 }
 
 /* blocco info */
@@ -67,7 +152,7 @@ body {
 .wm-day-title {
   font-size: 0.85rem;
   font-weight: 600;
-  color: #111827;
+  color: var(--ink);
 }
 
 .wm-day-date {
@@ -80,11 +165,11 @@ body {
 
 .wm-day-meta {
   font-size: 0.8rem;
-  color: #4b5563;
+  color: var(--text-soft);
   margin-top: 1px;
 }
 
-/* aspetto del punto live se usi un marker custom in futuro */
+/* Punto live (per eventuale marker custom) */
 
 .marker-live {
   background: var(--rust);
@@ -104,12 +189,33 @@ body {
     overflow: hidden;
   }
 
+  .wm-topbar-inner {
+    padding: 0.5rem 0.8rem;
+  }
+
+  .wm-nav {
+    gap: 0.8rem;
+  }
+
+  .wm-nav a {
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+  }
+
+  main {
+    height: calc(100vh - 48px);
+  }
+
+  .wm-map-section {
+    height: 100%;
+  }
+
   #map {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    height: 60vh; /* 60% altezza viewport per la mappa */
+    height: 60vh;
     bottom: auto;
   }
 
@@ -118,7 +224,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    top: 60vh; /* pannello nell'ultimo 40% */
+    top: 60vh;
     width: auto;
     box-shadow: 0 -6px 16px rgba(20, 20, 20, 0.08);
     padding: 14px;

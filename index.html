@@ -1,77 +1,77 @@
 <!doctype html>
-<html lang="en">
+<html lang="it">
   <head>
     <meta charset="utf-8" />
-    <title>Eurasia Crossing – Live Map</title>
-    <meta
-      name="description"
-      content="Live tracking of my bicycle trip across Eurasia."
-    />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Eurasia crossing – Live map</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+    <!-- Stili progetto -->
+    <link rel="stylesheet" href="src/style.css" />
 
     <!-- MapLibre GL JS -->
     <link
-      href="https://unpkg.com/maplibre-gl@^5.13.0/dist/maplibre-gl.css"
+      href="https://unpkg.com/maplibre-gl@3.6.1/dist/maplibre-gl.css"
       rel="stylesheet"
     />
-    <script src="https://unpkg.com/maplibre-gl@^5.13.0/dist/maplibre-gl.js"></script>
-
-    <!-- Stili del progetto -->
-    <link rel="stylesheet" href="src/style.css" />
+    <script src="https://unpkg.com/maplibre-gl@3.6.1/dist/maplibre-gl.js"></script>
   </head>
-
   <body>
     <header class="wm-topbar">
       <div class="wm-topbar-inner">
         <a href="index.html" class="wm-logo">
           <span class="wm-logo-title">Eurasia crossing</span>
-          <span class="wm-logo-subtitle">Live tracking</span>
+          <span class="wm-logo-subtitle">Milan → Tokyo by bike</span>
         </a>
-
         <nav class="wm-nav">
-          <a href="#map-section">Mappa live</a>
+          <a href="index.html">Map</a>
           <a href="about.html">About</a>
-          <a
-            href="https://github.com/preedence/whereismarco"
-            target="_blank"
-            rel="noopener"
-          >
-            Codice sorgente
-          </a>
         </nav>
       </div>
     </header>
 
     <main>
-      <!-- SEZIONE MAPPA -->
-      <section id="map-section" class="wm-map-section">
+      <section class="wm-map-section">
         <div id="map"></div>
 
-        <aside id="panel">
-          <h1>Eurasia crossing</h1>
+        <div id="panel">
+          <h1>Eurasia crossing – live</h1>
 
           <div id="info">
-            <div>Ultima posizione: <span id="last-pos">—</span></div>
-            <div>Ultimo aggiornamento: <span id="last-time">—</span></div>
+            <div>
+              Giorni in bici:
+              <strong><span id="total-days">—</span></strong>
+            </div>
+            <div>
+              Km totali:
+              <strong><span id="total-km">—</span></strong>
+            </div>
+            <div>
+              Dislivello ↑ totale:
+              <strong><span id="total-up">—</span></strong>
+            </div>
+            <div>
+              Ore in sella:
+              <strong><span id="total-hours">—</span></strong>
+            </div>
+            <div>
+              Media km/giorno:
+              <strong><span id="avg-km-day">—</span></strong>
+            </div>
+            <div>
+              Velocità media:
+              <strong><span id="avg-speed">—</span></strong> km/h
+            </div>
+            <div>
+              Giorno più lungo:
+              <strong><span id="longest-day">—</span></strong>
+            </div>
           </div>
 
-          <section id="summary">
-            <h2>Riepilogo</h2>
-            <div id="summary-content">
-              Caricamento dati in corso…
-            </div>
-
-            <div id="totals">
-              <div>Giorni: <span id="total-days">—</span></div>
-              <div>Distanza totale: <span id="total-km">—</span> km</div>
-              <div>Dislivello totale: <span id="total-up">—</span> m</div>
-              <div>Ore in movimento: <span id="total-hours">—</span> h</div>
-              <div>Media km/giorno: <span id="avg-km-day">—</span></div>
-              <div>Velocità media: <span id="avg-speed">—</span> km/h</div>
-              <div>Giorno più lungo: <span id="longest-day">—</span></div>
-            </div>
-          </section>
-        </aside>
+          <div id="summary">
+            <h2>Riepilogo tappe</h2>
+            <div id="summary-content">Caricamento…</div>
+          </div>
+        </div>
       </section>
     </main>
 
