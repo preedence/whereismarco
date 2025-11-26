@@ -1,6 +1,5 @@
 // Percorsi relativi alla pagina index.html (che ora è in root)
-// Stile mappa (unico)
-const MAP_STYLE_URL = "https://tiles.openfreemap.org/styles/terrain"; // stile outdoor tipo bikepacking
+const MAP_STYLE_URL = "styles/map-style.json";
 const POSITIONS_URL = "data/positions.geojson";
 
 // Centro iniziale e zoom di partenza
