@@ -1,11 +1,5 @@
-// Mappa degli stili (Classic / Dark) relativi a index.html
-const MAP_STYLES = {
-  classic: "styles/map-style.json",
-  dark: "styles/map-style-dark.json",
-};
-
-let currentStyle = "classic";
-
+// Percorsi relativi alla pagina index.html (che ora è in root)
+const MAP_STYLE_URL = "styles/map-style.json";
 const POSITIONS_URL = "data/positions.geojson";
 
 // Centro iniziale e zoom di partenza
@@ -15,10 +9,13 @@ const INITIAL_ZOOM = 4;
 // Riepilogo per data (riempito da loadSummary)
 let summaryByDate = {};
 
+// Tema attuale (chiaro/scuro)
+let isDark = false;
+
 // Inizializza la mappa MapLibre
 const map = new maplibregl.Map({
   container: "map",
-  style: MAP_STYLES[currentStyle],
+  style: MAP_STYLE_URL,
   center: INITIAL_CENTER,
   zoom: INITIAL_ZOOM,
 });
@@ -505,17 +502,29 @@ async function loadPhotos() {
   }
 }
 
-// Switch semplice di stile mappa (Classic / Dark)
+// Switch semplice di tema (Classic / Dark) sullo stesso stile
 document.addEventListener("DOMContentLoaded", () => {
   const buttons = document.querySelectorAll(".style-btn");
   buttons.forEach((btn) => {
     btn.addEventListener("click", () => {
       const styleKey = btn.getAttribute("data-style");
-      if (!styleKey || !MAP_STYLES[styleKey] || styleKey === currentStyle) {
-        return;
-      }
-      currentStyle = styleKey;
-      map.setStyle(MAP_STYLES[currentStyle]);
+      if (!styleKey) return;
+
+      const dark = styleKey === "dark";
+      if (dark === isDark) return;
+      isDark = dark;
+
+      const style = map.getStyle();
+      if (!style || !style.layers) return;
+
+      // trova il layer di background e cambia colore
+      const bgLayer = style.layers.find((l) => l.id === "background");
+      if (!bgLayer) return;
+
+      bgLayer.paint = bgLayer.paint || {};
+      bgLayer.paint["background-color"] = dark ? "#1c1f26" : "#f5f2e9";
+
+      map.setStyle(style);
     });
   });
 });
