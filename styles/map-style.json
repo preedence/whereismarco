@@ -27,8 +27,8 @@
       "paint": {
         "raster-opacity": 0.96,
         "raster-saturation": -0.1,
-        "raster-brightness-min": 0.95,
-        "raster-brightness-max": 1.05
+        "raster-brightness-min": 0.9,
+        "raster-brightness-max": 1
       }
     }
   ]
