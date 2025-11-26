@@ -10,31 +10,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <link rel="stylesheet" href="src/style.css" />
-
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.9.1/dist/leaflet.css"
-      integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14="
-      crossorigin=""
-    />
-    <script
-      src="https://unpkg.com/leaflet@1.9.1/dist/leaflet.js"
-      integrity="sha256-o9N1j7kP5PvsPWnNh5mzp3ZdwQioWL2s9v+U8pru730="
-      crossorigin=""
-    ></script>
   </head>
 
   <body>
     <header class="wm-topbar">
       <div class="wm-topbar-inner">
-        <a href="." class="wm-logo">
+        <a href="index.html" class="wm-logo">
           <span class="wm-logo-title">Eurasia crossing</span>
           <span class="wm-logo-subtitle">Live tracking</span>
         </a>
 
         <nav class="wm-nav">
           <a href="#map-section">Mappa live</a>
-          <a href="#about">About</a>
+          <a href="about.html">About</a>
           <a
             href="https://github.com/preedence/whereismarco"
             target="_blank"
@@ -47,6 +35,7 @@
     </header>
 
     <main>
+      <!-- SEZIONE MAPPA: qui viene disegnata la MapLibre -->
       <section id="map-section" class="wm-map-section">
         <div id="map"></div>
 
@@ -75,15 +64,6 @@
             </div>
           </section>
         </aside>
-      </section>
-
-      <section id="about" class="wm-about">
-        <h1>Eurasia crossing</h1>
-        <p>
-          Live tracking del viaggio in bicicletta verso est, aggiornato
-          automaticamente da SPOT e GitHub Actions. La mappa mostra
-          l’ultima posizione rilevata e la traccia del percorso.
-        </p>
       </section>
     </main>
 

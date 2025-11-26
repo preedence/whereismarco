@@ -17,15 +17,13 @@ const map = new maplibregl.Map({
   zoom: INITIAL_ZOOM,
 });
 
-// Aggiorna UI info (al momento non usata)
+// Aggiorna UI info
 function updateInfo(lat, lon, timestamp) {
   const posEl = document.getElementById("last-pos");
   const timeEl = document.getElementById("last-time");
-
   if (!posEl || !timeEl) {
     return;
   }
-
   posEl.textContent = `${lat.toFixed(5)}, ${lon.toFixed(5)}`;
   timeEl.textContent = timestamp || "—";
 }
@@ -33,7 +31,6 @@ function updateInfo(lat, lon, timestamp) {
 // Carica dati dal GeoJSON generato (positions.geojson)
 async function fetchPositions() {
   const url = `${POSITIONS_URL}?cache=${Date.now()}`;
-
   const res = await fetch(url);
   if (!res.ok) {
     throw new Error("Impossibile caricare positions.geojson");
@@ -143,7 +140,7 @@ map.on("load", () => {
     const html =
       f.properties && f.properties.summary_html
         ? f.properties.summary_html
-        : `<strong>Giorno ${f.properties?.dayIndex || ""}</strong>`;
+        : `Giorno ${f.properties?.dayIndex || ""}`;
     map.getCanvas().style.cursor = "pointer";
     dayEndPopup.setLngLat(f.geometry.coordinates).setHTML(html).addTo(map);
   }
@@ -217,6 +214,7 @@ async function updateData() {
   for (const f of features) {
     const tsF = f.properties?.timestamp;
     const d = tsF ? tsF.slice(0, 10) : null; // "YYYY-MM-DD"
+
     if (d !== lastDate) {
       if (currentLast) {
         dayCount++;
@@ -228,6 +226,7 @@ async function updateData() {
           ? clone.properties.timestamp.slice(0, 10)
           : null;
         const s = dateStr ? summaryByDate[dateStr] : null;
+
         if (s) {
           const dist =
             typeof s.distance_km === "number"
@@ -240,10 +239,9 @@ async function updateData() {
               : s.moving_time_h ?? "—";
 
           clone.properties.summary_html = `
-            <strong>${dateStr}</strong><br>
-            ${s.label || ""}<br>
-            ${dist} km, ↑ ${up} m, ${time} h
-          `;
+<strong>${dateStr}</strong><br>
+${s.label || ""}<br>
+${dist} km, ↑ ${up} m, ${time} h`;
         }
 
         dayEnds.push(clone);
@@ -253,6 +251,7 @@ async function updateData() {
     currentLast = f;
   }
 
+  // Chiudi l'ultima giornata
   if (currentLast) {
     dayCount++;
     const clone = JSON.parse(JSON.stringify(currentLast));
@@ -263,6 +262,7 @@ async function updateData() {
       ? clone.properties.timestamp.slice(0, 10)
       : null;
     const s = dateStr ? summaryByDate[dateStr] : null;
+
     if (s) {
       const dist =
         typeof s.distance_km === "number"
@@ -275,10 +275,9 @@ async function updateData() {
           : s.moving_time_h ?? "—";
 
       clone.properties.summary_html = `
-        <strong>${dateStr}</strong><br>
-        ${s.label || ""}<br>
-        ${dist} km, ↑ ${up} m, ${time} h
-      `;
+<strong>${dateStr}</strong><br>
+${s.label || ""}<br>
+${dist} km, ↑ ${up} m, ${time} h`;
     }
 
     dayEnds.push(clone);
@@ -295,7 +294,7 @@ async function updateData() {
     features: dayEnds,
   });
 
-  // (updateInfo al momento non trova gli elementi e quindi non fa nulla)
+  // Aggiorna pannello
   updateInfo(lat, lon, ts);
 
   // Adatta la mappa per mostrare l'intero percorso
@@ -356,7 +355,8 @@ async function loadSummary() {
     // Calcolo totali
     const totalDays = days.length;
     const totalKm = days.reduce(
-      (sum, d) => sum + (typeof d.distance_km === "number" ? d.distance_km : 0),
+      (sum, d) =>
+        sum + (typeof d.distance_km === "number" ? d.distance_km : 0),
       0
     );
     const totalUp = days.reduce(
@@ -369,7 +369,6 @@ async function loadSummary() {
         sum + (typeof d.moving_time_h === "number" ? d.moving_time_h : 0),
       0
     );
-
     const avgKmDay = totalDays > 0 ? totalKm / totalDays : 0;
     const avgSpeed = totalHours > 0 ? totalKm / totalHours : 0;
 
@@ -399,6 +398,7 @@ async function loadSummary() {
     if (hoursEl) hoursEl.textContent = totalHours.toFixed(1);
     if (avgKmEl) avgKmEl.textContent = avgKmDay.toFixed(1);
     if (avgSpeedEl) avgSpeedEl.textContent = avgSpeed.toFixed(1);
+
     if (longestEl) {
       if (longest) {
         const distStr =
@@ -413,7 +413,7 @@ async function loadSummary() {
       }
     }
 
-    // Tabella giornaliera
+    // Tabella giornaliera (markdown-like, se mai la userai)
     const rows = days
       .map((d) => {
         const dist =
@@ -425,76 +425,18 @@ async function loadSummary() {
           typeof d.moving_time_h === "number"
             ? d.moving_time_h.toFixed(1)
             : d.moving_time_h ?? "—";
-
-        return `
-          <tr>
-            <td>${d.date}</td>
-            <td>${d.label || ""}</td>
-            <td style="text-align:right;">${dist}</td>
-            <td style="text-align:right;">${up}</td>
-            <td style="text-align:right;">${time}</td>
-          </tr>
-        `;
+        return `|${d.date || "—"}|${d.label || ""}|${dist}|${up}|${time}|`;
       })
-      .join("");
+      .join("\n");
 
-    el.innerHTML = `
-      <table style="width:100%; border-collapse:collapse; font-size:13px;">
-        <thead>
-          <tr>
-            <th style="text-align:left;">Data</th>
-            <th style="text-align:left;">Tappa</th>
-            <th style="text-align:right;">km</th>
-            <th style="text-align:right;">↑ m</th>
-            <th style="text-align:right;">h</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${rows}
-        </tbody>
-      </table>
-    `;
+    el.textContent = rows;
   } catch (err) {
     console.error(err);
-    el.textContent = "Errore nel caricamento del riepilogo.";
+    el.textContent = "Errore caricamento riepilogo.";
   }
 }
 
-// Carica foto geotaggate da data/photos.json e aggiunge marker con popup
+// Foto geotaggate (stub: da implementare o lasciare vuoto)
 async function loadPhotos() {
-  try {
-    const res = await fetch("data/photos.json?cache=" + Date.now());
-    if (!res.ok) {
-      return;
-    }
-    const data = await res.json();
-    if (!data.photos || !data.photos.length) {
-      return;
-    }
-
-    data.photos.forEach((p) => {
-      if (typeof p.lon !== "number" || typeof p.lat !== "number") return;
-
-      const popupHtml = `
-        <div style="max-width:220px;">
-          <strong>${p.title || "Foto"}</strong><br>
-          <img src="${p.file}" style="width:100%;margin-top:6px;border-radius:4px;">
-          ${
-            p.caption
-              ? `<div style="margin-top:6px;font-size:12px;">${p.caption}</div>`
-              : ""
-          }
-        </div>
-      `;
-
-      const popup = new maplibregl.Popup({ offset: 20 }).setHTML(popupHtml);
-
-      new maplibregl.Marker({ color: "#c66a3a" })
-        .setLngLat([p.lon, p.lat])
-        .setPopup(popup)
-        .addTo(map);
-    });
-  } catch (err) {
-    console.error("Errore nel caricamento delle foto:", err);
-  }
+  // Placeholder per future foto geotaggate
 }

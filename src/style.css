@@ -146,7 +146,7 @@ main {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
-/* Sezione About */
+/* Sezione About (index e about.html) */
 
 .wm-about {
   max-width: 900px;
@@ -164,6 +164,16 @@ main {
 .wm-about p {
   line-height: 1.6;
   font-size: 0.95rem;
+}
+
+/* Layout dedicato alla pagina about.html */
+
+.wm-about-page {
+  min-height: calc(100vh - 56px);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 2.5rem;
 }
 
 /* Mobile: mappa sopra, pannello sotto */
