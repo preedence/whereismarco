@@ -214,7 +214,6 @@ map.on("load", () => {
 async function updateData() {
   const geo = await fetchPositions();
 
-  // Ci aspettiamo un FeatureCollection con punti ordinati cronologicamente
   if (!geo || !geo.features || !geo.features.length) {
     const s = document.getElementById("summary-content");
     if (s) s.textContent = "Nessuna posizione ancora.";
