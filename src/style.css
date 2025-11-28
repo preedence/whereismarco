@@ -225,16 +225,12 @@ main {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
-/* Avatar live: stile relativo a src/style.css → /img/avatar.gif */
+/* Avatar live: gif animata in src/img/avatar.gif */
 .wm-live-avatar {
   width: 26px;
   height: 26px;
   border-radius: 50%;
-<<<<<<< HEAD
-  background: url("/img/avatar.gif") center/cover no-repeat, var(--rust);
-=======
-  background: url("/img/avatar.gif") center/cover no-repeat, var(--rust);
->>>>>>> 4e28c71 (aggiornamenti di stile)
+  background: url("img/avatar.gif") center/cover no-repeat, var(--rust);
   border: 2px solid #ffffff;
   box-shadow: 0 2px 6px rgba(15, 23, 42, 0.45);
 }
