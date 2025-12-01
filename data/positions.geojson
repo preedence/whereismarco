@@ -1,4 +1,22 @@
 {
   "type": "FeatureCollection",
-  "features": []
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.47084,
+          45.63046
+        ]
+      },
+      "properties": {
+        "timestamp": "2025-12-01T20:11:55+0000",
+        "type": "OK",
+        "battery": "GOOD",
+        "spot_id": 2383347507,
+        "source": "spot"
+      }
+    }
+  ]
 }
