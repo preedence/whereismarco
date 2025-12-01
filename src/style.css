@@ -255,6 +255,35 @@ main {
   margin: 0 0 0.9rem;
 }
 
+.wm-about {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  padding: 24px 0;
+  flex-wrap: wrap;
+}
+
+.wm-about-avatar {
+  flex: 0 0 180px;
+  display: flex;
+  justify-content: center;
+}
+
+.wm-about-avatar img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.wm-about-text {
+  flex: 1 1 260px;
+}
+
+.wm-about-text h1 {
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+}
+
 /* Layout mobile: mappa sopra, pannello sotto */
 
 @media screen and (max-width: 768px) {
