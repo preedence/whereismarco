@@ -6,14 +6,16 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          9.19,
-          45.4642
+          9.47084,
+          45.63046
         ]
       },
       "properties": {
-        "timestamp": "2025-04-01T08:00:00Z",
-        "label": "Milano",
-        "source": "simulate_spot"
+        "timestamp": "2025-12-01T20:11:55+0000",
+        "type": "OK",
+        "battery": "GOOD",
+        "spot_id": 2383347507,
+        "source": "spot"
       }
     },
     {
@@ -21,14 +23,16 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          13.7768,
-          45.65
+          9.4709,
+          45.63051
         ]
       },
       "properties": {
-        "timestamp": "2025-04-01T14:00:00Z",
-        "label": "Trieste",
-        "source": "simulate_spot"
+        "timestamp": "2025-12-01T20:14:12+0000",
+        "type": "UNLIMITED-TRACK",
+        "battery": "GOOD",
+        "spot_id": 2383348230,
+        "source": "spot"
       }
     },
     {
@@ -36,14 +40,16 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          15.9819,
-          45.815
+          9.47082,
+          45.63055
         ]
       },
       "properties": {
-        "timestamp": "2025-04-01T20:00:00Z",
-        "label": "Zagreb",
-        "source": "simulate_spot"
+        "timestamp": "2025-12-02T09:49:34+0000",
+        "type": "UNLIMITED-TRACK",
+        "battery": "GOOD",
+        "spot_id": 2383523707,
+        "source": "spot"
       }
     },
     {
@@ -51,14 +57,16 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          20.4489,
-          44.7866
+          9.47073,
+          45.63058
         ]
       },
       "properties": {
-        "timestamp": "2025-04-02T02:00:00Z",
-        "label": "Belgrado",
-        "source": "simulate_spot"
+        "timestamp": "2025-12-02T09:53:48+0000",
+        "type": "UNLIMITED-TRACK",
+        "battery": "LOW",
+        "spot_id": 2383525379,
+        "source": "spot"
       }
     },
     {
@@ -66,14 +74,16 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          27.5667,
-          47.1667
+          9.47073,
+          45.63058
         ]
       },
       "properties": {
-        "timestamp": "2025-04-02T08:00:00Z",
-        "label": "Bucarest",
-        "source": "simulate_spot"
+        "timestamp": "2025-12-02T09:58:48+0000",
+        "type": "UNLIMITED-TRACK",
+        "battery": "LOW",
+        "spot_id": 2383525357,
+        "source": "spot"
       }
     },
     {
@@ -81,14 +91,33 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          28.9784,
-          41.0082
+          9.47099,
+          45.63055
         ]
       },
       "properties": {
-        "timestamp": "2025-04-02T14:00:00Z",
-        "label": "Istanbul",
-        "source": "simulate_spot"
+        "timestamp": "2025-12-02T10:04:54+0000",
+        "type": "UNLIMITED-TRACK",
+        "battery": "LOW",
+        "spot_id": 2383526465,
+        "source": "spot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.47094,
+          45.63057
+        ]
+      },
+      "properties": {
+        "timestamp": "2025-12-02T10:09:42+0000",
+        "type": "UNLIMITED-TRACK",
+        "battery": "LOW",
+        "spot_id": 2383527353,
+        "source": "spot"
       }
     }
   ]
