@@ -136,6 +136,23 @@
         "spot_id": 2384041489,
         "source": "spot"
       }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.47058,
+          45.63065
+        ]
+      },
+      "properties": {
+        "timestamp": "2025-12-03T18:13:39+0000",
+        "type": "UNLIMITED-TRACK",
+        "battery": "LOW",
+        "spot_id": 2384063051,
+        "source": "spot"
+      }
     }
   ]
 }
