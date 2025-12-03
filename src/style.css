@@ -284,6 +284,34 @@ main {
   margin-bottom: 0.75rem;
 }
 
+.wm-live-avatar {
+  width: 40px;
+  height: 40px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* 1. In movimento – gif animata */
+.wm-live-avatar--riding {
+  background-image: url("img/avatar-riding.gif");
+}
+
+/* 2. Fermo – immagine statica */
+.wm-live-avatar--stopped {
+  background-image: url("img/avatar-stopped.png");
+}
+
+/* 3. Dormo in tenda – tenda */
+.wm-live-avatar--camp {
+  background-image: url("img/avatar-camp.png");
+}
+
+/* 4. Dormo in hotel/casa – casetta */
+.wm-live-avatar--indoors {
+  background-image: url("img/avatar-indoors.png");
+}
+
 /* Layout mobile: mappa sopra, pannello sotto */
 
 @media screen and (max-width: 768px) {

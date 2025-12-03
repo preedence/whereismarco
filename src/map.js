@@ -31,8 +31,8 @@ function updateInfo(lat, lon, timestamp) {
   timeEl.textContent = timestamp || "—";
 }
 
-// Aggiorna/crea l'avatar live
-function updateLiveAvatar(lon, lat) {
+// Aggiorna/crea l'avatar live con stato
+function updateLiveAvatar(lon, lat, state) {
   if (!liveAvatarMarker) {
     const el = document.createElement("div");
     el.className = "wm-live-avatar";
@@ -41,6 +41,26 @@ function updateLiveAvatar(lon, lat) {
       .addTo(map);
   } else {
     liveAvatarMarker.setLngLat([lon, lat]);
+  }
+
+  const el = liveAvatarMarker.getElement();
+  // Pulisci le varianti precedenti
+  el.classList.remove(
+    "wm-live-avatar--riding",
+    "wm-live-avatar--stopped",
+    "wm-live-avatar--camp",
+    "wm-live-avatar--indoors"
+  );
+
+  if (state === "camp") {
+    el.classList.add("wm-live-avatar--camp");
+  } else if (state === "indoors") {
+    el.classList.add("wm-live-avatar--indoors");
+  } else if (state === "stopped") {
+    el.classList.add("wm-live-avatar--stopped");
+  } else {
+    // default: in movimento
+    el.classList.add("wm-live-avatar--riding");
   }
 }
 
@@ -242,6 +262,89 @@ async function updateData() {
   const [lon, lat] = last.geometry.coordinates;
   const ts = last.properties?.timestamp || "";
 
+  // ---------- Determina lo stato per l'avatar ----------
+
+  // Stato base in base al tipo di messaggio
+  let state = "riding";
+  const msgType = (last.properties?.type || "").toUpperCase();
+
+  if (msgType === "CUSTOM") {
+    state = "camp"; // tenda
+  } else if (msgType === "OK") {
+    state = "indoors"; // casa/hotel/B&B
+  } else if (msgType === "UNLIMITED-TRACK") {
+    // Raffiniamo con tempo + distanza
+
+    // Parametri configurabili
+    const WINDOW_MIN = 15; // finestra temporale ultimi X minuti
+    const MIN_MOVE_METERS = 50; // sotto questa distanza totale => fermo
+
+    // Calcola tempo ultimo ping
+    let isOld = false;
+    if (ts) {
+      const tLast = new Date(ts).getTime();
+      const now = Date.now();
+      const diffMin = (now - tLast) / 60000;
+      isOld = diffMin > WINDOW_MIN;
+    }
+
+    // Se è "vecchio" oltre la finestra → fermo
+    if (isOld) {
+      state = "stopped";
+    } else {
+      // Controlla anche la distanza percorsa negli ultimi WINDOW_MIN minuti
+      const recentPoints = [];
+      const nowMs = Date.now();
+
+      for (let i = features.length - 1; i >= 0; i--) {
+        const f = features[i];
+        const pts = f.properties?.timestamp;
+        if (!pts) continue;
+        const t = new Date(pts).getTime();
+        const diffMin = (nowMs - t) / 60000;
+        if (diffMin <= WINDOW_MIN) {
+          recentPoints.push(f);
+        } else {
+          break; // i punti precedenti sono ancora più vecchi
+        }
+      }
+
+      let totalDist = 0;
+
+      function haversineMeters(c1, c2) {
+        const R = 6371000; // raggio Terra in metri
+        const toRad = (d) => (d * Math.PI) / 180;
+        const [lon1, lat1] = c1;
+        const [lon2, lat2] = c2;
+        const dLat = toRad(lat2 - lat1);
+        const dLon = toRad(lon2 - lon1);
+        const a =
+          Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+          Math.cos(toRad(lat1)) *
+            Math.cos(toRad(lat2)) *
+            Math.sin(dLon / 2) *
+            Math.sin(dLon / 2);
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        return R * c;
+      }
+
+      if (recentPoints.length >= 2) {
+        for (let i = 1; i < recentPoints.length; i++) {
+          const cPrev = recentPoints[i - 1].geometry.coordinates;
+          const cCur = recentPoints[i].geometry.coordinates;
+          totalDist += haversineMeters(cPrev, cCur);
+        }
+      }
+
+      if (totalDist < MIN_MOVE_METERS) {
+        state = "stopped";
+      } else {
+        state = "riding";
+      }
+    }
+  }
+  // ---------- fine determinazione stato ----------
+
   // Calcola i punti "fine giornata" con indice progressivo e riepilogo HTML
   const dayEnds = [];
   let lastDate = null;
@@ -358,7 +461,7 @@ async function updateData() {
   });
 
   updateInfo(lat, lon, ts);
-  updateLiveAvatar(lon, lat);
+  updateLiveAvatar(lon, lat, state);
 
   // Adatta la mappa per mostrare l'intero percorso
   const coords = features.map((f) => f.geometry.coordinates);
