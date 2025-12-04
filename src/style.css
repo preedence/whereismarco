@@ -312,6 +312,23 @@ main {
   background-image: url("img/avatar-indoors.png");
 }
 
+/* Duomo di Milano – marker di partenza */
+.wm-start-marker {
+  width: 18px;   /* molto piccolo di base */
+  height: 18px;
+  background-image: url("images/duomo.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: transform 0.2s ease-out;
+}
+
+/* Stato ingrandito (click o zoom alto) */
+.wm-start-marker--large {
+  transform: scale(2); /* raddoppia circa le dimensioni */
+}
+
+
 /* Layout mobile: mappa sopra, pannello sotto */
 
 @media screen and (max-width: 768px) {

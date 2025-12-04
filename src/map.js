@@ -212,6 +212,37 @@ map.on("load", () => {
     },
   });
 
+  // Marker fisso di partenza (Duomo di Milano)
+  const startEl = document.createElement("div");
+  startEl.className = "wm-start-marker";
+
+  const startMarker = new maplibregl.Marker({ element: startEl })
+    .setLngLat([9.1916, 45.4642]) // Duomo di Milano
+    .addTo(map);
+
+  // Ingrandisci/riduci in base allo zoom
+  function updateStartMarkerSize() {
+    const z = map.getZoom();
+    if (z >= 10) {
+      startEl.classList.add("wm-start-marker--large");
+    } else {
+      startEl.classList.remove("wm-start-marker--large");
+    }
+  }
+
+  // Aggiorna subito e ad ogni cambio di zoom
+  updateStartMarkerSize();
+  map.on("zoom", updateStartMarkerSize);
+
+  // Ingrandisci al click e centra la mappa
+  startEl.addEventListener("click", () => {
+    startEl.classList.add("wm-start-marker--large");
+    map.easeTo({
+      center: [9.1916, 45.4642],
+      zoom: Math.max(map.getZoom(), 12),
+    });
+  });
+
   // Primo aggiornamento + refresh periodico
   updateData().catch((err) => {
     console.error(err);
@@ -264,7 +295,6 @@ async function updateData() {
 
   // ---------- Determina lo stato per l'avatar ----------
 
-  // Stato base in base al tipo di messaggio
   let state = "riding";
   const msgType = (last.properties?.type || "").toUpperCase();
 
@@ -273,13 +303,11 @@ async function updateData() {
   } else if (msgType === "OK") {
     state = "indoors"; // casa/hotel/B&B
   } else if (msgType === "UNLIMITED-TRACK") {
-    // Raffiniamo con tempo + distanza
-
     // Parametri configurabili
-    const WINDOW_MIN = 15; // finestra temporale ultimi X minuti
-    const MIN_MOVE_METERS = 50; // sotto questa distanza totale => fermo
+    const WINDOW_MIN = 15;
+    const MIN_MOVE_METERS = 50;
 
-    // Calcola tempo ultimo ping
+    // Età dell'ultimo ping
     let isOld = false;
     if (ts) {
       const tLast = new Date(ts).getTime();
@@ -288,11 +316,10 @@ async function updateData() {
       isOld = diffMin > WINDOW_MIN;
     }
 
-    // Se è "vecchio" oltre la finestra → fermo
     if (isOld) {
       state = "stopped";
     } else {
-      // Controlla anche la distanza percorsa negli ultimi WINDOW_MIN minuti
+      // Distanza percorsa negli ultimi WINDOW_MIN minuti
       const recentPoints = [];
       const nowMs = Date.now();
 
@@ -305,14 +332,14 @@ async function updateData() {
         if (diffMin <= WINDOW_MIN) {
           recentPoints.push(f);
         } else {
-          break; // i punti precedenti sono ancora più vecchi
+          break;
         }
       }
 
       let totalDist = 0;
 
       function haversineMeters(c1, c2) {
-        const R = 6371000; // raggio Terra in metri
+        const R = 6371000;
         const toRad = (d) => (d * Math.PI) / 180;
         const [lon1, lat1] = c1;
         const [lon2, lat2] = c2;
