@@ -216,6 +216,7 @@ main {
 }
 
 /* aspetto del punto live se usi un marker custom in futuro */
+/*
 .marker-live {
   background: var(--rust);
   width: 14px;
@@ -224,6 +225,7 @@ main {
   border: 2px solid #ffffff;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
+*/
 
 /* Avatar live: gif animata in src/img/avatar.gif */
 .wm-live-avatar {
@@ -316,7 +318,7 @@ main {
 .wm-start-marker {
   width: 18px;   /* molto piccolo di base */
   height: 18px;
-  background-image: url("images/duomo.png");
+  background-image: url("img/duomo.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
