@@ -15,6 +15,7 @@
 }
 
 /* Base */
+
 html,
 body {
   height: 100%;
@@ -27,6 +28,7 @@ body {
 }
 
 /* Top bar */
+
 .wm-topbar {
   position: sticky;
   top: 0;
@@ -46,54 +48,350 @@ body {
   gap: 1.5rem;
 }
 
-/* ... altri stili base e layout ... */
+.wm-logo {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: var(--text-on-dark);
+}
 
-/* Avatar live: base pulito, senza cerchio arancione */
+.wm-logo-title {
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+.wm-logo-subtitle {
+  font-size: 0.75rem;
+  color: rgba(209, 213, 219, 0.8);
+}
+
+.wm-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+}
+
+.wm-nav a {
+  font-size: 0.85rem;
+  text-decoration: none;
+  color: rgba(209, 213, 219, 0.8);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding-bottom: 0.15rem;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.wm-nav a:hover {
+  color: var(--text-on-dark);
+  border-color: var(--rust);
+}
+
+/* Main e sezione mappa riempiono lo schermo sotto la topbar */
+
+main {
+  height: calc(100vh - 56px);
+  min-height: 0;
+}
+
+.wm-map-section {
+  position: relative;
+  height: 100%;
+}
+
+/* Layout desktop: mappa a sinistra, pannello a destra */
+
+#map {
+  position: absolute;
+  inset: 0 300px 0 0;
+}
+
+#panel {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 300px;
+  background: rgba(255, 255, 255, 0.96);
+  padding: 18px;
+  box-shadow: -8px 0 20px rgba(20, 20, 20, 0.08);
+  overflow: auto;
+  box-sizing: border-box;
+  color: var(--text-main);
+}
+
+#panel h1 {
+  margin: 0 0 6px 0;
+  font-size: 18px;
+  color: var(--ink);
+}
+
+.wm-panel-sub {
+  margin: 0 0 10px;
+  font-size: 0.8rem;
+  color: var(--text-soft);
+}
+
+/* blocco info */
+
+#info div {
+  margin-bottom: 8px;
+}
+
+/* titolo riepilogo */
+
+#summary h2 {
+  margin-top: 14px;
+  font-size: 15px;
+}
+
+/* Righe riepilogo giornaliero */
+
+.wm-day-row {
+  margin-bottom: 6px;
+  padding-bottom: 4px;
+  border-bottom: 1px dashed rgba(148, 163, 184, 0.4);
+}
+
+.wm-day-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.wm-day-date {
+  font-variant-numeric: tabular-nums;
+}
+
+.wm-day-label {
+  font-weight: 500;
+}
+
+.wm-day-meta {
+  font-size: 0.8rem;
+  color: var(--text-soft);
+  margin-top: 1px;
+}
+
+/* Popup tappe (pallini fine giornata) */
+
+.wm-popup-day {
+  font-size: 0.8rem;
+  color: #111827;
+}
+
+.wm-popup-day-title {
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.wm-popup-day-date {
+  font-variant-numeric: tabular-nums;
+}
+
+.wm-popup-day-label {
+  font-weight: 500;
+}
+
+.wm-popup-day-meta {
+  color: #4b5563;
+}
+
+/* Popup generali MapLibre (tappe + foto) */
+
+.maplibregl-popup-content {
+  background: #fdfaf3;
+  border-radius: 6px;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.25);
+  padding: 8px 10px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+}
+
+.maplibregl-popup-tip {
+  border-top-color: #fdfaf3 !important;
+}
+
+/* aspetto del punto live se usi un marker custom in futuro */
+/*
+.marker-live {
+  background: var(--rust);
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+*/
+
+/* Avatar live: gif animata in src/img/avatar.gif */
 .wm-live-avatar {
-  width: 36px;
+  width: 36px;              /* prima 26 */
   height: 36px;
+  border-radius: 50%;
+  background: url("img/avatar.gif") center/contain no-repeat, var(--rust);
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.45);
+}
+
+/* Pagina about */
+
+.wm-page {
+  max-width: 720px;
+  margin: 40px auto;
+  padding: 0 16px;
+  color: var(--text-main);
+}
+
+.wm-page h1 {
+  font-size: 1.6rem;
+  margin-bottom: 0.5rem;
+  color: var(--ink);
+}
+
+.wm-page p {
+  line-height: 1.5;
+  margin: 0 0 0.9rem;
+}
+
+.wm-about {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  padding: 24px 0;
+  flex-wrap: wrap;
+}
+
+.wm-about-avatar {
+  flex: 0 0 180px;
+  display: flex;
+  justify-content: center;
+}
+
+.wm-about-avatar img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.wm-about-text {
+  flex: 1 1 260px;
+}
+
+.wm-about-text h1 {
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+}
+
+.wm-live-avatar {
+  width: 40px;
+  height: 40px;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  border: 2px solid #ffffff;
-  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.45);
-  border-radius: 50%;
 }
 
-/* Stati avatar */
+/* 1. In movimento – gif animata */
 .wm-live-avatar--riding {
   background-image: url("img/avatar-riding.gif");
 }
 
+/* 2. Fermo – immagine statica */
 .wm-live-avatar--stopped {
   background-image: url("img/avatar-stopped.png");
 }
 
+/* 3. Dormo in tenda – tenda */
 .wm-live-avatar--camp {
   background-image: url("img/avatar-camp.png");
 }
 
+/* 4. Dormo in hotel/casa – casetta */
 .wm-live-avatar--indoors {
   background-image: url("img/avatar-indoors.png");
 }
 
-/* Duomo marker piccolo + transizione */
+/* Duomo di Milano – marker di partenza */
 .wm-start-marker {
-  width: 18px;
+  width: 18px;   /* molto piccolo di base */
   height: 18px;
   background-image: url("img/duomo.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  border: 2px solid #ffffff;
-  border-radius: 50%;
-  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.3);
   transition: transform 0.2s ease-out;
 }
 
-/* Duomo ingrandito */
+/* Stato ingrandito (click o zoom alto) */
 .wm-start-marker--large {
-  transform: scale(2);
+  transform: scale(2); /* raddoppia circa le dimensioni */
 }
 
-/* ... continua con altri stili che vuoi mantenere ... */
+
+/* Layout mobile: mappa sopra, pannello sotto */
+
+@media screen and (max-width: 768px) {
+  html,
+  body {
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .wm-topbar-inner {
+    padding: 0.5rem 0.8rem;
+  }
+
+  .wm-nav {
+    gap: 0.8rem;
+  }
+
+  .wm-nav a {
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+  }
+
+  main {
+    height: calc(100vh - 48px);
+  }
+
+  .wm-map-section {
+    height: 100%;
+  }
+
+  #map {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60vh;
+    bottom: auto;
+  }
+
+  #panel {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 60vh;
+    width: auto;
+    box-shadow: 0 -6px 16px rgba(20, 20, 20, 0.08);
+    padding: 14px;
+  }
+
+  #panel h1 {
+    font-size: 16px;
+    margin-bottom: 4px;
+  }
+
+  #summary h2 {
+    font-size: 14px;
+  }
+
+  .wm-page {
+    margin: 24px auto;
+    padding: 0 14px;
+  }
+}
