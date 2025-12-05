@@ -305,7 +305,8 @@ main {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  transition: width 0.15s ease-out, height 0.15s ease-out;
+  /* NO border, NO box-shadow, NO border-radius */
+  transition: transform 0.2s ease-out;
 }
 
 /* Stato ingrandito (click o zoom alto) */

@@ -216,19 +216,17 @@ map.on("load", () => {
   const startEl = document.createElement("div");
   startEl.className = "wm-start-marker";
 
-  new maplibregl.Marker({ element: startEl })
+  const startMarker = new maplibregl.Marker({ element: startEl })
     .setLngLat([9.1916, 45.4642]) // Duomo di Milano
     .addTo(map);
-
-  // Ingrandisci/riduci in base allo zoom cambiando width/height
+	
+  // Ingrandisci/riduci in base allo zoom (forza con !important inline)
   function updateStartMarkerSize() {
     const z = map.getZoom();
     if (z >= 10) {
-      startEl.style.width = "32px";
-      startEl.style.height = "32px";
+      startEl.style.cssText = "transform: scale(2.2) !important; z-index: 1000 !important;";
     } else {
-      startEl.style.width = "18px";
-      startEl.style.height = "18px";
+      startEl.style.cssText = "transform: scale(1) !important; z-index: auto !important;";
     }
   }
 
@@ -236,16 +234,14 @@ map.on("load", () => {
   updateStartMarkerSize();
   map.on("zoom", updateStartMarkerSize);
 
-  // Ingrandisci al click e centra la mappa
+  // Ingrandisci al click e centra la mappa (forza con !important inline)
   startEl.addEventListener("click", () => {
-    startEl.style.width = "32px";
-    startEl.style.height = "32px";
+    startEl.style.cssText = "transform: scale(2.2) !important; z-index: 1000 !important;";
     map.easeTo({
       center: [9.1916, 45.4642],
       zoom: Math.max(map.getZoom(), 12),
     });
   });
-
 
 
   // Primo aggiornamento + refresh periodico
