@@ -240,29 +240,28 @@ map.on("load", () => {
       },
     });
 
-    // Layer simbolo del Duomo - DIMENSIONI RIDOTTE
+    // Layer simbolo del Duomo - MOLTO PICCOLO
 	map.addLayer({
 	  id: "duomo-start-layer",
 	  type: "symbol",
 	  source: "duomo-start",
 	  layout: {
 		"icon-image": "duomo",
-		"icon-size": 0.15,     // ← DA 0.3 a 0.15 (piccolo)
+		"icon-size": 0.08,     // ← ULTRA-PICCOLO (da 0.15)
 		"icon-allow-overlap": true,
 		"icon-ignore-placement": true,
 	  },
 	});
 
-	// Nella funzione updateDuomoSize():
 	function updateDuomoSize() {
 	  const z = map.getZoom();
-	  const size = z >= 10 ? 0.3 : 0.15;  // ← DA 0.6:0.3 a 0.3:0.15
+	  const size = z >= 10 ? 0.16 : 0.08;  // ← 0.16:0.08 (metà dimensione)
 	  map.setLayoutProperty("duomo-start-layer", "icon-size", size);
 	}
 
-	// Nel click:
+	// Click: ingrandimento moderato
 	map.on("click", "duomo-start-layer", () => {
-	  map.setLayoutProperty("duomo-start-layer", "icon-size", 0.4);  // ← DA 0.8 a 0.4
+	  map.setLayoutProperty("duomo-start-layer", "icon-size", 0.24);  // ← 0.24 (moderato)
 	  map.flyTo({
 		center: [9.1916, 45.4642],
 		zoom: Math.max(map.getZoom(), 14),
