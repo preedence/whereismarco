@@ -219,18 +219,14 @@ map.on("load", () => {
   const startMarker = new maplibregl.Marker({ element: startEl })
     .setLngLat([9.1916, 45.4642]) // Duomo di Milano
     .addTo(map);
-
-  // Ingrandisci/riduci in base allo zoom (forza stile inline)
+	
+  // Ingrandisci/riduci in base allo zoom (forza con !important inline)
   function updateStartMarkerSize() {
     const z = map.getZoom();
     if (z >= 10) {
-      startEl.classList.add("wm-start-marker--large");
-      startEl.style.transform = "scale(2.2)";
-      startEl.style.zIndex = "1000";
+      startEl.style.cssText = "transform: scale(2.2) !important; z-index: 1000 !important;";
     } else {
-      startEl.classList.remove("wm-start-marker--large");
-      startEl.style.transform = "scale(1)";
-      startEl.style.zIndex = "";
+      startEl.style.cssText = "transform: scale(1) !important; z-index: auto !important;";
     }
   }
 
@@ -238,16 +234,15 @@ map.on("load", () => {
   updateStartMarkerSize();
   map.on("zoom", updateStartMarkerSize);
 
-  // Ingrandisci al click e centra la mappa (forza stile inline)
+  // Ingrandisci al click e centra la mappa (forza con !important inline)
   startEl.addEventListener("click", () => {
-    startEl.classList.add("wm-start-marker--large");
-    startEl.style.transform = "scale(2.2)";
-    startEl.style.zIndex = "1000";
+    startEl.style.cssText = "transform: scale(2.2) !important; z-index: 1000 !important;";
     map.easeTo({
       center: [9.1916, 45.4642],
       zoom: Math.max(map.getZoom(), 12),
     });
   });
+
 
   // Primo aggiornamento + refresh periodico
   updateData().catch((err) => {
