@@ -217,16 +217,14 @@ main {
 
 /* ========== AVATAR LIVE ========== */
 
-/* Base: nessun cerchio arancione, solo immagine + bordo */
+/* Base: nessun cerchio arancione, solo immagine*/
 .wm-live-avatar {
   width: 36px;
   height: 36px;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  border: 2px solid #ffffff;
-  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.45);
-  border-radius: 50%;
+  /* NO border, NO box-shadow, NO border-radius */
 }
 
 /* 1. In movimento – gif animata */
@@ -301,15 +299,13 @@ main {
 /* ========== DUOMO DI MILANO – MARKER DI PARTENZA ========== */
 
 .wm-start-marker {
-  width: 18px;   /* piccolo di base */
+  width: 18px;
   height: 18px;
-  background-image: url("img/duomo.png"); /* adatta il path se serve */
+  background-image: url("img/duomo.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  border: 2px solid #ffffff;
-  border-radius: 50%;
-  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.3);
+  /* NO border, NO box-shadow, NO border-radius */
   transition: transform 0.2s ease-out;
 }
 
