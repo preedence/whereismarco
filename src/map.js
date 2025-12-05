@@ -213,69 +213,67 @@ map.on("load", () => {
   });
 
   // Duomo di Milano come symbol layer (niente salto)
-  map.loadImage("images/duomo.png", (error, image) => {
-    if (error) {
-      console.error("Errore caricamento icona Duomo:", error);
-      return;
-    }
-    if (!map.hasImage("duomo")) {
-      map.addImage("duomo", image);
-    }
+	map.loadImage("img/duomo.png", (error, image) => {
+	  if (error) {
+		console.error("Errore caricamento icona Duomo:", error);
+		return;
+	  }
+	  if (!map.hasImage("duomo")) {
+		map.addImage("duomo", image);
+	  }
 
-    // Sorgente GeoJSON per il Duomo
-    map.addSource("duomo-start", {
-      type: "geojson",
-      data: {
-        type: "FeatureCollection",
-        features: [
-          {
-            type: "Feature",
-            geometry: {
-              type: "Point",
-              coordinates: [9.1916, 45.4642], // Duomo di Milano
-            },
-            properties: {},
-          },
-        ],
-      },
-    });
+	  // Sorgente GeoJSON per il Duomo
+	  map.addSource("duomo-start", {
+		type: "geojson",
+		data: {
+		  type: "FeatureCollection",
+		  features: [{
+			type: "Feature",
+			geometry: { type: "Point", coordinates: [9.1916, 45.4642] },
+			properties: {},
+		  }],
+		},
+	  });
 
-    // Layer simbolo del Duomo - MOLTO PICCOLO
-	map.addLayer({
-	  id: "duomo-start-layer",
-	  type: "symbol",
-	  source: "duomo-start",
-	  layout: {
-		"icon-image": "duomo",
-		"icon-size": 0.08,     // ← ULTRA-PICCOLO (da 0.15)
-		"icon-allow-overlap": true,
-		"icon-ignore-placement": true,
-	  },
-	});
-
-	function updateDuomoSize() {
-	  const z = map.getZoom();
-	  const size = z >= 10 ? 0.16 : 0.08;  // ← 0.16:0.08 (metà dimensione)
-	  map.setLayoutProperty("duomo-start-layer", "icon-size", size);
-	}
-
-	// Click: ingrandimento moderato
-	map.on("click", "duomo-start-layer", () => {
-	  map.setLayoutProperty("duomo-start-layer", "icon-size", 0.24);  // ← 0.24 (moderato)
-	  map.flyTo({
-		center: [9.1916, 45.4642],
-		zoom: Math.max(map.getZoom(), 14),
+	  // Layer simbolo del Duomo
+	  map.addLayer({
+		id: "duomo-start-layer",
+		type: "symbol",
+		source: "duomo-start",
+		layout: {
+		  "icon-image": "duomo",
+		  "icon-size": 0.08,  // ← ultra-piccolo
+		  "icon-allow-overlap": true,
+		  "icon-ignore-placement": true,
+		},
 	  });
 	});
 
+	// FUNZIONE ZOOM FUORI dal loadImage
+	function updateDuomoSize() {
+	  if (!map.getLayer("duomo-start-layer")) return;  // Sicurezza
+	  const z = map.getZoom();
+	  const size = z >= 10 ? 0.16 : 0.08;
+	  map.setLayoutProperty("duomo-start-layer", "icon-size", size);
+	}
 
-    map.on("mouseenter", "duomo-start-layer", () => {
-      map.getCanvas().style.cursor = "pointer";
-    });
-    map.on("mouseleave", "duomo-start-layer", () => {
-      map.getCanvas().style.cursor = "";
-    });
-  });
+	// Listener zoom (UNA VOLTA SOLA, FUORI)
+	updateDuomoSize();
+	map.on("zoom", updateDuomoSize);
+
+	// Click (sempre fuori)
+	map.on("click", "duomo-start-layer", () => {
+	  map.setLayoutProperty("duomo-start-layer", "icon-size", 0.24);
+	  map.flyTo({ center: [9.1916, 45.4642], zoom: 14 });
+	});
+
+	map.on("mouseenter", "duomo-start-layer", () => {
+	  map.getCanvas().style.cursor = "pointer";
+	});
+	map.on("mouseleave", "duomo-start-layer", () => {
+	  map.getCanvas().style.cursor = "";
+	});
+
 
   // Primo aggiornamento + refresh periodico
   updateData().catch((err) => {
