@@ -213,7 +213,7 @@ map.on("load", () => {
   });
 
   // Duomo di Milano come symbol layer (niente salto)
-  map.loadImage("img/duomo.png", (error, image) => {
+  map.loadImage("images/duomo.png", (error, image) => {
     if (error) {
       console.error("Errore caricamento icona Duomo:", error);
       return;
