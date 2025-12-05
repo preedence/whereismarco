@@ -212,37 +212,71 @@ map.on("load", () => {
     },
   });
 
-  // Marker fisso di partenza (Duomo di Milano)
-  const startEl = document.createElement("div");
-  startEl.className = "wm-start-marker";
-
-  const startMarker = new maplibregl.Marker({ element: startEl })
-    .setLngLat([9.1916, 45.4642]) // Duomo di Milano
-    .addTo(map);
-	
-  // Ingrandisci/riduci in base allo zoom (forza con !important inline)
-  function updateStartMarkerSize() {
-    const z = map.getZoom();
-    if (z >= 10) {
-      startEl.style.cssText = "transform: scale(2.2) !important; z-index: 1000 !important;";
-    } else {
-      startEl.style.cssText = "transform: scale(1) !important; z-index: auto !important;";
+  // Duomo di Milano come symbol layer (niente salto)
+  map.loadImage("img/duomo.png", (error, image) => {
+    if (error) {
+      console.error("Errore caricamento icona Duomo:", error);
+      return;
     }
-  }
+    if (!map.hasImage("duomo")) {
+      map.addImage("duomo", image);
+    }
 
-  // Aggiorna subito e ad ogni cambio di zoom
-  updateStartMarkerSize();
-  map.on("zoom", updateStartMarkerSize);
+    // Sorgente GeoJSON per il Duomo
+    map.addSource("duomo-start", {
+      type: "geojson",
+      data: {
+        type: "FeatureCollection",
+        features: [
+          {
+            type: "Feature",
+            geometry: {
+              type: "Point",
+              coordinates: [9.1916, 45.4642], // Duomo di Milano
+            },
+            properties: {},
+          },
+        ],
+      },
+    });
 
-  // Ingrandisci al click e centra la mappa (forza con !important inline)
-  startEl.addEventListener("click", () => {
-    startEl.style.cssText = "transform: scale(2.2) !important; z-index: 1000 !important;";
-    map.easeTo({
-      center: [9.1916, 45.4642],
-      zoom: Math.max(map.getZoom(), 12),
+    // Layer simbolo del Duomo
+    map.addLayer({
+      id: "duomo-start-layer",
+      type: "symbol",
+      source: "duomo-start",
+      layout: {
+        "icon-image": "duomo",
+        "icon-size": 0.3,
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+      },
+    });
+
+    function updateDuomoSize() {
+      const z = map.getZoom();
+      const size = z >= 10 ? 0.6 : 0.3;
+      map.setLayoutProperty("duomo-start-layer", "icon-size", size);
+    }
+
+    updateDuomoSize();
+    map.on("zoom", updateDuomoSize);
+
+    // Click: centra e zooma sul Duomo
+    map.on("click", "duomo-start-layer", () => {
+      map.flyTo({
+        center: [9.1916, 45.4642],
+        zoom: Math.max(map.getZoom(), 14),
+      });
+    });
+
+    map.on("mouseenter", "duomo-start-layer", () => {
+      map.getCanvas().style.cursor = "pointer";
+    });
+    map.on("mouseleave", "duomo-start-layer", () => {
+      map.getCanvas().style.cursor = "";
     });
   });
-
 
   // Primo aggiornamento + refresh periodico
   updateData().catch((err) => {
@@ -295,7 +329,6 @@ async function updateData() {
   const ts = last.properties?.timestamp || "";
 
   // ---------- Determina lo stato per l'avatar ----------
-
   let state = "riding";
   const msgType = (last.properties?.type || "").toUpperCase();
 
@@ -304,11 +337,9 @@ async function updateData() {
   } else if (msgType === "OK") {
     state = "indoors"; // casa/hotel/B&B
   } else if (msgType === "UNLIMITED-TRACK") {
-    // Parametri configurabili
     const WINDOW_MIN = 15;
     const MIN_MOVE_METERS = 50;
 
-    // Età dell'ultimo ping
     let isOld = false;
     if (ts) {
       const tLast = new Date(ts).getTime();
@@ -320,7 +351,6 @@ async function updateData() {
     if (isOld) {
       state = "stopped";
     } else {
-      // Distanza percorsa negli ultimi WINDOW_MIN minuti
       const recentPoints = [];
       const nowMs = Date.now();
 
@@ -345,7 +375,7 @@ async function updateData() {
         const [lon1, lat1] = c1;
         const [lon2, lat2] = c2;
         const dLat = toRad(lat2 - lat1);
-        const dLon = toRad(lat2 - lon1);
+        const dLon = toRad(lon2 - lon1);
         const a =
           Math.sin(dLat / 2) * Math.sin(dLat / 2) +
           Math.cos(toRad(lat1)) *
@@ -432,7 +462,6 @@ async function updateData() {
     currentLast = f;
   }
 
-  // Chiudi l'ultima giornata
   if (currentLast) {
     dayCount++;
     const clone = JSON.parse(JSON.stringify(currentLast));
@@ -477,7 +506,6 @@ async function updateData() {
     dayEnds.push(clone);
   }
 
-  // Aggiorna sorgenti sulla mappa
   map.getSource("track").setData(trackFeature);
   map.getSource("live").setData({
     type: "FeatureCollection",
@@ -491,12 +519,9 @@ async function updateData() {
   updateInfo(lat, lon, ts);
   updateLiveAvatar(lon, lat, state);
 
-  // Adatta la mappa per mostrare l'intero percorso
   const coords = features.map((f) => f.geometry.coordinates);
-  let minLon = coords[0][0];
-  let maxLon = coords[0][0];
-  let minLat = coords[0][1];
-  let maxLat = coords[0][1];
+  let [minLon, minLat] = coords[0];
+  let [maxLon, maxLat] = coords[0];
 
   for (const [cLon, cLat] of coords) {
     if (cLon < minLon) minLon = cLon;
@@ -538,7 +563,6 @@ async function loadSummary() {
 
     const days = data.days;
 
-    // Mappa date -> oggetto riepilogo per collegare tappe ai pallini
     summaryByDate = {};
     days.forEach((d) => {
       if (d.date) {
@@ -546,7 +570,6 @@ async function loadSummary() {
       }
     });
 
-    // Calcolo totali
     const totalDays = days.length;
     const totalKm = days.reduce(
       (sum, d) =>
@@ -566,7 +589,6 @@ async function loadSummary() {
     const avgKmDay = totalDays > 0 ? totalKm / totalDays : 0;
     const avgSpeed = totalHours > 0 ? totalKm / totalHours : 0;
 
-    // Giorno più lungo per distanza
     let longest = null;
     for (const d of days) {
       if (
@@ -577,7 +599,6 @@ async function loadSummary() {
       }
     }
 
-    // Aggiorna i numeri nel blocco info (se esistono)
     const daysEl = document.getElementById("total-days");
     const kmEl = document.getElementById("total-km");
     const upEl = document.getElementById("total-up");
@@ -598,17 +619,14 @@ async function loadSummary() {
           typeof longest.distance_km === "number"
             ? longest.distance_km.toFixed(1)
             : longest.distance_km;
-
         const rawLongestLabel = longest.label || "";
         const niceLongestLabel = rawLongestLabel.replace(/_/g, " ");
-
         longestEl.textContent = `${longest.date} – ${niceLongestLabel} (${distStr} km)`;
       } else {
         longestEl.textContent = "—";
       }
     }
 
-    // Riepilogo formattato in HTML
     const itemsHtml = days
       .map((d) => {
         const dist =
