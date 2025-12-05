@@ -212,37 +212,43 @@ map.on("load", () => {
     },
   });
 
-  // Marker fisso di partenza (Duomo di Milano)
-  const startEl = document.createElement("div");
-  startEl.className = "wm-start-marker";
-
-  const startMarker = new maplibregl.Marker({ element: startEl })
-    .setLngLat([9.1916, 45.4642]) // Duomo di Milano
-    .addTo(map);
-	
-  // Ingrandisci/riduci in base allo zoom (forza con !important inline)
-  function updateStartMarkerSize() {
-    const z = map.getZoom();
-    if (z >= 10) {
-      startEl.style.cssText = "transform: scale(2.2) !important; z-index: 1000 !important;";
-    } else {
-      startEl.style.cssText = "transform: scale(1) !important; z-index: auto !important;";
+  // Layer simbolo: Duomo di Milano
+  map.addLayer({
+    id: "duomo",
+    type: "symbol",
+    source: {
+      type: "geojson",
+      data: {
+        type: "Feature",
+        geometry: {
+          type: "Point",
+          coordinates: [9.1916, 45.4642]
+        }
+      }
+    },
+    layout: {
+      "icon-image": "duomo",
+      "icon-size": 0.2,
+      "icon-allow-overlap": true,
+      "icon-ignore-placement": true
     }
-  }
-
-  // Aggiorna subito e ad ogni cambio di zoom
-  updateStartMarkerSize();
-  map.on("zoom", updateStartMarkerSize);
-
-  // Ingrandisci al click e centra la mappa (forza con !important inline)
-  startEl.addEventListener("click", () => {
-    startEl.style.cssText = "transform: scale(2.2) !important; z-index: 1000 !important;";
-    map.easeTo({
-      center: [9.1916, 45.4642],
-      zoom: Math.max(map.getZoom(), 12),
-    });
   });
 
+  // Cambia dimensione icona in base allo zoom
+  map.on("zoom", () => {
+    const z = map.getZoom();
+    if (z >= 10) {
+      map.setLayoutProperty("duomo", "icon-size", 0.4);
+    } else {
+      map.setLayoutProperty("duomo", "icon-size", 0.2);
+    }
+  });
+
+  // Ingrandisci al click e centra la mappa
+  map.on("click", "duomo", () => {
+    map.setLayoutProperty("duomo", "icon-size", 0.6);
+    map.flyTo({ center: [9.1916, 45.4642], zoom: 14 });
+  });
 
   // Primo aggiornamento + refresh periodico
   updateData().catch((err) => {
@@ -345,7 +351,7 @@ async function updateData() {
         const [lon1, lat1] = c1;
         const [lon2, lat2] = c2;
         const dLat = toRad(lat2 - lat1);
-        const dLon = toRad(lat2 - lon1);
+        const dLon = toRad(lon2 - lon1);
         const a =
           Math.sin(dLat / 2) * Math.sin(dLat / 2) +
           Math.cos(toRad(lat1)) *
