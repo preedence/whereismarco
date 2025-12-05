@@ -215,26 +215,38 @@ main {
   border-top-color: #fdfaf3 !important;
 }
 
-/* aspetto del punto live se usi un marker custom in futuro */
-/*
-.marker-live {
-  background: var(--rust);
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  border: 2px solid #ffffff;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-}
-*/
+/* ========== AVATAR LIVE ========== */
 
-/* Avatar live: gif animata in src/img/avatar.gif */
+/* Base: nessun cerchio arancione, solo immagine + bordo */
 .wm-live-avatar {
-  width: 36px;              /* prima 26 */
+  width: 36px;
   height: 36px;
-  border-radius: 50%;
-  background: url("img/avatar.gif") center/contain no-repeat, var(--rust);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
   border: 2px solid #ffffff;
   box-shadow: 0 2px 6px rgba(15, 23, 42, 0.45);
+  border-radius: 50%;
+}
+
+/* 1. In movimento – gif animata */
+.wm-live-avatar--riding {
+  background-image: url("img/avatar-riding.gif");
+}
+
+/* 2. Fermo – immagine statica */
+.wm-live-avatar--stopped {
+  background-image: url("img/avatar-stopped.png");
+}
+
+/* 3. Dormo in tenda – tenda */
+.wm-live-avatar--camp {
+  background-image: url("img/avatar-camp.png");
+}
+
+/* 4. Dormo in hotel/casa – casetta */
+.wm-live-avatar--indoors {
+  background-image: url("img/avatar-indoors.png");
 }
 
 /* Pagina about */
@@ -286,50 +298,25 @@ main {
   margin-bottom: 0.75rem;
 }
 
-.wm-live-avatar {
-  width: 40px;
-  height: 40px;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-}
+/* ========== DUOMO DI MILANO – MARKER DI PARTENZA ========== */
 
-/* 1. In movimento – gif animata */
-.wm-live-avatar--riding {
-  background-image: url("img/avatar-riding.gif");
-}
-
-/* 2. Fermo – immagine statica */
-.wm-live-avatar--stopped {
-  background-image: url("img/avatar-stopped.png");
-}
-
-/* 3. Dormo in tenda – tenda */
-.wm-live-avatar--camp {
-  background-image: url("img/avatar-camp.png");
-}
-
-/* 4. Dormo in hotel/casa – casetta */
-.wm-live-avatar--indoors {
-  background-image: url("img/avatar-indoors.png");
-}
-
-/* Duomo di Milano – marker di partenza */
 .wm-start-marker {
-  width: 18px;   /* molto piccolo di base */
+  width: 18px;   /* piccolo di base */
   height: 18px;
-  background-image: url("img/duomo.png");
+  background-image: url("img/duomo.png"); /* adatta il path se serve */
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.3);
   transition: transform 0.2s ease-out;
 }
 
 /* Stato ingrandito (click o zoom alto) */
 .wm-start-marker--large {
-  transform: scale(2); /* raddoppia circa le dimensioni */
+  transform: scale(2.2);
 }
-
 
 /* Layout mobile: mappa sopra, pannello sotto */
 
