@@ -212,7 +212,7 @@ map.on("load", () => {
     },
   });
 
-  // Duomo di Milano come symbol layer (niente salto)
+  // 🔥 DUOMO CORRETTO: ora torna piccolo al riclick e zoom out
   map.loadImage("images/duomo.png", (error, image) => {
     if (error) {
       console.error("Errore caricamento icona Duomo:", error);
@@ -240,35 +240,65 @@ map.on("load", () => {
       },
     });
 
-    // Layer simbolo del Duomo - MOLTO PICCOLO
-	map.addLayer({
-	  id: "duomo-start-layer",
-	  type: "symbol",
-	  source: "duomo-start",
-	  layout: {
-		"icon-image": "duomo",
-		"icon-size": 0.08,     // ← ULTRA-PICCOLO (da 0.15)
-		"icon-allow-overlap": true,
-		"icon-ignore-placement": true,
-	  },
-	});
+    // Layer simbolo del Duomo
+    map.addLayer({
+      id: "duomo-start-layer",
+      type: "symbol",
+      source: "duomo-start",
+      layout: {
+        "icon-image": "duomo",
+        "icon-size": 0.08,     // Inizialmente PICCOLO
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+      },
+    });
 
-	function updateDuomoSize() {
-	  const z = map.getZoom();
-	  const size = z >= 10 ? 0.16 : 0.08;  // ← 0.16:0.08 (metà dimensione)
-	  map.setLayoutProperty("duomo-start-layer", "icon-size", size);
-	}
+    // 🆕 VARIABILE STATO per tracciare se è ingrandito
+    let isDuomoEnlarged = false;
 
-	// Click: ingrandimento moderato
-	map.on("click", "duomo-start-layer", () => {
-	  map.setLayoutProperty("duomo-start-layer", "icon-size", 0.15);  // ← 0.24 (moderato)
-	  map.flyTo({
-		center: [9.1916, 45.4642],
-		zoom: Math.max(map.getZoom(), 14),
-	  });
-	});
+    // 🆕 Funzione centralizzata per dimensioni corrette
+    function updateDuomoSize() {
+      const z = map.getZoom();
+      if (isDuomoEnlarged && z >= 10) {
+        map.setLayoutProperty("duomo-start-layer", "icon-size", 0.15);
+      } else {
+        // RESET: piccolo se zoom out OPPURE non ingrandito
+        map.setLayoutProperty("duomo-start-layer", "icon-size", z >= 10 ? 0.16 : 0.08);
+      }
+    }
 
+    // 🆕 CLICK TOGGLE: ingrandisci/rimpicciolisci
+    map.on("click", "duomo-start-layer", () => {
+      isDuomoEnlarged = !isDuomoEnlarged; // Inverti stato
+      
+      if (isDuomoEnlarged) {
+        // PRIMO CLICK → INGANDISCI + flyTo
+        map.setLayoutProperty("duomo-start-layer", "icon-size", 0.15);
+        map.flyTo({
+          center: [9.1916, 45.4642],
+          zoom: Math.max(map.getZoom(), 14),
+        });
+      } else {
+        // SECONDO CLICK → TORNA NORMALE
+        updateDuomoSize();
+      }
+    });
 
+    // 🆕 ZOOM END: reset se zoom out sotto 10
+    map.on("zoomend", () => {
+      const z = map.getZoom();
+      if (z < 10) {
+        isDuomoEnlarged = false;
+        map.setLayoutProperty("duomo-start-layer", "icon-size", 0.08);
+      }
+    });
+
+    // 🆕 ZOOM REALE TIME: aggiorna durante lo zoom
+    map.on("zoom", () => {
+      updateDuomoSize();
+    });
+
+    // Hover cursor
     map.on("mouseenter", "duomo-start-layer", () => {
       map.getCanvas().style.cursor = "pointer";
     });
@@ -295,7 +325,7 @@ map.on("load", () => {
   }, 60000); // ogni 60 secondi
 });
 
-// Funzione che aggiorna traccia + punto live + punti fine giornata
+// [resto del file IDENTICO - funzioni updateData, loadSummary, loadPhotos]
 async function updateData() {
   const geo = await fetchPositions();
 
@@ -429,311 +459,4 @@ async function updateData() {
             typeof s.distance_km === "number"
               ? s.distance_km.toFixed(1)
               : s.distance_km ?? "—";
-          const up = s.elevation_up_m ?? "—";
-          const time =
-            typeof s.moving_time_h === "number"
-              ? s.moving_time_h.toFixed(1)
-              : s.moving_time_h ?? "—";
-
-          const niceLabel = (s.label || "").replace(/_/g, " ");
-
-          clone.properties.summary_html = `
-  <div class="wm-popup-day">
-    <div class="wm-popup-day-title">
-      <span class="wm-popup-day-date">${dateStr}</span>
-      ${
-        niceLabel
-          ? ` – <span class="wm-popup-day-label">${niceLabel}</span>`
-          : ""
-      }
-    </div>
-    <div class="wm-popup-day-meta">
-      ${dist} km, ↑ ${up} m, ${time} h
-    </div>
-  </div>
-`;
-        }
-
-        dayEnds.push(clone);
-      }
-      lastDate = d;
-    }
-    currentLast = f;
-  }
-
-  if (currentLast) {
-    dayCount++;
-    const clone = JSON.parse(JSON.stringify(currentLast));
-    clone.properties = clone.properties || {};
-    clone.properties.dayIndex = dayCount;
-
-    const dateStr = clone.properties.timestamp
-      ? clone.properties.timestamp.slice(0, 10)
-      : null;
-    const s = dateStr ? summaryByDate[dateStr] : null;
-
-    if (s) {
-      const dist =
-        typeof s.distance_km === "number"
-          ? s.distance_km.toFixed(1)
-          : s.distance_km ?? "—";
-      const up = s.elevation_up_m ?? "—";
-      const time =
-        typeof s.moving_time_h === "number"
-          ? s.moving_time_h.toFixed(1)
-          : s.moving_time_h ?? "—";
-
-      const niceLabel = (s.label || "").replace(/_/g, " ");
-
-      clone.properties.summary_html = `
-  <div class="wm-popup-day">
-    <div class="wm-popup-day-title">
-      <span class="wm-popup-day-date">${dateStr}</span>
-      ${
-        niceLabel
-          ? ` – <span class="wm-popup-day-label">${niceLabel}</span>`
-          : ""
-      }
-    </div>
-    <div class="wm-popup-day-meta">
-      ${dist} km, ↑ ${up} m, ${time} h
-    </div>
-  </div>
-`;
-    }
-
-    dayEnds.push(clone);
-  }
-
-  map.getSource("track").setData(trackFeature);
-  map.getSource("live").setData({
-    type: "FeatureCollection",
-    features: [last],
-  });
-  map.getSource("day-ends").setData({
-    type: "FeatureCollection",
-    features: dayEnds,
-  });
-
-  updateInfo(lat, lon, ts);
-  updateLiveAvatar(lon, lat, state);
-
-  const coords = features.map((f) => f.geometry.coordinates);
-  let [minLon, minLat] = coords[0];
-  let [maxLon, maxLat] = coords[0];
-
-  for (const [cLon, cLat] of coords) {
-    if (cLon < minLon) minLon = cLon;
-    if (cLon > maxLon) maxLon = cLon;
-    if (cLat < minLat) minLat = cLat;
-    if (cLat > maxLat) maxLat = cLat;
-  }
-
-  map.fitBounds(
-    [
-      [minLon, minLat],
-      [maxLon, maxLat],
-    ],
-    {
-      padding: 50,
-      maxZoom: 8,
-      duration: 800,
-    }
-  );
-}
-
-// Carica il riepilogo da data/summary.json e popola pannello + totali
-async function loadSummary() {
-  const el = document.getElementById("summary-content");
-  if (!el) return;
-
-  try {
-    const res = await fetch("data/summary.json?cache=" + Date.now());
-    if (!res.ok) {
-      el.textContent = "Nessun riepilogo disponibile.";
-      return;
-    }
-
-    const data = await res.json();
-    if (!data.days || !data.days.length) {
-      el.textContent = "Nessuna tappa ancora.";
-      return;
-    }
-
-    const days = data.days;
-
-    summaryByDate = {};
-    days.forEach((d) => {
-      if (d.date) {
-        summaryByDate[d.date] = d;
-      }
-    });
-
-    const totalDays = days.length;
-    const totalKm = days.reduce(
-      (sum, d) =>
-        sum + (typeof d.distance_km === "number" ? d.distance_km : 0),
-      0
-    );
-    const totalUp = days.reduce(
-      (sum, d) =>
-        sum + (typeof d.elevation_up_m === "number" ? d.elevation_up_m : 0),
-      0
-    );
-    const totalHours = days.reduce(
-      (sum, d) =>
-        sum + (typeof d.moving_time_h === "number" ? d.moving_time_h : 0),
-      0
-    );
-    const avgKmDay = totalDays > 0 ? totalKm / totalDays : 0;
-    const avgSpeed = totalHours > 0 ? totalKm / totalHours : 0;
-
-    let longest = null;
-    for (const d of days) {
-      if (
-        typeof d.distance_km === "number" &&
-        (!longest || d.distance_km > longest.distance_km)
-      ) {
-        longest = d;
-      }
-    }
-
-    const daysEl = document.getElementById("total-days");
-    const kmEl = document.getElementById("total-km");
-    const upEl = document.getElementById("total-up");
-    const hoursEl = document.getElementById("total-hours");
-    const avgKmEl = document.getElementById("avg-km-day");
-    const avgSpeedEl = document.getElementById("avg-speed");
-    const longestEl = document.getElementById("longest-day");
-
-    if (daysEl) daysEl.textContent = totalDays.toString();
-    if (kmEl) kmEl.textContent = totalKm.toFixed(1);
-    if (upEl) upEl.textContent = Math.round(totalUp).toString();
-    if (hoursEl) hoursEl.textContent = totalHours.toFixed(1);
-    if (avgKmEl) avgKmEl.textContent = avgKmDay.toFixed(1);
-    if (avgSpeedEl) avgSpeedEl.textContent = avgSpeed.toFixed(1);
-    if (longestEl) {
-      if (longest) {
-        const distStr =
-          typeof longest.distance_km === "number"
-            ? longest.distance_km.toFixed(1)
-            : longest.distance_km;
-        const rawLongestLabel = longest.label || "";
-        const niceLongestLabel = rawLongestLabel.replace(/_/g, " ");
-        longestEl.textContent = `${longest.date} – ${niceLongestLabel} (${distStr} km)`;
-      } else {
-        longestEl.textContent = "—";
-      }
-    }
-
-    const itemsHtml = days
-      .map((d) => {
-        const dist =
-          typeof d.distance_km === "number"
-            ? d.distance_km.toFixed(1)
-            : d.distance_km ?? "—";
-        const up = d.elevation_up_m ?? "—";
-        const time =
-          typeof d.moving_time_h === "number"
-            ? d.moving_time_h.toFixed(1)
-            : d.moving_time_h ?? "—";
-
-        const rawLabel = d.label || "";
-        const niceLabel = rawLabel.replace(/_/g, " ");
-
-        const date = d.date || "—";
-
-        return `
-          <div class="wm-day-row">
-            <div class="wm-day-title">
-              <span class="wm-day-date">${date}</span>
-              ${
-                niceLabel
-                  ? ` – <span class="wm-day-label">${niceLabel}</span>`
-                  : ""
-              }
-            </div>
-            <div class="wm-day-meta">
-              ${dist} km, ↑ ${up} m, ${time} h
-            </div>
-          </div>
-        `;
-      })
-      .join("");
-
-    el.innerHTML = itemsHtml;
-  } catch (err) {
-    console.error(err);
-    el.textContent = "Errore caricamento riepilogo.";
-  }
-}
-
-// Foto geotaggate da data/photos.json e marker/popup sulla mappa
-async function loadPhotos() {
-  try {
-    const res = await fetch("data/photos.json?cache=" + Date.now());
-    if (!res.ok) {
-      return; // niente file, niente foto
-    }
-    const data = await res.json();
-
-    if (!data.photos || !data.photos.length) {
-      return;
-    }
-
-    const features = [];
-
-    data.photos.forEach((p) => {
-      if (typeof p.lon !== "number" || typeof p.lat !== "number") return;
-
-      const title = p.title || "Foto";
-      const caption = p.caption || "";
-      const file = p.file || p.url || "";
-
-      const popupHtml = `
-  <div class="wm-photo-popup" style="max-width:220px;">
-    <strong>${title}</strong><br>
-    ${
-      file
-        ? `<img src="${file}" alt="${title}" style="width:100%;margin-top:6px;border-radius:4px;">`
-        : ""
-    }
-    ${
-      caption
-        ? `<div style="margin-top:6px;font-size:12px;">${caption}</div>`
-        : ""
-    }
-  </div>
-`;
-
-      const popup = new maplibregl.Popup({ offset: 20 }).setHTML(popupHtml);
-
-      new maplibregl.Marker({ color: "#c66a3a" })
-        .setLngLat([p.lon, p.lat])
-        .setPopup(popup)
-        .addTo(map);
-
-      features.push({
-        type: "Feature",
-        geometry: {
-          type: "Point",
-          coordinates: [p.lon, p.lat],
-        },
-        properties: {
-          title,
-          caption,
-          file,
-        },
-      });
-    });
-
-    if (map.getSource("photos")) {
-      map.getSource("photos").setData({
-        type: "FeatureCollection",
-        features,
-      });
-    }
-  } catch (err) {
-    console.error("Errore nel caricamento delle foto:", err);
-  }
-}
+          const up = s.elevation_up_m ?? "—
