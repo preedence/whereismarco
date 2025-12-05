@@ -299,8 +299,8 @@ main {
 /* ========== DUOMO DI MILANO – MARKER DI PARTENZA ========== */
 
 .wm-start-marker {
-  width: 18px;
-  height: 18px;
+  width: 36px;
+  height: 36px;
   background-image: url("img/duomo.png");
   background-size: contain;
   background-repeat: no-repeat;
