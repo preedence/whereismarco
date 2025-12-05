@@ -261,7 +261,7 @@ map.on("load", () => {
 
 	// Click: ingrandimento moderato
 	map.on("click", "duomo-start-layer", () => {
-	  map.setLayoutProperty("duomo-start-layer", "icon-size", 0.24);  // ← 0.24 (moderato)
+	  map.setLayoutProperty("duomo-start-layer", "icon-size", 0.15);  // ← 0.24 (moderato)
 	  map.flyTo({
 		center: [9.1916, 45.4642],
 		zoom: Math.max(map.getZoom(), 14),
