@@ -220,13 +220,17 @@ map.on("load", () => {
     .setLngLat([9.1916, 45.4642]) // Duomo di Milano
     .addTo(map);
 
-  // Ingrandisci/riduci in base allo zoom
+  // Ingrandisci/riduci in base allo zoom (forza stile inline)
   function updateStartMarkerSize() {
     const z = map.getZoom();
     if (z >= 10) {
       startEl.classList.add("wm-start-marker--large");
+      startEl.style.transform = "scale(2.2)";
+      startEl.style.zIndex = "1000";
     } else {
       startEl.classList.remove("wm-start-marker--large");
+      startEl.style.transform = "scale(1)";
+      startEl.style.zIndex = "";
     }
   }
 
@@ -234,9 +238,11 @@ map.on("load", () => {
   updateStartMarkerSize();
   map.on("zoom", updateStartMarkerSize);
 
-  // Ingrandisci al click e centra la mappa
+  // Ingrandisci al click e centra la mappa (forza stile inline)
   startEl.addEventListener("click", () => {
     startEl.classList.add("wm-start-marker--large");
+    startEl.style.transform = "scale(2.2)";
+    startEl.style.zIndex = "1000";
     map.easeTo({
       center: [9.1916, 45.4642],
       zoom: Math.max(map.getZoom(), 12),
@@ -344,7 +350,7 @@ async function updateData() {
         const [lon1, lat1] = c1;
         const [lon2, lat2] = c2;
         const dLat = toRad(lat2 - lat1);
-        const dLon = toRad(lon2 - lon1);
+        const dLon = toRad(lat2 - lon1);
         const a =
           Math.sin(dLat / 2) * Math.sin(dLat / 2) +
           Math.cos(toRad(lat1)) *
