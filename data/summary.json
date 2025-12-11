@@ -1,20 +1,12 @@
 {
   "days": [
     {
-      "date": "2023-04-16",
-      "label": "La_corsa_dei_campanili",
-      "distance_km": 25.9,
-      "elevation_up_m": 250,
-      "moving_time_h": 2.0,
-      "gpx_file": "La_corsa_dei_campanili.gpx"
-    },
-    {
-      "date": "2025-11-20",
-      "label": "activity_21041945457",
-      "distance_km": 5.3,
-      "elevation_up_m": 42,
-      "moving_time_h": 0.4,
-      "gpx_file": "activity_21041945457.gpx"
+      "date": "2025-12-08",
+      "label": "Morning_Ride",
+      "distance_km": 15.0,
+      "elevation_up_m": 92,
+      "moving_time_h": 1.1,
+      "gpx_file": "Morning_Ride.gpx"
     }
   ]
 }
