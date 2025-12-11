@@ -94,7 +94,7 @@ map.on("load", () => {
       "line-cap": "round",
     },
     paint: {
-      "line-color": "#d2b574", // ocra
+      "line-color": "#2563eb", // blu
       "line-width": 4,
       "line-opacity": 0.9,
     },
@@ -448,48 +448,53 @@ async function updateData() {
 
     if (d !== lastDate) {
       if (currentLast) {
-        dayCount++;
-        const clone = JSON.parse(JSON.stringify(currentLast));
-        clone.properties = clone.properties || {};
-        clone.properties.dayIndex = dayCount;
+  const lastTs = currentLast.properties?.timestamp || null;
+  const lastDateStr = lastTs ? lastTs.slice(0, 10) : null;
+  const todayStr = new Date().toISOString().slice(0, 10);
 
-        const dateStr = clone.properties.timestamp
-          ? clone.properties.timestamp.slice(0, 10)
-          : null;
-        const s = dateStr ? summaryByDate[dateStr] : null;
+  // Non aggiungere il pallino di fine giornata se è oggi (giorno in corso)
+  if (lastDateStr !== todayStr) {
+    dayCount++;
+    const clone = JSON.parse(JSON.stringify(currentLast));
+    clone.properties = clone.properties || {};
+    clone.properties.dayIndex = dayCount;
 
-        if (s) {
-          const dist =
-            typeof s.distance_km === "number"
-              ? s.distance_km.toFixed(1)
-              : s.distance_km ?? "—";
-          const up = s.elevation_up_m ?? "—";
-          const time =
-            typeof s.moving_time_h === "number"
-              ? s.moving_time_h.toFixed(1)
-              : s.moving_time_h ?? "—";
+    const s = lastDateStr ? summaryByDate[lastDateStr] : null;
 
-          const niceLabel = (s.label || "").replace(/_/g, " ");
+    if (s) {
+      const dist =
+        typeof s.distance_km === "number"
+          ? s.distance_km.toFixed(1)
+          : s.distance_km ?? "—";
+      const up = s.elevation_up_m ?? "—";
+      const time =
+        typeof s.moving_time_h === "number"
+          ? s.moving_time_h.toFixed(1)
+          : s.moving_time_h ?? "—";
 
-          clone.properties.summary_html = `
-  <div class="wm-popup-day">
-    <div class="wm-popup-day-title">
-      <span class="wm-popup-day-date">${dateStr}</span>
-      ${
-        niceLabel
-          ? ` – <span class="wm-popup-day-label">${niceLabel}</span>`
-          : ""
-      }
-    </div>
-    <div class="wm-popup-day-meta">
-      ${dist} km, ↑ ${up} m, ${time} h
-    </div>
-  </div>
-`;
-        }
+      const niceLabel = (s.label || "").replace(/_/g, " ");
 
-        dayEnds.push(clone);
-      }
+      clone.properties.summary_html = `
+	  <div class="wm-popup-day">
+		<div class="wm-popup-day-title">
+		  <span class="wm-popup-day-date">${lastDateStr}</span>
+		  ${
+			niceLabel
+			  ? ` – <span class="wm-popup-day-label">${niceLabel}</span>`
+			  : ""
+		  }
+		</div>
+		<div class="wm-popup-day-meta">
+		  ${dist} km, ↑ ${up} m, ${time} h
+		</div>
+	  </div>
+	`;
+		}
+
+		dayEnds.push(clone);
+	  }
+	}
+
       lastDate = d;
     }
     currentLast = f;
