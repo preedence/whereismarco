@@ -7,16 +7,16 @@ on:
 jobs:
   keepalive:
     runs-on: ubuntu-latest
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"  # Questa riga risolve l'avviso di deprecazione[web:57][web:60]
+    container:
+      image: ubuntu:22.04  # Container con git preinstallato
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '24'  # Ulteriore garanzia che usiamo Node.js 24
+      - name: Install git (if needed) and configure
+        run: |
+          apt-get update
+          apt-get install -y git
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
       - name: Create keepalive commit
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
           git commit --allow-empty -m "Workflow keepalive: $(date +'%Y-%m-%d %H:%M:%S')"
           git push
