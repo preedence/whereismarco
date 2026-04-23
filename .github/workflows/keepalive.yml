@@ -7,12 +7,13 @@ on:
 jobs:
   keepalive:
     runs-on: ubuntu-latest
-    # Esplicitamente impostiamo Node.js 24 per evitare qualsiasi avviso di deprecazione
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"  # Questa riga risolve l'avviso di deprecazione[web:57][web:60]
     steps:
-      - uses: actions/checkout@v4.1.6  # Versione aggiornata che supporta Node.js 24[web:62][web:64]
+      - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '24'  # Forziamo l'uso di Node.js 24[web:57][web:59]
+          node-version: '24'  # Ulteriore garanzia che usiamo Node.js 24
       - name: Create keepalive commit
         run: |
           git config user.name "github-actions[bot]"
