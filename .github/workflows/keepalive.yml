@@ -7,10 +7,15 @@ on:
 jobs:
   keepalive:
     runs-on: ubuntu-latest
+    # Esplicitamente impostiamo Node.js 24 per evitare qualsiasi avviso di deprecazione
     steps:
-      - uses: actions/checkout@v4
-      - uses: entepotenz/keep-github-actions-alive-min-dependencies@v1
+      - uses: actions/checkout@v4.1.6  # Versione aggiornata che supporta Node.js 24[web:62][web:64]
+      - uses: actions/setup-node@v4
         with:
-          COMMIT_MESSAGE: "Workflow keepalive: mantenere attivi i workflow programmati"
-          COMMIT_USER_NAME: "github-actions[bot]"
-          COMMIT_USER_EMAIL: "github-actions[bot]@users.noreply.github.com"
+          node-version: '24'  # Forziamo l'uso di Node.js 24[web:57][web:59]
+      - name: Create keepalive commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git commit --allow-empty -m "Workflow keepalive: $(date +'%Y-%m-%d %H:%M:%S')"
+          git push
