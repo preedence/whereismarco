@@ -1,0 +1,14 @@
+name: Keep Workflows Alive
+on:
+  schedule:
+    - cron: '0 0 15 * *'  # Esegue il 15 di ogni mese (ben prima dei 60 giorni)
+jobs:
+  keepalive:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: entepotenz/keep-github-actions-alive-min-dependencies@v1
+        with:
+          COMMIT_MESSAGE: "Workflow keepalive: mantenere attivi i workflow programmati"
+          COMMIT_USER_NAME: "github-actions[bot]"
+          COMMIT_USER_EMAIL: "github-actions[bot]@users.noreply.github.com"
