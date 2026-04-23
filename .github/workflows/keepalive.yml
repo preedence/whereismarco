@@ -8,15 +8,27 @@ jobs:
   keepalive:
     runs-on: ubuntu-latest
     container:
-      image: ubuntu:22.04  # Container con git preinstallato
+      image: ubuntu:22.04  # Container ufficiale con git preinstallato
     steps:
-      - name: Install git (if needed) and configure
+      - name: Configure git and authenticate
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          apt-get update
-          apt-get install -y git
+          # Configura l'utente git
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Imposta l'URL del remote con token per il push
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/$GITHUB_REPOSITORY.git
+          
+          # Verifica che siamo nel repository corretto
+          echo "Repository: $GITHUB_REPOSITORY"
+          echo "Branch: ${GITHUB_REF#refs/heads/}"
+      
       - name: Create keepalive commit
         run: |
+          # Crea un commit vuoto
           git commit --allow-empty -m "Workflow keepalive: $(date +'%Y-%m-%d %H:%M:%S')"
+          
+          # Esegue il push
           git push
