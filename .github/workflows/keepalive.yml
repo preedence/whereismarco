@@ -1,7 +1,9 @@
 name: Keep Workflows Alive
 on:
   schedule:
-    - cron: '0 0 15 * *'  # Esegue il 15 di ogni mese (ben prima dei 60 giorni)
+    - cron: '0 0 15 * *'  # Esegue il 15 di ogni mese
+  workflow_dispatch:      # Permette l'attivazione manuale da GitHub UI
+
 jobs:
   keepalive:
     runs-on: ubuntu-latest
