@@ -8,8 +8,13 @@ jobs:
   keepalive:
     runs-on: ubuntu-latest
     container:
-      image: ubuntu:22.04  # Container ufficiale con git preinstallato
+      image: ubuntu:22.04  # Container ufficiale Ubuntu
     steps:
+      - name: Install git
+        run: |
+          apt-get update
+          apt-get install -y git
+      
       - name: Configure git and authenticate
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
