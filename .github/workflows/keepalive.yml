@@ -1,39 +1,26 @@
 name: Keep Workflows Alive
 on:
   schedule:
-    - cron: '0 0 15 * *'  # Esegue il 15 di ogni mese
-  workflow_dispatch:      # Permette l'attivazione manuale da GitHub UI
+    - cron: '0 0 15 * *'  # Esegue il 15 di ogni mese (ben prima dei 60 giorni)
+  workflow_dispatch:      # Permette test manuali immediati
 
 jobs:
   keepalive:
     runs-on: ubuntu-latest
-    container:
-      image: ubuntu:22.04  # Container ufficiale Ubuntu
+    permissions:
+      contents: write  # ESSENZIALE: permette di pushare
     steps:
-      - name: Install git
-        run: |
-          apt-get update
-          apt-get install -y git
+      - name: Checkout repository with push permissions
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true  # Mantiene il token per poter pushare dopo il checkout
       
-      - name: Configure git and authenticate
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Configure git user (necessario per il commit)
         run: |
-          # Configura l'utente git
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          
-          # Imposta l'URL del remote con token per il push
-          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/$GITHUB_REPOSITORY.git
-          
-          # Verifica che siamo nel repository corretto
-          echo "Repository: $GITHUB_REPOSITORY"
-          echo "Branch: ${GITHUB_REF#refs/heads/}"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
       
-      - name: Create keepalive commit
+      - name: Create and push keepalive commit
         run: |
-          # Crea un commit vuoto
           git commit --allow-empty -m "Workflow keepalive: $(date +'%Y-%m-%d %H:%M:%S')"
-          
-          # Esegue il push
           git push
