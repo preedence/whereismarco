@@ -8,18 +8,13 @@ jobs:
   keepalive:
     runs-on: ubuntu-latest
     permissions:
-      contents: write  # Necessario per il push
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"  # Forza Node.js 24 per tutte le azioni JS
+      contents: write  # ESSENZIALE per poter pushare
     steps:
-      - uses: actions/checkout@v4.1.6  # Versione che include l'aggiornamento a Node.js 24 (commit di ieri)
+      - uses: actions/checkout@v4
         with:
-          persist-credentials: true  # Mantiene l'autenticazione per il push dopo il checkout
-      - name: Configure git user
-        run: |
+          persist-credentials: true  # Mantiene il token per il push dopo checkout
+      - run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-      - name: Create and push keepalive commit
-        run: |
-          git commit --allow-empty -m "Workflow keepalive: $(date +'%Y-%m-%d %H:%M:%S')"
+          git commit --allow-empty -m "keepalive: $(date -u +'%Y-%m-%d %H:%M:%S')"
           git push
