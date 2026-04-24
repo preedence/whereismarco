@@ -1,25 +1,24 @@
 name: Keep Workflows Alive
 on:
   schedule:
-    - cron: '0 0 15 * *'  # Esegue il 15 di ogni mese (ben prima dei 60 giorni)
+    - cron: '0 0 15 * *'  # Esegue il 15 di ogni mese
   workflow_dispatch:      # Permette test manuali immediati
 
 jobs:
   keepalive:
     runs-on: ubuntu-latest
     permissions:
-      contents: write  # ESSENZIALE: permette di pushare
+      contents: write  # Necessario per il push
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"  # Forza Node.js 24 per tutte le azioni JS
     steps:
-      - name: Checkout repository with push permissions
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4.1.6  # Versione che include l'aggiornamento a Node.js 24 (commit di ieri)
         with:
-          persist-credentials: true  # Mantiene il token per poter pushare dopo il checkout
-      
-      - name: Configure git user (necessario per il commit)
+          persist-credentials: true  # Mantiene l'autenticazione per il push dopo il checkout
+      - name: Configure git user
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-      
       - name: Create and push keepalive commit
         run: |
           git commit --allow-empty -m "Workflow keepalive: $(date +'%Y-%m-%d %H:%M:%S')"
