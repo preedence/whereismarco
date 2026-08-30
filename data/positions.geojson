@@ -2448,6 +2448,40 @@
         "spot_id": 2491675063,
         "source": "spot"
       }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          11.69572,
+          45.61472
+        ]
+      },
+      "properties": {
+        "timestamp": "2026-08-30T07:02:35+0000",
+        "type": "UNLIMITED-TRACK",
+        "battery": "GOOD",
+        "spot_id": 2491884762,
+        "source": "spot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          11.69576,
+          45.61471
+        ]
+      },
+      "properties": {
+        "timestamp": "2026-08-30T07:07:33+0000",
+        "type": "UNLIMITED-TRACK",
+        "battery": "GOOD",
+        "spot_id": 2491885748,
+        "source": "spot"
+      }
     }
   ]
 }
