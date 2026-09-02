@@ -5151,6 +5151,57 @@
         "spot_id": 2492937336,
         "source": "spot"
       }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          14.66885,
+          45.22909
+        ]
+      },
+      "properties": {
+        "timestamp": "2026-09-02T11:36:41+0000",
+        "type": "UNLIMITED-TRACK",
+        "battery": "GOOD",
+        "spot_id": 2493272870,
+        "source": "spot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          14.67998,
+          45.21864
+        ]
+      },
+      "properties": {
+        "timestamp": "2026-09-02T11:41:49+0000",
+        "type": "UNLIMITED-TRACK",
+        "battery": "GOOD",
+        "spot_id": 2493276146,
+        "source": "spot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          14.68934,
+          45.20452
+        ]
+      },
+      "properties": {
+        "timestamp": "2026-09-02T11:46:49+0000",
+        "type": "UNLIMITED-TRACK",
+        "battery": "GOOD",
+        "spot_id": 2493276106,
+        "source": "spot"
+      }
     }
   ]
 }
