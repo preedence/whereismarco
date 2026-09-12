@@ -15946,6 +15946,397 @@
         "spot_id": 2497882255,
         "source": "spot"
       }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.81538,
+          42.62869
+        ]
+      },
+      "properties": {
+        "timestamp": "2026-09-12T12:56:55+0000",
+        "type": "UNLIMITED-TRACK",
+        "battery": "LOW",
+        "spot_id": 2497889294,
+        "source": "spot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.82577,
+          42.63036
+        ]
+      },
+      "properties": {
+        "timestamp": "2026-09-12T13:01:55+0000",
+        "type": "UNLIMITED-TRACK",
+        "battery": "LOW",
+        "spot_id": 2497889293,
+        "source": "spot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.82577,
+          42.63023
+        ]
+      },
+      "properties": {
+        "timestamp": "2026-09-12T13:06:55+0000",
+        "type": "UNLIMITED-TRACK",
+        "battery": "LOW",
+        "spot_id": 2497889269,
+        "source": "spot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.8286,
+          42.62989
+        ]
+      },
+      "properties": {
+        "timestamp": "2026-09-12T13:32:26+0000",
+        "type": "UNLIMITED-TRACK",
+        "battery": "LOW",
+        "spot_id": 2497898664,
+        "source": "spot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.8457,
+          42.62494
+        ]
+      },
+      "properties": {
+        "timestamp": "2026-09-12T13:37:22+0000",
+        "type": "UNLIMITED-TRACK",
+        "battery": "LOW",
+        "spot_id": 2497902384,
+        "source": "spot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.86905,
+          42.62833
+        ]
+      },
+      "properties": {
+        "timestamp": "2026-09-12T13:42:22+0000",
+        "type": "UNLIMITED-TRACK",
+        "battery": "LOW",
+        "spot_id": 2497902343,
+        "source": "spot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.89827,
+          42.62533
+        ]
+      },
+      "properties": {
+        "timestamp": "2026-09-12T13:52:21+0000",
+        "type": "UNLIMITED-TRACK",
+        "battery": "LOW",
+        "spot_id": 2497905525,
+        "source": "spot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.91733,
+          42.64245
+        ]
+      },
+      "properties": {
+        "timestamp": "2026-09-12T14:02:14+0000",
+        "type": "UNLIMITED-TRACK",
+        "battery": "LOW",
+        "spot_id": 2497913835,
+        "source": "spot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.92653,
+          42.65331
+        ]
+      },
+      "properties": {
+        "timestamp": "2026-09-12T14:07:19+0000",
+        "type": "UNLIMITED-TRACK",
+        "battery": "LOW",
+        "spot_id": 2497911487,
+        "source": "spot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.93827,
+          42.66447
+        ]
+      },
+      "properties": {
+        "timestamp": "2026-09-12T14:12:14+0000",
+        "type": "UNLIMITED-TRACK",
+        "battery": "LOW",
+        "spot_id": 2497913801,
+        "source": "spot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.94966,
+          42.6728
+        ]
+      },
+      "properties": {
+        "timestamp": "2026-09-12T14:17:11+0000",
+        "type": "UNLIMITED-TRACK",
+        "battery": "LOW",
+        "spot_id": 2497920375,
+        "source": "spot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.94966,
+          42.6728
+        ]
+      },
+      "properties": {
+        "timestamp": "2026-09-12T14:22:11+0000",
+        "type": "UNLIMITED-TRACK",
+        "battery": "LOW",
+        "spot_id": 2497920374,
+        "source": "spot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.94966,
+          42.6728
+        ]
+      },
+      "properties": {
+        "timestamp": "2026-09-12T14:27:11+0000",
+        "type": "UNLIMITED-TRACK",
+        "battery": "LOW",
+        "spot_id": 2497920341,
+        "source": "spot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          20.98539,
+          42.66376
+        ]
+      },
+      "properties": {
+        "timestamp": "2026-09-12T14:41:55+0000",
+        "type": "UNLIMITED-TRACK",
+        "battery": "LOW",
+        "spot_id": 2497931069,
+        "source": "spot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.00118,
+          42.65239
+        ]
+      },
+      "properties": {
+        "timestamp": "2026-09-12T14:46:55+0000",
+        "type": "UNLIMITED-TRACK",
+        "battery": "LOW",
+        "spot_id": 2497931067,
+        "source": "spot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.01002,
+          42.64243
+        ]
+      },
+      "properties": {
+        "timestamp": "2026-09-12T14:51:55+0000",
+        "type": "UNLIMITED-TRACK",
+        "battery": "LOW",
+        "spot_id": 2497931013,
+        "source": "spot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.02189,
+          42.63202
+        ]
+      },
+      "properties": {
+        "timestamp": "2026-09-12T14:56:51+0000",
+        "type": "UNLIMITED-TRACK",
+        "battery": "LOW",
+        "spot_id": 2497935930,
+        "source": "spot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.0321,
+          42.62498
+        ]
+      },
+      "properties": {
+        "timestamp": "2026-09-12T15:01:51+0000",
+        "type": "UNLIMITED-TRACK",
+        "battery": "LOW",
+        "spot_id": 2497935880,
+        "source": "spot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.08115,
+          42.62834
+        ]
+      },
+      "properties": {
+        "timestamp": "2026-09-12T15:16:45+0000",
+        "type": "UNLIMITED-TRACK",
+        "battery": "LOW",
+        "spot_id": 2497942574,
+        "source": "spot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.09895,
+          42.63929
+        ]
+      },
+      "properties": {
+        "timestamp": "2026-09-12T15:31:32+0000",
+        "type": "UNLIMITED-TRACK",
+        "battery": "LOW",
+        "spot_id": 2497953430,
+        "source": "spot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.11182,
+          42.64289
+        ]
+      },
+      "properties": {
+        "timestamp": "2026-09-12T15:36:32+0000",
+        "type": "UNLIMITED-TRACK",
+        "battery": "LOW",
+        "spot_id": 2497953429,
+        "source": "spot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.1265,
+          42.64701
+        ]
+      },
+      "properties": {
+        "timestamp": "2026-09-12T15:41:32+0000",
+        "type": "UNLIMITED-TRACK",
+        "battery": "LOW",
+        "spot_id": 2497953391,
+        "source": "spot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          21.13918,
+          42.65036
+        ]
+      },
+      "properties": {
+        "timestamp": "2026-09-12T15:46:31+0000",
+        "type": "UNLIMITED-TRACK",
+        "battery": "LOW",
+        "spot_id": 2497955556,
+        "source": "spot"
+      }
     }
   ]
 }
