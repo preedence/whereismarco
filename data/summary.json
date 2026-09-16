@@ -1,12 +1,3 @@
 {
-  "days": [
-    {
-      "date": "2025-12-08",
-      "label": "Morning_Ride",
-      "distance_km": 15.0,
-      "elevation_up_m": 92,
-      "moving_time_h": 1.1,
-      "gpx_file": "Morning_Ride.gpx"
-    }
-  ]
+  "days": []
 }
