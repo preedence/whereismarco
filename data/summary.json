@@ -1,3 +1,44 @@
 {
-  "days": []
+  "days": [
+    {
+      "date": "2026-08-27",
+      "label": "_1",
+      "distance_km": 47.8,
+      "elevation_up_m": 155,
+      "moving_time_h": 2.5,
+      "gpx_file": "_1.gpx"
+    },
+    {
+      "date": "2026-08-28",
+      "label": "_2",
+      "distance_km": 128.4,
+      "elevation_up_m": 727,
+      "moving_time_h": 7.9,
+      "gpx_file": "_2.gpx"
+    },
+    {
+      "date": "2026-08-29",
+      "label": "_3",
+      "distance_km": 80.0,
+      "elevation_up_m": 472,
+      "moving_time_h": 4.8,
+      "gpx_file": "_3.gpx"
+    },
+    {
+      "date": "2026-08-30",
+      "label": "_4",
+      "distance_km": 132.0,
+      "elevation_up_m": 437,
+      "moving_time_h": 8.0,
+      "gpx_file": "_4.gpx"
+    },
+    {
+      "date": "2026-08-31",
+      "label": "_5",
+      "distance_km": 121.5,
+      "elevation_up_m": 489,
+      "moving_time_h": 7.2,
+      "gpx_file": "_5.gpx"
+    }
+  ]
 }
