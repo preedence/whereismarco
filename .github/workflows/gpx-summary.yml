@@ -2,6 +2,7 @@ name: Generate summary from GPX
 
 on:
   push:
+    branches: [main]
     paths:
       - "gpx/**/*.gpx"
       - "scripts/generate_summary.py"
@@ -12,11 +13,13 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
-      contents: write   # ⬅️ aggiungi questa sezione
+      contents: write
 
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # ⬅️ Aggiungi: assicura che tutti i file GPX siano presenti
 
       - name: Set up Python
         uses: actions/setup-python@v5
