@@ -418,16 +418,16 @@ async function updateData() {
         const todayStr = new Date().toISOString().slice(0, 10);
 
         if (lastDateStr !== todayStr) {
-          dayCount++;
+          // Conta solo i giorni con GPX corrispondente
+          const hasGpx = summaryByDate.hasOwnProperty(lastDateStr);
 
-          // Salta i primi 2 giorni (traccia SPOT iniziale)
-          if (dayCount <= 2) {
-            // Non aggiungere questo giorno
-          } else {
+          if (hasGpx) {
+            dayCount++;
+
             const clone = JSON.parse(JSON.stringify(currentLast));
             clone.properties = clone.properties || {};
-            clone.properties.dayIndex = dayCount - 2;
-            clone.properties.summary_html = `Giorno ${dayCount - 2}`;
+            clone.properties.dayIndex = dayCount;
+            clone.properties.summary_html = `Giorno ${dayCount}`;
             dayEnds.push(clone);
           }
         }
@@ -439,14 +439,20 @@ async function updateData() {
   }
 
   if (currentLast) {
-    dayCount++;
+    const dateStr = currentLast.properties.timestamp
+    ? currentLast.properties.timestamp.slice(0, 10)
+    : null;
 
-    // Salta i primi 2 giorni (traccia SPOT iniziale)
-    if (dayCount > 2) {
+    // Conta solo se c'è un GPX per questo giorno
+    const hasGpx = dateStr && summaryByDate.hasOwnProperty(dateStr);
+
+    if (hasGpx) {
+      dayCount++;
+
       const clone = JSON.parse(JSON.stringify(currentLast));
       clone.properties = clone.properties || {};
-      clone.properties.dayIndex = dayCount - 2;
-      clone.properties.summary_html = `Giorno ${dayCount - 2}`;
+      clone.properties.dayIndex = dayCount;
+      clone.properties.summary_html = `Giorno ${dayCount}`;
       dayEnds.push(clone);
     }
   }
