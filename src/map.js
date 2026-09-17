@@ -559,8 +559,8 @@ async function loadSummary() {
     if (kmEl) kmEl.textContent = totalKm.toFixed(1);
     if (upEl) upEl.textContent = Math.round(totalUp).toString();
     if (hoursEl) hoursEl.textContent = totalHours.toFixed(1);
-    if (avgKmEl) kmEl.textContent = avgKmDay.toFixed(1);
-    if (avgSpeedEl) kmEl.textContent = avgSpeed.toFixed(1);
+    if (avgKmEl) avgKmEl.textContent = avgKmDay.toFixed(1);
+    if (avgSpeedEl) avgSpeedEl.textContent = avgSpeed.toFixed(1);
     if (longestEl) {
       if (longest) {
         const distStr =
@@ -636,52 +636,4 @@ async function loadPhotos() {
 
       const title = p.title || "Foto";
       const caption = p.caption || "";
-      const file = p.file || p.url || "";
-
-      const popupHtml = `
-      <div class="wm-photo-popup" style="max-width:220px;">
-      <strong>${title}</strong><br>
-      ${
-        file
-        ? `<img src="${file}" alt="${title}" style="width:100%;margin-top:6px;border-radius:4px;">`
-        : ""
-      }
-      ${
-        caption
-        ? `<div style="margin-top:6px;font-size:12px;">${caption}</div>`
-        : ""
-      }
-      </div>
-      `;
-
-      const popup = new maplibregl.Popup({ offset: 20 }).setHTML(popupHtml);
-
-      new maplibregl.Marker({ color: "#c66a3a" })
-      .setLngLat([p.lon, p.lat])
-      .setPopup(popup)
-      .addTo(map);
-
-      features.push({
-        type: "Feature",
-        geometry: {
-          type: "Point",
-          coordinates: [p.lon, p.lat],
-        },
-        properties: {
-          title,
-          caption,
-          file,
-        },
-      });
-    });
-
-    if (map.getSource("photos")) {
-      map.getSource("photos").setData({
-        type: "FeatureCollection",
-        features,
-      });
-    }
-  } catch (err) {
-    console.error("Errore nel caricamento delle foto:", err);
-  }
-}
+      const file = p.file || p.url
