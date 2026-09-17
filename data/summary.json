@@ -9,6 +9,78 @@
       "gpx_file": "_1.gpx"
     },
     {
+      "date": "2026-09-05",
+      "label": "_10",
+      "distance_km": 61.0,
+      "elevation_up_m": 845,
+      "moving_time_h": 4.1,
+      "gpx_file": "_10.gpx"
+    },
+    {
+      "date": "2026-09-06",
+      "label": "_11",
+      "distance_km": 92.3,
+      "elevation_up_m": 1220,
+      "moving_time_h": 6.1,
+      "gpx_file": "_11.gpx"
+    },
+    {
+      "date": "2026-09-07",
+      "label": "_12",
+      "distance_km": 111.2,
+      "elevation_up_m": 1566,
+      "moving_time_h": 7.4,
+      "gpx_file": "_12.gpx"
+    },
+    {
+      "date": "2026-09-08",
+      "label": "_13",
+      "distance_km": 61.4,
+      "elevation_up_m": 556,
+      "moving_time_h": 4.4,
+      "gpx_file": "_13.gpx"
+    },
+    {
+      "date": "2026-09-09",
+      "label": "_14",
+      "distance_km": 65.7,
+      "elevation_up_m": 1869,
+      "moving_time_h": 6.5,
+      "gpx_file": "_14.gpx"
+    },
+    {
+      "date": "2026-09-10",
+      "label": "_15",
+      "distance_km": 80.7,
+      "elevation_up_m": 1998,
+      "moving_time_h": 7.0,
+      "gpx_file": "_15.gpx"
+    },
+    {
+      "date": "2026-09-11",
+      "label": "_16",
+      "distance_km": 74.9,
+      "elevation_up_m": 1702,
+      "moving_time_h": 5.4,
+      "gpx_file": "_16.gpx"
+    },
+    {
+      "date": "2026-09-12",
+      "label": "_17",
+      "distance_km": 114.8,
+      "elevation_up_m": 845,
+      "moving_time_h": 6.7,
+      "gpx_file": "_17.gpx"
+    },
+    {
+      "date": "2026-09-13",
+      "label": "_18",
+      "distance_km": 95.1,
+      "elevation_up_m": 527,
+      "moving_time_h": 5.5,
+      "gpx_file": "_18.gpx"
+    },
+    {
       "date": "2026-08-28",
       "label": "_2",
       "distance_km": 128.4,
@@ -39,6 +111,38 @@
       "elevation_up_m": 489,
       "moving_time_h": 7.2,
       "gpx_file": "_5.gpx"
+    },
+    {
+      "date": "2026-09-01",
+      "label": "_6",
+      "distance_km": 82.4,
+      "elevation_up_m": 1193,
+      "moving_time_h": 5.6,
+      "gpx_file": "_6.gpx"
+    },
+    {
+      "date": "2026-09-02",
+      "label": "_7",
+      "distance_km": 94.3,
+      "elevation_up_m": 1447,
+      "moving_time_h": 6.6,
+      "gpx_file": "_7.gpx"
+    },
+    {
+      "date": "2026-09-03",
+      "label": "_8",
+      "distance_km": 128.1,
+      "elevation_up_m": 1261,
+      "moving_time_h": 6.8,
+      "gpx_file": "_8.gpx"
+    },
+    {
+      "date": "2026-09-04",
+      "label": "_9",
+      "distance_km": 115.8,
+      "elevation_up_m": 1206,
+      "moving_time_h": 6.8,
+      "gpx_file": "_9.gpx"
     }
   ]
 }
