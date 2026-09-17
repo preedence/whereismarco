@@ -20,7 +20,6 @@ const map = new maplibregl.Map({
   zoom: INITIAL_ZOOM,
 });
 
-// Aggiorna UI info (al momento non usata)
 function updateInfo(lat, lon, timestamp) {
   const posEl = document.getElementById("last-pos");
   const timeEl = document.getElementById("last-time");
@@ -31,7 +30,6 @@ function updateInfo(lat, lon, timestamp) {
   timeEl.textContent = timestamp || "—";
 }
 
-// Aggiorna/crea l'avatar live con stato
 function updateLiveAvatar(lon, lat, state) {
   if (!liveAvatarMarker) {
     const el = document.createElement("div");
@@ -286,18 +284,20 @@ map.on("load", () => {
     });
   });
 
-  updateData().catch((err) => {
-    console.error(err);
-    const s = document.getElementById("summary-content");
-    if (s) s.textContent = "Errore caricamento dati";
+  // Carica prima il summary, poi aggiorna i dati
+  loadSummary().then(() => {
+    updateData().catch((err) => {
+      console.error(err);
+      const s = document.getElementById("summary-content");
+      if (s) s.textContent = "Errore caricamento dati";
+    });
   });
 
-    loadSummary();
-    loadPhotos();
+  loadPhotos();
 
-    setInterval(() => {
-      updateData().catch((err) => console.error(err));
-    }, 60000);
+  setInterval(() => {
+    updateData().catch((err) => console.error(err));
+  }, 60000);
 });
 
 async function updateData() {
@@ -418,7 +418,6 @@ async function updateData() {
         const todayStr = new Date().toISOString().slice(0, 10);
 
         if (lastDateStr !== todayStr) {
-          // Conta solo i giorni con GPX corrispondente
           const hasGpx = summaryByDate.hasOwnProperty(lastDateStr);
 
           if (hasGpx) {
@@ -443,7 +442,6 @@ async function updateData() {
     ? currentLast.properties.timestamp.slice(0, 10)
     : null;
 
-    // Conta solo se c'è un GPX per questo giorno
     const hasGpx = dateStr && summaryByDate.hasOwnProperty(dateStr);
 
     if (hasGpx) {
