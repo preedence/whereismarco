@@ -284,20 +284,23 @@ map.on("load", () => {
     });
   });
 
-  // Carica prima il summary, poi aggiorna i dati
-  loadSummary().then(() => {
-    updateData().catch((err) => {
-      console.error(err);
-      const s = document.getElementById("summary-content");
-      if (s) s.textContent = "Errore caricamento dati";
-    });
+  // Carica summary e poi aggiorna dati
+  loadSummary()
+  .then(() => {
+    console.log("Summary caricato, ora carico i dati...");
+    return updateData();
+  })
+  .catch((err) => {
+    console.error("Errore in loadSummary o updateData:", err);
+    const s = document.getElementById("summary-content");
+    if (s) s.textContent = "Errore caricamento dati";
   });
 
-  loadPhotos();
+    loadPhotos();
 
-  setInterval(() => {
-    updateData().catch((err) => console.error(err));
-  }, 60000);
+    setInterval(() => {
+      updateData().catch((err) => console.error("Errore updateData:", err));
+    }, 60000);
 });
 
 async function updateData() {
@@ -494,7 +497,10 @@ async function updateData() {
 
 async function loadSummary() {
   const el = document.getElementById("summary-content");
-  if (!el) return;
+  if (!el) {
+    console.warn("Elemento summary-content non trovato");
+    return;
+  }
 
   try {
     const res = await fetch("data/summary.json?cache=" + Date.now());
@@ -611,8 +617,9 @@ async function loadSummary() {
     .join("");
 
     el.innerHTML = itemsHtml;
+    console.log(`Summary caricato: ${days.length} giorni`);
   } catch (err) {
-    console.error(err);
+    console.error("Errore in loadSummary:", err);
     el.textContent = "Errore caricamento riepilogo.";
   }
 }
