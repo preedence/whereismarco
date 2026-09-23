@@ -19601,6 +19601,40 @@
         "spot_id": 2502912353,
         "source": "spot"
       }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.29966,
+          42.68726
+        ]
+      },
+      "properties": {
+        "timestamp": "2026-09-23T08:57:54+0000",
+        "type": "UNLIMITED-TRACK",
+        "battery": "LOW",
+        "spot_id": 2502959085,
+        "source": "spot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.30829,
+          42.69114
+        ]
+      },
+      "properties": {
+        "timestamp": "2026-09-23T09:02:53+0000",
+        "type": "UNLIMITED-TRACK",
+        "battery": "LOW",
+        "spot_id": 2502960419,
+        "source": "spot"
+      }
     }
   ]
 }
