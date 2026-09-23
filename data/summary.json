@@ -159,6 +159,22 @@
       "elevation_up_m": 1064,
       "moving_time_h": 3.7,
       "gpx_file": "_20.gpx"
+    },
+    {
+      "date": "2026-09-22",
+      "label": "_21_1",
+      "distance_km": 46.9,
+      "elevation_up_m": 725,
+      "moving_time_h": 3.0,
+      "gpx_file": "_21_1.gpx"
+    },
+    {
+      "date": "2026-09-22",
+      "label": "_21_2",
+      "distance_km": 42.9,
+      "elevation_up_m": 551,
+      "moving_time_h": 2.8,
+      "gpx_file": "_21_2.gpx"
     }
   ]
 }
