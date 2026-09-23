@@ -19635,6 +19635,23 @@
         "spot_id": 2502960419,
         "source": "spot"
       }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.31466,
+          42.69495
+        ]
+      },
+      "properties": {
+        "timestamp": "2026-09-23T15:44:53+0000",
+        "type": "OK",
+        "battery": "LOW",
+        "spot_id": 2503091804,
+        "source": "spot"
+      }
     }
   ]
 }
