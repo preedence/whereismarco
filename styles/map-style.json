@@ -1,29 +1,24 @@
 {
   "version": 8,
-  "name": "Eurasia crossing",
-  "glyphs": "https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf",
+  "name": "Pioneer",
   "sources": {
-    "osm": {
+    "pioneer": {
       "type": "raster",
-      "tiles": ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
+      "tiles": [
+        "https://api.thunderforest.com/pioneer/{z}/{x}/{y}.png?apikey=8f001b03d22c413cab9d77aeda937190"
+      ],
       "tileSize": 256,
-      "maxzoom": 19
+      "minzoom": 0,
+      "maxzoom": 22
     }
   },
   "layers": [
     {
-      "id": "background",
-      "type": "background",
-      "paint": {
-        "background-color": "#f5f2e9"
-      }
-    },
-    {
-      "id": "osm",
+      "id": "pioneer-layer",
       "type": "raster",
-      "source": "osm",
+      "source": "pioneer",
       "minzoom": 0,
-      "maxzoom": 19
+      "maxzoom": 22
     }
   ]
 }
