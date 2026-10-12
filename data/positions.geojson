@@ -32317,6 +32317,74 @@
         "spot_id": 2511881897,
         "source": "spot"
       }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          27.40173,
+          40.92863
+        ]
+      },
+      "properties": {
+        "timestamp": "2026-10-12T18:32:07+0000",
+        "type": "UNLIMITED-TRACK",
+        "battery": "GOOD",
+        "spot_id": 2511931415,
+        "source": "spot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          27.40173,
+          40.92854
+        ]
+      },
+      "properties": {
+        "timestamp": "2026-10-12T18:37:07+0000",
+        "type": "UNLIMITED-TRACK",
+        "battery": "GOOD",
+        "spot_id": 2511931380,
+        "source": "spot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          27.40175,
+          40.92857
+        ]
+      },
+      "properties": {
+        "timestamp": "2026-10-12T18:42:04+0000",
+        "type": "UNLIMITED-TRACK",
+        "battery": "GOOD",
+        "spot_id": 2511933157,
+        "source": "spot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          27.40177,
+          40.92857
+        ]
+      },
+      "properties": {
+        "timestamp": "2026-10-12T18:57:20+0000",
+        "type": "CUSTOM",
+        "battery": "GOOD",
+        "spot_id": 2511938588,
+        "source": "spot"
+      }
     }
   ]
 }
