@@ -295,6 +295,14 @@
       "elevation_up_m": 1042,
       "moving_time_h": 6.0,
       "gpx_file": "_37.gpx"
+    },
+    {
+      "date": "2026-10-14",
+      "label": "_38",
+      "distance_km": 40.3,
+      "elevation_up_m": 785,
+      "moving_time_h": 3.1,
+      "gpx_file": "_38.gpx"
     }
   ]
 }
