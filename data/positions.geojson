@@ -39253,6 +39253,23 @@
         "spot_id": 2520171553,
         "source": "spot"
       }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          39.78113,
+          40.99333
+        ]
+      },
+      "properties": {
+        "timestamp": "2026-11-01T07:26:48+0000",
+        "type": "UNLIMITED-TRACK",
+        "battery": "LOW",
+        "spot_id": 2520500633,
+        "source": "spot"
+      }
     }
   ]
 }
