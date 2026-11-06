@@ -2,8 +2,8 @@
 <html lang="it">
   <head>
     <meta charset="utf-8" />
-    <title>Eurasia crossing – Live map</title>
-	<link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+    <title>Eurasia crossing – Mappa live</title>
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
 
     <!-- Stili progetto -->
@@ -16,23 +16,30 @@
     />
     <script src="https://unpkg.com/maplibre-gl@3.6.1/dist/maplibre-gl.js"></script>
   </head>
-  <body>
+  <body data-title-key="title.map">
     <header class="wm-topbar">
       <div class="wm-topbar-inner">
         <a href="index.html" class="wm-logo">
           <span class="wm-logo-title">Eurasia crossing</span>
-          <span class="wm-logo-subtitle">A long-distance bike journey</span>
+          <span class="wm-logo-subtitle" data-i18n="tagline"
+            >Un viaggio in bici a lunga distanza</span
+          >
         </a>
         <nav class="wm-nav">
-          <a href="index.html">Map</a>
-          <a href="about.html">About</a>
+          <a href="index.html" data-i18n="nav.map">Mappa</a>
+          <a href="about.html" data-i18n="nav.about">Info</a>
           <a
             href="https://marcopoloroad.wordpress.com"
             target="_blank"
             rel="noopener"
+            data-i18n="nav.journey"
           >
-            the journey
+            Il viaggio
           </a>
+          <div class="wm-lang" role="group" aria-label="Language">
+            <button type="button" data-lang="it" aria-pressed="true">IT</button>
+            <button type="button" data-lang="en" aria-pressed="false">EN</button>
+          </div>
         </nav>
       </div>
     </header>
@@ -42,9 +49,9 @@
         <div id="map"></div>
 
         <div id="panel">
-          <h1>Eurasia crossing – live</h1>
-          <p class="wm-panel-sub">
-            Map, stats and photos from the journey. Source code on
+          <h1 data-i18n="panel.title">Eurasia crossing – live</h1>
+          <p class="wm-panel-sub" data-i18n-html="panel.sub">
+            Mappa, statistiche e foto del viaggio. Codice sorgente su
             <a
               href="https://github.com/preedence/whereismarco"
               target="_blank"
@@ -55,43 +62,45 @@
 
           <div id="info">
             <div>
-              Giorni in bici:
+              <span data-i18n="stat.days">Giorni in bici</span>:
               <strong><span id="total-days">—</span></strong>
             </div>
             <div>
-              Km totali:
+              <span data-i18n="stat.km">Km totali</span>:
               <strong><span id="total-km">—</span></strong>
             </div>
             <div>
-              Dislivello ↑ totale:
+              <span data-i18n="stat.up">Dislivello ↑ totale</span>:
               <strong><span id="total-up">—</span></strong>
             </div>
             <div>
-              Ore in sella:
+              <span data-i18n="stat.hours">Ore in sella</span>:
               <strong><span id="total-hours">—</span></strong>
             </div>
             <div>
-              Media km/giorno:
+              <span data-i18n="stat.avgKm">Media km/giorno</span>:
               <strong><span id="avg-km-day">—</span></strong>
             </div>
             <div>
-              Velocità media:
+              <span data-i18n="stat.avgSpeed">Velocità media</span>:
               <strong><span id="avg-speed">—</span></strong> km/h
             </div>
             <div>
-              Giorno più lungo:
+              <span data-i18n="stat.longest">Giorno più lungo</span>:
               <strong><span id="longest-day">—</span></strong>
             </div>
           </div>
 
           <div id="summary">
-            <h2>Riepilogo tappe</h2>
+            <h2 data-i18n="summary.title">Riepilogo tappe</h2>
             <div id="summary-content">Caricamento…</div>
           </div>
         </div>
       </section>
     </main>
 
+    <!-- i18n deve caricarsi prima di map.js -->
+    <script src="src/i18n.js"></script>
     <script src="src/map.js"></script>
   </body>
 </html>

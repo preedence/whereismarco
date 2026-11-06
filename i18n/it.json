@@ -1,0 +1,38 @@
+{
+  "title.map": "Eurasia crossing – Mappa live",
+  "title.about": "Eurasia crossing – Info",
+
+  "tagline": "Un viaggio in bici a lunga distanza",
+  "nav.map": "Mappa",
+  "nav.about": "Info",
+  "nav.journey": "Il viaggio",
+
+  "panel.title": "Eurasia crossing – live",
+  "panel.sub": "Mappa, statistiche e foto del viaggio. Codice sorgente su <a href=\"https://github.com/preedence/whereismarco\" target=\"_blank\" rel=\"noopener\">GitHub</a>.",
+
+  "stat.days": "Giorni in bici",
+  "stat.km": "Km totali",
+  "stat.up": "Dislivello ↑ totale",
+  "stat.hours": "Ore in sella",
+  "stat.avgKm": "Media km/giorno",
+  "stat.avgSpeed": "Velocità media",
+  "stat.longest": "Giorno più lungo",
+
+  "summary.title": "Riepilogo tappe",
+  "summary.loading": "Caricamento…",
+
+  "day": "Giorno {n}",
+  "photo.default": "Foto",
+
+  "empty.positions": "Nessuna posizione ancora.",
+  "empty.summary": "Nessun riepilogo disponibile.",
+  "empty.days": "Nessuna tappa ancora.",
+  "err.data": "Errore caricamento dati",
+  "err.summary": "Errore caricamento riepilogo.",
+
+  "about.title": "Informazioni su questa mappa",
+  "about.avatarAlt": "Avatar ciclista",
+  "about.p1": "Questa mappa mostra il percorso in bici attraverso Eurasia usando OpenStreetMap come base, una traccia aggiornata periodicamente e i punti di fine tappa calcolati dai dati GPS.",
+  "about.p2": "Le statistiche (giorni in bici, chilometri totali, dislivello, velocità media) vengono generate da uno script che elabora i file registrati sul campo e produce un GeoJSON per la traccia, un riepilogo giornaliero e un elenco di foto geotaggate.",
+  "about.p3": "Il codice sorgente di questo progetto è disponibile su GitHub, insieme agli script che preparano i dati e al workflow usato per aggiornare la mappa in automatico."
+}
