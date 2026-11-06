@@ -8,6 +8,10 @@ on:
       - "scripts/generate_summary.py"
   workflow_dispatch: {}
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build-summary:
     runs-on: ubuntu-latest
@@ -19,7 +23,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # ⬅️ Aggiungi: assicura che tutti i file GPX siano presenti
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -34,6 +38,10 @@ jobs:
       - name: Generate summary.json from GPX
         run: |
           python scripts/generate_summary.py
+
+      - name: Rebase on latest main
+        run: |
+          git pull --rebase origin main
 
       - name: Commit and push summary.json
         uses: stefanzweifel/git-auto-commit-action@v7
