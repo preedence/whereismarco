@@ -69,6 +69,33 @@ async function fetchPositions() {
   return res.json();
 }
 
+/* ============================================================
+ *  METEO: mapping codice WMO -> emoji + formattazione
+ *  ============================================================ */
+
+function weatherIcon(code) {
+  if (code === 0) return "☀️";
+  if (code === 1 || code === 2) return "⛅";
+  if (code === 3) return "☁️";
+  if (code === 45 || code === 48) return "🌫️";
+  if (code >= 51 && code <= 55) return "🌦️";
+  if (code >= 61 && code <= 65) return "🌧️";
+  if (code >= 71 && code <= 75) return "🌨️";
+  if (code >= 80 && code <= 82) return "🌧️";
+  if (code >= 95 && code <= 99) return "⛈️";
+  return "🌡️";
+}
+
+function formatWeather(w) {
+  if (!w) return "";
+  const icon = weatherIcon(w.code);
+  const tmax = typeof w.tmax === "number" ? Math.round(w.tmax) : "—";
+  const tmin = typeof w.tmin === "number" ? Math.round(w.tmin) : "—";
+  const tmean = typeof w.tmean === "number" ? Math.round(w.tmean) : null;
+  const meanStr = tmean !== null ? ` · media ${tmean}°` : "";
+  return `<span class="wm-weather" title="min ${tmin}° / max ${tmax}°${meanStr}">${icon} ${tmin}°/${tmax}°</span>`;
+}
+
 map.on("load", () => {
   map.addSource("track", {
     type: "geojson",
@@ -161,10 +188,7 @@ map.on("load", () => {
   function showDayEndPopup(e) {
     const f = e.features && e.features[0];
     if (!f) return;
-    const html =
-    f.properties && f.properties.summary_html
-    ? f.properties.summary_html
-    : `Giorno ${f.properties?.dayIndex || ""}`;
+    const html = t("day", { n: f.properties?.dayIndex ?? "" });
     map.getCanvas().style.cursor = "pointer";
     dayEndPopup.setLngLat(f.geometry.coordinates).setHTML(html).addTo(map);
   }
@@ -293,7 +317,7 @@ map.on("load", () => {
   .catch((err) => {
     console.error("Errore in loadSummary o updateData:", err);
     const s = document.getElementById("summary-content");
-    if (s) s.textContent = "Errore caricamento dati";
+    if (s) s.textContent = t("err.data");
   });
 
     loadPhotos();
@@ -308,7 +332,7 @@ async function updateData() {
 
   if (!geo || !geo.features || !geo.features.length) {
     const s = document.getElementById("summary-content");
-    if (s) s.textContent = "Nessuna posizione ancora.";
+    if (s) s.textContent = t("empty.positions");
     return;
   }
 
@@ -496,6 +520,8 @@ async function updateData() {
 }
 
 async function loadSummary() {
+  await I18N.ready;
+
   const el = document.getElementById("summary-content");
   if (!el) {
     console.warn("Elemento summary-content non trovato");
@@ -505,13 +531,13 @@ async function loadSummary() {
   try {
     const res = await fetch("data/summary.json?cache=" + Date.now());
     if (!res.ok) {
-      el.textContent = "Nessun riepilogo disponibile.";
+      el.textContent = t("empty.summary");
       return;
     }
 
     const data = await res.json();
     if (!data.days || !data.days.length) {
-      el.textContent = "Nessuna tappa ancora.";
+      el.textContent = t("empty.days");
       return;
     }
 
@@ -524,103 +550,85 @@ async function loadSummary() {
       }
     });
 
-    const totalDays = days.length;
-    const totalKm = days.reduce(
-      (sum, d) =>
-      sum + (typeof d.distance_km === "number" ? d.distance_km : 0),
-                                0
-    );
-    const totalUp = days.reduce(
-      (sum, d) =>
-      sum + (typeof d.elevation_up_m === "number" ? d.elevation_up_m : 0),
-                                0
-    );
-    const totalHours = days.reduce(
-      (sum, d) =>
-      sum + (typeof d.moving_time_h === "number" ? d.moving_time_h : 0),
-                                   0
-    );
-    const avgKmDay = totalDays > 0 ? totalKm / totalDays : 0;
-    const avgSpeed = totalHours > 0 ? totalKm / totalHours : 0;
+    const sum = (key) =>
+    days.reduce((s, d) => s + (typeof d[key] === "number" ? d[key] : 0), 0);
+    const setText = (id, value) => {
+      const e = document.getElementById(id);
+      if (e) e.textContent = value;
+    };
+      const cleanLabel = (l) => (l || "").replace(/_/g, " ").trim();
 
-    let longest = null;
-    for (const d of days) {
-      if (
-        typeof d.distance_km === "number" &&
-        (!longest || d.distance_km > longest.distance_km)
-      ) {
-        longest = d;
+      const totalDays = days.length;
+      const totalKm = sum("distance_km");
+      const totalUp = sum("elevation_up_m");
+      const totalHours = sum("moving_time_h");
+      const avgKmDay = totalDays > 0 ? totalKm / totalDays : 0;
+      const avgSpeed = totalHours > 0 ? totalKm / totalHours : 0;
+
+      let longest = null;
+      for (const d of days) {
+        if (
+          typeof d.distance_km === "number" &&
+          (!longest || d.distance_km > longest.distance_km)
+        ) {
+          longest = d;
+        }
       }
-    }
 
-    const daysEl = document.getElementById("total-days");
-    const kmEl = document.getElementById("total-km");
-    const upEl = document.getElementById("total-up");
-    const hoursEl = document.getElementById("total-hours");
-    const avgKmEl = document.getElementById("avg-km-day");
-    const avgSpeedEl = document.getElementById("avg-speed");
-    const longestEl = document.getElementById("longest-day");
+      setText("total-days", fmtNum(totalDays, 0));
+      setText("total-km", fmtNum(totalKm));
+      setText("total-up", fmtNum(totalUp, 0));
+      setText("total-hours", fmtNum(totalHours));
+      setText("avg-km-day", fmtNum(avgKmDay));
+      setText("avg-speed", fmtNum(avgSpeed));
 
-    if (daysEl) daysEl.textContent = totalDays.toString();
-    if (kmEl) kmEl.textContent = totalKm.toFixed(1);
-    if (upEl) upEl.textContent = Math.round(totalUp).toString();
-    if (hoursEl) hoursEl.textContent = totalHours.toFixed(1);
-    if (avgKmEl) avgKmEl.textContent = avgKmDay.toFixed(1);
-    if (avgSpeedEl) avgSpeedEl.textContent = avgSpeed.toFixed(1);
-    if (longestEl) {
       if (longest) {
-        const distStr =
-        typeof longest.distance_km === "number"
-        ? longest.distance_km.toFixed(1)
-        : longest.distance_km;
-        const rawLongestLabel = longest.label || "";
-        const niceLongestLabel = rawLongestLabel.replace(/_/g, " ");
-        longestEl.textContent = `${longest.date} – ${niceLongestLabel} (${distStr} km)`;
+        const lbl = cleanLabel(longest.label);
+        setText(
+          "longest-day",
+          `${fmtDate(longest.date)}${lbl ? " – " + lbl : ""} (${fmtNum(
+            longest.distance_km
+          )} km)`
+        );
       } else {
-        longestEl.textContent = "—";
+        setText("longest-day", "—");
       }
-    }
 
-    const itemsHtml = days
-    .map((d) => {
-      const dist =
-      typeof d.distance_km === "number"
-      ? d.distance_km.toFixed(1)
-      : d.distance_km ?? "—";
-      const up = d.elevation_up_m ?? "—";
-      const time =
-      typeof d.moving_time_h === "number"
-      ? d.moving_time_h.toFixed(1)
-      : d.moving_time_h ?? "—";
+      el.innerHTML = days
+      .map((d) => {
+        const dist =
+        typeof d.distance_km === "number"
+        ? fmtNum(d.distance_km)
+        : d.distance_km ?? "—";
+        const up =
+        typeof d.elevation_up_m === "number"
+        ? fmtNum(d.elevation_up_m, 0)
+        : d.elevation_up_m ?? "—";
+        const time =
+        typeof d.moving_time_h === "number"
+        ? fmtNum(d.moving_time_h)
+        : d.moving_time_h ?? "—";
+        const label = cleanLabel(d.label);
+        const weatherHtml = formatWeather(d.weather);
 
-      const rawLabel = d.label || "";
-      const niceLabel = rawLabel.replace(/_/g, " ");
+        return `
+        <div class="wm-day-row">
+        <div class="wm-day-title">
+        <span class="wm-day-date">${fmtDate(d.date)}</span>${
+          label ? ` – <span class="wm-day-label">${label}</span>` : ""
+        }
+        </div>
+        <div class="wm-day-meta">${dist} km, ↑ ${up} m, ${time} h ${
+          weatherHtml ? "· " + weatherHtml : ""
+        }</div>
+        </div>`;
+      })
+      .join("");
 
-      const date = d.date || "—";
-
-      return `
-      <div class="wm-day-row">
-      <div class="wm-day-title">
-      <span class="wm-day-date">${date}</span>
-      ${
-        niceLabel
-        ? ` – <span class="wm-day-label">${niceLabel}</span>`
-        : ""
-      }
-      </div>
-      <div class="wm-day-meta">
-      ${dist} km, ↑ ${up} m, ${time} h
-      </div>
-      </div>
-      `;
-    })
-    .join("");
-
-    el.innerHTML = itemsHtml;
-    console.log(`Summary caricato: ${days.length} giorni`);
+      console.log(`Summary caricato: ${days.length} giorni`);
   } catch (err) {
     console.error("Errore in loadSummary:", err);
-    el.textContent = "Errore caricamento riepilogo.";
+    el.textContent = t("err.summary");
   }
 }
 
@@ -641,7 +649,7 @@ async function loadPhotos() {
     data.photos.forEach((p) => {
       if (typeof p.lon !== "number" || typeof p.lat !== "number") return;
 
-      const title = p.title || "Foto";
+      const title = p.title || t("photo.default");
       const caption = p.caption || "";
       const file = p.file || p.url || "";
 

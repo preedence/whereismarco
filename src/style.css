@@ -21,7 +21,7 @@ body {
   height: 100%;
   margin: 0;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
+  sans-serif;
   background: var(--sand);
   color: var(--steel);
   overflow: hidden;
@@ -89,6 +89,36 @@ body {
   border-color: var(--rust);
 }
 
+/* Selettore lingua */
+
+.wm-lang {
+  display: flex;
+  gap: 0.25rem;
+  margin-left: 0.4rem;
+}
+
+.wm-lang button {
+  font: inherit;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  background: none;
+  color: rgba(209, 213, 219, 0.8);
+  border: 1px solid var(--border-soft);
+  border-radius: 4px;
+  padding: 0.15rem 0.45rem;
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.wm-lang button:hover {
+  color: var(--text-on-dark);
+}
+
+.wm-lang button[aria-pressed="true"] {
+  color: var(--text-on-dark);
+  border-color: var(--rust);
+}
+
 /* Main e sezione mappa riempiono lo schermo sotto la topbar */
 
 main {
@@ -104,28 +134,28 @@ main {
 /* Layout desktop: mappa a sinistra, pannello a destra */
 
 #map {
-  position: absolute;
-  inset: 0 300px 0 0;
+position: absolute;
+inset: 0 300px 0 0;
 }
 
 #panel {
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 300px;
-  background: rgba(255, 255, 255, 0.96);
-  padding: 18px;
-  box-shadow: -8px 0 20px rgba(20, 20, 20, 0.08);
-  overflow: auto;
-  box-sizing: border-box;
-  color: var(--text-main);
+position: absolute;
+right: 0;
+top: 0;
+bottom: 0;
+width: 300px;
+background: rgba(255, 255, 255, 0.96);
+padding: 18px;
+box-shadow: -8px 0 20px rgba(20, 20, 20, 0.08);
+overflow: auto;
+box-sizing: border-box;
+color: var(--text-main);
 }
 
 #panel h1 {
-  margin: 0 0 6px 0;
-  font-size: 18px;
-  color: var(--ink);
+margin: 0 0 6px 0;
+font-size: 18px;
+color: var(--ink);
 }
 
 .wm-panel-sub {
@@ -137,14 +167,14 @@ main {
 /* blocco info */
 
 #info div {
-  margin-bottom: 8px;
+margin-bottom: 8px;
 }
 
 /* titolo riepilogo */
 
 #summary h2 {
-  margin-top: 14px;
-  font-size: 15px;
+margin-top: 14px;
+font-size: 15px;
 }
 
 /* Righe riepilogo giornaliero */
@@ -208,7 +238,7 @@ main {
   box-shadow: 0 8px 20px rgba(15, 23, 42, 0.25);
   padding: 8px 10px;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
+  sans-serif;
 }
 
 .maplibregl-popup-tip {
@@ -336,6 +366,10 @@ main {
     letter-spacing: 0.06em;
   }
 
+  .wm-lang {
+    margin-left: 0;
+  }
+
   main {
     height: calc(100vh - 48px);
   }
@@ -345,36 +379,248 @@ main {
   }
 
   #map {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 60vh;
-    bottom: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60vh;
+  bottom: auto;
   }
 
   #panel {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: 60vh;
-    width: auto;
-    box-shadow: 0 -6px 16px rgba(20, 20, 20, 0.08);
-    padding: 14px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 60vh;
+  width: auto;
+  box-shadow: 0 -6px 16px rgba(20, 20, 20, 0.08);
+  padding: 14px;
   }
 
   #panel h1 {
-    font-size: 16px;
-    margin-bottom: 4px;
+  font-size: 16px;
+  margin-bottom: 4px;
   }
 
   #summary h2 {
-    font-size: 14px;
+  font-size: 14px;
   }
 
   .wm-page {
     margin: 24px auto;
     padding: 0 14px;
+  }
+}
+
+/* ============================================================
+ *  STILE "AVVENTURA CALDA / MAPPA DISEGNATA A MANO"
+ *  Ispirato a giochi di esplorazione accoglienti (Megis Adventure).
+ *  Palette invariata, ma con toni più caldi e texture leggere.
+ *  ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Nunito:wght@400;600&display=swap");
+
+:root {
+  --wm-warm-border: 1px solid rgba(198, 106, 58, 0.45); /* rust tenue */
+  --wm-warm-shadow: 0 4px 14px rgba(56, 83, 107, 0.10);
+  --wm-warm-shadow-soft: 0 2px 6px rgba(56, 83, 107, 0.08);
+  --wm-serif-warm: "Cormorant Garamond", "Georgia", serif;
+  --wm-sans-warm: "Nunito", system-ui, sans-serif;
+  --wm-mono: "Courier New", "Consolas", monospace;
+}
+
+/* Titoli in serif caldo */
+h1, h2, h3,
+.wm-logo-title,
+.wm-day-title {
+  font-family: var(--wm-serif-warm);
+  letter-spacing: 0.02em;
+}
+
+/* Numeri e date in monospace (per leggibilità) */
+#total-days, #total-km, #total-up, #total-hours,
+#avg-km-day, #avg-speed, #longest-day,
+.wm-day-date, .wm-day-meta,
+.maplibregl-popup-content strong {
+  font-family: var(--wm-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- Topbar: morbida, calda, senza blur --- */
+.wm-topbar {
+  border-bottom: var(--wm-warm-border);
+  box-shadow: var(--wm-warm-shadow-soft);
+  backdrop-filter: none;
+  background: var(--night);
+}
+
+.wm-logo-title {
+  letter-spacing: 0.06em;
+}
+
+/* Menu: hover caldo, senza freccia netta */
+.wm-nav a {
+  border-bottom: 2px solid transparent;
+  padding: 0.2rem 0.5rem;
+  transition: color 0.2s ease, border-color 0.2s ease;
+  border-radius: 4px;
+}
+
+.wm-nav a:hover {
+  color: var(--night);
+  background: var(--ochre);
+  border-bottom-color: var(--rust);
+}
+
+/* --- Bottoni lingua: morbidi, arrotondati --- */
+.wm-lang button {
+  border: 1px solid rgba(210, 181, 116, 0.5);
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: background 0.2s ease, color 0.2s ease;
+  background: rgba(16, 24, 39, 0.4);
+  font-family: var(--wm-sans-warm);
+}
+
+.wm-lang button:hover {
+  color: var(--night);
+  background: var(--ochre);
+  border-color: var(--rust);
+}
+
+.wm-lang button[aria-pressed="true"] {
+  color: var(--night);
+  background: var(--ochre);
+  border-color: var(--rust);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+/* --- Pannello laterale: "carta" con texture leggera --- */
+#panel {
+background:
+linear-gradient(180deg, rgba(210, 181, 116, 0.10) 0%, rgba(245, 242, 233, 0) 30%),
+var(--sand);
+border-left: var(--wm-warm-border);
+box-shadow: var(--wm-warm-shadow);
+padding: 20px 18px;
+font-family: var(--wm-sans-warm);
+font-size: 0.9rem;
+border-radius: 8px 0 0 8px;
+}
+
+#panel h1 {
+font-size: 1.15rem;
+letter-spacing: 0.02em;
+border-bottom: 1px solid rgba(198, 106, 58, 0.35);
+padding-bottom: 8px;
+margin-bottom: 12px;
+}
+
+.wm-panel-sub {
+  font-size: 0.82rem;
+  line-height: 1.5;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed rgba(198, 106, 58, 0.25);
+  margin-bottom: 14px;
+}
+
+/* --- Statistiche: righe morbide --- */
+#info > div {
+display: flex;
+justify-content: space-between;
+align-items: baseline;
+gap: 0.5rem;
+padding: 5px 0;
+border-bottom: 1px dotted rgba(56, 83, 107, 0.18);
+font-size: 0.84rem;
+}
+
+#info > div:last-child {
+border-bottom: none;
+}
+
+#info strong {
+font-weight: 700;
+color: var(--ink);
+}
+
+/* --- Titolo riepilogo --- */
+#summary h2 {
+font-size: 1rem;
+text-transform: none;
+letter-spacing: 0.04em;
+border-bottom: 1px solid rgba(198, 106, 58, 0.35);
+padding-bottom: 4px;
+margin-bottom: 10px;
+color: var(--rust);
+}
+
+/* --- Righe dei giorni: blocchi morbidi --- */
+.wm-day-row {
+  border-bottom: 1px dashed rgba(198, 106, 58, 0.22);
+  padding: 7px 4px;
+  margin-bottom: 0;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+.wm-day-row:hover {
+  background: rgba(210, 181, 116, 0.22);
+}
+
+.wm-day-title {
+  font-size: 0.9rem;
+}
+
+.wm-day-meta {
+  font-size: 0.76rem;
+  color: var(--text-soft);
+}
+
+/* --- Popup MapLibre: riquadro "carta" morbido --- */
+.maplibregl-popup-content {
+  background: var(--sand);
+  border: var(--wm-warm-border);
+  border-radius: 8px;
+  box-shadow: var(--wm-warm-shadow-soft);
+  padding: 12px 14px;
+  font-family: var(--wm-sans-warm);
+}
+
+.maplibregl-popup-tip {
+  border-top-color: var(--rust) !important;
+}
+
+/* --- Mappa: cornice leggera --- */
+#map {
+border-right: 1px solid rgba(198, 106, 58, 0.25);
+}
+
+/* --- Scrollbar del pannello: sottile e calda --- */
+#panel::-webkit-scrollbar {
+width: 8px;
+}
+
+#panel::-webkit-scrollbar-track {
+background: rgba(210, 181, 116, 0.10);
+}
+
+#panel::-webkit-scrollbar-thumb {
+background: rgba(198, 106, 58, 0.5);
+border-radius: 4px;
+}
+
+/* --- Mobile: cornice anche sotto --- */
+@media screen and (max-width: 768px) {
+  #panel {
+  border-left: none;
+  border-top: var(--wm-warm-border);
+  box-shadow: 0 -2px 10px rgba(56, 83, 107, 0.10);
+  border-radius: 8px 8px 0 0;
+  }
+
+  #map {
+  border-right: none;
   }
 }

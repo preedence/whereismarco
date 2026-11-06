@@ -6,7 +6,14 @@
       "distance_km": 47.8,
       "elevation_up_m": 155,
       "moving_time_h": 2.5,
-      "gpx_file": "_1.gpx"
+      "gpx_file": "_1.gpx",
+      "weather": {
+        "tmax": 28.6,
+        "tmin": 21.9,
+        "tmean": 25.4,
+        "precip": 0.0,
+        "code": 3
+      }
     },
     {
       "date": "2026-08-28",
@@ -14,7 +21,14 @@
       "distance_km": 128.4,
       "elevation_up_m": 727,
       "moving_time_h": 7.9,
-      "gpx_file": "_2.gpx"
+      "gpx_file": "_2.gpx",
+      "weather": {
+        "tmax": 35.3,
+        "tmin": 23.5,
+        "tmean": 27.8,
+        "precip": 0.4,
+        "code": 51
+      }
     },
     {
       "date": "2026-08-29",
@@ -22,7 +36,14 @@
       "distance_km": 80.0,
       "elevation_up_m": 472,
       "moving_time_h": 4.8,
-      "gpx_file": "_3.gpx"
+      "gpx_file": "_3.gpx",
+      "weather": {
+        "tmax": 30.6,
+        "tmin": 20.1,
+        "tmean": 24.8,
+        "precip": 0.0,
+        "code": 1
+      }
     },
     {
       "date": "2026-08-30",
@@ -30,7 +51,14 @@
       "distance_km": 132.0,
       "elevation_up_m": 437,
       "moving_time_h": 8.0,
-      "gpx_file": "_4.gpx"
+      "gpx_file": "_4.gpx",
+      "weather": {
+        "tmax": 32.0,
+        "tmin": 20.1,
+        "tmean": 25.7,
+        "precip": 0.0,
+        "code": 3
+      }
     },
     {
       "date": "2026-08-31",
@@ -38,7 +66,14 @@
       "distance_km": 121.5,
       "elevation_up_m": 489,
       "moving_time_h": 7.2,
-      "gpx_file": "_5.gpx"
+      "gpx_file": "_5.gpx",
+      "weather": {
+        "tmax": 30.5,
+        "tmin": 20.1,
+        "tmean": 25.6,
+        "precip": 0.0,
+        "code": 1
+      }
     },
     {
       "date": "2026-09-01",
@@ -46,7 +81,14 @@
       "distance_km": 82.4,
       "elevation_up_m": 1193,
       "moving_time_h": 5.6,
-      "gpx_file": "_6.gpx"
+      "gpx_file": "_6.gpx",
+      "weather": {
+        "tmax": 30.4,
+        "tmin": 19.9,
+        "tmean": 25.1,
+        "precip": 1.1,
+        "code": 53
+      }
     },
     {
       "date": "2026-09-02",
@@ -54,7 +96,14 @@
       "distance_km": 94.3,
       "elevation_up_m": 1447,
       "moving_time_h": 6.6,
-      "gpx_file": "_7.gpx"
+      "gpx_file": "_7.gpx",
+      "weather": {
+        "tmax": 31.3,
+        "tmin": 21.0,
+        "tmean": 25.8,
+        "precip": 0.0,
+        "code": 3
+      }
     },
     {
       "date": "2026-09-03",
@@ -62,7 +111,14 @@
       "distance_km": 128.1,
       "elevation_up_m": 1261,
       "moving_time_h": 6.8,
-      "gpx_file": "_8.gpx"
+      "gpx_file": "_8.gpx",
+      "weather": {
+        "tmax": 33.0,
+        "tmin": 18.3,
+        "tmean": 25.6,
+        "precip": 0.0,
+        "code": 3
+      }
     },
     {
       "date": "2026-09-04",
@@ -70,7 +126,14 @@
       "distance_km": 115.8,
       "elevation_up_m": 1206,
       "moving_time_h": 6.8,
-      "gpx_file": "_9.gpx"
+      "gpx_file": "_9.gpx",
+      "weather": {
+        "tmax": 35.2,
+        "tmin": 23.3,
+        "tmean": 29.2,
+        "precip": 0.0,
+        "code": 2
+      }
     },
     {
       "date": "2026-09-05",
@@ -78,7 +141,14 @@
       "distance_km": 61.0,
       "elevation_up_m": 845,
       "moving_time_h": 4.1,
-      "gpx_file": "_10.gpx"
+      "gpx_file": "_10.gpx",
+      "weather": {
+        "tmax": 34.9,
+        "tmin": 19.1,
+        "tmean": 26.6,
+        "precip": 0.0,
+        "code": 0
+      }
     },
     {
       "date": "2026-09-06",
@@ -86,7 +156,14 @@
       "distance_km": 92.3,
       "elevation_up_m": 1220,
       "moving_time_h": 6.1,
-      "gpx_file": "_11.gpx"
+      "gpx_file": "_11.gpx",
+      "weather": {
+        "tmax": 34.9,
+        "tmin": 21.8,
+        "tmean": 28.5,
+        "precip": 0.0,
+        "code": 0
+      }
     },
     {
       "date": "2026-09-07",
@@ -94,7 +171,14 @@
       "distance_km": 111.2,
       "elevation_up_m": 1566,
       "moving_time_h": 7.4,
-      "gpx_file": "_12.gpx"
+      "gpx_file": "_12.gpx",
+      "weather": {
+        "tmax": 30.8,
+        "tmin": 16.2,
+        "tmean": 22.7,
+        "precip": 0.0,
+        "code": 0
+      }
     },
     {
       "date": "2026-09-08",
@@ -102,7 +186,14 @@
       "distance_km": 61.4,
       "elevation_up_m": 556,
       "moving_time_h": 4.4,
-      "gpx_file": "_13.gpx"
+      "gpx_file": "_13.gpx",
+      "weather": {
+        "tmax": 31.3,
+        "tmin": 15.2,
+        "tmean": 22.6,
+        "precip": 0.0,
+        "code": 2
+      }
     },
     {
       "date": "2026-09-09",
@@ -110,7 +201,14 @@
       "distance_km": 65.7,
       "elevation_up_m": 1869,
       "moving_time_h": 6.5,
-      "gpx_file": "_14.gpx"
+      "gpx_file": "_14.gpx",
+      "weather": {
+        "tmax": 25.8,
+        "tmin": 14.1,
+        "tmean": 19.0,
+        "precip": 0.3,
+        "code": 51
+      }
     },
     {
       "date": "2026-09-10",
@@ -118,7 +216,14 @@
       "distance_km": 80.7,
       "elevation_up_m": 1998,
       "moving_time_h": 7.0,
-      "gpx_file": "_15.gpx"
+      "gpx_file": "_15.gpx",
+      "weather": {
+        "tmax": 27.8,
+        "tmin": 14.1,
+        "tmean": 20.1,
+        "precip": 0.1,
+        "code": 51
+      }
     },
     {
       "date": "2026-09-11",
@@ -126,7 +231,14 @@
       "distance_km": 74.9,
       "elevation_up_m": 1702,
       "moving_time_h": 5.4,
-      "gpx_file": "_16.gpx"
+      "gpx_file": "_16.gpx",
+      "weather": {
+        "tmax": 25.9,
+        "tmin": 14.5,
+        "tmean": 19.4,
+        "precip": 0.0,
+        "code": 3
+      }
     },
     {
       "date": "2026-09-12",
@@ -134,7 +246,14 @@
       "distance_km": 114.8,
       "elevation_up_m": 845,
       "moving_time_h": 6.7,
-      "gpx_file": "_17.gpx"
+      "gpx_file": "_17.gpx",
+      "weather": {
+        "tmax": 20.4,
+        "tmin": 13.1,
+        "tmean": 16.9,
+        "precip": 3.0,
+        "code": 53
+      }
     },
     {
       "date": "2026-09-13",
@@ -142,7 +261,14 @@
       "distance_km": 95.1,
       "elevation_up_m": 527,
       "moving_time_h": 5.5,
-      "gpx_file": "_18.gpx"
+      "gpx_file": "_18.gpx",
+      "weather": {
+        "tmax": 24.6,
+        "tmin": 13.3,
+        "tmean": 18.7,
+        "precip": 0.0,
+        "code": 2
+      }
     },
     {
       "date": "2026-09-20",
@@ -150,7 +276,14 @@
       "distance_km": 96.2,
       "elevation_up_m": 1409,
       "moving_time_h": 6.3,
-      "gpx_file": "_19.gpx"
+      "gpx_file": "_19.gpx",
+      "weather": {
+        "tmax": 26.4,
+        "tmin": 15.3,
+        "tmean": 19.5,
+        "precip": 3.8,
+        "code": 61
+      }
     },
     {
       "date": "2026-09-21",
@@ -158,7 +291,14 @@
       "distance_km": 43.9,
       "elevation_up_m": 1064,
       "moving_time_h": 3.7,
-      "gpx_file": "_20.gpx"
+      "gpx_file": "_20.gpx",
+      "weather": {
+        "tmax": 23.3,
+        "tmin": 11.6,
+        "tmean": 16.7,
+        "precip": 0.3,
+        "code": 51
+      }
     },
     {
       "date": "2026-09-23",
@@ -166,7 +306,14 @@
       "distance_km": 95.2,
       "elevation_up_m": 1222,
       "moving_time_h": 6.3,
-      "gpx_file": "_21.gpx"
+      "gpx_file": "_21.gpx",
+      "weather": {
+        "tmax": 15.4,
+        "tmin": 6.7,
+        "tmean": 10.7,
+        "precip": 0.4,
+        "code": 51
+      }
     },
     {
       "date": "2026-09-27",
@@ -174,7 +321,14 @@
       "distance_km": 117.8,
       "elevation_up_m": 1800,
       "moving_time_h": 7.2,
-      "gpx_file": "_22.gpx"
+      "gpx_file": "_22.gpx",
+      "weather": {
+        "tmax": 13.2,
+        "tmin": 5.5,
+        "tmean": 8.4,
+        "precip": 0.0,
+        "code": 3
+      }
     },
     {
       "date": "2026-09-28",
@@ -182,7 +336,14 @@
       "distance_km": 109.6,
       "elevation_up_m": 1013,
       "moving_time_h": 5.9,
-      "gpx_file": "_23.gpx"
+      "gpx_file": "_23.gpx",
+      "weather": {
+        "tmax": 20.9,
+        "tmin": 8.9,
+        "tmean": 14.4,
+        "precip": 0.0,
+        "code": 2
+      }
     },
     {
       "date": "2026-09-29",
@@ -190,7 +351,14 @@
       "distance_km": 55.1,
       "elevation_up_m": 650,
       "moving_time_h": 3.5,
-      "gpx_file": "_24.gpx"
+      "gpx_file": "_24.gpx",
+      "weather": {
+        "tmax": 22.9,
+        "tmin": 9.6,
+        "tmean": 16.3,
+        "precip": 0.0,
+        "code": 3
+      }
     },
     {
       "date": "2026-09-30",
@@ -198,7 +366,14 @@
       "distance_km": 81.1,
       "elevation_up_m": 609,
       "moving_time_h": 4.4,
-      "gpx_file": "_25.gpx"
+      "gpx_file": "_25.gpx",
+      "weather": {
+        "tmax": 24.4,
+        "tmin": 12.6,
+        "tmean": 18.2,
+        "precip": 0.0,
+        "code": 3
+      }
     },
     {
       "date": "2026-10-01",
@@ -206,7 +381,14 @@
       "distance_km": 89.1,
       "elevation_up_m": 882,
       "moving_time_h": 5.3,
-      "gpx_file": "_26.gpx"
+      "gpx_file": "_26.gpx",
+      "weather": {
+        "tmax": 22.5,
+        "tmin": 9.5,
+        "tmean": 14.8,
+        "precip": 0.0,
+        "code": 1
+      }
     },
     {
       "date": "2026-10-02",
@@ -214,7 +396,14 @@
       "distance_km": 93.4,
       "elevation_up_m": 575,
       "moving_time_h": 5.3,
-      "gpx_file": "_27.gpx"
+      "gpx_file": "_27.gpx",
+      "weather": {
+        "tmax": 25.1,
+        "tmin": 14.2,
+        "tmean": 19.5,
+        "precip": 0.0,
+        "code": 2
+      }
     },
     {
       "date": "2026-10-03",
@@ -222,7 +411,14 @@
       "distance_km": 87.6,
       "elevation_up_m": 1590,
       "moving_time_h": 5.4,
-      "gpx_file": "_28.gpx"
+      "gpx_file": "_28.gpx",
+      "weather": {
+        "tmax": 19.6,
+        "tmin": 12.2,
+        "tmean": 16.1,
+        "precip": 0.0,
+        "code": 0
+      }
     },
     {
       "date": "2026-10-04",
@@ -230,7 +426,14 @@
       "distance_km": 26.8,
       "elevation_up_m": 646,
       "moving_time_h": 2.3,
-      "gpx_file": "_29.gpx"
+      "gpx_file": "_29.gpx",
+      "weather": {
+        "tmax": 20.8,
+        "tmin": 8.9,
+        "tmean": 14.2,
+        "precip": 0.0,
+        "code": 0
+      }
     },
     {
       "date": "2026-10-05",
@@ -238,7 +441,14 @@
       "distance_km": 85.8,
       "elevation_up_m": 1283,
       "moving_time_h": 5.8,
-      "gpx_file": "_30.gpx"
+      "gpx_file": "_30.gpx",
+      "weather": {
+        "tmax": 25.6,
+        "tmin": 10.7,
+        "tmean": 18.1,
+        "precip": 0.0,
+        "code": 2
+      }
     },
     {
       "date": "2026-10-07",
@@ -246,7 +456,14 @@
       "distance_km": 69.2,
       "elevation_up_m": 819,
       "moving_time_h": 4.2,
-      "gpx_file": "_31.gpx"
+      "gpx_file": "_31.gpx",
+      "weather": {
+        "tmax": 24.9,
+        "tmin": 15.9,
+        "tmean": 19.5,
+        "precip": 0.0,
+        "code": 3
+      }
     },
     {
       "date": "2026-10-08",
@@ -254,7 +471,14 @@
       "distance_km": 86.3,
       "elevation_up_m": 708,
       "moving_time_h": 5.0,
-      "gpx_file": "_32.gpx"
+      "gpx_file": "_32.gpx",
+      "weather": {
+        "tmax": 23.8,
+        "tmin": 12.2,
+        "tmean": 17.6,
+        "precip": 0.0,
+        "code": 3
+      }
     },
     {
       "date": "2026-10-09",
@@ -262,7 +486,14 @@
       "distance_km": 63.7,
       "elevation_up_m": 465,
       "moving_time_h": 3.8,
-      "gpx_file": "_33.gpx"
+      "gpx_file": "_33.gpx",
+      "weather": {
+        "tmax": 25.1,
+        "tmin": 9.5,
+        "tmean": 17.0,
+        "precip": 0.0,
+        "code": 3
+      }
     },
     {
       "date": "2026-10-10",
@@ -270,7 +501,14 @@
       "distance_km": 113.4,
       "elevation_up_m": 917,
       "moving_time_h": 6.7,
-      "gpx_file": "_34.gpx"
+      "gpx_file": "_34.gpx",
+      "weather": {
+        "tmax": 24.2,
+        "tmin": 16.1,
+        "tmean": 19.6,
+        "precip": 0.0,
+        "code": 3
+      }
     },
     {
       "date": "2026-10-11",
@@ -278,7 +516,14 @@
       "distance_km": 91.3,
       "elevation_up_m": 685,
       "moving_time_h": 5.9,
-      "gpx_file": "_35.gpx"
+      "gpx_file": "_35.gpx",
+      "weather": {
+        "tmax": 26.4,
+        "tmin": 13.3,
+        "tmean": 19.0,
+        "precip": 0.0,
+        "code": 3
+      }
     },
     {
       "date": "2026-10-12",
@@ -286,7 +531,14 @@
       "distance_km": 101.9,
       "elevation_up_m": 1302,
       "moving_time_h": 6.3,
-      "gpx_file": "_36.gpx"
+      "gpx_file": "_36.gpx",
+      "weather": {
+        "tmax": 22.9,
+        "tmin": 14.7,
+        "tmean": 18.7,
+        "precip": 1.0,
+        "code": 53
+      }
     },
     {
       "date": "2026-10-13",
@@ -294,7 +546,14 @@
       "distance_km": 85.7,
       "elevation_up_m": 1042,
       "moving_time_h": 6.0,
-      "gpx_file": "_37.gpx"
+      "gpx_file": "_37.gpx",
+      "weather": {
+        "tmax": 17.8,
+        "tmin": 14.7,
+        "tmean": 15.8,
+        "precip": 11.3,
+        "code": 61
+      }
     },
     {
       "date": "2026-10-14",
@@ -302,7 +561,14 @@
       "distance_km": 40.3,
       "elevation_up_m": 785,
       "moving_time_h": 3.1,
-      "gpx_file": "_38.gpx"
+      "gpx_file": "_38.gpx",
+      "weather": {
+        "tmax": 15.5,
+        "tmin": 13.7,
+        "tmean": 14.7,
+        "precip": 67.7,
+        "code": 65
+      }
     },
     {
       "date": "2026-10-15",
@@ -310,7 +576,14 @@
       "distance_km": 41.8,
       "elevation_up_m": 477,
       "moving_time_h": 3.1,
-      "gpx_file": "_39.gpx"
+      "gpx_file": "_39.gpx",
+      "weather": {
+        "tmax": 15.6,
+        "tmin": 13.5,
+        "tmean": 14.7,
+        "precip": 16.8,
+        "code": 63
+      }
     },
     {
       "date": "2026-10-17",
@@ -318,7 +591,14 @@
       "distance_km": 25.4,
       "elevation_up_m": 353,
       "moving_time_h": 2.2,
-      "gpx_file": "_40.gpx"
+      "gpx_file": "_40.gpx",
+      "weather": {
+        "tmax": 13.0,
+        "tmin": 10.6,
+        "tmean": 11.6,
+        "precip": 16.3,
+        "code": 61
+      }
     },
     {
       "date": "2026-10-19",
@@ -326,7 +606,14 @@
       "distance_km": 43.1,
       "elevation_up_m": 443,
       "moving_time_h": 2.8,
-      "gpx_file": "_41.gpx"
+      "gpx_file": "_41.gpx",
+      "weather": {
+        "tmax": 17.7,
+        "tmin": 12.7,
+        "tmean": 15.4,
+        "precip": 0.6,
+        "code": 51
+      }
     },
     {
       "date": "2026-10-20",
@@ -334,7 +621,14 @@
       "distance_km": 53.9,
       "elevation_up_m": 595,
       "moving_time_h": 3.4,
-      "gpx_file": "_42.gpx"
+      "gpx_file": "_42.gpx",
+      "weather": {
+        "tmax": 21.9,
+        "tmin": 11.8,
+        "tmean": 16.0,
+        "precip": 0.0,
+        "code": 3
+      }
     },
     {
       "date": "2026-10-21",
@@ -342,7 +636,14 @@
       "distance_km": 122.2,
       "elevation_up_m": 909,
       "moving_time_h": 6.7,
-      "gpx_file": "_43.gpx"
+      "gpx_file": "_43.gpx",
+      "weather": {
+        "tmax": 22.5,
+        "tmin": 9.0,
+        "tmean": 14.5,
+        "precip": 0.0,
+        "code": 3
+      }
     },
     {
       "date": "2026-10-22",
@@ -350,7 +651,14 @@
       "distance_km": 109.1,
       "elevation_up_m": 1859,
       "moving_time_h": 7.4,
-      "gpx_file": "_44.gpx"
+      "gpx_file": "_44.gpx",
+      "weather": {
+        "tmax": 18.5,
+        "tmin": 3.1,
+        "tmean": 9.4,
+        "precip": 0.0,
+        "code": 2
+      }
     },
     {
       "date": "2026-10-23",
@@ -358,7 +666,14 @@
       "distance_km": 80.3,
       "elevation_up_m": 730,
       "moving_time_h": 4.9,
-      "gpx_file": "_45.gpx"
+      "gpx_file": "_45.gpx",
+      "weather": {
+        "tmax": 19.3,
+        "tmin": 3.5,
+        "tmean": 10.4,
+        "precip": 0.1,
+        "code": 51
+      }
     },
     {
       "date": "2026-10-24",
@@ -366,7 +681,14 @@
       "distance_km": 87.4,
       "elevation_up_m": 577,
       "moving_time_h": 4.8,
-      "gpx_file": "_46.gpx"
+      "gpx_file": "_46.gpx",
+      "weather": {
+        "tmax": 18.0,
+        "tmin": 9.6,
+        "tmean": 12.5,
+        "precip": 5.9,
+        "code": 61
+      }
     },
     {
       "date": "2026-10-25",
@@ -374,7 +696,14 @@
       "distance_km": 91.4,
       "elevation_up_m": 735,
       "moving_time_h": 5.3,
-      "gpx_file": "_47.gpx"
+      "gpx_file": "_47.gpx",
+      "weather": {
+        "tmax": 20.9,
+        "tmin": 8.9,
+        "tmean": 13.4,
+        "precip": 0.0,
+        "code": 3
+      }
     },
     {
       "date": "2026-10-26",
@@ -382,7 +711,14 @@
       "distance_km": 80.9,
       "elevation_up_m": 859,
       "moving_time_h": 4.9,
-      "gpx_file": "_48.gpx"
+      "gpx_file": "_48.gpx",
+      "weather": {
+        "tmax": 21.2,
+        "tmin": 9.0,
+        "tmean": 14.1,
+        "precip": 0.0,
+        "code": 3
+      }
     },
     {
       "date": "2026-10-27",
@@ -390,7 +726,14 @@
       "distance_km": 81.5,
       "elevation_up_m": 1019,
       "moving_time_h": 4.8,
-      "gpx_file": "_49.gpx"
+      "gpx_file": "_49.gpx",
+      "weather": {
+        "tmax": 23.7,
+        "tmin": 15.1,
+        "tmean": 19.1,
+        "precip": 3.7,
+        "code": 61
+      }
     },
     {
       "date": "2026-10-28",
@@ -398,7 +741,14 @@
       "distance_km": 94.5,
       "elevation_up_m": 326,
       "moving_time_h": 4.8,
-      "gpx_file": "_50.gpx"
+      "gpx_file": "_50.gpx",
+      "weather": {
+        "tmax": 21.7,
+        "tmin": 15.3,
+        "tmean": 17.9,
+        "precip": 3.2,
+        "code": 61
+      }
     },
     {
       "date": "2026-10-29",
@@ -406,7 +756,14 @@
       "distance_km": 86.8,
       "elevation_up_m": 556,
       "moving_time_h": 4.4,
-      "gpx_file": "_51.gpx"
+      "gpx_file": "_51.gpx",
+      "weather": {
+        "tmax": 22.3,
+        "tmin": 17.4,
+        "tmean": 19.1,
+        "precip": 6.4,
+        "code": 63
+      }
     },
     {
       "date": "2026-10-30",
@@ -414,7 +771,14 @@
       "distance_km": 56.0,
       "elevation_up_m": 280,
       "moving_time_h": 3.0,
-      "gpx_file": "_52.gpx"
+      "gpx_file": "_52.gpx",
+      "weather": {
+        "tmax": 19.8,
+        "tmin": 15.9,
+        "tmean": 17.4,
+        "precip": 12.1,
+        "code": 63
+      }
     },
     {
       "date": "2026-10-31",
@@ -422,7 +786,14 @@
       "distance_km": 106.3,
       "elevation_up_m": 841,
       "moving_time_h": 5.7,
-      "gpx_file": "_53.gpx"
+      "gpx_file": "_53.gpx",
+      "weather": {
+        "tmax": 19.1,
+        "tmin": 14.3,
+        "tmean": 16.6,
+        "precip": 4.7,
+        "code": 55
+      }
     },
     {
       "date": "2026-11-01",
@@ -430,7 +801,14 @@
       "distance_km": 86.6,
       "elevation_up_m": 506,
       "moving_time_h": 4.4,
-      "gpx_file": "_54.gpx"
+      "gpx_file": "_54.gpx",
+      "weather": {
+        "tmax": 19.7,
+        "tmin": 15.0,
+        "tmean": 17.3,
+        "precip": 0.0,
+        "code": 3
+      }
     },
     {
       "date": "2026-11-02",
@@ -438,7 +816,14 @@
       "distance_km": 129.7,
       "elevation_up_m": 481,
       "moving_time_h": 7.0,
-      "gpx_file": "_55.gpx"
+      "gpx_file": "_55.gpx",
+      "weather": {
+        "tmax": 21.0,
+        "tmin": 12.6,
+        "tmean": 16.6,
+        "precip": 0.0,
+        "code": 3
+      }
     }
   ]
 }
