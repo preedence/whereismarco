@@ -533,13 +533,16 @@ margin-bottom: 12px;
 }
 
 /* ============================================================
- *  MEDIA QUERY PER MOBILE (< 768px) - RISOLUZIONE TAGLI IN FONDO
+ *  MEDIA QUERY PER MOBILE (< 768px) - MAPPA FISSA & SCROLL PANNELLO
  *  ============================================================ */
 
 @media screen and (max-width: 768px) {
+  /* Blocchiamo lo scroll della pagina intera per mantenere fissa la mappa */
   html, body {
     height: 100%;
-    overflow-y: auto;
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
   }
 
   .wm-topbar-inner {
@@ -594,59 +597,44 @@ margin-bottom: 12px;
     transform: translateY(-9px) rotate(-45deg);
   }
 
+  /* Main occupa lo spazio sotto la topbar */
   main {
-    height: auto;
-    min-height: calc(100dvh - 54px);
+    height: calc(100vh - 54px);
+    position: relative;
   }
 
   .wm-map-section {
-    display: flex;
-    flex-direction: column;
-    height: auto;
+    position: relative;
+    height: 100%;
   }
 
+  /* Mappa fissa nella parte superiore dello schermo (45vh) */
   #map {
-  position: relative;
-  inset: auto;
-  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
   height: 45vh;
-  min-height: 280px;
+  min-height: 260px;
   border-right: none;
   border-bottom: 3px solid var(--ink);
   }
 
+  /* Pannello sotto la mappa che gestisce autonomamente lo scroll */
   #panel {
-  position: relative;
-  inset: auto;
+  position: absolute;
+  top: 45vh;
+  left: 0;
+  right: 0;
+  bottom: 0;
   width: 100%;
   height: auto;
   border-left: none;
   border-top: none;
   padding: 16px;
-  padding-bottom: calc(env(safe-area-inset-bottom, 20px) + 50px);
+  overflow-y: auto; /* Questo fa scorrere SOLO il pannello */
+  -webkit-overflow-scrolling: touch; /* Scroll fluido su iOS */
+  padding-bottom: calc(env(safe-area-inset-bottom, 20px) + 30px);
   }
 
-  .wm-page-wrapper {
-    min-height: calc(100dvh - 54px);
-    padding: 12px 10px;
-    padding-bottom: calc(env(safe-area-inset-bottom, 20px) + 40px);
-  }
-
-  .wm-page {
-    padding: 16px;
-    border-width: 2px;
-    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.12);
-    margin-bottom: 30px;
-  }
-
-  .wm-about {
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .wm-about-avatar {
-    flex: auto;
-    max-width: 200px;
-  }
 }
