@@ -627,7 +627,7 @@ margin-bottom: 12px;
   width: 100%;
   height: auto;
   border-left: none;
-  border-top: none;
+  border-top: 3px solid var(--ink); /* <-- Linea di separazione blu/inchiostro tra mappa e pannello su mobile */
   padding: 16px;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
