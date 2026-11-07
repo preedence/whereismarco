@@ -2,31 +2,43 @@
 <html lang="it">
   <head>
     <meta charset="utf-8" />
-    <title>Eurasia crossing – Mappa live</title>
+    <title data-title-key="title.map">Dov'è Marco? – Mappa live</title>
     <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
 
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Stili MapLibre GL JS -->
+    <link href="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.css" rel="stylesheet" />
+
     <!-- Stili progetto -->
     <link rel="stylesheet" href="src/style.css" />
-
-    <!-- MapLibre GL JS -->
-    <link
-      href="https://unpkg.com/maplibre-gl@3.6.1/dist/maplibre-gl.css"
-      rel="stylesheet"
-    />
-    <script src="https://unpkg.com/maplibre-gl@3.6.1/dist/maplibre-gl.js"></script>
   </head>
-  <body data-title-key="title.map">
+  <body>
+    <div class="waldo-stripe"></div>
+
     <header class="wm-topbar">
       <div class="wm-topbar-inner">
+        <!-- Logo e Titolo -->
         <a href="index.html" class="wm-logo">
-          <span class="wm-logo-title">Eurasia crossing</span>
-          <span class="wm-logo-subtitle" data-i18n="tagline"
-            >Un viaggio in bici a lunga distanza</span
-          >
+          <div class="wm-logo-title-wrap">
+            <span class="wm-logo-title" data-i18n="logo.title">Dov'è Marco?</span>
+          </div>
+          <span class="wm-logo-subtitle" data-i18n="tagline">Dove mi porta la bici</span>
         </a>
-        <nav class="wm-nav">
-          <a href="index.html" data-i18n="nav.map">Mappa</a>
+
+        <!-- Pulsante Menu Mobile -->
+        <button type="button" class="wm-mobile-toggle" id="menu-toggle" aria-label="Toggle Menu">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+
+        <!-- Navigazione -->
+        <nav class="wm-nav" id="wm-nav-menu">
           <a href="about.html" data-i18n="nav.about">Info</a>
           <a
             href="https://marcopoloroad.wordpress.com"
@@ -45,62 +57,74 @@
     </header>
 
     <main>
-      <section class="wm-map-section">
+      <div class="wm-map-section">
+        <!-- Mappa MapLibre -->
         <div id="map"></div>
 
-        <div id="panel">
-          <h1 data-i18n="panel.title">Eurasia crossing – live</h1>
-          <p class="wm-panel-sub" data-i18n-html="panel.sub">
-            Mappa, statistiche e foto del viaggio. Codice sorgente su
-            <a
-              href="https://github.com/preedence/whereismarco"
-              target="_blank"
-              rel="noopener"
-              >GitHub</a
-            >.
+        <!-- Pannello Laterale -->
+        <aside id="panel">
+          <div class="panel-badge">TRACKER</div>
+          <h1 data-i18n="panel.title">Esplorando il mondo</h1>
+          <p class="wm-panel-sub">
+            <span data-i18n="panel.subText">Mappa, statistiche e foto del viaggio. Codice sorgente su</span>
+            <a href="https://github.com/preedence/whereismarco" target="_blank" rel="noopener">GitHub</a>.
           </p>
 
+          <!-- Statistiche -->
           <div id="info">
             <div>
-              <span data-i18n="stat.days">Giorni in bici</span>:
-              <strong><span id="total-days">—</span></strong>
+              <span data-i18n="stat.days">Giorni in bici</span>
+              <strong id="total-days">-</strong>
             </div>
             <div>
-              <span data-i18n="stat.km">Km totali</span>:
-              <strong><span id="total-km">—</span></strong>
+              <span data-i18n="stat.km">Km totali</span>
+              <strong id="total-km">-</strong>
             </div>
             <div>
-              <span data-i18n="stat.up">Dislivello ↑ totale</span>:
-              <strong><span id="total-up">—</span></strong>
+              <span data-i18n="stat.up">Dislivello ↑ totale</span>
+              <strong id="total-up">-</strong>
             </div>
             <div>
-              <span data-i18n="stat.hours">Ore in sella</span>:
-              <strong><span id="total-hours">—</span></strong>
+              <span data-i18n="stat.hours">Ore in sella</span>
+              <strong id="total-hours">-</strong>
             </div>
             <div>
-              <span data-i18n="stat.avgKm">Media km/giorno</span>:
-              <strong><span id="avg-km-day">—</span></strong>
+              <span data-i18n="stat.avgKm">Media km/giorno</span>
+              <strong id="avg-km-day">-</strong>
             </div>
             <div>
-              <span data-i18n="stat.avgSpeed">Velocità media</span>:
-              <strong><span id="avg-speed">—</span></strong> km/h
+              <span data-i18n="stat.avgSpeed">Velocità media</span>
+              <strong id="avg-speed">-</strong>
             </div>
             <div>
-              <span data-i18n="stat.longest">Giorno più lungo</span>:
-              <strong><span id="longest-day">—</span></strong>
+              <span data-i18n="stat.longest">Giorno più lungo</span>
+              <strong id="longest-day">-</strong>
             </div>
           </div>
 
-          <div id="summary">
+          <!-- Riepilogo Tappe -->
+          <section id="summary">
             <h2 data-i18n="summary.title">Riepilogo tappe</h2>
-            <div id="summary-content">Caricamento…</div>
-          </div>
-        </div>
-      </section>
+            <div id="summary-content">
+              <p class="wm-loading" data-i18n="summary.loading">Caricamento…</p>
+            </div>
+          </section>
+        </aside>
+      </div>
     </main>
 
-    <!-- i18n deve caricarsi prima di map.js -->
+    <!-- Librerie JS -->
+    <script src="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
+    <!-- Script del progetto -->
     <script src="src/i18n.js"></script>
     <script src="src/map.js"></script>
+    <script>
+      document.getElementById('menu-toggle').addEventListener('click', function() {
+        document.getElementById('wm-nav-menu').classList.toggle('active');
+        this.classList.toggle('open');
+      });
+    </script>
   </body>
 </html>

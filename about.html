@@ -1,28 +1,44 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
   <head>
-    <meta charset="UTF-8" />
-    <title>Eurasia crossing – Info</title>
+    <meta charset="utf-8" />
+    <title data-title-key="title.about">Dov'è Marco? – Info</title>
     <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
 
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Stili progetto -->
     <link rel="stylesheet" href="src/style.css" />
   </head>
-  <body data-title-key="title.about">
-    <!-- stessa top bar di index.html -->
+  <body>
+    <div class="waldo-stripe"></div>
+
     <header class="wm-topbar">
       <div class="wm-topbar-inner">
+        <!-- Logo pulito e dinamico i18n -->
         <a href="index.html" class="wm-logo">
-          <span class="wm-logo-title">Eurasia crossing</span>
-          <span class="wm-logo-subtitle" data-i18n="tagline"
-            >Un viaggio in bici a lunga distanza</span
-          >
+          <div class="wm-logo-title-wrap">
+            <span class="wm-logo-title" data-i18n="logo.title">🔍 Dov'è Marco?</span>
+          </div>
+          <span class="wm-logo-subtitle" data-i18n="tagline">Dove mi porta la bici</span>
         </a>
-        <nav class="wm-nav">
-          <a href="index.html" data-i18n="nav.map">Mappa</a>
-          <a href="about.html" data-i18n="nav.about">Info</a>
+
+        <!-- Pulsante Menu Mobile -->
+        <button type="button" class="wm-mobile-toggle" id="menu-toggle" aria-label="Toggle Menu">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+
+        <!-- Navigazione -->
+        <nav class="wm-nav" id="wm-nav-menu">
+          <a href="about.html" class="active" data-i18n="nav.about">Info</a>
           <a
-            href="https://www.vitadatreno.it"
+            href="https://marcopoloroad.wordpress.com"
             target="_blank"
             rel="noopener"
             data-i18n="nav.journey"
@@ -37,43 +53,45 @@
       </div>
     </header>
 
-    <main>
+    <main class="wm-page-wrapper">
       <div class="wm-page">
-        <section class="wm-about">
+        <div class="panel-badge">CHARACTER PROFILE</div>
+        <h1 data-i18n="about.title">Chi è Marco?</h1>
+
+        <div class="wm-about">
           <div class="wm-about-avatar">
-            <img
-              src="images/avatar-bike.png"
-              alt="Avatar ciclista"
-              data-i18n-alt="about.avatarAlt"
-            />
+            <!-- Percorso corretto dell'immagine -->
+            <img src="images/avatar-bike.png" alt="Marco Profile" data-i18n-alt="about.avatarAlt" />
+            <div class="wm-avatar-stats">
+              <span>CLASS: <strong>Bikepacker</strong></span>
+              <span>STYLE: <strong>Wally Mode</strong></span>
+            </div>
           </div>
 
           <div class="wm-about-text">
-            <h1 data-i18n="about.title">Informazioni su questa mappa</h1>
-
             <p data-i18n="about.p1">
-              Questa mappa mostra il percorso in bici attraverso Eurasia usando
-              OpenStreetMap come base, una traccia aggiornata periodicamente e
-              i punti di fine tappa calcolati dai dati GPS.
+              Benvenuto! Questo sito traccia in tempo reale il mio viaggio in sella attraverso l'Europa e oltre.
             </p>
-
             <p data-i18n="about.p2">
-              Le statistiche (giorni in bici, chilometri totali, dislivello,
-              velocità media) vengono generate da uno script che elabora i file
-              registrati sul campo e produce un GeoJSON per la traccia, un
-              riepilogo giornaliero e un elenco di foto geotaggate.
+              Puoi seguire la traccia GPS, consultare le statistiche di viaggio quotidiane e scoprire le foto scattate lungo il percorso direttamente dalla mappa principale.
             </p>
-
             <p data-i18n="about.p3">
-              Il codice sorgente di questo progetto è disponibile su GitHub,
-              insieme agli script che preparano i dati e al workflow usato per
-              aggiornare la mappa in automatico.
+              Il codice sorgente di questo progetto è disponibile su GitHub, insieme agli script che preparano i dati e al workflow usato per aggiornare la mappa in automatico.
             </p>
           </div>
-        </section>
+        </div>
       </div>
     </main>
 
+    <!-- Script toggle mobile -->
+    <script>
+      document.getElementById('menu-toggle').addEventListener('click', function() {
+        document.getElementById('wm-nav-menu').classList.toggle('active');
+        this.classList.toggle('open');
+      });
+    </script>
+
+    <!-- Script i18n -->
     <script src="src/i18n.js"></script>
   </body>
 </html>

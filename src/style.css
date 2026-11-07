@@ -1,128 +1,193 @@
-:root {
-  --sand: #f5f2e9;
-  --rust: #c66a3a;
-  --ochre: #d2b574;
-  --tundra: #5a6e50;
-  --steel: #38536b;
+/* ============================================================
+ *  STILE "WHERE IS WALDO / FARFLUNG" (Completo)
+ *  ============================================================ */
 
-  --night: #101827;
-  --night-soft: rgba(16, 24, 39, 0.94);
-  --ink: #111827;
-  --text-main: #111827;
-  --text-soft: #4b5563;
-  --text-on-dark: #e5e7eb;
-  --border-soft: rgba(148, 163, 184, 0.45);
+:root {
+  --sky-blue: #70c5ce;
+  --grass-green: #5cbf47;
+  --waldo-red: #e63946;
+  --waldo-white: #f8f9fa;
+  --sun-yellow: #ffb703;
+  --earth-brown: #8d5b4c;
+
+  --sand: #fefae0;
+  --ink: #1d3557;
+  --text-main: #2b2d42;
+  --text-soft: #6c757d;
+  --border-soft: rgba(29, 53, 87, 0.2);
+
+  --wm-sans: "Nunito", system-ui, sans-serif;
+  --wm-pixel: "Silkscreen", monospace;
+  --wm-mono: "Courier New", monospace;
 }
 
 /* Base */
-
 html,
 body {
   height: 100%;
   margin: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-  sans-serif;
-  background: var(--sand);
-  color: var(--steel);
+  font-family: var(--wm-sans);
+  background: var(--sky-blue);
+  color: var(--text-main);
   overflow: hidden;
 }
 
-/* Top bar */
+/* Striscia a righe bianche e rosse */
+.waldo-stripe {
+  height: 6px;
+  background: repeating-linear-gradient(
+    45deg,
+    var(--waldo-red),
+                                        var(--waldo-red) 15px,
+                                        var(--waldo-white) 15px,
+                                        var(--waldo-white) 30px
+  );
+  width: 100%;
+  position: relative;
+  z-index: 1001;
+}
 
+/* Header */
 .wm-topbar {
   position: sticky;
   top: 0;
   z-index: 1000;
-  backdrop-filter: blur(14px);
-  background: var(--night-soft);
-  border-bottom: 1px solid var(--border-soft);
+  background: #ffffff;
+  border-bottom: 3px solid var(--ink);
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.1);
 }
 
 .wm-topbar-inner {
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 0.6rem 1.2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
+/* Logo con immagine PNG di Marco */
 .wm-logo {
   display: flex;
   flex-direction: column;
   text-decoration: none;
-  color: var(--text-on-dark);
+  color: var(--ink);
+}
+
+.wm-logo-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.wm-marco-img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
 }
 
 .wm-logo-title {
+  font-family: var(--wm-pixel);
   font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  font-size: 0.9rem;
+  font-size: 1rem;
+  color: var(--waldo-red);
+  text-shadow: 1px 1px 0px var(--ink);
+}
+
+.wm-logo-subtitle:empty {
+  display: none;
 }
 
 .wm-logo-subtitle {
-  font-size: 0.75rem;
-  color: rgba(209, 213, 219, 0.8);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--earth-brown);
+  margin-top: 2px;
 }
 
+/* Navigazione */
 .wm-nav {
   display: flex;
   align-items: center;
-  gap: 1.4rem;
+  gap: 1.2rem;
 }
 
 .wm-nav a {
-  font-size: 0.85rem;
+  font-family: var(--wm-pixel);
+  font-size: 0.75rem;
   text-decoration: none;
-  color: rgba(209, 213, 219, 0.8);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  padding-bottom: 0.15rem;
-  border-bottom: 2px solid transparent;
-  transition: color 0.15s ease, border-color 0.15s ease;
+  color: var(--ink);
+  padding: 0.3rem 0.6rem;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  transition: all 0.15s ease;
 }
 
-.wm-nav a:hover {
-  color: var(--text-on-dark);
-  border-color: var(--rust);
+.wm-nav a:hover,
+.wm-nav a.active {
+  background: var(--sun-yellow);
+  border-color: var(--ink);
+  transform: translateY(-2px);
+  box-shadow: 0 3px 0 var(--ink);
 }
 
 /* Selettore lingua */
-
 .wm-lang {
   display: flex;
-  gap: 0.25rem;
+  gap: 0.3rem;
   margin-left: 0.4rem;
 }
 
 .wm-lang button {
-  font: inherit;
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  background: none;
-  color: rgba(209, 213, 219, 0.8);
-  border: 1px solid var(--border-soft);
-  border-radius: 4px;
-  padding: 0.15rem 0.45rem;
+  font-family: var(--wm-pixel);
+  font-size: 0.7rem;
+  background: var(--waldo-white);
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  border-radius: 6px;
+  padding: 0.2rem 0.5rem;
   cursor: pointer;
-  transition: color 0.15s ease, border-color 0.15s ease;
+  transition: all 0.1s ease;
+  box-shadow: 0 2px 0 var(--ink);
 }
 
 .wm-lang button:hover {
-  color: var(--text-on-dark);
+  background: var(--sun-yellow);
 }
 
 .wm-lang button[aria-pressed="true"] {
-  color: var(--text-on-dark);
-  border-color: var(--rust);
+  background: var(--waldo-red);
+  color: white;
 }
 
-/* Main e sezione mappa riempiono lo schermo sotto la topbar */
+/* Pulsante Hamburger Mobile */
+.wm-mobile-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 22px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1002;
+}
 
+.wm-mobile-toggle .bar {
+  height: 4px;
+  width: 100%;
+  background-color: var(--ink);
+  border-radius: 2px;
+  transition: all 0.2s ease;
+}
+
+/* Main e Layout Mappa Desktop */
 main {
-  height: calc(100vh - 56px);
+  height: calc(100vh - 62px);
   min-height: 0;
 }
 
@@ -131,11 +196,10 @@ main {
   height: 100%;
 }
 
-/* Layout desktop: mappa a sinistra, pannello a destra */
-
 #map {
 position: absolute;
-inset: 0 300px 0 0;
+inset: 0 340px 0 0;
+border-right: 3px solid var(--ink);
 }
 
 #panel {
@@ -143,212 +207,284 @@ position: absolute;
 right: 0;
 top: 0;
 bottom: 0;
-width: 300px;
-background: rgba(255, 255, 255, 0.96);
-padding: 18px;
-box-shadow: -8px 0 20px rgba(20, 20, 20, 0.08);
+width: 340px;
+background: var(--sand);
+padding: 20px;
+box-shadow: -6px 0 0 rgba(0, 0, 0, 0.08);
 overflow: auto;
 box-sizing: border-box;
 color: var(--text-main);
+border-left: 3px solid var(--ink);
+}
+
+.panel-badge {
+  font-family: var(--wm-pixel);
+  font-size: 0.65rem;
+  background: var(--sun-yellow);
+  color: var(--ink);
+  padding: 3px 8px;
+  border: 2px solid var(--ink);
+  display: inline-block;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  font-weight: bold;
 }
 
 #panel h1 {
 margin: 0 0 6px 0;
-font-size: 18px;
+font-family: var(--wm-pixel);
+font-size: 1.1rem;
 color: var(--ink);
+line-height: 1.3;
 }
 
 .wm-panel-sub {
-  margin: 0 0 10px;
-  font-size: 0.8rem;
+  margin: 0 0 14px;
+  font-size: 0.85rem;
   color: var(--text-soft);
+  border-bottom: 2px dashed var(--border-soft);
+  padding-bottom: 10px;
 }
 
-/* blocco info */
+.wm-panel-sub a {
+  color: var(--waldo-red);
+  font-weight: 700;
+  text-decoration: underline;
+}
 
+/* Statistiche */
 #info div {
 margin-bottom: 8px;
+display: flex;
+justify-content: space-between;
+background: white;
+padding: 6px 10px;
+border: 2px solid var(--ink);
+border-radius: 6px;
+font-size: 0.85rem;
+box-shadow: 0 2px 0 var(--ink);
 }
 
-/* titolo riepilogo */
+#info span {
+font-weight: 600;
+color: var(--text-soft);
+}
 
+#info strong {
+font-family: var(--wm-mono);
+color: var(--ink);
+font-size: 0.95rem;
+}
+
+/* Riepilogo Tappe */
 #summary h2 {
-margin-top: 14px;
-font-size: 15px;
+margin-top: 18px;
+font-family: var(--wm-pixel);
+font-size: 0.95rem;
+color: var(--waldo-red);
+border-bottom: 2px solid var(--ink);
+padding-bottom: 6px;
+margin-bottom: 12px;
 }
-
-/* Righe riepilogo giornaliero */
 
 .wm-day-row {
-  margin-bottom: 6px;
-  padding-bottom: 4px;
-  border-bottom: 1px dashed rgba(148, 163, 184, 0.4);
+  background: white;
+  margin-bottom: 8px;
+  padding: 8px 10px;
+  border: 2px solid var(--ink);
+  border-radius: 6px;
+  transition: transform 0.1s ease;
+}
+
+.wm-day-row:hover {
+  transform: translateX(-3px);
+  background: #fff3b0;
 }
 
 .wm-day-title {
-  font-size: 0.85rem;
-  font-weight: 600;
+  font-size: 0.9rem;
+  font-weight: 700;
   color: var(--ink);
 }
 
-.wm-day-date {
-  font-variant-numeric: tabular-nums;
-}
-
-.wm-day-label {
-  font-weight: 500;
-}
-
 .wm-day-meta {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   color: var(--text-soft);
-  margin-top: 1px;
+  margin-top: 2px;
+  font-family: var(--wm-mono);
 }
 
-/* Popup tappe (pallini fine giornata) */
-
-.wm-popup-day {
-  font-size: 0.8rem;
-  color: #111827;
+/* Pagina Info (about.html) */
+.wm-page-wrapper {
+  height: calc(100vh - 62px);
+  overflow-y: auto;
+  background: var(--sky-blue);
+  padding: 20px 14px;
+  box-sizing: border-box;
 }
-
-.wm-popup-day-title {
-  font-weight: 600;
-  margin-bottom: 2px;
-}
-
-.wm-popup-day-date {
-  font-variant-numeric: tabular-nums;
-}
-
-.wm-popup-day-label {
-  font-weight: 500;
-}
-
-.wm-popup-day-meta {
-  color: #4b5563;
-}
-
-/* Popup generali MapLibre (tappe + foto) */
-
-.maplibregl-popup-content {
-  background: #fdfaf3;
-  border-radius: 6px;
-  border: 1px solid rgba(148, 163, 184, 0.6);
-  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.25);
-  padding: 8px 10px;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-  sans-serif;
-}
-
-.maplibregl-popup-tip {
-  border-top-color: #fdfaf3 !important;
-}
-
-/* ========== AVATAR LIVE ========== */
-
-/* Base: nessun cerchio arancione, solo immagine*/
-.wm-live-avatar {
-  width: 36px;
-  height: 36px;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  /* NO border, NO box-shadow, NO border-radius */
-}
-
-/* 1. In movimento – gif animata */
-.wm-live-avatar--riding {
-  background-image: url("img/avatar-riding.gif");
-}
-
-/* 2. Fermo – immagine statica */
-.wm-live-avatar--stopped {
-  background-image: url("img/avatar-stopped.png");
-}
-
-/* 3. Dormo in tenda – tenda */
-.wm-live-avatar--camp {
-  background-image: url("img/avatar-camp.png");
-}
-
-/* 4. Dormo in hotel/casa – casetta */
-.wm-live-avatar--indoors {
-  background-image: url("img/avatar-indoors.png");
-}
-
-/* Pagina about */
 
 .wm-page {
   max-width: 720px;
-  margin: 40px auto;
-  padding: 0 16px;
+  margin: 0 auto 40px auto;
+  padding: 24px;
+  background: var(--sand);
+  border: 3px solid var(--ink);
+  border-radius: 12px;
+  box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.15);
   color: var(--text-main);
 }
 
 .wm-page h1 {
-  font-size: 1.6rem;
-  margin-bottom: 0.5rem;
-  color: var(--ink);
-}
-
-.wm-page p {
-  line-height: 1.5;
-  margin: 0 0 0.9rem;
+  font-family: var(--wm-pixel);
+  font-size: 1.3rem;
+  margin: 8px 0 16px 0;
+  color: var(--waldo-red);
 }
 
 .wm-about {
   display: flex;
   gap: 24px;
   align-items: flex-start;
-  padding: 24px 0;
   flex-wrap: wrap;
 }
 
 .wm-about-avatar {
   flex: 0 0 180px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 
 .wm-about-avatar img {
-  max-width: 100%;
+  max-width: 160px;
   height: auto;
   display: block;
+  border: 3px solid var(--ink);
+  border-radius: 10px;
+  background: white;
+  padding: 6px;
+  box-shadow: 3px 3px 0 var(--ink);
+}
+
+.wm-avatar-stats {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-family: var(--wm-pixel);
+  font-size: 0.65rem;
+  background: white;
+  padding: 8px;
+  border: 2px solid var(--ink);
+  border-radius: 6px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .wm-about-text {
   flex: 1 1 260px;
 }
 
-.wm-about-text h1 {
-  margin-top: 0;
-  margin-bottom: 0.75rem;
+.wm-actions-box {
+  margin-top: 24px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
-/* ========== DUOMO DI MILANO – MARKER DI PARTENZA ========== */
+.wm-btn-primary, .wm-btn-secondary {
+  font-family: var(--wm-pixel);
+  font-size: 0.75rem;
+  padding: 10px 14px;
+  text-decoration: none;
+  border-radius: 6px;
+  border: 2px solid var(--ink);
+  box-shadow: 3px 3px 0 var(--ink);
+  transition: all 0.1s ease;
+  display: inline-block;
+}
+
+.wm-btn-primary {
+  background: var(--sun-yellow);
+  color: var(--ink);
+}
+
+.wm-btn-secondary {
+  background: white;
+  color: var(--ink);
+}
+
+.wm-btn-primary:active, .wm-btn-secondary:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--ink);
+}
+
+/* Avatar Live e Marker Mappa */
+.wm-live-avatar {
+  width: 38px;
+  height: 38px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.wm-live-avatar--riding { background-image: url("img/avatar-riding.gif"); }
+.wm-live-avatar--stopped { background-image: url("img/avatar-stopped.png"); }
+.wm-live-avatar--camp { background-image: url("img/avatar-camp.png"); }
+.wm-live-avatar--indoors { background-image: url("img/avatar-indoors.png"); }
 
 .wm-start-marker {
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
   background-image: url("img/duomo.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  /* NO border, NO box-shadow, NO border-radius */
   transition: transform 0.2s ease-out;
 }
 
-/* Stato ingrandito (click o zoom alto) */
 .wm-start-marker--large {
   transform: scale(2.2);
 }
 
-/* Layout mobile: mappa sopra, pannello sotto */
+/* Popup MapLibre */
+.maplibregl-popup-content {
+  background: white;
+  border-radius: 8px;
+  border: 3px solid var(--ink);
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.2);
+  padding: 12px 14px;
+  font-family: var(--wm-sans);
+}
+
+.maplibregl-popup-tip {
+  border-top-color: var(--ink) !important;
+}
+
+/* Scrollbar personalizzata */
+#panel::-webkit-scrollbar,
+.wm-page-wrapper::-webkit-scrollbar {
+  width: 10px;
+}
+#panel::-webkit-scrollbar-track,
+.wm-page-wrapper::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-left: 2px solid var(--ink);
+}
+#panel::-webkit-scrollbar-thumb,
+.wm-page-wrapper::-webkit-scrollbar-thumb {
+  background: var(--waldo-red);
+  border: 2px solid var(--ink);
+  border-radius: 4px;
+}
+
+/* ============================================================
+ *  MEDIA QUERY PER MOBILE (< 768px)
+ *  ============================================================ */
 
 @media screen and (max-width: 768px) {
-  html,
-  body {
+  html, body {
     height: 100%;
     overflow: hidden;
   }
@@ -357,25 +493,60 @@ font-size: 15px;
     padding: 0.5rem 0.8rem;
   }
 
+  /* Mostra pulsante menu */
+  .wm-mobile-toggle {
+    display: flex;
+  }
+
+  /* Menu a comparsa mobile */
   .wm-nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    flex-direction: column;
+    padding: 1rem;
+    border-bottom: 3px solid var(--ink);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
     gap: 0.8rem;
+    z-index: 2000;
+  }
+
+  .wm-nav.active {
+    display: flex;
   }
 
   .wm-nav a {
-    font-size: 0.75rem;
-    letter-spacing: 0.06em;
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+    font-size: 0.85rem;
+    padding: 0.5rem;
   }
 
   .wm-lang {
+    justify-content: center;
+    width: 100%;
     margin-left: 0;
+    margin-top: 0.4rem;
   }
 
+  /* Animazione hamburger in "X" */
+  .wm-mobile-toggle.open .bar:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+  }
+  .wm-mobile-toggle.open .bar:nth-child(2) {
+    opacity: 0;
+  }
+  .wm-mobile-toggle.open .bar:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+  }
+
+  /* Mappa e Pannello su Home Mobile */
   main {
-    height: calc(100vh - 48px);
-  }
-
-  .wm-map-section {
-    height: 100%;
+    height: calc(100vh - 54px);
   }
 
   #map {
@@ -383,8 +554,10 @@ font-size: 15px;
   top: 0;
   left: 0;
   right: 0;
-  height: 60vh;
+  height: 50vh;
   bottom: auto;
+  border-right: none;
+  border-bottom: 3px solid var(--ink);
   }
 
   #panel {
@@ -392,235 +565,45 @@ font-size: 15px;
   left: 0;
   right: 0;
   bottom: 0;
-  top: 60vh;
+  top: 50vh;
   width: auto;
-  box-shadow: 0 -6px 16px rgba(20, 20, 20, 0.08);
-  padding: 14px;
+  border-left: none;
+  border-top: 3px solid var(--ink);
+  padding: 12px;
   }
 
-  #panel h1 {
-  font-size: 16px;
-  margin-bottom: 4px;
-  }
-
-  #summary h2 {
-  font-size: 14px;
+  /* Pagina Info su Mobile */
+  .wm-page-wrapper {
+    height: calc(100vh - 54px);
+    padding: 12px 10px;
   }
 
   .wm-page {
-    margin: 24px auto;
-    padding: 0 14px;
-  }
-}
-
-/* ============================================================
- *  STILE "AVVENTURA CALDA / MAPPA DISEGNATA A MANO"
- *  Ispirato a giochi di esplorazione accoglienti (Megis Adventure).
- *  Palette invariata, ma con toni più caldi e texture leggere.
- *  ============================================================ */
-
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Nunito:wght@400;600&display=swap");
-
-:root {
-  --wm-warm-border: 1px solid rgba(198, 106, 58, 0.45); /* rust tenue */
-  --wm-warm-shadow: 0 4px 14px rgba(56, 83, 107, 0.10);
-  --wm-warm-shadow-soft: 0 2px 6px rgba(56, 83, 107, 0.08);
-  --wm-serif-warm: "Cormorant Garamond", "Georgia", serif;
-  --wm-sans-warm: "Nunito", system-ui, sans-serif;
-  --wm-mono: "Courier New", "Consolas", monospace;
-}
-
-/* Titoli in serif caldo */
-h1, h2, h3,
-.wm-logo-title,
-.wm-day-title {
-  font-family: var(--wm-serif-warm);
-  letter-spacing: 0.02em;
-}
-
-/* Numeri e date in monospace (per leggibilità) */
-#total-days, #total-km, #total-up, #total-hours,
-#avg-km-day, #avg-speed, #longest-day,
-.wm-day-date, .wm-day-meta,
-.maplibregl-popup-content strong {
-  font-family: var(--wm-mono);
-  font-variant-numeric: tabular-nums;
-}
-
-/* --- Topbar: morbida, calda, senza blur --- */
-.wm-topbar {
-  border-bottom: var(--wm-warm-border);
-  box-shadow: var(--wm-warm-shadow-soft);
-  backdrop-filter: none;
-  background: var(--night);
-}
-
-.wm-logo-title {
-  letter-spacing: 0.06em;
-}
-
-/* Menu: hover caldo, senza freccia netta */
-.wm-nav a {
-  border-bottom: 2px solid transparent;
-  padding: 0.2rem 0.5rem;
-  transition: color 0.2s ease, border-color 0.2s ease;
-  border-radius: 4px;
-}
-
-.wm-nav a:hover {
-  color: var(--night);
-  background: var(--ochre);
-  border-bottom-color: var(--rust);
-}
-
-/* --- Bottoni lingua: morbidi, arrotondati --- */
-.wm-lang button {
-  border: 1px solid rgba(210, 181, 116, 0.5);
-  border-radius: 6px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-  transition: background 0.2s ease, color 0.2s ease;
-  background: rgba(16, 24, 39, 0.4);
-  font-family: var(--wm-sans-warm);
-}
-
-.wm-lang button:hover {
-  color: var(--night);
-  background: var(--ochre);
-  border-color: var(--rust);
-}
-
-.wm-lang button[aria-pressed="true"] {
-  color: var(--night);
-  background: var(--ochre);
-  border-color: var(--rust);
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.15);
-}
-
-/* --- Pannello laterale: "carta" con texture leggera --- */
-#panel {
-background:
-linear-gradient(180deg, rgba(210, 181, 116, 0.10) 0%, rgba(245, 242, 233, 0) 30%),
-var(--sand);
-border-left: var(--wm-warm-border);
-box-shadow: var(--wm-warm-shadow);
-padding: 20px 18px;
-font-family: var(--wm-sans-warm);
-font-size: 0.9rem;
-border-radius: 8px 0 0 8px;
-}
-
-#panel h1 {
-font-size: 1.15rem;
-letter-spacing: 0.02em;
-border-bottom: 1px solid rgba(198, 106, 58, 0.35);
-padding-bottom: 8px;
-margin-bottom: 12px;
-}
-
-.wm-panel-sub {
-  font-size: 0.82rem;
-  line-height: 1.5;
-  padding-bottom: 10px;
-  border-bottom: 1px dashed rgba(198, 106, 58, 0.25);
-  margin-bottom: 14px;
-}
-
-/* --- Statistiche: righe morbide --- */
-#info > div {
-display: flex;
-justify-content: space-between;
-align-items: baseline;
-gap: 0.5rem;
-padding: 5px 0;
-border-bottom: 1px dotted rgba(56, 83, 107, 0.18);
-font-size: 0.84rem;
-}
-
-#info > div:last-child {
-border-bottom: none;
-}
-
-#info strong {
-font-weight: 700;
-color: var(--ink);
-}
-
-/* --- Titolo riepilogo --- */
-#summary h2 {
-font-size: 1rem;
-text-transform: none;
-letter-spacing: 0.04em;
-border-bottom: 1px solid rgba(198, 106, 58, 0.35);
-padding-bottom: 4px;
-margin-bottom: 10px;
-color: var(--rust);
-}
-
-/* --- Righe dei giorni: blocchi morbidi --- */
-.wm-day-row {
-  border-bottom: 1px dashed rgba(198, 106, 58, 0.22);
-  padding: 7px 4px;
-  margin-bottom: 0;
-  border-radius: 4px;
-  transition: background 0.2s ease;
-}
-
-.wm-day-row:hover {
-  background: rgba(210, 181, 116, 0.22);
-}
-
-.wm-day-title {
-  font-size: 0.9rem;
-}
-
-.wm-day-meta {
-  font-size: 0.76rem;
-  color: var(--text-soft);
-}
-
-/* --- Popup MapLibre: riquadro "carta" morbido --- */
-.maplibregl-popup-content {
-  background: var(--sand);
-  border: var(--wm-warm-border);
-  border-radius: 8px;
-  box-shadow: var(--wm-warm-shadow-soft);
-  padding: 12px 14px;
-  font-family: var(--wm-sans-warm);
-}
-
-.maplibregl-popup-tip {
-  border-top-color: var(--rust) !important;
-}
-
-/* --- Mappa: cornice leggera --- */
-#map {
-border-right: 1px solid rgba(198, 106, 58, 0.25);
-}
-
-/* --- Scrollbar del pannello: sottile e calda --- */
-#panel::-webkit-scrollbar {
-width: 8px;
-}
-
-#panel::-webkit-scrollbar-track {
-background: rgba(210, 181, 116, 0.10);
-}
-
-#panel::-webkit-scrollbar-thumb {
-background: rgba(198, 106, 58, 0.5);
-border-radius: 4px;
-}
-
-/* --- Mobile: cornice anche sotto --- */
-@media screen and (max-width: 768px) {
-  #panel {
-  border-left: none;
-  border-top: var(--wm-warm-border);
-  box-shadow: 0 -2px 10px rgba(56, 83, 107, 0.10);
-  border-radius: 8px 8px 0 0;
+    padding: 16px;
+    border-width: 2px;
+    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.12);
   }
 
-  #map {
-  border-right: none;
+  .wm-about {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
   }
+
+  .wm-about-avatar {
+    flex: auto;
+    max-width: 200px;
+  }
+
+  .wm-actions-box {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .wm-btn-primary, .wm-btn-secondary {
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
 }
