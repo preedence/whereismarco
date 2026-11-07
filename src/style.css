@@ -203,7 +203,7 @@ overflow-y: auto;
 box-sizing: border-box;
 color: var(--text-main);
 border-left: 3px solid var(--ink);
-padding-bottom: env(safe-area-inset-bottom, 40px); /* Fix fine pannello mobile/desktop */
+padding-bottom: env(safe-area-inset-bottom, 40px);
 }
 
 .panel-badge {
@@ -428,7 +428,7 @@ margin-bottom: 12px;
   background-image: url("img/avatar-indoors.png");
 }
 
-/* Pagina Info (about.html) con fix mobile */
+/* Pagina Info (about.html) */
 .wm-page-wrapper {
   min-height: calc(100dvh - 62px);
   overflow-y: auto;
@@ -533,18 +533,10 @@ margin-bottom: 12px;
 }
 
 /* ============================================================
- *  MEDIA QUERY PER MOBILE (< 768px) - MAPPA FISSA & SCROLL PANNELLO
+ *  MEDIA QUERY PER MOBILE (< 768px) - GESTIONE SEPARATA MAPPA / ABOUT
  *  ============================================================ */
 
 @media screen and (max-width: 768px) {
-  /* Blocchiamo lo scroll della pagina intera per mantenere fissa la mappa */
-  html, body {
-    height: 100%;
-    overflow: hidden;
-    position: fixed;
-    width: 100%;
-  }
-
   .wm-topbar-inner {
     padding: 0.5rem 0.8rem;
   }
@@ -597,18 +589,24 @@ margin-bottom: 12px;
     transform: translateY(-9px) rotate(-45deg);
   }
 
-  /* Main occupa lo spazio sotto la topbar */
+  /* --- SCHERMATA MAPPA (INDEX) --- */
+  body:has(#map) {
+    height: 100vh;
+    overflow: hidden;
+  }
+
   main {
-    height: calc(100vh - 54px);
-    position: relative;
+    height: auto;
+    min-height: calc(100dvh - 54px);
   }
 
   .wm-map-section {
+    display: flex;
+    flex-direction: column;
+    height: calc(100dvh - 54px);
     position: relative;
-    height: 100%;
   }
 
-  /* Mappa fissa nella parte superiore dello schermo (45vh) */
   #map {
   position: absolute;
   top: 0;
@@ -620,7 +618,6 @@ margin-bottom: 12px;
   border-bottom: 3px solid var(--ink);
   }
 
-  /* Pannello sotto la mappa che gestisce autonomamente lo scroll */
   #panel {
   position: absolute;
   top: 45vh;
@@ -632,9 +629,40 @@ margin-bottom: 12px;
   border-left: none;
   border-top: none;
   padding: 16px;
-  overflow-y: auto; /* Questo fa scorrere SOLO il pannello */
-  -webkit-overflow-scrolling: touch; /* Scroll fluido su iOS */
-  padding-bottom: calc(env(safe-area-inset-bottom, 20px) + 30px);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: calc(env(safe-area-inset-bottom, 20px) + 50px);
   }
 
+  /* --- SCHERMATA INFO / ABOUT --- */
+  body:not(:has(#map)) {
+    height: auto;
+    overflow-y: auto;
+  }
+
+  .wm-page-wrapper {
+    min-height: calc(100dvh - 54px);
+    height: auto;
+    overflow-y: visible;
+    padding: 16px 12px;
+    padding-bottom: calc(env(safe-area-inset-bottom, 20px) + 60px);
+  }
+
+  .wm-page {
+    padding: 18px;
+    border-width: 2px;
+    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.12);
+    margin-bottom: 40px;
+  }
+
+  .wm-about {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .wm-about-avatar {
+    flex: auto;
+    max-width: 200px;
+  }
 }
