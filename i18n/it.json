@@ -1,6 +1,7 @@
 {
   "title.map": "Dov'è Marco? – Mappa live",
   "title.about": "Dov'è Marco? – Info",
+  "title.journey": "Dov'è Marco? – Il viaggio",
 
   "logo.title": "🔍 Dov'è Marco?",
   "tagline": "Dove mi porta la bici",
@@ -34,5 +35,16 @@
   "about.avatarAlt": "Avatar ciclista",
   "about.p1": "Benvenuto! Questo sito traccia in tempo reale il mio viaggio in sella attraverso l'Europa e oltre.",
   "about.p2": "Puoi seguire la traccia GPS, consultare le statistiche di viaggio quotidiane e scoprire le foto scattate lungo il percorso direttamente dalla mappa principale.",
-  "about.p3": "Il codice sorgente di questo progetto è disponibile su GitHub, insieme agli script che preparano i dati e al workflow usato per aggiornare la mappa in automatico."
+  "about.p3": "Il codice sorgente di questo progetto è disponibile su GitHub, insieme agli script che preparano i dati e al workflow usato per aggiornare la mappa in automatico.",
+
+  "journey.badge": "DIARIO DI VIAGGIO",
+  "journey.title": "Il viaggio, tappa per tappa",
+  "journey.subtitle": "Ogni giorno è una tappa: chilometri, dislivello e meteo reale.",
+  "journey.subtitleRange": "{n} tappe · dal {from} al {to}",
+  "journey.day": "GIORNO",
+  "journey.km": "km",
+  "journey.m": "m",
+  "journey.h": "h",
+  "journey.empty": "Nessuna tappa pubblicata ancora.",
+  "journey.error": "Impossibile caricare data/summary.json"
 }

@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <title data-title-key="title.journey">Dov'è Marco? – Il viaggio</title>
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="src/style.css" />
+    <link rel="stylesheet" href="src/journey.css" />
+  </head>
+  <body data-title-key="title.journey">
+    <div class="waldo-stripe"></div>
+
+    <header class="wm-topbar">
+      <div class="wm-topbar-inner">
+        <a href="index.html" class="wm-logo">
+          <div class="wm-logo-title-wrap">
+            <span class="wm-logo-title" data-i18n="logo.title">Dov'è Marco?</span>
+          </div>
+          <span class="wm-logo-subtitle" data-i18n="tagline">Dove mi porta la bici</span>
+        </a>
+
+        <button type="button" class="wm-mobile-toggle" id="menu-toggle" aria-label="Toggle Menu">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+
+        <nav class="wm-nav" id="wm-nav-menu">
+          <a href="about.html" data-i18n="nav.about">Info</a>
+          <a href="journey.html" class="active" data-i18n="nav.journey">Il viaggio</a>
+          <div class="wm-lang" role="group" aria-label="Language">
+            <button type="button" data-lang="it" aria-pressed="true">IT</button>
+            <button type="button" data-lang="en" aria-pressed="false">EN</button>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main class="wm-journey-main">
+      <div class="wm-journey-wrap">
+
+        <div class="wm-page wm-journey-header">
+          <div class="panel-badge" data-i18n="journey.badge">DIARIO DI VIAGGIO</div>
+          <h1 data-i18n="journey.title">Il viaggio, tappa per tappa</h1>
+          <p class="wm-panel-sub" id="journey-subtitle" data-i18n="journey.subtitle">
+            Ogni giorno è una tappa: chilometri, dislivello e meteo reale.
+          </p>
+        </div>
+
+        <div id="journey-list" class="wm-journey-list">
+          <p class="wm-loading" data-i18n="summary.loading">Caricamento…</p>
+        </div>
+
+      </div>
+    </main>
+
+    <script src="src/i18n.js"></script>
+    <script src="src/journey.js"></script>
+    <script>
+      document.getElementById('menu-toggle').addEventListener('click', function () {
+        document.getElementById('wm-nav-menu').classList.toggle('active');
+        this.classList.toggle('open');
+      });
+    </script>
+  </body>
+</html>

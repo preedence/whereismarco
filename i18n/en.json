@@ -1,6 +1,7 @@
 {
   "title.map": "Where is Marco? – Live map",
   "title.about": "Where is Marco? – About",
+  "title.journey": "Where is Marco? – The Journey",
 
   "logo.title": "🔍 Where is Marco?",
   "tagline": "Where the bike takes me",
@@ -34,5 +35,16 @@
   "about.avatarAlt": "Cyclist avatar",
   "about.p1": "Welcome! This site tracks my long-distance cycling journey across Europe and beyond in real time.",
   "about.p2": "You can follow the GPS track, check daily travel statistics, and discover photos taken along the route directly from the main map.",
-  "about.p3": "The source code of this project is available on GitHub, together with the scripts that prepare the data and the workflow used to update the map automatically."
+  "about.p3": "The source code of this project is available on GitHub, together with the scripts that prepare the data and the workflow used to update the map automatically.",
+
+  "journey.badge": "JOURNEY DIARY",
+  "journey.title": "The journey, stage by stage",
+  "journey.subtitle": "Every day is a stage: distance, elevation and real weather.",
+  "journey.subtitleRange": "{n} stages · from {from} to {to}",
+  "journey.day": "DAY",
+  "journey.km": "km",
+  "journey.m": "m",
+  "journey.h": "h",
+  "journey.empty": "No stages published yet.",
+  "journey.error": "Could not load data/summary.json"
 }

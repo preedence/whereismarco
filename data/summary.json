@@ -152,7 +152,7 @@
     },
     {
       "date": "2026-09-06",
-      "label": "Općina Čitluk",
+      "label": "Međugorje",
       "distance_km": 92.3,
       "elevation_up_m": 1220,
       "moving_time_h": 6.1,
@@ -167,7 +167,7 @@
     },
     {
       "date": "2026-09-07",
-      "label": "Општина Билећа / Opština Bileća",
+      "label": "Vlahinja",
       "distance_km": 111.2,
       "elevation_up_m": 1566,
       "moving_time_h": 7.4,
@@ -197,7 +197,7 @@
     },
     {
       "date": "2026-09-09",
-      "label": "Opština Šavnik",
+      "label": "Krnja Jela",
       "distance_km": 65.7,
       "elevation_up_m": 1869,
       "moving_time_h": 6.5,
@@ -287,7 +287,7 @@
     },
     {
       "date": "2026-09-21",
-      "label": "_20",
+      "label": "Богослов",
       "distance_km": 43.9,
       "elevation_up_m": 1064,
       "moving_time_h": 3.7,
@@ -407,7 +407,7 @@
     },
     {
       "date": "2026-10-03",
-      "label": "Δήμος Αριστοτέλη",
+      "label": "Μεγάλη Παναγία",
       "distance_km": 87.6,
       "elevation_up_m": 1590,
       "moving_time_h": 5.4,
@@ -467,7 +467,7 @@
     },
     {
       "date": "2026-10-08",
-      "label": "Δήμος Παγγαίου",
+      "label": "Αμισιανά",
       "distance_km": 86.3,
       "elevation_up_m": 708,
       "moving_time_h": 5.0,
@@ -482,7 +482,7 @@
     },
     {
       "date": "2026-10-09",
-      "label": "Δήμος Τοπείρου",
+      "label": "Κρεμαστή",
       "distance_km": 63.7,
       "elevation_up_m": 465,
       "moving_time_h": 3.8,
@@ -497,7 +497,7 @@
     },
     {
       "date": "2026-10-10",
-      "label": "Δήμος Αλεξανδρούπολης",
+      "label": "Δίκελλα",
       "distance_km": 113.4,
       "elevation_up_m": 917,
       "moving_time_h": 6.7,
@@ -572,7 +572,7 @@
     },
     {
       "date": "2026-10-15",
-      "label": "Fatih",
+      "label": "İstanbul",
       "distance_km": 41.8,
       "elevation_up_m": 477,
       "moving_time_h": 3.1,
@@ -617,7 +617,7 @@
     },
     {
       "date": "2026-10-20",
-      "label": "İzmit",
+      "label": "Kocaeli",
       "distance_km": 53.9,
       "elevation_up_m": 595,
       "moving_time_h": 3.4,
@@ -722,7 +722,7 @@
     },
     {
       "date": "2026-10-27",
-      "label": "İlkadım",
+      "label": "Samsun",
       "distance_km": 81.5,
       "elevation_up_m": 1019,
       "moving_time_h": 4.8,
@@ -782,7 +782,7 @@
     },
     {
       "date": "2026-10-31",
-      "label": "Ortahisar",
+      "label": "Trabzon",
       "distance_km": 106.3,
       "elevation_up_m": 841,
       "moving_time_h": 5.7,

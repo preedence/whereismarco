@@ -1,0 +1,181 @@
+/* ============================================================
+ *  JOURNEY PAGE — stile blog per le tappe
+ *  Riusa variabili e pattern da src/style.css
+ * ============================================================ */
+
+.wm-journey-main {
+  height: auto;
+  min-height: calc(100dvh - 62px);
+  overflow-y: auto;
+  background: var(--sky-blue);
+  padding: 20px 14px;
+  box-sizing: border-box;
+  padding-bottom: env(safe-area-inset-bottom, 40px);
+}
+
+.wm-journey-wrap {
+  max-width: 860px;
+  margin: 0 auto 40px;
+}
+
+.wm-journey-header {
+  margin-bottom: 20px;
+}
+
+.wm-journey-header h1 {
+  margin: 8px 0 6px;
+}
+
+.wm-journey-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Card tappa: estende .wm-day-row già definito in style.css */
+.wm-stage-card {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 0;
+  padding: 0;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+}
+
+.wm-stage-card:hover {
+  transform: translate(-3px, -2px);
+  background: #fff3b0;
+}
+
+.wm-stage-cover {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  background: var(--sand);
+  border-right: 2px solid var(--ink);
+  padding: 12px 8px;
+  min-height: 100px;
+}
+
+.wm-stage-cover .cover-icon {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.wm-stage-cover .cover-temps {
+  font-family: var(--wm-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--ink);
+  text-align: center;
+}
+
+.wm-stage-body {
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.wm-stage-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.wm-stage-day {
+  font-family: var(--wm-pixel);
+  font-size: 0.62rem;
+  background: var(--waldo-red);
+  color: #fff;
+  padding: 3px 7px;
+  border: 2px solid var(--ink);
+  border-radius: 4px;
+}
+
+.wm-stage-date {
+  font-family: var(--wm-mono);
+  font-size: 0.75rem;
+  color: var(--text-soft);
+  font-weight: 700;
+}
+
+.wm-stage-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--ink);
+  margin: 0;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+.wm-stage-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-family: var(--wm-mono);
+  font-size: 0.78rem;
+  color: var(--text-soft);
+  border-top: 2px dashed var(--border-soft);
+  padding-top: 6px;
+  font-weight: 700;
+}
+
+.wm-stage-stats span {
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
+}
+
+/* Errore / vuoto */
+.wm-journey-empty {
+  background: var(--sand);
+  border: 3px solid var(--ink);
+  border-radius: 12px;
+  box-shadow: 4px 4px 0 var(--ink);
+  padding: 30px;
+  text-align: center;
+  font-weight: 800;
+}
+
+/* ============================================================
+ *  MOBILE — eredita il resto da style.css
+ * ============================================================ */
+@media screen and (max-width: 768px) {
+  .wm-journey-main {
+    min-height: calc(100dvh - 54px);
+    padding: 14px 10px;
+    padding-bottom: calc(env(safe-area-inset-bottom, 20px) + 50px);
+  }
+
+  .wm-stage-card {
+    grid-template-columns: 88px 1fr;
+  }
+
+  .wm-stage-cover {
+    padding: 10px 6px;
+    min-height: 90px;
+  }
+
+  .wm-stage-cover .cover-icon {
+    font-size: 1.6rem;
+  }
+
+  .wm-stage-cover .cover-temps {
+    font-size: 0.65rem;
+  }
+
+  .wm-stage-title {
+    font-size: 0.98rem;
+  }
+
+  .wm-stage-stats {
+    font-size: 0.72rem;
+    gap: 8px;
+  }
+}

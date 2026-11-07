@@ -67,25 +67,34 @@ def get_last_coord(gpx) -> tuple[float, float] | None:
 
 
 def fetch_location_name(lat: float, lon: float) -> str | None:
-    """Ottiene il nome della località partendo da coordinate lat/lon tramite Nominatim."""
-    url = f"https://nominatim.openstreetmap.org/reverse?format=json&lat={lat}&lon={lon}&zoom=10"
+    """Tenta zoom=14 (più preciso), poi zoom=10 (fallback)."""
     headers = {"User-Agent": "WhereIsMarcoTracker/1.0"}
-    try:
-        req = urllib.request.Request(url, headers=headers)
-        with urllib.request.urlopen(req, timeout=10) as resp:
-            data = json.loads(resp.read().decode())
-            address = data.get("address", {})
-            # Cerca il nome della città, paese, comune o regione
-            loc = (
-                address.get("town")
-                or address.get("city")
-                or address.get("village")
-                or address.get("municipality")
-                or address.get("county")
-            )
-            return loc
-    except Exception as e:
-        print(f"  Località non disponibile: {e}", flush=True)
+
+    for zoom in (14, 10):
+        url = f"https://nominatim.openstreetmap.org/reverse?format=json&lat={lat}&lon={lon}&zoom={zoom}"
+        try:
+            req = urllib.request.Request(url, headers=headers)
+            with urllib.request.urlopen(req, timeout=10) as resp:
+                data = json.loads(resp.read().decode())
+                address = data.get("address", {})
+                loc = (
+                    address.get("city")
+                    or address.get("town")
+                    or address.get("village")
+                    or address.get("municipality")
+                    or address.get("county")
+                    or address.get("state_district")
+                    or address.get("state")
+                    or address.get("country")
+                    or address.get("suburb")
+                    or address.get("neighbourhood")
+                )
+                if loc:
+                    return loc
+        except Exception as e:
+            print(f"  Località non disponibile (zoom={zoom}): {e}", flush=True)
+        time.sleep(GEOCODE_SLEEP_S)
+
     return None
 
 
