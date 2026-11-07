@@ -1,5 +1,5 @@
 /* ============================================================
- *  STILE "WHERE IS WALDO / FARFLUNG" (Completo)
+ *  STILE "WHERE IS WALDO / FARFLUNG" (Completo con Fix Mobile e Meteo)
  *  ============================================================ */
 
 :root {
@@ -29,7 +29,7 @@ body {
   font-family: var(--wm-sans);
   background: var(--sky-blue);
   color: var(--text-main);
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 /* Striscia a righe bianche e rosse */
@@ -211,10 +211,11 @@ width: 340px;
 background: var(--sand);
 padding: 20px;
 box-shadow: -6px 0 0 rgba(0, 0, 0, 0.08);
-overflow: auto;
+overflow-y: auto;
 box-sizing: border-box;
 color: var(--text-main);
 border-left: 3px solid var(--ink);
+padding-bottom: env(safe-area-inset-bottom, 40px);
 }
 
 .panel-badge {
@@ -293,12 +294,20 @@ margin-bottom: 12px;
   padding: 8px 10px;
   border: 2px solid var(--ink);
   border-radius: 6px;
-  transition: transform 0.1s ease;
+  cursor: pointer;
+  transition: all 0.15s ease;
 }
 
 .wm-day-row:hover {
   transform: translateX(-3px);
   background: #fff3b0;
+}
+
+.wm-day-row.wm-day-active {
+  background: var(--sun-yellow) !important;
+  border-color: var(--waldo-red) !important;
+  transform: translateX(-4px);
+  box-shadow: 2px 2px 0 var(--ink);
 }
 
 .wm-day-title {
@@ -314,13 +323,53 @@ margin-bottom: 12px;
   font-family: var(--wm-mono);
 }
 
-/* Pagina Info (about.html) */
+/* Meteo & Termometro Integrato */
+.weather-icon-custom {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.weather-icon-custom.sunny svg { color: #f59e0b; }
+.weather-icon-custom.rainy svg { color: #3b82f6; }
+.weather-icon-custom.windy svg { color: #10b981; }
+
+.wm-weather-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+  background: white;
+  padding: 4px 8px;
+  border: 2px solid var(--ink);
+  border-radius: 6px;
+}
+
+.thermometer-bar {
+  width: 4px;
+  height: 18px;
+  background: #e5e7eb;
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--ink);
+}
+
+.thermometer-fill {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: linear-gradient(to top, #3b82f6, #ef4444);
+}
+
+/* Pagina Info (about.html) con fix mobile */
 .wm-page-wrapper {
-  height: calc(100vh - 62px);
+  min-height: calc(100dvh - 62px);
   overflow-y: auto;
   background: var(--sky-blue);
   padding: 20px 14px;
   box-sizing: border-box;
+  padding-bottom: env(safe-area-inset-bottom, 40px);
 }
 
 .wm-page {
@@ -386,68 +435,6 @@ margin-bottom: 12px;
   flex: 1 1 260px;
 }
 
-.wm-actions-box {
-  margin-top: 24px;
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.wm-btn-primary, .wm-btn-secondary {
-  font-family: var(--wm-pixel);
-  font-size: 0.75rem;
-  padding: 10px 14px;
-  text-decoration: none;
-  border-radius: 6px;
-  border: 2px solid var(--ink);
-  box-shadow: 3px 3px 0 var(--ink);
-  transition: all 0.1s ease;
-  display: inline-block;
-}
-
-.wm-btn-primary {
-  background: var(--sun-yellow);
-  color: var(--ink);
-}
-
-.wm-btn-secondary {
-  background: white;
-  color: var(--ink);
-}
-
-.wm-btn-primary:active, .wm-btn-secondary:active {
-  transform: translate(2px, 2px);
-  box-shadow: 1px 1px 0 var(--ink);
-}
-
-/* Avatar Live e Marker Mappa */
-.wm-live-avatar {
-  width: 38px;
-  height: 38px;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-.wm-live-avatar--riding { background-image: url("img/avatar-riding.gif"); }
-.wm-live-avatar--stopped { background-image: url("img/avatar-stopped.png"); }
-.wm-live-avatar--camp { background-image: url("img/avatar-camp.png"); }
-.wm-live-avatar--indoors { background-image: url("img/avatar-indoors.png"); }
-
-.wm-start-marker {
-  width: 38px;
-  height: 38px;
-  background-image: url("img/duomo.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  transition: transform 0.2s ease-out;
-}
-
-.wm-start-marker--large {
-  transform: scale(2.2);
-}
-
 /* Popup MapLibre */
 .maplibregl-popup-content {
   background: white;
@@ -480,25 +467,23 @@ margin-bottom: 12px;
 }
 
 /* ============================================================
- *  MEDIA QUERY PER MOBILE (< 768px)
+ *  MEDIA QUERY PER MOBILE (< 768px) - RISOLUZIONE TAGLI IN FONDO
  *  ============================================================ */
 
 @media screen and (max-width: 768px) {
   html, body {
     height: 100%;
-    overflow: hidden;
+    overflow-y: auto;
   }
 
   .wm-topbar-inner {
     padding: 0.5rem 0.8rem;
   }
 
-  /* Mostra pulsante menu */
   .wm-mobile-toggle {
     display: flex;
   }
 
-  /* Menu a comparsa mobile */
   .wm-nav {
     display: none;
     position: absolute;
@@ -533,7 +518,6 @@ margin-bottom: 12px;
     margin-top: 0.4rem;
   }
 
-  /* Animazione hamburger in "X" */
   .wm-mobile-toggle.open .bar:nth-child(1) {
     transform: translateY(9px) rotate(45deg);
   }
@@ -544,44 +528,49 @@ margin-bottom: 12px;
     transform: translateY(-9px) rotate(-45deg);
   }
 
-  /* Mappa e Pannello su Home Mobile */
   main {
-    height: calc(100vh - 54px);
+    height: auto;
+    min-height: calc(100dvh - 54px);
+  }
+
+  .wm-map-section {
+    display: flex;
+    flex-direction: column;
+    height: auto;
   }
 
   #map {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 50vh;
-  bottom: auto;
+  position: relative;
+  inset: auto;
+  width: 100%;
+  height: 45vh;
+  min-height: 280px;
   border-right: none;
   border-bottom: 3px solid var(--ink);
   }
 
   #panel {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  top: 50vh;
-  width: auto;
+  position: relative;
+  inset: auto;
+  width: 100%;
+  height: auto;
   border-left: none;
-  border-top: 3px solid var(--ink);
-  padding: 12px;
+  border-top: none;
+  padding: 16px;
+  padding-bottom: calc(env(safe-area-inset-bottom, 20px) + 50px);
   }
 
-  /* Pagina Info su Mobile */
   .wm-page-wrapper {
-    height: calc(100vh - 54px);
+    min-height: calc(100dvh - 54px);
     padding: 12px 10px;
+    padding-bottom: calc(env(safe-area-inset-bottom, 20px) + 40px);
   }
 
   .wm-page {
     padding: 16px;
     border-width: 2px;
     box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.12);
+    margin-bottom: 30px;
   }
 
   .wm-about {
@@ -594,16 +583,4 @@ margin-bottom: 12px;
     flex: auto;
     max-width: 200px;
   }
-
-  .wm-actions-box {
-    flex-direction: column;
-    width: 100%;
-  }
-
-  .wm-btn-primary, .wm-btn-secondary {
-    text-align: center;
-    width: 100%;
-    box-sizing: border-box;
-  }
-
 }

@@ -16,7 +16,8 @@ SUMMARY_PATH = DATA_DIR / "summary.json"
 
 # Pausa tra le chiamate API (secondi), per non sovraccaricare il servizio
 WEATHER_SLEEP_S = 0.2
-# Se True, salta le chiamate API e usa i dati meteo già presenti nel summary.json
+GEOCODE_SLEEP_S = 1.0  # Pausa di rispetto per le API pubbliche di Nominatim
+# Se True, salta le chiamate API meteo e usa i dati già presenti
 SKIP_WEATHER_FETCH = False
 
 
@@ -42,7 +43,7 @@ def get_gpx_date(path: Path) -> str:
     except Exception:
         pass
 
-    # 3. Fallback estremo: parse completo (lento, ma raro)
+    # 3. Fallback estremo: parse completo
     try:
         with path.open("r", encoding="utf-8") as f:
             gpx = gpxpy.parse(f)
@@ -62,6 +63,29 @@ def get_last_coord(gpx) -> tuple[float, float] | None:
         for segment in reversed(track.segments):
             for point in reversed(segment.points):
                 return (point.longitude, point.latitude)
+    return None
+
+
+def fetch_location_name(lat: float, lon: float) -> str | None:
+    """Ottiene il nome della località partendo da coordinate lat/lon tramite Nominatim."""
+    url = f"https://nominatim.openstreetmap.org/reverse?format=json&lat={lat}&lon={lon}&zoom=10"
+    headers = {"User-Agent": "WhereIsMarcoTracker/1.0"}
+    try:
+        req = urllib.request.Request(url, headers=headers)
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            data = json.loads(resp.read().decode())
+            address = data.get("address", {})
+            # Cerca il nome della città, paese, comune o regione
+            loc = (
+                address.get("town")
+                or address.get("city")
+                or address.get("village")
+                or address.get("municipality")
+                or address.get("county")
+            )
+            return loc
+    except Exception as e:
+        print(f"  Località non disponibile: {e}", flush=True)
     return None
 
 
@@ -136,12 +160,26 @@ def summarize_gpx(path: Path) -> dict:
         except Exception:
             date = ""
 
-    label = gpx.name or path.stem
+    # Ricerca automatica della label / località tramite coordinate finali del GPX
+    label = gpx.name
+    coord = get_last_coord(gpx)
+
+    if not label or label == path.stem:
+        if coord:
+            lon, lat = coord
+            print(f"  Cerco località per {date} @ {lat:.4f},{lon:.4f}", flush=True)
+            loc_name = fetch_location_name(lat, lon)
+            if loc_name:
+                label = loc_name
+                print(f"    Trovato: {loc_name}", flush=True)
+            time.sleep(GEOCODE_SLEEP_S)
+
+    if not label:
+        label = path.stem
 
     # Meteo (solo se abbiamo data valida e coordinate)
     weather = None
     if not SKIP_WEATHER_FETCH and date and date != "1970-01-01":
-        coord = get_last_coord(gpx)
         if coord:
             lon, lat = coord
             print(f"  Meteo per {date} @ {lat:.4f},{lon:.4f}", flush=True)

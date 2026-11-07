@@ -70,30 +70,80 @@ async function fetchPositions() {
 }
 
 /* ============================================================
- *  METEO: mapping codice WMO -> emoji + formattazione
+ *  METEO & TERMOMETRO INTEGRATO (Icone SVG + Barra Termometro)
  *  ============================================================ */
 
-function weatherIcon(code) {
-  if (code === 0) return "☀️";
-  if (code === 1 || code === 2) return "⛅";
-  if (code === 3) return "☁️";
-  if (code === 45 || code === 48) return "🌫️";
-  if (code >= 51 && code <= 55) return "🌦️";
-  if (code >= 61 && code <= 65) return "🌧️";
-  if (code >= 71 && code <= 75) return "🌨️";
-  if (code >= 80 && code <= 82) return "🌧️";
-  if (code >= 95 && code <= 99) return "⛈️";
-  return "🌡️";
+function weatherIconCustom(code) {
+  if (code === 0) {
+    return `<div class="weather-icon-custom sunny" title="Sereno"><svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg></div>`;
+  }
+  if ((code >= 51 && code <= 65) || (code >= 80 && code <= 82)) {
+    return `<div class="weather-icon-custom rainy" title="Pioggia"><svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><path d="M20 16.2A4.5 4.5 0 0 0 17.5 8h-1.8A7 7 0 1 0 4 14.9"></path><line x1="8" y1="19" x2="8" y2="21"></line><line x1="12" y1="19" x2="12" y2="21"></line><line x1="16" y1="19" x2="16" y2="21"></line></svg></div>`;
+  }
+  return `<div class="weather-icon-custom windy" title="Variabile"><svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path></svg></div>`;
 }
 
 function formatWeather(w) {
   if (!w) return "";
-  const icon = weatherIcon(w.code);
+  const iconHtml = weatherIconCustom(w.code);
   const tmax = typeof w.tmax === "number" ? Math.round(w.tmax) : "—";
   const tmin = typeof w.tmin === "number" ? Math.round(w.tmin) : "—";
-  const tmean = typeof w.tmean === "number" ? Math.round(w.tmean) : null;
-  const meanStr = tmean !== null ? ` · media ${tmean}°` : "";
-  return `<span class="wm-weather" title="min ${tmin}° / max ${tmax}°${meanStr}">${icon} ${tmin}°/${tmax}°</span>`;
+
+  const tempVal = typeof w.tmax === "number" ? w.tmax : (typeof w.tmin === "number" ? w.tmin : 20);
+  const minT = -10;
+  const maxT = 40;
+  const clamped = Math.max(minT, Math.min(maxT, tempVal));
+  const percentage = ((clamped - minT) / (maxT - minT)) * 100;
+
+  return `
+  <div class="wm-weather-badge">
+  ${iconHtml}
+  <div style="display: flex; align-items: center; gap: 4px;">
+  <svg class="thermometer-icon" viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none" style="color: var(--waldo-red);">
+  <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"></path>
+  </svg>
+  <div class="thermometer-bar">
+  <div class="thermometer-fill" style="height: ${percentage}%;"></div>
+  </div>
+  </div>
+  <span style="font-family: var(--wm-mono); font-size: 0.8rem; font-weight: 700;">${tmin}° / ${tmax}°C</span>
+  </div>
+  `;
+}
+
+/* ============================================================
+ *  INTERAZIONE BIDIREZIONALE: Pannello <-> Mappa
+ *  ============================================================ */
+
+function highlightDayInPanel(dateStr) {
+  document.querySelectorAll('.wm-day-row').forEach(row => {
+    row.classList.remove('wm-day-active');
+  });
+
+  const targetRow = document.querySelector(`.wm-day-row[data-date="${dateStr}"]`);
+  if (targetRow) {
+    targetRow.classList.add('wm-day-active');
+    targetRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+}
+
+function zoomToDayOnMap(dateStr) {
+  const source = map.getSource('day-ends');
+  if (!source || !source._data) return;
+
+  const targetFeature = source._data.features.find(f => {
+    const ts = f.properties?.timestamp || "";
+    return ts.slice(0, 10) === dateStr;
+  });
+
+  if (targetFeature) {
+    map.flyTo({
+      center: targetFeature.geometry.coordinates,
+      zoom: 11,
+      duration: 1200
+    });
+    highlightDayInPanel(dateStr);
+  }
 }
 
 map.on("load", () => {
@@ -191,6 +241,13 @@ map.on("load", () => {
     const html = t("day", { n: f.properties?.dayIndex ?? "" });
     map.getCanvas().style.cursor = "pointer";
     dayEndPopup.setLngLat(f.geometry.coordinates).setHTML(html).addTo(map);
+
+    // Evidenzia la tappa nel pannello a destra al click sul marker mappa
+    const ts = f.properties?.timestamp || "";
+    const dateStr = ts.slice(0, 10);
+    if (dateStr) {
+      highlightDayInPanel(dateStr);
+    }
   }
 
   function hideDayEndPopup() {
@@ -308,7 +365,6 @@ map.on("load", () => {
     });
   });
 
-  // Carica summary e poi aggiorna dati
   loadSummary()
   .then(() => {
     console.log("Summary caricato, ora carico i dati...");
@@ -612,18 +668,25 @@ async function loadSummary() {
         const weatherHtml = formatWeather(d.weather);
 
         return `
-        <div class="wm-day-row">
+        <div class="wm-day-row" data-date="${d.date}">
         <div class="wm-day-title">
         <span class="wm-day-date">${fmtDate(d.date)}</span>${
           label ? ` – <span class="wm-day-label">${label}</span>` : ""
         }
         </div>
-        <div class="wm-day-meta">${dist} km, ↑ ${up} m, ${time} h ${
-          weatherHtml ? "· " + weatherHtml : ""
-        }</div>
+        <div class="wm-day-meta">${dist} km, ↑ ${up} m, ${time} h</div>
+        ${weatherHtml}
         </div>`;
       })
       .join("");
+
+      // Click su tappa nel pannello -> zoom sulla mappa
+      document.querySelectorAll('.wm-day-row').forEach(row => {
+        row.addEventListener('click', () => {
+          const dateStr = row.getAttribute('data-date');
+          zoomToDayOnMap(dateStr);
+        });
+      });
 
       console.log(`Summary caricato: ${days.length} giorni`);
   } catch (err) {
