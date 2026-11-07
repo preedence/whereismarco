@@ -1,5 +1,5 @@
 /* ============================================================
- *  STILE "WHERE IS WALDO / FARFLUNG" (Completo con Fix Mobile e Meteo)
+ *  STILE "WHERE IS WALDO / FARFLUNG" (Aggiornato con fix mobile e meteo)
  *  ============================================================ */
 
 :root {
@@ -81,24 +81,12 @@ body {
   gap: 8px;
 }
 
-.wm-marco-img {
-  width: 24px;
-  height: 24px;
-  object-fit: contain;
-  image-rendering: pixelated;
-  image-rendering: crisp-edges;
-}
-
 .wm-logo-title {
   font-family: var(--wm-pixel);
   font-weight: 700;
   font-size: 1rem;
   color: var(--waldo-red);
   text-shadow: 1px 1px 0px var(--ink);
-}
-
-.wm-logo-subtitle:empty {
-  display: none;
 }
 
 .wm-logo-subtitle {
@@ -215,7 +203,7 @@ overflow-y: auto;
 box-sizing: border-box;
 color: var(--text-main);
 border-left: 3px solid var(--ink);
-padding-bottom: env(safe-area-inset-bottom, 40px);
+padding-bottom: env(safe-area-inset-bottom, 40px); /* Fix fine pannello mobile/desktop */
 }
 
 .panel-badge {
@@ -294,8 +282,8 @@ margin-bottom: 12px;
   padding: 8px 10px;
   border: 2px solid var(--ink);
   border-radius: 6px;
+  transition: transform 0.1s ease;
   cursor: pointer;
-  transition: all 0.15s ease;
 }
 
 .wm-day-row:hover {
@@ -303,11 +291,11 @@ margin-bottom: 12px;
   background: #fff3b0;
 }
 
+/* Stato attivo tappa (sincronizzazione mappa <-> pannello) */
 .wm-day-row.wm-day-active {
-  background: var(--sun-yellow) !important;
-  border-color: var(--waldo-red) !important;
-  transform: translateX(-4px);
-  box-shadow: 2px 2px 0 var(--ink);
+  background: rgba(198, 106, 58, 0.15) !important;
+  border-left: 3px solid var(--waldo-red);
+  padding-left: 6px;
 }
 
 .wm-day-title {
@@ -323,7 +311,21 @@ margin-bottom: 12px;
   font-family: var(--wm-mono);
 }
 
-/* Meteo & Termometro Integrato */
+/* ============================================================
+ *  ICONE METEO A TEMA & TERMOMETRO PER TAPPE
+ *  ============================================================ */
+.wm-weather-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--border-soft);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
 .weather-icon-custom {
   display: inline-flex;
   align-items: center;
@@ -334,22 +336,34 @@ margin-bottom: 12px;
 .weather-icon-custom.rainy svg { color: #3b82f6; }
 .weather-icon-custom.windy svg { color: #10b981; }
 
-.wm-weather-badge {
-  display: inline-flex;
+/* Widget Termometro per le Tappe */
+.stage-temperature-widget {
+  display: flex;
   align-items: center;
-  gap: 8px;
-  margin-top: 6px;
+  gap: 10px;
   background: white;
-  padding: 4px 8px;
+  padding: 6px 10px;
   border: 2px solid var(--ink);
   border-radius: 6px;
+  box-shadow: 0 2px 0 var(--ink);
+  margin-top: 6px;
+}
+
+.thermometer-container {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.thermometer-icon {
+  color: var(--waldo-red);
 }
 
 .thermometer-bar {
-  width: 4px;
-  height: 18px;
+  width: 6px;
+  height: 28px;
   background: #e5e7eb;
-  border-radius: 2px;
+  border-radius: 3px;
   position: relative;
   overflow: hidden;
   border: 1px solid var(--ink);
@@ -360,6 +374,58 @@ margin-bottom: 12px;
   bottom: 0;
   width: 100%;
   background: linear-gradient(to top, #3b82f6, #ef4444);
+  border-radius: 2px;
+  transition: height 0.5s ease-in-out;
+}
+
+.temperature-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.temp-value {
+  font-family: var(--wm-mono);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.temp-label {
+  font-size: 0.65rem;
+  color: var(--text-soft);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* ============================================================
+ *  AVATAR LIVE & MARKER FINALE (TENDA / HOTEL / CICLISTA)
+ *  ============================================================ */
+.wm-live-avatar {
+  width: 36px;
+  height: 36px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* 1. In movimento – gif animata */
+.wm-live-avatar--riding {
+  background-image: url("img/avatar-riding.gif");
+}
+
+/* 2. Fermo – immagine statica */
+.wm-live-avatar--stopped {
+  background-image: url("img/avatar-stopped.png");
+}
+
+/* 3. Marker finale: Tenda (campeggio) */
+.wm-hotel-tent {
+  background-image: url("img/avatar-camp.png");
+}
+
+/* 4. Marker finale: Hotel / Ciclista */
+.wm-hotel-cyclist {
+  background-image: url("img/avatar-indoors.png");
 }
 
 /* Pagina Info (about.html) con fix mobile */

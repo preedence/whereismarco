@@ -46,13 +46,16 @@ function updateLiveAvatar(lon, lat, state) {
     "wm-live-avatar--riding",
     "wm-live-avatar--stopped",
     "wm-live-avatar--camp",
-    "wm-live-avatar--indoors"
+    "wm-live-avatar--indoors",
+    "wm-hotel-tent",
+    "wm-hotel-cyclist"
   );
 
+  // Gestione del marker finale sull'ultimo punto (Tenda vs Hotel/Ciclista)
   if (state === "camp") {
-    el.classList.add("wm-live-avatar--camp");
+    el.classList.add("wm-hotel-tent"); // Mostra il marker tenda
   } else if (state === "indoors") {
-    el.classList.add("wm-live-avatar--indoors");
+    el.classList.add("wm-hotel-cyclist"); // Mostra il marker hotel/ciclista
   } else if (state === "stopped") {
     el.classList.add("wm-live-avatar--stopped");
   } else {
