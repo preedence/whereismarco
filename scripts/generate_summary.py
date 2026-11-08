@@ -67,10 +67,10 @@ def get_last_coord(gpx) -> tuple[float, float] | None:
 
 
 def fetch_location_name(lat: float, lon: float) -> str | None:
-    """Tenta zoom=14 (più preciso), poi zoom=10 (fallback)."""
     headers = {"User-Agent": "WhereIsMarcoTracker/1.0"}
 
-    for zoom in (14, 10):
+    # Prova zoom dal più ampio (city) al più stretto (suburb)
+    for zoom in (10, 12, 13, 14, 16):
         url = f"https://nominatim.openstreetmap.org/reverse?format=json&lat={lat}&lon={lon}&zoom={zoom}"
         try:
             req = urllib.request.Request(url, headers=headers)
@@ -82,15 +82,28 @@ def fetch_location_name(lat: float, lon: float) -> str | None:
                     or address.get("town")
                     or address.get("village")
                     or address.get("municipality")
+                    or address.get("hamlet")
+                    or address.get("suburb")
+                    or address.get("neighbourhood")
                     or address.get("county")
                     or address.get("state_district")
                     or address.get("state")
                     or address.get("country")
-                    or address.get("suburb")
-                    or address.get("neighbourhood")
                 )
                 if loc:
                     return loc
+
+                # Ultima spiaggia: usa display_name (es. "Via X, Città, Italia")
+                display = data.get("display_name")
+                if display:
+                    print(f"  Zoom {zoom}: uso display_name → {display}", flush=True)
+                    # prendi il secondo/terzo pezzo, di solito è la città
+                    parts = [p.strip() for p in display.split(",")]
+                    if len(parts) >= 2:
+                        return parts[1]
+                    return parts[0]
+
+                print(f"  Zoom {zoom}: nessun toponimo in {address}", flush=True)
         except Exception as e:
             print(f"  Località non disponibile (zoom={zoom}): {e}", flush=True)
         time.sleep(GEOCODE_SLEEP_S)

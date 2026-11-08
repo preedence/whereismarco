@@ -152,7 +152,7 @@
     },
     {
       "date": "2026-09-06",
-      "label": "Međugorje",
+      "label": "Općina Čitluk",
       "distance_km": 92.3,
       "elevation_up_m": 1220,
       "moving_time_h": 6.1,
@@ -167,7 +167,7 @@
     },
     {
       "date": "2026-09-07",
-      "label": "Vlahinja",
+      "label": "Општина Билећа / Opština Bileća",
       "distance_km": 111.2,
       "elevation_up_m": 1566,
       "moving_time_h": 7.4,
@@ -197,7 +197,7 @@
     },
     {
       "date": "2026-09-09",
-      "label": "Krnja Jela",
+      "label": "Opština Šavnik",
       "distance_km": 65.7,
       "elevation_up_m": 1869,
       "moving_time_h": 6.5,
@@ -287,7 +287,7 @@
     },
     {
       "date": "2026-09-21",
-      "label": "Богослов",
+      "label": "Кюстендил",
       "distance_km": 43.9,
       "elevation_up_m": 1064,
       "moving_time_h": 3.7,
@@ -302,7 +302,7 @@
     },
     {
       "date": "2026-09-23",
-      "label": "21",
+      "label": "София",
       "distance_km": 95.2,
       "elevation_up_m": 1222,
       "moving_time_h": 6.3,
@@ -407,7 +407,7 @@
     },
     {
       "date": "2026-10-03",
-      "label": "Μεγάλη Παναγία",
+      "label": "Δήμος Αριστοτέλη",
       "distance_km": 87.6,
       "elevation_up_m": 1590,
       "moving_time_h": 5.4,
@@ -467,7 +467,7 @@
     },
     {
       "date": "2026-10-08",
-      "label": "Αμισιανά",
+      "label": "Δήμος Παγγαίου",
       "distance_km": 86.3,
       "elevation_up_m": 708,
       "moving_time_h": 5.0,
@@ -482,7 +482,7 @@
     },
     {
       "date": "2026-10-09",
-      "label": "Κρεμαστή",
+      "label": "Δήμος Τοπείρου",
       "distance_km": 63.7,
       "elevation_up_m": 465,
       "moving_time_h": 3.8,
@@ -497,7 +497,7 @@
     },
     {
       "date": "2026-10-10",
-      "label": "Δίκελλα",
+      "label": "Δήμος Αλεξανδρούπολης",
       "distance_km": 113.4,
       "elevation_up_m": 917,
       "moving_time_h": 6.7,
@@ -527,7 +527,7 @@
     },
     {
       "date": "2026-10-12",
-      "label": "Süleymanpaşa",
+      "label": "Tekirdağ",
       "distance_km": 101.9,
       "elevation_up_m": 1302,
       "moving_time_h": 6.3,
