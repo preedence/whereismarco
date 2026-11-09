@@ -7,3 +7,7 @@ __pycache__/
 
 # GPX (vogliamo TRACCIARE i .gpx, quindi non ignorarli)
 # gpx/*.gpx
+
+# Kate swap files
+*.kate-swp
+*.swp

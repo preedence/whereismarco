@@ -32,6 +32,12 @@ body {
   overflow-x: hidden;
 }
 
+/* Home: il body non scrolla, scrolla solo #panel */
+body:has(#map) {
+  height: 100vh;
+  overflow: hidden;
+}
+
 /* Striscia a righe bianche e rosse */
 .waldo-stripe {
   height: 6px;
@@ -517,16 +523,19 @@ margin-bottom: 12px;
 
 /* Scrollbar personalizzata */
 #panel::-webkit-scrollbar,
-.wm-page-wrapper::-webkit-scrollbar {
+.wm-page-wrapper::-webkit-scrollbar,
+.wm-journey-main::-webkit-scrollbar {
   width: 10px;
 }
 #panel::-webkit-scrollbar-track,
-.wm-page-wrapper::-webkit-scrollbar-track {
+.wm-page-wrapper::-webkit-scrollbar-track,
+.wm-journey-main::-webkit-scrollbar-track {
   background: #f1f1f1;
   border-left: 2px solid var(--ink);
 }
 #panel::-webkit-scrollbar-thumb,
-.wm-page-wrapper::-webkit-scrollbar-thumb {
+.wm-page-wrapper::-webkit-scrollbar-thumb,
+.wm-journey-main::-webkit-scrollbar-thumb {
   background: var(--waldo-red);
   border: 2px solid var(--ink);
   border-radius: 4px;

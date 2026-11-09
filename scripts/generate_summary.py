@@ -66,11 +66,12 @@ def get_last_coord(gpx) -> tuple[float, float] | None:
     return None
 
 
-def fetch_location_name(lat: float, lon: float) -> str | None:
+def fetch_location_name(lat: float, lon: float) -> tuple[str | None, str | None]:
+    """Tenta zoom=14 (più preciso), poi zoom=10 (fallback).
+    Restituisce (label, country_code). country_code è ISO2 minuscolo, es. 'it', 'fr'."""
     headers = {"User-Agent": "WhereIsMarcoTracker/1.0"}
 
-    # Prova zoom dal più ampio (city) al più stretto (suburb)
-    for zoom in (10, 12, 13, 14, 16):
+    for zoom in (14, 10):
         url = f"https://nominatim.openstreetmap.org/reverse?format=json&lat={lat}&lon={lon}&zoom={zoom}"
         try:
             req = urllib.request.Request(url, headers=headers)
@@ -82,33 +83,21 @@ def fetch_location_name(lat: float, lon: float) -> str | None:
                     or address.get("town")
                     or address.get("village")
                     or address.get("municipality")
-                    or address.get("hamlet")
-                    or address.get("suburb")
-                    or address.get("neighbourhood")
                     or address.get("county")
                     or address.get("state_district")
                     or address.get("state")
                     or address.get("country")
+                    or address.get("suburb")
+                    or address.get("neighbourhood")
                 )
+                country_code = (address.get("country_code") or "").lower() or None
                 if loc:
-                    return loc
-
-                # Ultima spiaggia: usa display_name (es. "Via X, Città, Italia")
-                display = data.get("display_name")
-                if display:
-                    print(f"  Zoom {zoom}: uso display_name → {display}", flush=True)
-                    # prendi il secondo/terzo pezzo, di solito è la città
-                    parts = [p.strip() for p in display.split(",")]
-                    if len(parts) >= 2:
-                        return parts[1]
-                    return parts[0]
-
-                print(f"  Zoom {zoom}: nessun toponimo in {address}", flush=True)
+                    return loc, country_code
         except Exception as e:
             print(f"  Località non disponibile (zoom={zoom}): {e}", flush=True)
         time.sleep(GEOCODE_SLEEP_S)
 
-    return None
+    return None, None
 
 
 def fetch_weather(lat: float, lon: float, date_str: str) -> dict | None:
@@ -184,16 +173,18 @@ def summarize_gpx(path: Path) -> dict:
 
     # Ricerca automatica della label / località tramite coordinate finali del GPX
     label = gpx.name
+    country_code = None
     coord = get_last_coord(gpx)
 
     if not label or label == path.stem:
         if coord:
             lon, lat = coord
             print(f"  Cerco località per {date} @ {lat:.4f},{lon:.4f}", flush=True)
-            loc_name = fetch_location_name(lat, lon)
+            loc_name, cc = fetch_location_name(lat, lon)
             if loc_name:
                 label = loc_name
-                print(f"    Trovato: {loc_name}", flush=True)
+                print(f"    Trovato: {loc_name} ({cc})", flush=True)
+            country_code = cc
             time.sleep(GEOCODE_SLEEP_S)
 
     if not label:
@@ -211,6 +202,7 @@ def summarize_gpx(path: Path) -> dict:
     return {
         "date": date,
         "label": label,
+        "country_code": country_code,
         "distance_km": round(distance_m / 1000.0, 1),
         "elevation_up_m": int(round(elevation_up_m)),
         "moving_time_h": round(moving_time_s / 3600.0, 1),
@@ -221,6 +213,21 @@ def summarize_gpx(path: Path) -> dict:
 
 def main():
     DATA_DIR.mkdir(exist_ok=True)
+
+    # ── Cache incrementale: riusa i dati delle tappe già elaborate ──
+    cache = {}
+    if SUMMARY_PATH.exists():
+        try:
+            with SUMMARY_PATH.open("r", encoding="utf-8") as f:
+                old = json.load(f)
+            for day in old.get("days", []):
+                key = day.get("gpx_file")
+                if key:
+                    cache[key] = day
+            print(f"Cache: {len(cache)} tappe già elaborate", flush=True)
+        except Exception as e:
+            print(f"⚠️  Impossibile leggere cache: {e}", flush=True)
+
     days = []
 
     if not GPX_DIR.exists():
@@ -233,8 +240,13 @@ def main():
         print("Ordinamento completato", flush=True)
 
         for path in gpx_files_sorted:
-            print(f"Elaboro {path.name}", flush=True)
-            days.append(summarize_gpx(path))
+            cached = cache.get(path.name)
+            if cached:
+                print(f"  ↺ {path.name} (cache)", flush=True)
+                days.append(cached)
+            else:
+                print(f"  + {path.name} (nuovo)", flush=True)
+                days.append(summarize_gpx(path))
 
     summary = {"days": days}
 

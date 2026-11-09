@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <title>Georgia – Il viaggio – Dov'è Marco?</title>
+  <link rel="icon" href="../images/favicon.ico" type="image/x-icon" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+
+  <link href="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../src/style.css" />
+  <link rel="stylesheet" href="../src/countries.css" />
+</head>
+<body>
+  <div class="waldo-stripe"></div>
+
+  <header class="wm-topbar">
+    <div class="wm-topbar-inner">
+      <a href="../index.html" class="wm-logo">
+        <div class="wm-logo-title-wrap">
+          <span class="wm-logo-title">🔍 Dov'è Marco?</span>
+        </div>
+        <span class="wm-logo-subtitle">Dove mi porta la bici</span>
+      </a>
+
+      <button type="button" class="wm-mobile-toggle" id="menu-toggle" aria-label="Toggle Menu">
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </button>
+
+      <nav class="wm-nav" id="wm-nav-menu">
+        <a href="../about.html">Info</a>
+        <a href="../journey.html">Il viaggio</a>
+        <div class="wm-lang" role="group" aria-label="Language">
+          <button type="button" data-lang="it" aria-pressed="true">IT</button>
+          <button type="button" data-lang="en" aria-pressed="false">EN</button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wm-journey-main">
+    <div class="wm-journey-wrap">
+
+      <a href="../journey.html" class="wm-back-link">← Torna a tutte le nazioni</a>
+
+      <article class="wm-page wm-country-article">
+
+        <header class="wm-country-header">
+          <div class="wm-country-flag">🇬🇪</div>
+          <div>
+            <h1 class="wm-country-title">Georgia</h1>
+            <p class="wm-country-sub">
+              1 tappe · 129,7 km · ↑ 481 m
+              · dal 2 nov 2026 al 2 nov 2026
+            </p>
+          </div>
+        </header>
+
+        <div id="country-map" class="wm-country-map"></div>
+
+        
+
+        <section class="wm-country-stages">
+          <h2>Le tappe</h2>
+          <div class="wm-country-stages-list">
+            
+      <a href="../stages/giorno-55.html" class="wm-country-stage-row">
+        <div class="wm-csr-cover">
+          <span class="wm-csr-icon">☁️</span>
+          <span class="wm-csr-temps">13° / 21°</span>
+        </div>
+        <div class="wm-csr-body">
+          <div class="wm-csr-head">
+            <span class="wm-csr-day">GIORNO 55</span>
+            <span class="wm-csr-date">📅 2 nov 2026</span>
+          </div>
+          <h3 class="wm-csr-title">ბათუმი</h3>
+          <div class="wm-csr-stats">
+            <span>📏 129,7 km</span>
+            <span>⛰️ ↑ 481 m</span>
+            <span>⏱️ 7,0 h</span>
+          </div>
+        </div>
+      </a>
+    
+          </div>
+        </section>
+
+        <nav class="wm-country-nav">
+          <a href="turchia.html" class="wm-nav-prev">← 🇹🇷 Turchia</a>
+          
+        </nav>
+
+      </article>
+    </div>
+  </main>
+
+  <script src="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.js"></script>
+  <script>
+    const GEOJSON = {"type": "FeatureCollection", "features": [{"type": "Feature", "properties": {"day_index": 55, "date": "2026-11-02", "label": "ბათუმი"}, "geometry": {"type": "LineString", "coordinates": [[40.541198, 41.026051], [40.546089, 41.027736], [40.550013, 41.029168], [40.55421, 41.031148], [40.559793, 41.034403], [40.565272, 41.037634], [40.570871, 41.039973], [40.576964, 41.041869], [40.582662, 41.04384], [40.589182, 41.04451], [40.596278, 41.045433], [40.602559, 41.046028], [40.609228, 41.048546], [40.615734, 41.053102], [40.621503, 41.056505], [40.629656, 41.059124], [40.63583, 41.061655], [40.643404, 41.066075], [40.65135, 41.067585], [40.659575, 41.070243], [40.667479, 41.072331], [40.674608, 41.075338], [40.68119, 41.076503], [40.690957, 41.0764], [40.69963, 41.079705], [40.708167, 41.082609], [40.715908, 41.085475], [40.723412, 41.089079], [40.729214, 41.094153], [40.734776, 41.098994], [40.739445, 41.102402], [40.744294, 41.107786], [40.74773, 41.112655], [40.752226, 41.118163], [40.756574, 41.123531], [40.75918, 41.126497], [40.763907, 41.131506], [40.768967, 41.136457], [40.775883, 41.141378], [40.78065, 41.146642], [40.788121, 41.151013], [40.79518, 41.15558], [40.801081, 41.159972], [40.808736, 41.161844], [40.817088, 41.162762], [40.822067, 41.165516], [40.829106, 41.167652], [40.833436, 41.16878], [40.842099, 41.171586], [40.848473, 41.1732], [40.854556, 41.175548], [40.861473, 41.176716], [40.869377, 41.178469], [40.874429, 41.181335], [40.882777, 41.180189], [40.886398, 41.180487], [40.892457, 41.181846], [40.898725, 41.183432], [40.903591, 41.182091], [40.909222, 41.178812], [40.914852, 41.176518], [40.922572, 41.175656], [40.929674, 41.175079], [40.935374, 41.177388], [40.942481, 41.180655], [40.94958, 41.183903], [40.957009, 41.186804], [40.964416, 41.189423], [40.969208, 41.190678], [40.977157, 41.193234], [40.985174, 41.193862], [40.992128, 41.19292], [40.998321, 41.194888], [41.00369, 41.196988], [41.010467, 41.199239], [41.017507, 41.202127], [41.024082, 41.205285], [41.031419, 41.208273], [41.039141, 41.209705], [41.046842, 41.211148], [41.054157, 41.213623], [41.060678, 41.216658], [41.068604, 41.220198], [41.074497, 41.224658], [41.080371, 41.229774], [41.086424, 41.234141], [41.093136, 41.237717], [41.098979, 41.242698], [41.105708, 41.246924], [41.113282, 41.250076], [41.121179, 41.254548], [41.128618, 41.259176], [41.13356, 41.26436], [41.138368, 41.269542], [41.143556, 41.274371], [41.149371, 41.279208], [41.156384, 41.283271], [41.16504, 41.284511], [41.173434, 41.28599], [41.18165, 41.288231], [41.189115, 41.291435], [41.197196, 41.294732], [41.205448, 41.297907], [41.211851, 41.302753], [41.219786, 41.305216], [41.225699, 41.309824], [41.233514, 41.313085], [41.239974, 41.317485], [41.245404, 41.321743], [41.248941, 41.325442], [41.253472, 41.329925], [41.256806, 41.333674], [41.261121, 41.33882], [41.271395, 41.343939], [41.280467, 41.34742], [41.289692, 41.349244], [41.298276, 41.351543], [41.306541, 41.353706], [41.313448, 41.357159], [41.318642, 41.359764], [41.326372, 41.362617], [41.332199, 41.365056], [41.3382, 41.369684], [41.345618, 41.372827], [41.353389, 41.374742], [41.361613, 41.377173], [41.369743, 41.377507], [41.377444, 41.376636], [41.385526, 41.37819], [41.394771, 41.379511], [41.403095, 41.381897], [41.409814, 41.386131], [41.415743, 41.39079], [41.421444, 41.39106], [41.422792, 41.388809], [41.418573, 41.388832], [41.415433, 41.390194], [41.419465, 41.394226], [41.424459, 41.399478], [41.428712, 41.404511], [41.432124, 41.408886], [41.435963, 41.414519], [41.438432, 41.419947], [41.442821, 41.425281], [41.447999, 41.430544], [41.450066, 41.433485], [41.4555, 41.439989], [41.458786, 41.443903], [41.463764, 41.448439], [41.468229, 41.451616], [41.473159, 41.456537], [41.477537, 41.46126], [41.484698, 41.463974], [41.490853, 41.468077], [41.498845, 41.470651], [41.505898, 41.473987], [41.512877, 41.477664], [41.52131, 41.481574], [41.525697, 41.484581], [41.529842, 41.488966], [41.531579, 41.493712], [41.532625, 41.498515], [41.534297, 41.502705], [41.536403, 41.506487], [41.538503, 41.509068], [41.543805, 41.512245], [41.546569, 41.517261], [41.548063, 41.519346], [41.549078, 41.520683], [41.54889, 41.521481], [41.548976, 41.524882], [41.549193, 41.530818], [41.551113, 41.53562], [41.556135, 41.541472], [41.563983, 41.545499], [41.564414, 41.552453], [41.566437, 41.558364], [41.569272, 41.564713], [41.571802, 41.570312], [41.573622, 41.576658], [41.579297, 41.581548], [41.586304, 41.585184], [41.593653, 41.585452], [41.596383, 41.59001], [41.598126, 41.5961], [41.603786, 41.59922], [41.610968, 41.600069], [41.613593, 41.603704], [41.613801, 41.608831], [41.611755, 41.61476], [41.610445, 41.620331], [41.611145, 41.625371], [41.610962, 41.629773], [41.612439, 41.63283], [41.616585, 41.635713], [41.621567, 41.639141], [41.625129, 41.64132], [41.629034, 41.643173], [41.627976, 41.645701], [41.6342, 41.650845]]}}]};
+    const MAP_STYLE = "../styles/map-style.json";
+
+    if (GEOJSON.features.length > 0) {
+      const map = new maplibregl.Map({
+        container: "country-map",
+        style: MAP_STYLE,
+        center: [10, 45],
+        zoom: 4,
+        attributionControl: false,
+      });
+
+      map.on("load", () => {
+        map.addSource("stages", { type: "geojson", data: GEOJSON });
+
+        map.addLayer({
+          id: "stage-lines",
+          type: "line",
+          source: "stages",
+          paint: {
+            "line-color": "#e63946",
+            "line-width": 3,
+            "line-opacity": 0.85,
+          },
+          layout: { "line-cap": "round", "line-join": "round" },
+        });
+
+        // Fit bounds su tutte le tracce
+        const bounds = new maplibregl.LngLatBounds();
+        GEOJSON.features.forEach(f => {
+          f.geometry.coordinates.forEach(c => bounds.extend(c));
+        });
+        map.fitBounds(bounds, { padding: 40, duration: 0 });
+      });
+    }
+
+    document.getElementById('menu-toggle').addEventListener('click', function() {
+      document.getElementById('wm-nav-menu').classList.toggle('active');
+      this.classList.toggle('open');
+    });
+  </script>
+</body>
+</html>

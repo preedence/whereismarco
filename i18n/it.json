@@ -38,8 +38,8 @@
   "about.p3": "Il codice sorgente di questo progetto è disponibile su GitHub, insieme agli script che preparano i dati e al workflow usato per aggiornare la mappa in automatico.",
 
   "journey.badge": "DIARIO DI VIAGGIO",
-  "journey.title": "Il viaggio, tappa per tappa",
-  "journey.subtitle": "Ogni giorno è una tappa: chilometri, dislivello e meteo reale.",
+  "journey.title": "Il viaggio, nazione per nazione",
+  "journey.subtitle": "Ogni paese è un capitolo: chilometri, dislivello e storie.",
   "journey.subtitleRange": "{n} tappe · dal {from} al {to}",
   "journey.day": "GIORNO",
   "journey.km": "km",

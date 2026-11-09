@@ -206,32 +206,14 @@ map.on("load", () => {
     type: "circle",
     source: "day-ends",
     paint: {
-      "circle-radius": 10,
+      "circle-radius": 8,
       "circle-color": "#38536b",
       "circle-stroke-color": "#ffffff",
       "circle-stroke-width": 2,
     },
   });
 
-  map.addLayer(
-    {
-      id: "day-end-labels",
-      type: "symbol",
-      source: "day-ends",
-      layout: {
-        "text-field": ["to-string", ["get", "dayIndex"]],
-        "text-size": 14,
-        "text-font": ["Open Sans Regular", "Arial Unicode MS Regular"],
-        "text-anchor": "center",
-      },
-      paint: {
-        "text-color": "#ffffff",
-        "text-halo-color": "#000000",
-        "text-halo-width": 2,
-      },
-    },
-    "live-point"
-  );
+
 
   const dayEndPopup = new maplibregl.Popup({
     closeButton: false,

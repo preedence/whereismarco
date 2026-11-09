@@ -38,8 +38,8 @@
   "about.p3": "The source code of this project is available on GitHub, together with the scripts that prepare the data and the workflow used to update the map automatically.",
 
   "journey.badge": "JOURNEY DIARY",
-  "journey.title": "The journey, stage by stage",
-  "journey.subtitle": "Every day is a stage: distance, elevation and real weather.",
+  "journey.title": "The journey, country by country",
+  "journey.subtitle": "Every country is a chapter: distance, elevation and stories.",
   "journey.subtitleRange": "{n} stages · from {from} to {to}",
   "journey.day": "DAY",
   "journey.km": "km",

@@ -1,0 +1,208 @@
+/* ============================================================
+ *  PAGINA NAZIONE (countries/<slug>.html)
+ * ============================================================ */
+
+.wm-country-article { padding: 20px 24px; }
+
+.wm-country-header {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 20px;
+}
+
+.wm-country-flag {
+  font-size: 3.5rem;
+  line-height: 1;
+  filter: drop-shadow(3px 3px 0 rgba(29, 53, 87, 0.15));
+}
+
+.wm-country-title {
+  font-family: var(--wm-pixel);
+  font-size: 1.4rem;
+  color: var(--waldo-red);
+  margin: 0 0 4px;
+  line-height: 1.15;
+}
+
+.wm-country-sub {
+  font-family: var(--wm-mono);
+  font-size: 0.8rem;
+  color: var(--text-soft);
+  font-weight: 700;
+  margin: 0;
+}
+
+.wm-country-map {
+  width: 100%;
+  height: 360px;
+  border: 3px solid var(--ink);
+  border-radius: 10px;
+  box-shadow: 4px 4px 0 var(--ink);
+  margin-bottom: 22px;
+  overflow: hidden;
+}
+
+.wm-country-description {
+  margin-bottom: 22px;
+  padding-bottom: 18px;
+  border-bottom: 2px dashed var(--border-soft);
+}
+.wm-country-description p {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--text-main);
+  margin: 0 0 12px;
+}
+.wm-country-description blockquote {
+  border-left: 4px solid var(--waldo-red);
+  background: rgba(255,255,255,0.5);
+  margin: 12px 0;
+  padding: 8px 14px;
+  font-style: italic;
+  color: var(--text-soft);
+}
+.wm-country-description img {
+  max-width: 100%;
+  height: auto;
+  border: 2px solid var(--ink);
+  border-radius: 8px;
+  margin: 8px 0;
+  box-shadow: 3px 3px 0 var(--ink);
+}
+.wm-country-description h1,
+.wm-country-description h2,
+.wm-country-description h3 {
+  font-family: var(--wm-pixel);
+  color: var(--waldo-red);
+  margin: 16px 0 8px;
+  line-height: 1.2;
+}
+.wm-country-description ul,
+.wm-country-description ol {
+  padding-left: 22px;
+  margin: 8px 0;
+}
+
+.wm-country-stages h2 {
+  font-family: var(--wm-pixel);
+  font-size: 1rem;
+  color: var(--waldo-red);
+  margin: 0 0 12px;
+  border-bottom: 2px solid var(--ink);
+  padding-bottom: 6px;
+}
+
+.wm-country-stages-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.wm-country-stage-row {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 0;
+  background: white;
+  border: 2px solid var(--ink);
+  border-radius: 8px;
+  box-shadow: 0 3px 0 var(--ink);
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.1s ease, background 0.1s ease;
+}
+.wm-country-stage-row:hover {
+  transform: translate(-2px, -2px);
+  background: #fff3b0;
+}
+
+.wm-csr-cover {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--sand);
+  border-right: 2px solid var(--ink);
+  padding: 10px 6px;
+  gap: 2px;
+}
+.wm-csr-icon { font-size: 1.6rem; line-height: 1; }
+.wm-csr-temps {
+  font-family: var(--wm-mono);
+  font-size: 0.7rem;
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.wm-csr-body { padding: 10px 14px; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+
+.wm-csr-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.wm-csr-day {
+  font-family: var(--wm-pixel);
+  font-size: 0.6rem;
+  background: var(--waldo-red);
+  color: #fff;
+  padding: 3px 7px;
+  border: 2px solid var(--ink);
+  border-radius: 4px;
+}
+.wm-csr-date {
+  font-family: var(--wm-mono);
+  font-size: 0.72rem;
+  color: var(--text-soft);
+  font-weight: 700;
+}
+
+.wm-csr-title {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--ink);
+  margin: 0;
+  overflow-wrap: anywhere;
+  line-height: 1.2;
+}
+
+.wm-csr-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-family: var(--wm-mono);
+  font-size: 0.75rem;
+  color: var(--text-soft);
+  font-weight: 700;
+  border-top: 2px dashed var(--border-soft);
+  padding-top: 6px;
+  margin-top: 2px;
+}
+
+.wm-country-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  border-top: 2px dashed var(--border-soft);
+  padding-top: 16px;
+  margin-top: 22px;
+  flex-wrap: wrap;
+}
+
+@media screen and (max-width: 768px) {
+  .wm-country-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .wm-country-flag { font-size: 2.6rem; }
+  .wm-country-title { font-size: 1.15rem; }
+  .wm-country-map { height: 260px; }
+  .wm-country-stage-row { grid-template-columns: 78px 1fr; }
+  .wm-csr-icon { font-size: 1.3rem; }
+  .wm-csr-temps { font-size: 0.62rem; }
+  .wm-csr-title { font-size: 0.92rem; }
+  .wm-csr-stats { font-size: 0.7rem; gap: 8px; }
+}

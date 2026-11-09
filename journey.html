@@ -20,15 +20,13 @@
       <div class="wm-topbar-inner">
         <a href="index.html" class="wm-logo">
           <div class="wm-logo-title-wrap">
-            <span class="wm-logo-title" data-i18n="logo.title">Dov'è Marco?</span>
+            <span class="wm-logo-title" data-i18n="logo.title">🔍 Dov'è Marco?</span>
           </div>
           <span class="wm-logo-subtitle" data-i18n="tagline">Dove mi porta la bici</span>
         </a>
 
         <button type="button" class="wm-mobile-toggle" id="menu-toggle" aria-label="Toggle Menu">
-          <span class="bar"></span>
-          <span class="bar"></span>
-          <span class="bar"></span>
+          <span class="bar"></span><span class="bar"></span><span class="bar"></span>
         </button>
 
         <nav class="wm-nav" id="wm-nav-menu">
@@ -47,13 +45,13 @@
 
         <div class="wm-page wm-journey-header">
           <div class="panel-badge" data-i18n="journey.badge">DIARIO DI VIAGGIO</div>
-          <h1 data-i18n="journey.title">Il viaggio, tappa per tappa</h1>
+          <h1 data-i18n="journey.title">Il viaggio, nazione per nazione</h1>
           <p class="wm-panel-sub" id="journey-subtitle" data-i18n="journey.subtitle">
-            Ogni giorno è una tappa: chilometri, dislivello e meteo reale.
+            Ogni paese è un capitolo: chilometri, dislivello e storie.
           </p>
         </div>
 
-        <div id="journey-list" class="wm-journey-list">
+        <div id="countries-list" class="wm-countries-list">
           <p class="wm-loading" data-i18n="summary.loading">Caricamento…</p>
         </div>
 
@@ -61,12 +59,68 @@
     </main>
 
     <script src="src/i18n.js"></script>
-    <script src="src/journey.js"></script>
     <script>
       document.getElementById('menu-toggle').addEventListener('click', function () {
         document.getElementById('wm-nav-menu').classList.toggle('active');
         this.classList.toggle('open');
       });
+
+      (async function () {
+        if (window.I18N && window.I18N.ready) {
+          try { await window.I18N.ready; } catch (e) {}
+        }
+
+        const list = document.getElementById('countries-list');
+        const subtitle = document.getElementById('journey-subtitle');
+
+        try {
+          const res = await fetch('data/countries.json', { cache: 'no-store' });
+          if (!res.ok) throw new Error('HTTP ' + res.status);
+          const data = await res.json();
+          const countries = data.countries || [];
+
+          list.innerHTML = '';
+
+          if (countries.length === 0) {
+            list.innerHTML = '<div class="wm-journey-empty">Nessuna nazione ancora.</div>';
+            return;
+          }
+
+          if (subtitle) {
+            const totalDays = countries.reduce((s, c) => s + c.days_count, 0);
+            const totalKm = countries.reduce((s, c) => s + c.total_km, 0);
+            subtitle.textContent = `${countries.length} paesi · ${totalDays} tappe · ${totalKm.toFixed(1)} km`;
+          }
+
+          countries.forEach((c, idx) => {
+            const a = document.createElement('a');
+            a.className = 'wm-country-card';
+            a.href = `countries/${c.slug}.html`;
+
+            const shortDesc = c.description_html
+              ? c.description_html.replace(/<[^>]+>/g, '').slice(0, 120).trim() + '…'
+              : '';
+
+            a.innerHTML = `
+              <div class="wm-country-card-flag">${c.flag}</div>
+              <div class="wm-country-card-body">
+                <h2 class="wm-country-card-title">${c.name_it}</h2>
+                <div class="wm-country-card-meta">
+                  <span>${c.days_count} tappe</span>
+                  <span>${c.total_km.toFixed(1)} km</span>
+                  <span>↑ ${c.total_elevation_m} m</span>
+                </div>
+                <div class="wm-country-card-dates">${c.first_date} → ${c.last_date}</div>
+                ${shortDesc ? `<p class="wm-country-card-desc">${shortDesc}</p>` : ''}
+              </div>
+            `;
+            list.appendChild(a);
+          });
+        } catch (err) {
+          list.innerHTML = '<div class="wm-journey-empty">⚠️ Impossibile caricare data/countries.json</div>';
+          console.error(err);
+        }
+      })();
     </script>
   </body>
 </html>

@@ -3,9 +3,15 @@
  *  Riusa variabili e pattern da src/style.css
  * ============================================================ */
 
+/* Pagina journey: il body non scrolla, scrolla solo <main class="wm-journey-main"> */
+body:has(.wm-journey-main) {
+  height: 100vh;
+  overflow: hidden;
+}
+
 .wm-journey-main {
-  height: auto;
-  min-height: calc(100dvh - 62px);
+  height: calc(100vh - 62px);       /* 62px = altezza header, come in style.css */
+  min-height: 0;
   overflow-y: auto;
   background: var(--sky-blue);
   padding: 20px 14px;
@@ -178,4 +184,89 @@
     font-size: 0.72rem;
     gap: 8px;
   }
+}
+
+/* ============================================================
+ *  COUNTRY CARDS (journey.html — indice nazioni)
+ * ============================================================ */
+
+.wm-countries-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.wm-country-card {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  background: white;
+  border: 3px solid var(--ink);
+  border-radius: 12px;
+  box-shadow: 5px 5px 0 var(--ink);
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.wm-country-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 7px 7px 0 var(--ink);
+}
+
+.wm-country-card-flag {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--sand);
+  border-right: 3px solid var(--ink);
+  font-size: 3rem;
+  padding: 16px 8px;
+}
+
+.wm-country-card-body {
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.wm-country-card-title {
+  font-family: var(--wm-pixel);
+  font-size: 1.1rem;
+  color: var(--waldo-red);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.wm-country-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-family: var(--wm-mono);
+  font-size: 0.78rem;
+  color: var(--text-soft);
+  font-weight: 700;
+}
+
+.wm-country-card-dates {
+  font-family: var(--wm-mono);
+  font-size: 0.72rem;
+  color: var(--text-soft);
+  font-weight: 600;
+}
+
+.wm-country-card-desc {
+  font-size: 0.85rem;
+  color: var(--text-main);
+  line-height: 1.45;
+  margin: 4px 0 0;
+  overflow-wrap: anywhere;
+}
+
+@media screen and (max-width: 768px) {
+  .wm-country-card { grid-template-columns: 76px 1fr; }
+  .wm-country-card-flag { font-size: 2.2rem; padding: 12px 6px; }
+  .wm-country-card-title { font-size: 0.98rem; }
+  .wm-country-card-body { padding: 12px 14px; }
 }
