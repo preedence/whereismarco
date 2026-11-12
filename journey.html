@@ -73,6 +73,12 @@
         const list = document.getElementById('countries-list');
         const subtitle = document.getElementById('journey-subtitle');
 
+        // helper locali con fallback se i18n non è pronto
+        const t = (k, vars) => (window.t ? window.t(k, vars) : k);
+        const num = (n, d) => (window.fmtNum ? window.fmtNum(Number(n), d ?? 0) : String(n));
+        const date = (iso) => (window.fmtDate ? window.fmtDate(iso) : iso);
+        const cname = (c) => (window.countryName ? window.countryName(c) : c.name_it);
+
         try {
           const res = await fetch('data/countries.json', { cache: 'no-store' });
           if (!res.ok) throw new Error('HTTP ' + res.status);
@@ -82,17 +88,21 @@
           list.innerHTML = '';
 
           if (countries.length === 0) {
-            list.innerHTML = '<div class="wm-journey-empty">Nessuna nazione ancora.</div>';
+            list.innerHTML = `<div class="wm-journey-empty">${t('journey.empty')}</div>`;
             return;
           }
 
           if (subtitle) {
-            const totalDays = countries.reduce((s, c) => s + c.days_count, 0);
-            const totalKm = countries.reduce((s, c) => s + c.total_km, 0);
-            subtitle.textContent = `${countries.length} paesi · ${totalDays} tappe · ${totalKm.toFixed(1)} km`;
+            const totalDays = countries.reduce((s, c) => s + (c.days_count || 0), 0);
+            const totalKm = countries.reduce((s, c) => s + (c.total_km || 0), 0);
+            subtitle.textContent = t('journey.summary', {
+              countries: num(countries.length, 0),
+              stages: num(totalDays, 0),
+              km: num(totalKm, 1),
+            });
           }
 
-          countries.forEach((c, idx) => {
+          countries.forEach((c) => {
             const a = document.createElement('a');
             a.className = 'wm-country-card';
             a.href = `countries/${c.slug}.html`;
@@ -104,20 +114,20 @@
             a.innerHTML = `
               <div class="wm-country-card-flag">${c.flag}</div>
               <div class="wm-country-card-body">
-                <h2 class="wm-country-card-title">${c.name_it}</h2>
+                <h2 class="wm-country-card-title">${cname(c)}</h2>
                 <div class="wm-country-card-meta">
-                  <span>${c.days_count} tappe</span>
-                  <span>${c.total_km.toFixed(1)} km</span>
-                  <span>↑ ${c.total_elevation_m} m</span>
+                  <span>${t('journey.stagesCount', { n: num(c.days_count, 0) })}</span>
+                  <span>${num(c.total_km, 1)} ${t('journey.km')}</span>
+                  <span>↑ ${num(c.total_elevation_m, 0)} ${t('journey.m')}</span>
                 </div>
-                <div class="wm-country-card-dates">${c.first_date} → ${c.last_date}</div>
+                <div class="wm-country-card-dates">${date(c.first_date)} → ${date(c.last_date)}</div>
                 ${shortDesc ? `<p class="wm-country-card-desc">${shortDesc}</p>` : ''}
               </div>
             `;
             list.appendChild(a);
           });
         } catch (err) {
-          list.innerHTML = '<div class="wm-journey-empty">⚠️ Impossibile caricare data/countries.json</div>';
+          list.innerHTML = `<div class="wm-journey-empty">⚠️ ${t('journey.loadError')}</div>`;
           console.error(err);
         }
       })();

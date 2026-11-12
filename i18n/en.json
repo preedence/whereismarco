@@ -1,4 +1,14 @@
 {
+
+  "nav.subtitle": "Where the bike takes me",
+  "country.backToAll": "← Back to all countries",
+  "country.stages": "Stages",
+  "country.day": "DAY",
+  "country.h": "h",
+  "country.from": "from",
+  "country.to": "to",
+  "country.stagesCount": "{n} stages",
+
   "title.map": "Where is Marco? – Live map",
   "title.about": "Where is Marco? – About",
   "title.journey": "Where is Marco? – The Journey",
@@ -46,5 +56,12 @@
   "journey.m": "m",
   "journey.h": "h",
   "journey.empty": "No stages published yet.",
-  "journey.error": "Could not load data/summary.json"
+  "journey.error": "Could not load data/summary.json",
+  "journey.summary": "{countries} countries · {stages} stages · {km} km",
+  "journey.stagesCount": "{n} stages",
+  "journey.km": "km",
+  "journey.m": "m",
+  "journey.empty": "No countries yet.",
+  "journey.loadError": "Could not load data/countries.json"
+
 }

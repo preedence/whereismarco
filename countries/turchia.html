@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
   <meta charset="utf-8" />
-  <title>Turchia – Il viaggio – Dov'è Marco?</title>
+  <title data-title-country="Turchia" data-title-country-en="Türkiye">Turchia – Dov'è Marco?</title>
   <link rel="icon" href="../images/favicon.ico" type="image/x-icon" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
 
@@ -23,7 +23,7 @@
         <div class="wm-logo-title-wrap">
           <span class="wm-logo-title">🔍 Dov'è Marco?</span>
         </div>
-        <span class="wm-logo-subtitle">Dove mi porta la bici</span>
+        <span class="wm-logo-subtitle" data-i18n="nav.subtitle">Dove mi porta la bici</span>
       </a>
 
       <button type="button" class="wm-mobile-toggle" id="menu-toggle" aria-label="Toggle Menu">
@@ -31,8 +31,8 @@
       </button>
 
       <nav class="wm-nav" id="wm-nav-menu">
-        <a href="../about.html">Info</a>
-        <a href="../journey.html">Il viaggio</a>
+        <a href="../about.html" data-i18n="nav.about">Info</a>
+        <a href="../journey.html" data-i18n="nav.journey">Il viaggio</a>
         <div class="wm-lang" role="group" aria-label="Language">
           <button type="button" data-lang="it" aria-pressed="true">IT</button>
           <button type="button" data-lang="en" aria-pressed="false">EN</button>
@@ -44,17 +44,27 @@
   <main class="wm-journey-main">
     <div class="wm-journey-wrap">
 
-      <a href="../journey.html" class="wm-back-link">← Torna a tutte le nazioni</a>
+            <article class="wm-page wm-country-article">
 
-      <article class="wm-page wm-country-article">
+        <a href="../journey.html" class="wm-back-link" data-i18n="country.backToAll">← Torna a tutte le nazioni</a>
 
         <header class="wm-country-header">
           <div class="wm-country-flag">🇹🇷</div>
           <div>
-            <h1 class="wm-country-title">Turchia</h1>
-            <p class="wm-country-sub">
-              20 tappe · 1.566,4 km · ↑ 14.879 m
-              · dal 11 ott 2026 al 1 nov 2026
+            <h1 class="wm-country-title" data-name-it="Turchia" data-name-en="Türkiye">Turchia</h1>
+            <p class="wm-country-sub"
+               data-days="20"
+               data-km="1566.4"
+               data-up="14879"
+               data-first="2026-10-11"
+               data-last="2026-11-01">
+              <span data-i18n="country.stagesCount">5 tappe</span> ·
+              <span><span class="wm-sub-km">1566.4</span> km</span> ·
+              <span>↑ <span class="wm-sub-up">14879</span> m</span> ·
+              <span data-i18n="country.from">dal</span>
+              <span class="wm-sub-first">2026-10-11</span>
+              <span data-i18n="country.to">al</span>
+              <span class="wm-sub-last">2026-11-01</span>
             </p>
           </div>
         </header>
@@ -64,395 +74,483 @@
         
 
         <section class="wm-country-stages">
-          <h2>Le tappe</h2>
+          <h2 data-i18n="country.stages">Le tappe</h2>
           <div class="wm-country-stages-list">
             
-      <a href="../stages/giorno-35.html" class="wm-country-stage-row">
+      <div class="wm-country-stage-row"
+           data-date="2026-10-11"
+           data-km="91.3"
+           data-up="685"
+           data-hours="5.9">
         <div class="wm-csr-cover">
           <span class="wm-csr-icon">☁️</span>
-          <span class="wm-csr-temps">13° / 26°</span>
+          <span class="wm-csr-temps" data-tmin="13.3" data-tmax="26.4"></span>
         </div>
         <div class="wm-csr-body">
           <div class="wm-csr-head">
-            <span class="wm-csr-day">GIORNO 35</span>
-            <span class="wm-csr-date">📅 11 ott 2026</span>
+            <span class="wm-csr-day"><span data-i18n="country.day">GIORNO</span> 35</span>
+            <span class="wm-csr-date">📅 <span class="wm-csr-date-text"></span></span>
           </div>
           <h3 class="wm-csr-title">İpsala</h3>
           <div class="wm-csr-stats">
-            <span>📏 91,3 km</span>
-            <span>⛰️ ↑ 685 m</span>
-            <span>⏱️ 5,9 h</span>
+            <span>📏 <span class="wm-csr-km"></span> km</span>
+            <span>⛰️ ↑ <span class="wm-csr-up"></span> m</span>
+            <span>⏱️ <span class="wm-csr-hours"></span> <span data-i18n="country.h">h</span></span>
           </div>
         </div>
-      </a>
+      </div>
     
-      <a href="../stages/giorno-36.html" class="wm-country-stage-row">
+      <div class="wm-country-stage-row"
+           data-date="2026-10-12"
+           data-km="101.9"
+           data-up="1302"
+           data-hours="6.3">
         <div class="wm-csr-cover">
           <span class="wm-csr-icon">🌦️</span>
-          <span class="wm-csr-temps">15° / 23°</span>
+          <span class="wm-csr-temps" data-tmin="14.7" data-tmax="22.9"></span>
         </div>
         <div class="wm-csr-body">
           <div class="wm-csr-head">
-            <span class="wm-csr-day">GIORNO 36</span>
-            <span class="wm-csr-date">📅 12 ott 2026</span>
+            <span class="wm-csr-day"><span data-i18n="country.day">GIORNO</span> 36</span>
+            <span class="wm-csr-date">📅 <span class="wm-csr-date-text"></span></span>
           </div>
           <h3 class="wm-csr-title">Süleymanpaşa</h3>
           <div class="wm-csr-stats">
-            <span>📏 101,9 km</span>
-            <span>⛰️ ↑ 1.302 m</span>
-            <span>⏱️ 6,3 h</span>
+            <span>📏 <span class="wm-csr-km"></span> km</span>
+            <span>⛰️ ↑ <span class="wm-csr-up"></span> m</span>
+            <span>⏱️ <span class="wm-csr-hours"></span> <span data-i18n="country.h">h</span></span>
           </div>
         </div>
-      </a>
+      </div>
     
-      <a href="../stages/giorno-37.html" class="wm-country-stage-row">
+      <div class="wm-country-stage-row"
+           data-date="2026-10-13"
+           data-km="85.7"
+           data-up="1042"
+           data-hours="6.0">
         <div class="wm-csr-cover">
           <span class="wm-csr-icon">🌧️</span>
-          <span class="wm-csr-temps">15° / 18°</span>
+          <span class="wm-csr-temps" data-tmin="14.7" data-tmax="17.8"></span>
         </div>
         <div class="wm-csr-body">
           <div class="wm-csr-head">
-            <span class="wm-csr-day">GIORNO 37</span>
-            <span class="wm-csr-date">📅 13 ott 2026</span>
+            <span class="wm-csr-day"><span data-i18n="country.day">GIORNO</span> 37</span>
+            <span class="wm-csr-date">📅 <span class="wm-csr-date-text"></span></span>
           </div>
           <h3 class="wm-csr-title">Silivri</h3>
           <div class="wm-csr-stats">
-            <span>📏 85,7 km</span>
-            <span>⛰️ ↑ 1.042 m</span>
-            <span>⏱️ 6,0 h</span>
+            <span>📏 <span class="wm-csr-km"></span> km</span>
+            <span>⛰️ ↑ <span class="wm-csr-up"></span> m</span>
+            <span>⏱️ <span class="wm-csr-hours"></span> <span data-i18n="country.h">h</span></span>
           </div>
         </div>
-      </a>
+      </div>
     
-      <a href="../stages/giorno-38.html" class="wm-country-stage-row">
+      <div class="wm-country-stage-row"
+           data-date="2026-10-14"
+           data-km="40.3"
+           data-up="785"
+           data-hours="3.1">
         <div class="wm-csr-cover">
           <span class="wm-csr-icon">🌧️</span>
-          <span class="wm-csr-temps">14° / 16°</span>
+          <span class="wm-csr-temps" data-tmin="13.7" data-tmax="15.5"></span>
         </div>
         <div class="wm-csr-body">
           <div class="wm-csr-head">
-            <span class="wm-csr-day">GIORNO 38</span>
-            <span class="wm-csr-date">📅 14 ott 2026</span>
+            <span class="wm-csr-day"><span data-i18n="country.day">GIORNO</span> 38</span>
+            <span class="wm-csr-date">📅 <span class="wm-csr-date-text"></span></span>
           </div>
           <h3 class="wm-csr-title">Esenyurt</h3>
           <div class="wm-csr-stats">
-            <span>📏 40,3 km</span>
-            <span>⛰️ ↑ 785 m</span>
-            <span>⏱️ 3,1 h</span>
+            <span>📏 <span class="wm-csr-km"></span> km</span>
+            <span>⛰️ ↑ <span class="wm-csr-up"></span> m</span>
+            <span>⏱️ <span class="wm-csr-hours"></span> <span data-i18n="country.h">h</span></span>
           </div>
         </div>
-      </a>
+      </div>
     
-      <a href="../stages/giorno-39.html" class="wm-country-stage-row">
+      <div class="wm-country-stage-row"
+           data-date="2026-10-15"
+           data-km="41.8"
+           data-up="477"
+           data-hours="3.1">
         <div class="wm-csr-cover">
           <span class="wm-csr-icon">🌧️</span>
-          <span class="wm-csr-temps">14° / 16°</span>
+          <span class="wm-csr-temps" data-tmin="13.5" data-tmax="15.6"></span>
         </div>
         <div class="wm-csr-body">
           <div class="wm-csr-head">
-            <span class="wm-csr-day">GIORNO 39</span>
-            <span class="wm-csr-date">📅 15 ott 2026</span>
+            <span class="wm-csr-day"><span data-i18n="country.day">GIORNO</span> 39</span>
+            <span class="wm-csr-date">📅 <span class="wm-csr-date-text"></span></span>
           </div>
           <h3 class="wm-csr-title">İstanbul</h3>
           <div class="wm-csr-stats">
-            <span>📏 41,8 km</span>
-            <span>⛰️ ↑ 477 m</span>
-            <span>⏱️ 3,1 h</span>
+            <span>📏 <span class="wm-csr-km"></span> km</span>
+            <span>⛰️ ↑ <span class="wm-csr-up"></span> m</span>
+            <span>⏱️ <span class="wm-csr-hours"></span> <span data-i18n="country.h">h</span></span>
           </div>
         </div>
-      </a>
+      </div>
     
-      <a href="../stages/giorno-40.html" class="wm-country-stage-row">
+      <div class="wm-country-stage-row"
+           data-date="2026-10-17"
+           data-km="25.4"
+           data-up="353"
+           data-hours="2.2">
         <div class="wm-csr-cover">
           <span class="wm-csr-icon">🌧️</span>
-          <span class="wm-csr-temps">11° / 13°</span>
+          <span class="wm-csr-temps" data-tmin="10.6" data-tmax="13.0"></span>
         </div>
         <div class="wm-csr-body">
           <div class="wm-csr-head">
-            <span class="wm-csr-day">GIORNO 40</span>
-            <span class="wm-csr-date">📅 17 ott 2026</span>
+            <span class="wm-csr-day"><span data-i18n="country.day">GIORNO</span> 40</span>
+            <span class="wm-csr-date">📅 <span class="wm-csr-date-text"></span></span>
           </div>
           <h3 class="wm-csr-title">Ataşehir</h3>
           <div class="wm-csr-stats">
-            <span>📏 25,4 km</span>
-            <span>⛰️ ↑ 353 m</span>
-            <span>⏱️ 2,2 h</span>
+            <span>📏 <span class="wm-csr-km"></span> km</span>
+            <span>⛰️ ↑ <span class="wm-csr-up"></span> m</span>
+            <span>⏱️ <span class="wm-csr-hours"></span> <span data-i18n="country.h">h</span></span>
           </div>
         </div>
-      </a>
+      </div>
     
-      <a href="../stages/giorno-41.html" class="wm-country-stage-row">
+      <div class="wm-country-stage-row"
+           data-date="2026-10-19"
+           data-km="43.1"
+           data-up="443"
+           data-hours="2.8">
         <div class="wm-csr-cover">
           <span class="wm-csr-icon">🌦️</span>
-          <span class="wm-csr-temps">13° / 18°</span>
+          <span class="wm-csr-temps" data-tmin="12.7" data-tmax="17.7"></span>
         </div>
         <div class="wm-csr-body">
           <div class="wm-csr-head">
-            <span class="wm-csr-day">GIORNO 41</span>
-            <span class="wm-csr-date">📅 19 ott 2026</span>
+            <span class="wm-csr-day"><span data-i18n="country.day">GIORNO</span> 41</span>
+            <span class="wm-csr-date">📅 <span class="wm-csr-date-text"></span></span>
           </div>
           <h3 class="wm-csr-title">Darıca</h3>
           <div class="wm-csr-stats">
-            <span>📏 43,1 km</span>
-            <span>⛰️ ↑ 443 m</span>
-            <span>⏱️ 2,8 h</span>
+            <span>📏 <span class="wm-csr-km"></span> km</span>
+            <span>⛰️ ↑ <span class="wm-csr-up"></span> m</span>
+            <span>⏱️ <span class="wm-csr-hours"></span> <span data-i18n="country.h">h</span></span>
           </div>
         </div>
-      </a>
+      </div>
     
-      <a href="../stages/giorno-42.html" class="wm-country-stage-row">
+      <div class="wm-country-stage-row"
+           data-date="2026-10-20"
+           data-km="53.9"
+           data-up="595"
+           data-hours="3.4">
         <div class="wm-csr-cover">
           <span class="wm-csr-icon">☁️</span>
-          <span class="wm-csr-temps">12° / 22°</span>
+          <span class="wm-csr-temps" data-tmin="11.8" data-tmax="21.9"></span>
         </div>
         <div class="wm-csr-body">
           <div class="wm-csr-head">
-            <span class="wm-csr-day">GIORNO 42</span>
-            <span class="wm-csr-date">📅 20 ott 2026</span>
+            <span class="wm-csr-day"><span data-i18n="country.day">GIORNO</span> 42</span>
+            <span class="wm-csr-date">📅 <span class="wm-csr-date-text"></span></span>
           </div>
           <h3 class="wm-csr-title">Kocaeli</h3>
           <div class="wm-csr-stats">
-            <span>📏 53,9 km</span>
-            <span>⛰️ ↑ 595 m</span>
-            <span>⏱️ 3,4 h</span>
+            <span>📏 <span class="wm-csr-km"></span> km</span>
+            <span>⛰️ ↑ <span class="wm-csr-up"></span> m</span>
+            <span>⏱️ <span class="wm-csr-hours"></span> <span data-i18n="country.h">h</span></span>
           </div>
         </div>
-      </a>
+      </div>
     
-      <a href="../stages/giorno-43.html" class="wm-country-stage-row">
+      <div class="wm-country-stage-row"
+           data-date="2026-10-21"
+           data-km="122.2"
+           data-up="909"
+           data-hours="6.7">
         <div class="wm-csr-cover">
           <span class="wm-csr-icon">☁️</span>
-          <span class="wm-csr-temps">9° / 22°</span>
+          <span class="wm-csr-temps" data-tmin="9.0" data-tmax="22.5"></span>
         </div>
         <div class="wm-csr-body">
           <div class="wm-csr-head">
-            <span class="wm-csr-day">GIORNO 43</span>
-            <span class="wm-csr-date">📅 21 ott 2026</span>
+            <span class="wm-csr-day"><span data-i18n="country.day">GIORNO</span> 43</span>
+            <span class="wm-csr-date">📅 <span class="wm-csr-date-text"></span></span>
           </div>
           <h3 class="wm-csr-title">Düzce Merkez</h3>
           <div class="wm-csr-stats">
-            <span>📏 122,2 km</span>
-            <span>⛰️ ↑ 909 m</span>
-            <span>⏱️ 6,7 h</span>
+            <span>📏 <span class="wm-csr-km"></span> km</span>
+            <span>⛰️ ↑ <span class="wm-csr-up"></span> m</span>
+            <span>⏱️ <span class="wm-csr-hours"></span> <span data-i18n="country.h">h</span></span>
           </div>
         </div>
-      </a>
+      </div>
     
-      <a href="../stages/giorno-44.html" class="wm-country-stage-row">
+      <div class="wm-country-stage-row"
+           data-date="2026-10-22"
+           data-km="109.1"
+           data-up="1859"
+           data-hours="7.4">
         <div class="wm-csr-cover">
           <span class="wm-csr-icon">⛅</span>
-          <span class="wm-csr-temps">3° / 18°</span>
+          <span class="wm-csr-temps" data-tmin="3.1" data-tmax="18.5"></span>
         </div>
         <div class="wm-csr-body">
           <div class="wm-csr-head">
-            <span class="wm-csr-day">GIORNO 44</span>
-            <span class="wm-csr-date">📅 22 ott 2026</span>
+            <span class="wm-csr-day"><span data-i18n="country.day">GIORNO</span> 44</span>
+            <span class="wm-csr-date">📅 <span class="wm-csr-date-text"></span></span>
           </div>
           <h3 class="wm-csr-title">Gerede</h3>
           <div class="wm-csr-stats">
-            <span>📏 109,1 km</span>
-            <span>⛰️ ↑ 1.859 m</span>
-            <span>⏱️ 7,4 h</span>
+            <span>📏 <span class="wm-csr-km"></span> km</span>
+            <span>⛰️ ↑ <span class="wm-csr-up"></span> m</span>
+            <span>⏱️ <span class="wm-csr-hours"></span> <span data-i18n="country.h">h</span></span>
           </div>
         </div>
-      </a>
+      </div>
     
-      <a href="../stages/giorno-45.html" class="wm-country-stage-row">
+      <div class="wm-country-stage-row"
+           data-date="2026-10-23"
+           data-km="80.3"
+           data-up="730"
+           data-hours="4.9">
         <div class="wm-csr-cover">
           <span class="wm-csr-icon">🌦️</span>
-          <span class="wm-csr-temps">4° / 19°</span>
+          <span class="wm-csr-temps" data-tmin="3.5" data-tmax="19.3"></span>
         </div>
         <div class="wm-csr-body">
           <div class="wm-csr-head">
-            <span class="wm-csr-day">GIORNO 45</span>
-            <span class="wm-csr-date">📅 23 ott 2026</span>
+            <span class="wm-csr-day"><span data-i18n="country.day">GIORNO</span> 45</span>
+            <span class="wm-csr-date">📅 <span class="wm-csr-date-text"></span></span>
           </div>
           <h3 class="wm-csr-title">Atkaracalar</h3>
           <div class="wm-csr-stats">
-            <span>📏 80,3 km</span>
-            <span>⛰️ ↑ 730 m</span>
-            <span>⏱️ 4,9 h</span>
+            <span>📏 <span class="wm-csr-km"></span> km</span>
+            <span>⛰️ ↑ <span class="wm-csr-up"></span> m</span>
+            <span>⏱️ <span class="wm-csr-hours"></span> <span data-i18n="country.h">h</span></span>
           </div>
         </div>
-      </a>
+      </div>
     
-      <a href="../stages/giorno-46.html" class="wm-country-stage-row">
+      <div class="wm-country-stage-row"
+           data-date="2026-10-24"
+           data-km="87.4"
+           data-up="577"
+           data-hours="4.8">
         <div class="wm-csr-cover">
           <span class="wm-csr-icon">🌧️</span>
-          <span class="wm-csr-temps">10° / 18°</span>
+          <span class="wm-csr-temps" data-tmin="9.6" data-tmax="18.0"></span>
         </div>
         <div class="wm-csr-body">
           <div class="wm-csr-head">
-            <span class="wm-csr-day">GIORNO 46</span>
-            <span class="wm-csr-date">📅 24 ott 2026</span>
+            <span class="wm-csr-day"><span data-i18n="country.day">GIORNO</span> 46</span>
+            <span class="wm-csr-date">📅 <span class="wm-csr-date-text"></span></span>
           </div>
           <h3 class="wm-csr-title">Tosya</h3>
           <div class="wm-csr-stats">
-            <span>📏 87,4 km</span>
-            <span>⛰️ ↑ 577 m</span>
-            <span>⏱️ 4,8 h</span>
+            <span>📏 <span class="wm-csr-km"></span> km</span>
+            <span>⛰️ ↑ <span class="wm-csr-up"></span> m</span>
+            <span>⏱️ <span class="wm-csr-hours"></span> <span data-i18n="country.h">h</span></span>
           </div>
         </div>
-      </a>
+      </div>
     
-      <a href="../stages/giorno-47.html" class="wm-country-stage-row">
+      <div class="wm-country-stage-row"
+           data-date="2026-10-25"
+           data-km="91.4"
+           data-up="735"
+           data-hours="5.3">
         <div class="wm-csr-cover">
           <span class="wm-csr-icon">☁️</span>
-          <span class="wm-csr-temps">9° / 21°</span>
+          <span class="wm-csr-temps" data-tmin="8.9" data-tmax="20.9"></span>
         </div>
         <div class="wm-csr-body">
           <div class="wm-csr-head">
-            <span class="wm-csr-day">GIORNO 47</span>
-            <span class="wm-csr-date">📅 25 ott 2026</span>
+            <span class="wm-csr-day"><span data-i18n="country.day">GIORNO</span> 47</span>
+            <span class="wm-csr-date">📅 <span class="wm-csr-date-text"></span></span>
           </div>
           <h3 class="wm-csr-title">Osmancık</h3>
           <div class="wm-csr-stats">
-            <span>📏 91,4 km</span>
-            <span>⛰️ ↑ 735 m</span>
-            <span>⏱️ 5,3 h</span>
+            <span>📏 <span class="wm-csr-km"></span> km</span>
+            <span>⛰️ ↑ <span class="wm-csr-up"></span> m</span>
+            <span>⏱️ <span class="wm-csr-hours"></span> <span data-i18n="country.h">h</span></span>
           </div>
         </div>
-      </a>
+      </div>
     
-      <a href="../stages/giorno-48.html" class="wm-country-stage-row">
+      <div class="wm-country-stage-row"
+           data-date="2026-10-26"
+           data-km="80.9"
+           data-up="859"
+           data-hours="4.9">
         <div class="wm-csr-cover">
           <span class="wm-csr-icon">☁️</span>
-          <span class="wm-csr-temps">9° / 21°</span>
+          <span class="wm-csr-temps" data-tmin="9.0" data-tmax="21.2"></span>
         </div>
         <div class="wm-csr-body">
           <div class="wm-csr-head">
-            <span class="wm-csr-day">GIORNO 48</span>
-            <span class="wm-csr-date">📅 26 ott 2026</span>
+            <span class="wm-csr-day"><span data-i18n="country.day">GIORNO</span> 48</span>
+            <span class="wm-csr-date">📅 <span class="wm-csr-date-text"></span></span>
           </div>
           <h3 class="wm-csr-title">Havza</h3>
           <div class="wm-csr-stats">
-            <span>📏 80,9 km</span>
-            <span>⛰️ ↑ 859 m</span>
-            <span>⏱️ 4,9 h</span>
+            <span>📏 <span class="wm-csr-km"></span> km</span>
+            <span>⛰️ ↑ <span class="wm-csr-up"></span> m</span>
+            <span>⏱️ <span class="wm-csr-hours"></span> <span data-i18n="country.h">h</span></span>
           </div>
         </div>
-      </a>
+      </div>
     
-      <a href="../stages/giorno-49.html" class="wm-country-stage-row">
+      <div class="wm-country-stage-row"
+           data-date="2026-10-27"
+           data-km="81.5"
+           data-up="1019"
+           data-hours="4.8">
         <div class="wm-csr-cover">
           <span class="wm-csr-icon">🌧️</span>
-          <span class="wm-csr-temps">15° / 24°</span>
+          <span class="wm-csr-temps" data-tmin="15.1" data-tmax="23.7"></span>
         </div>
         <div class="wm-csr-body">
           <div class="wm-csr-head">
-            <span class="wm-csr-day">GIORNO 49</span>
-            <span class="wm-csr-date">📅 27 ott 2026</span>
+            <span class="wm-csr-day"><span data-i18n="country.day">GIORNO</span> 49</span>
+            <span class="wm-csr-date">📅 <span class="wm-csr-date-text"></span></span>
           </div>
           <h3 class="wm-csr-title">Samsun</h3>
           <div class="wm-csr-stats">
-            <span>📏 81,5 km</span>
-            <span>⛰️ ↑ 1.019 m</span>
-            <span>⏱️ 4,8 h</span>
+            <span>📏 <span class="wm-csr-km"></span> km</span>
+            <span>⛰️ ↑ <span class="wm-csr-up"></span> m</span>
+            <span>⏱️ <span class="wm-csr-hours"></span> <span data-i18n="country.h">h</span></span>
           </div>
         </div>
-      </a>
+      </div>
     
-      <a href="../stages/giorno-50.html" class="wm-country-stage-row">
+      <div class="wm-country-stage-row"
+           data-date="2026-10-28"
+           data-km="94.5"
+           data-up="326"
+           data-hours="4.8">
         <div class="wm-csr-cover">
           <span class="wm-csr-icon">🌧️</span>
-          <span class="wm-csr-temps">15° / 22°</span>
+          <span class="wm-csr-temps" data-tmin="15.3" data-tmax="21.7"></span>
         </div>
         <div class="wm-csr-body">
           <div class="wm-csr-head">
-            <span class="wm-csr-day">GIORNO 50</span>
-            <span class="wm-csr-date">📅 28 ott 2026</span>
+            <span class="wm-csr-day"><span data-i18n="country.day">GIORNO</span> 50</span>
+            <span class="wm-csr-date">📅 <span class="wm-csr-date-text"></span></span>
           </div>
           <h3 class="wm-csr-title">Ünye</h3>
           <div class="wm-csr-stats">
-            <span>📏 94,5 km</span>
-            <span>⛰️ ↑ 326 m</span>
-            <span>⏱️ 4,8 h</span>
+            <span>📏 <span class="wm-csr-km"></span> km</span>
+            <span>⛰️ ↑ <span class="wm-csr-up"></span> m</span>
+            <span>⏱️ <span class="wm-csr-hours"></span> <span data-i18n="country.h">h</span></span>
           </div>
         </div>
-      </a>
+      </div>
     
-      <a href="../stages/giorno-51.html" class="wm-country-stage-row">
+      <div class="wm-country-stage-row"
+           data-date="2026-10-29"
+           data-km="86.8"
+           data-up="556"
+           data-hours="4.4">
         <div class="wm-csr-cover">
           <span class="wm-csr-icon">🌧️</span>
-          <span class="wm-csr-temps">17° / 22°</span>
+          <span class="wm-csr-temps" data-tmin="17.4" data-tmax="22.3"></span>
         </div>
         <div class="wm-csr-body">
           <div class="wm-csr-head">
-            <span class="wm-csr-day">GIORNO 51</span>
-            <span class="wm-csr-date">📅 29 ott 2026</span>
+            <span class="wm-csr-day"><span data-i18n="country.day">GIORNO</span> 51</span>
+            <span class="wm-csr-date">📅 <span class="wm-csr-date-text"></span></span>
           </div>
           <h3 class="wm-csr-title">Piraziz</h3>
           <div class="wm-csr-stats">
-            <span>📏 86,8 km</span>
-            <span>⛰️ ↑ 556 m</span>
-            <span>⏱️ 4,4 h</span>
+            <span>📏 <span class="wm-csr-km"></span> km</span>
+            <span>⛰️ ↑ <span class="wm-csr-up"></span> m</span>
+            <span>⏱️ <span class="wm-csr-hours"></span> <span data-i18n="country.h">h</span></span>
           </div>
         </div>
-      </a>
+      </div>
     
-      <a href="../stages/giorno-52.html" class="wm-country-stage-row">
+      <div class="wm-country-stage-row"
+           data-date="2026-10-30"
+           data-km="56.0"
+           data-up="280"
+           data-hours="3.0">
         <div class="wm-csr-cover">
           <span class="wm-csr-icon">🌧️</span>
-          <span class="wm-csr-temps">16° / 20°</span>
+          <span class="wm-csr-temps" data-tmin="15.9" data-tmax="19.8"></span>
         </div>
         <div class="wm-csr-body">
           <div class="wm-csr-head">
-            <span class="wm-csr-day">GIORNO 52</span>
-            <span class="wm-csr-date">📅 30 ott 2026</span>
+            <span class="wm-csr-day"><span data-i18n="country.day">GIORNO</span> 52</span>
+            <span class="wm-csr-date">📅 <span class="wm-csr-date-text"></span></span>
           </div>
           <h3 class="wm-csr-title">Espiye</h3>
           <div class="wm-csr-stats">
-            <span>📏 56,0 km</span>
-            <span>⛰️ ↑ 280 m</span>
-            <span>⏱️ 3,0 h</span>
+            <span>📏 <span class="wm-csr-km"></span> km</span>
+            <span>⛰️ ↑ <span class="wm-csr-up"></span> m</span>
+            <span>⏱️ <span class="wm-csr-hours"></span> <span data-i18n="country.h">h</span></span>
           </div>
         </div>
-      </a>
+      </div>
     
-      <a href="../stages/giorno-53.html" class="wm-country-stage-row">
+      <div class="wm-country-stage-row"
+           data-date="2026-10-31"
+           data-km="106.3"
+           data-up="841"
+           data-hours="5.7">
         <div class="wm-csr-cover">
           <span class="wm-csr-icon">🌦️</span>
-          <span class="wm-csr-temps">14° / 19°</span>
+          <span class="wm-csr-temps" data-tmin="14.3" data-tmax="19.1"></span>
         </div>
         <div class="wm-csr-body">
           <div class="wm-csr-head">
-            <span class="wm-csr-day">GIORNO 53</span>
-            <span class="wm-csr-date">📅 31 ott 2026</span>
+            <span class="wm-csr-day"><span data-i18n="country.day">GIORNO</span> 53</span>
+            <span class="wm-csr-date">📅 <span class="wm-csr-date-text"></span></span>
           </div>
           <h3 class="wm-csr-title">Trabzon</h3>
           <div class="wm-csr-stats">
-            <span>📏 106,3 km</span>
-            <span>⛰️ ↑ 841 m</span>
-            <span>⏱️ 5,7 h</span>
+            <span>📏 <span class="wm-csr-km"></span> km</span>
+            <span>⛰️ ↑ <span class="wm-csr-up"></span> m</span>
+            <span>⏱️ <span class="wm-csr-hours"></span> <span data-i18n="country.h">h</span></span>
           </div>
         </div>
-      </a>
+      </div>
     
-      <a href="../stages/giorno-54.html" class="wm-country-stage-row">
+      <div class="wm-country-stage-row"
+           data-date="2026-11-01"
+           data-km="86.6"
+           data-up="506"
+           data-hours="4.4">
         <div class="wm-csr-cover">
           <span class="wm-csr-icon">☁️</span>
-          <span class="wm-csr-temps">15° / 20°</span>
+          <span class="wm-csr-temps" data-tmin="15.0" data-tmax="19.7"></span>
         </div>
         <div class="wm-csr-body">
           <div class="wm-csr-head">
-            <span class="wm-csr-day">GIORNO 54</span>
-            <span class="wm-csr-date">📅 1 nov 2026</span>
+            <span class="wm-csr-day"><span data-i18n="country.day">GIORNO</span> 54</span>
+            <span class="wm-csr-date">📅 <span class="wm-csr-date-text"></span></span>
           </div>
           <h3 class="wm-csr-title">Rize Merkez</h3>
           <div class="wm-csr-stats">
-            <span>📏 86,6 km</span>
-            <span>⛰️ ↑ 506 m</span>
-            <span>⏱️ 4,4 h</span>
+            <span>📏 <span class="wm-csr-km"></span> km</span>
+            <span>⛰️ ↑ <span class="wm-csr-up"></span> m</span>
+            <span>⏱️ <span class="wm-csr-hours"></span> <span data-i18n="country.h">h</span></span>
           </div>
         </div>
-      </a>
+      </div>
     
           </div>
         </section>
 
-        <nav class="wm-country-nav">
-          <a href="grecia.html" class="wm-nav-prev">← 🇬🇷 Grecia</a>
-          <a href="georgia.html" class="wm-nav-next">🇬🇪 Georgia →</a>
+        <nav class="wm-country-nav"
+             data-prev-slug="grecia"
+             data-prev-it="Grecia"
+             data-prev-en="Greece"
+             data-prev-flag="🇬🇷"
+             data-next-slug="georgia"
+             data-next-it="Georgia"
+             data-next-en="Georgia"
+             data-next-flag="🇬🇪">
+          <a href="grecia.html" class="wm-nav-prev" data-name-it="Grecia" data-name-en="Greece">← 🇬🇷 <span class="wm-nav-name">Grecia</span></a>
+          <a href="georgia.html" class="wm-nav-next" data-name-it="Georgia" data-name-en="Georgia">🇬🇪 <span class="wm-nav-name">Georgia</span> →</a>
         </nav>
 
       </article>
@@ -460,6 +558,8 @@
   </main>
 
   <script src="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.js"></script>
+  <script src="../src/i18n.js"></script>
+  <script src="../src/countries.js"></script>
   <script>
     const GEOJSON = {"type": "FeatureCollection", "features": [{"type": "Feature", "properties": {"day_index": 35, "date": "2026-10-11", "label": "İpsala"}, "geometry": {"type": "LineString", "coordinates": [[25.707165, 40.873951], [25.707855, 40.870176], [25.697988, 40.864916], [25.696248, 40.864943], [25.696248, 40.864943], [25.696248, 40.864943], [25.696256, 40.864903], [25.696596, 40.865049], [25.696596, 40.865049], [25.696596, 40.865049], [25.694075, 40.864189], [25.688933, 40.862881], [25.67947, 40.862511], [25.670432, 40.862268], [25.661283, 40.861565], [25.651781, 40.861524], [25.643476, 40.861805], [25.643476, 40.861805], [25.648416, 40.860968], [25.656229, 40.861826], [25.665651, 40.861804], [25.674433, 40.862589], [25.682336, 40.862195], [25.689695, 40.862974], [25.694659, 40.864148], [25.699476, 40.862014], [25.707579, 40.857386], [25.7153, 40.854003], [25.721015, 40.85053], [25.730128, 40.848415], [25.736777, 40.848888], [25.739447, 40.852034], [25.742133, 40.853846], [25.74501, 40.85366], [25.74707, 40.856346], [25.757721, 40.858254], [25.769245, 40.858122], [25.774012, 40.854736], [25.774116, 40.854741], [25.78138, 40.852026], [25.790551, 40.851774], [25.797981, 40.85258], [25.806238, 40.85393], [25.814891, 40.85354], [25.823621, 40.851943], [25.82981, 40.851767], [25.831399, 40.851359], [25.831399, 40.851359], [25.832056, 40.851043], [25.837665, 40.849972], [25.846575, 40.848605], [25.852317, 40.847754], [25.857684, 40.846654], [25.864559, 40.844997], [25.871972, 40.844159], [25.87449, 40.845734], [25.87449, 40.845734], [25.87449, 40.845734], [25.87449, 40.845734], [25.87449, 40.845734], [25.87449, 40.845734], [25.87449, 40.845734], [25.87449, 40.845734], [25.87449, 40.845734], [25.87449, 40.845734], [25.87449, 40.845734], [25.87449, 40.845734], [25.874486, 40.845755], [25.876834, 40.845992], [25.878207, 40.846455], [25.878607, 40.846577], [25.878607, 40.846577], [25.878609, 40.846558], [25.878629, 40.846605], [25.884783, 40.847708], [25.893842, 40.848852], [25.902582, 40.849893], [25.90826, 40.852294], [25.91651, 40.853979], [25.923068, 40.8545], [25.932931, 40.855777], [25.940078, 40.85669], [25.949607, 40.857895], [25.958249, 40.858902], [25.967192, 40.860217], [25.976118, 40.861824], [25.985511, 40.863143], [25.995216, 40.863772], [26.004549, 40.864187], [26.014767, 40.864618], [26.02464, 40.865029], [26.032005, 40.866236], [26.035307, 40.872756], [26.041606, 40.877819], [26.047566, 40.882701], [26.047967, 40.883342], [26.048444, 40.884126], [26.050814, 40.889661], [26.052792, 40.894999], [26.052291, 40.899113], [26.053484, 40.901413], [26.053484, 40.901413], [26.053484, 40.901413], [26.053503, 40.900081], [26.057625, 40.902709], [26.061052, 40.908307], [26.06348, 40.910031], [26.072629, 40.908915], [26.07984, 40.908611], [26.082008, 40.907333], [26.083867, 40.906738], [26.088653, 40.907366], [26.093757, 40.907246], [26.098718, 40.907709], [26.103821, 40.907339], [26.110941, 40.907974], [26.119176, 40.910762], [26.12414, 40.910655], [26.12414, 40.910655], [26.12414, 40.910655], [26.12414, 40.910655], [26.12414, 40.910655], [26.125671, 40.91112], [26.134331, 40.912448], [26.140139, 40.908484], [26.147864, 40.904063], [26.156798, 40.900852], [26.166513, 40.898422], [26.167196, 40.897963], [26.167196, 40.897963], [26.167196, 40.897963], [26.167597, 40.89688], [26.17235, 40.895837], [26.177039, 40.893988], [26.17816, 40.892159], [26.183854, 40.894537], [26.194406, 40.895739], [26.198866, 40.899258], [26.204906, 40.902474], [26.211515, 40.905628], [26.21772, 40.910234], [26.224299, 40.915214], [26.229199, 40.91906], [26.235116, 40.920661], [26.24093, 40.91762], [26.246484, 40.915044], [26.246602, 40.915047], [26.247574, 40.915953], [26.252304, 40.919953], [26.257698, 40.923749], [26.263509, 40.927785], [26.268795, 40.931518], [26.272858, 40.934354], [26.27804, 40.937977], [26.284321, 40.942381], [26.286533, 40.946342], [26.295061, 40.945981], [26.302476, 40.945746], [26.309443, 40.945302], [26.310549, 40.944984], [26.310699, 40.944976], [26.311293, 40.944923], [26.311591, 40.944873], [26.312016, 40.944878], [26.317576, 40.942719], [26.322965, 40.937763], [26.32811, 40.933713], [26.329219, 40.933047], [26.330126, 40.932366], [26.332099, 40.930997], [26.333553, 40.93018], [26.339245, 40.926817], [26.346779, 40.922443], [26.354377, 40.918036], [26.361911, 40.913646], [26.369284, 40.909366], [26.375096, 40.905901], [26.380655, 40.902231], [26.384191, 40.899814], [26.388034, 40.897173], [26.391437, 40.894686], [26.391437, 40.894686], [26.391437, 40.894686], [26.391437, 40.894686], [26.389494, 40.89055], [26.386221, 40.885482], [26.3833, 40.879809], [26.379136, 40.875602], [26.374249, 40.870717], [26.372878, 40.869693], [26.372878, 40.869693], [26.372878, 40.869693], [26.376118, 40.872567], [26.380735, 40.877188], [26.383816, 40.881617], [26.386302, 40.88556], [26.38909, 40.889156], [26.391455, 40.889069], [26.391453, 40.889131], [26.391453, 40.889131]]}}, {"type": "Feature", "properties": {"day_index": 36, "date": "2026-10-12", "label": "Süleymanpaşa"}, "geometry": {"type": "LineString", "coordinates": [[26.390161, 40.8891], [26.390803, 40.892878], [26.395171, 40.892283], [26.402399, 40.887308], [26.40907, 40.882654], [26.415687, 40.879846], [26.423195, 40.879454], [26.428977, 40.879227], [26.436269, 40.878944], [26.445357, 40.878601], [26.453868, 40.878274], [26.459952, 40.878032], [26.464942, 40.877845], [26.470102, 40.877625], [26.478395, 40.877308], [26.489641, 40.876878], [26.503192, 40.876339], [26.507618, 40.876222], [26.512162, 40.876047], [26.518499, 40.875807], [26.529251, 40.875723], [26.538125, 40.87566], [26.545096, 40.875593], [26.55556, 40.875544], [26.56518, 40.875472], [26.573368, 40.87539], [26.583183, 40.875356], [26.59404, 40.875279], [26.600634, 40.875216], [26.612032, 40.875162], [26.620815, 40.875045], [26.629518, 40.875029], [26.634823, 40.874258], [26.634823, 40.874258], [26.634786, 40.874273], [26.634767, 40.874275], [26.632242, 40.872641], [26.628058, 40.868706], [26.624193, 40.865906], [26.621699, 40.858849], [26.625287, 40.856698], [26.625636, 40.856522], [26.625636, 40.856522], [26.625636, 40.856522], [26.625636, 40.856522], [26.625636, 40.856522], [26.625636, 40.856522], [26.627946, 40.856239], [26.627892, 40.856245], [26.627892, 40.856245], [26.627892, 40.856245], [26.627909, 40.856246], [26.628179, 40.856079], [26.628179, 40.856079], [26.62824, 40.856111], [26.629156, 40.855838], [26.629167, 40.855825], [26.629167, 40.855825], [26.629167, 40.855825], [26.629167, 40.855825], [26.629167, 40.855825], [26.629167, 40.855825], [26.629167, 40.855825], [26.629167, 40.855825], [26.628716, 40.857092], [26.628846, 40.859215], [26.629982, 40.865208], [26.633225, 40.871679], [26.634741, 40.874358], [26.634741, 40.874358], [26.635212, 40.874719], [26.64051, 40.875], [26.646382, 40.874978], [26.653133, 40.874918], [26.660983, 40.874852], [26.669525, 40.874763], [26.677986, 40.874677], [26.686257, 40.874611], [26.693338, 40.873839], [26.699562, 40.872779], [26.705088, 40.871851], [26.709399, 40.871122], [26.714605, 40.870233], [26.719999, 40.869325], [26.725008, 40.868023], [26.732543, 40.864848], [26.738682, 40.862301], [26.743774, 40.861489], [26.748638, 40.862247], [26.752677, 40.863187], [26.760347, 40.865162], [26.7675, 40.866945], [26.781945, 40.868256], [26.795986, 40.8659], [26.808999, 40.863718], [26.820138, 40.861889], [26.833948, 40.863308], [26.847889, 40.868168], [26.854877, 40.870628], [26.860653, 40.872633], [26.865986, 40.874479], [26.871439, 40.876435], [26.87397, 40.877209], [26.878866, 40.879034], [26.88286, 40.880416], [26.889311, 40.882691], [26.894858, 40.884604], [26.902171, 40.886254], [26.918879, 40.884621], [26.924978, 40.883677], [26.931469, 40.882619], [26.948211, 40.879882], [26.952693, 40.879149], [26.961135, 40.8777], [26.967696, 40.876685], [26.974114, 40.875677], [26.981722, 40.874419], [26.992375, 40.87267], [27.000718, 40.871316], [27.007874, 40.870165], [27.014084, 40.869165], [27.019155, 40.868438], [27.024629, 40.86887], [27.024721, 40.868803], [27.023683, 40.86832], [27.023611, 40.868278], [27.023611, 40.868278], [27.023611, 40.868278], [27.024258, 40.868673], [27.024751, 40.868791], [27.024751, 40.868791], [27.024751, 40.868791], [27.033853, 40.871063], [27.045234, 40.8737], [27.049803, 40.874865], [27.053635, 40.875778], [27.060386, 40.877379], [27.072247, 40.880073], [27.081749, 40.882447], [27.087374, 40.883789], [27.0948, 40.886705], [27.103465, 40.89235], [27.113459, 40.898895], [27.127532, 40.908139], [27.138533, 40.91308], [27.143048, 40.913524], [27.147408, 40.913909], [27.15171, 40.914308], [27.157754, 40.914834], [27.173026, 40.921176], [27.182878, 40.927015], [27.195167, 40.932271], [27.204336, 40.932691], [27.213007, 40.932249], [27.22146, 40.931812], [27.229426, 40.931636], [27.235774, 40.931774], [27.241323, 40.931866], [27.247398, 40.932312], [27.25336, 40.933788], [27.2542, 40.933741], [27.254187, 40.9337], [27.254187, 40.9337], [27.254187, 40.9337], [27.254187, 40.9337], [27.254187, 40.9337], [27.254203, 40.933774], [27.260028, 40.935566], [27.267899, 40.937688], [27.285998, 40.935386], [27.295106, 40.934813], [27.303292, 40.938482], [27.31051, 40.942283], [27.317787, 40.946043], [27.319311, 40.946794], [27.323168, 40.948859], [27.328577, 40.950815], [27.332436, 40.952092], [27.336538, 40.953424], [27.340895, 40.954877], [27.34535, 40.956334], [27.349743, 40.957788], [27.353826, 40.959147], [27.358554, 40.960718], [27.367026, 40.963486], [27.377784, 40.966652], [27.38597, 40.958312], [27.387845, 40.950072], [27.390798, 40.945097], [27.390292, 40.938625], [27.39481, 40.934319], [27.39481, 40.934319], [27.39481, 40.934319], [27.398452, 40.934144], [27.401336, 40.934823], [27.404054, 40.93603], [27.407263, 40.935329], [27.404405, 40.931212], [27.402271, 40.928615], [27.401705, 40.928377]]}}, {"type": "Feature", "properties": {"day_index": 37, "date": "2026-10-13", "label": "Silivri"}, "geometry": {"type": "LineString", "coordinates": [[27.403678, 40.92886], [27.404424, 40.931508], [27.406577, 40.934106], [27.407289, 40.935467], [27.407289, 40.935467], [27.409844, 40.937078], [27.412577, 40.938636], [27.413366, 40.938989], [27.416895, 40.940815], [27.420681, 40.942412], [27.424878, 40.943291], [27.435096, 40.943536], [27.445449, 40.946921], [27.450279, 40.948376], [27.469182, 40.947145], [27.481792, 40.956862], [27.48413, 40.964622], [27.482913, 40.972325], [27.485066, 40.978183], [27.488628, 40.980609], [27.492822, 40.983449], [27.496831, 40.986215], [27.502835, 40.990308], [27.506501, 40.992783], [27.51094, 40.995966], [27.518366, 41.00188], [27.523248, 41.004752], [27.533197, 41.00625], [27.553179, 40.997608], [27.56037, 40.99369], [27.572768, 40.987645], [27.571531, 40.986481], [27.572231, 40.985988], [27.572035, 40.986086], [27.572035, 40.986086], [27.572154, 40.986419], [27.577263, 40.988858], [27.576777, 40.988927], [27.576777, 40.988927], [27.576777, 40.988927], [27.576777, 40.988927], [27.576777, 40.988927], [27.576777, 40.988927], [27.576777, 40.988927], [27.577448, 40.988809], [27.579885, 40.99125], [27.58461, 40.990972], [27.588786, 40.992424], [27.591791, 40.988502], [27.600918, 40.988804], [27.611616, 40.990894], [27.619303, 40.99238], [27.625279, 40.99355], [27.637614, 40.995954], [27.648591, 40.998025], [27.657446, 40.999806], [27.665602, 41.001393], [27.677006, 41.003536], [27.686893, 41.004489], [27.69366, 41.003885], [27.703382, 41.00515], [27.707589, 41.006604], [27.714876, 41.009115], [27.715859, 41.009377], [27.715859, 41.009377], [27.715859, 41.009377], [27.715859, 41.009377], [27.715841, 41.009374], [27.715841, 41.009374], [27.716262, 41.009632], [27.724406, 41.0116], [27.717287, 41.009952], [27.726939, 41.011946], [27.736704, 41.013], [27.746303, 41.014065], [27.755249, 41.015039], [27.764514, 41.015137], [27.772679, 41.013133], [27.782803, 41.010309], [27.793768, 41.00725], [27.802135, 41.004722], [27.802139, 41.004682], [27.802139, 41.004682], [27.802139, 41.004682], [27.802139, 41.004682], [27.802139, 41.004682], [27.802139, 41.004682], [27.802139, 41.004682], [27.802139, 41.004682], [27.802139, 41.004682], [27.802139, 41.004682], [27.802139, 41.004682], [27.802139, 41.004682], [27.802139, 41.004682], [27.802139, 41.004682], [27.802139, 41.004682], [27.802139, 41.004682], [27.802139, 41.004682], [27.802139, 41.004682], [27.802139, 41.004682], [27.802139, 41.004682], [27.802139, 41.004682], [27.802139, 41.004682], [27.802139, 41.004682], [27.802139, 41.004682], [27.802139, 41.004682], [27.802139, 41.004682], [27.802139, 41.004682], [27.802163, 41.004757], [27.806254, 41.003773], [27.815291, 41.001216], [27.824043, 40.998811], [27.833763, 40.996101], [27.8414, 40.993857], [27.850301, 40.989515], [27.858689, 40.984798], [27.86565, 40.980881], [27.872339, 40.977117], [27.879509, 40.973173], [27.889529, 40.969326], [27.899756, 40.969194], [27.909257, 40.969998], [27.922872, 40.971138], [27.934386, 40.972106], [27.944762, 40.973438], [27.946997, 40.974], [27.946997, 40.974], [27.946997, 40.974], [27.94706, 40.973973], [27.947139, 40.974013], [27.947139, 40.974013], [27.947139, 40.974013], [27.947139, 40.974013], [27.947139, 40.974013], [27.947139, 40.974013], [27.947411, 40.974178], [27.951113, 40.975986], [27.954625, 40.977937], [27.961329, 40.981696], [27.969321, 40.986141], [27.972587, 40.990912], [27.973931, 40.996458], [27.976894, 41.003299], [27.982345, 41.010939], [27.988431, 41.016999], [27.99399, 41.021701], [27.999607, 41.025919], [28.007511, 41.031674], [28.015133, 41.036196], [28.024192, 41.03955], [28.030378, 41.041812], [28.036073, 41.0439], [28.048211, 41.048357], [28.060255, 41.052773], [28.068678, 41.055851], [28.076913, 41.057976], [28.084559, 41.059836], [28.090145, 41.061248], [28.096071, 41.063267], [28.095949, 41.063149], [28.095949, 41.063149], [28.095949, 41.063149], [28.095949, 41.063149], [28.095949, 41.063149], [28.095949, 41.063149], [28.095949, 41.063149], [28.095774, 41.063102], [28.095321, 41.063699], [28.099008, 41.064853], [28.10616, 41.068016], [28.113726, 41.070789], [28.119773, 41.072264], [28.125314, 41.073448], [28.133894, 41.074691], [28.14412, 41.075937], [28.153896, 41.07612], [28.162593, 41.076266], [28.163077, 41.076269], [28.162563, 41.075369], [28.161002, 41.0727], [28.161208, 41.074045], [28.163442, 41.076273], [28.172063, 41.076458], [28.178851, 41.077296], [28.18302, 41.077867], [28.190646, 41.078841], [28.195767, 41.079307], [28.202156, 41.079908], [28.206251, 41.079426], [28.206269, 41.079251], [28.206727, 41.076482], [28.206714, 41.076503], [28.206704, 41.076492], [28.206602, 41.076884], [28.206165, 41.080147], [28.206165, 41.080147], [28.209051, 41.079949], [28.208968, 41.07994], [28.209082, 41.079921], [28.209082, 41.079921]]}}, {"type": "Feature", "properties": {"day_index": 38, "date": "2026-10-14", "label": "Esenyurt"}, "geometry": {"type": "LineString", "coordinates": [[28.20743, 41.080734], [28.210324, 41.081473], [28.21113, 41.083648], [28.21287, 41.083585], [28.211459, 41.080079], [28.214835, 41.081087], [28.219284, 41.081507], [28.225499, 41.081452], [28.231508, 41.080363], [28.2373, 41.079128], [28.241715, 41.078176], [28.246348, 41.077207], [28.249981, 41.076463], [28.253095, 41.075808], [28.256266, 41.075116], [28.258764, 41.074607], [28.261187, 41.074094], [28.263195, 41.073633], [28.265673, 41.07316], [28.26832, 41.072682], [28.271507, 41.072154], [28.275115, 41.07163], [28.278339, 41.071138], [28.286008, 41.069957], [28.293865, 41.06874], [28.301971, 41.067513], [28.307819, 41.066617], [28.31099, 41.0661], [28.313376, 41.065764], [28.315926, 41.065379], [28.320051, 41.06472], [28.326774, 41.063685], [28.334822, 41.062456], [28.341405, 41.06146], [28.346502, 41.06068], [28.351787, 41.059865], [28.354915, 41.059338], [28.35774, 41.058853], [28.36166, 41.058183], [28.367627, 41.056457], [28.373804, 41.054891], [28.379698, 41.053292], [28.384748, 41.051902], [28.388586, 41.05083], [28.391707, 41.049975], [28.396414, 41.048687], [28.401452, 41.047295], [28.405993, 41.046042], [28.410375, 41.044841], [28.414921, 41.043578], [28.419339, 41.042375], [28.423933, 41.0411], [28.428621, 41.039804], [28.433493, 41.038464], [28.438215, 41.037156], [28.442556, 41.035973], [28.447538, 41.034284], [28.452217, 41.032154], [28.456263, 41.030343], [28.459722, 41.029309], [28.464753, 41.026523], [28.467926, 41.025093], [28.470833, 41.023788], [28.473556, 41.02255], [28.475787, 41.02154], [28.478146, 41.020478], [28.480306, 41.019504], [28.482672, 41.018445], [28.484822, 41.017481], [28.48697, 41.016462], [28.486634, 41.016468], [28.487463, 41.016011], [28.48744, 41.016077], [28.48744, 41.016077], [28.48744, 41.016077], [28.487032, 41.01622], [28.489938, 41.015165], [28.494727, 41.012993], [28.502659, 41.009404], [28.505651, 41.008087], [28.508665, 41.00727], [28.511796, 41.006971], [28.514325, 41.007122], [28.516746, 41.007554], [28.519296, 41.008139], [28.521769, 41.008693], [28.524326, 41.009259], [28.526706, 41.009793], [28.52916, 41.010343], [28.530936, 41.010604], [28.531657, 41.010313], [28.531641, 41.010301], [28.531641, 41.010301], [28.531641, 41.010301], [28.53163, 41.0103], [28.531568, 41.010295], [28.531568, 41.010295], [28.531549, 41.010299], [28.531549, 41.010299], [28.531549, 41.010299], [28.531549, 41.010299], [28.531549, 41.010299], [28.531549, 41.010299], [28.531549, 41.010299], [28.531549, 41.010299], [28.531549, 41.010299], [28.531549, 41.010299], [28.531549, 41.010299], [28.531549, 41.010299], [28.531572, 41.010314], [28.53411, 41.011444], [28.540626, 41.012852], [28.547335, 41.014392], [28.554383, 41.015964], [28.562596, 41.017783], [28.565727, 41.018477], [28.568509, 41.019098], [28.573092, 41.01943], [28.578227, 41.019774], [28.582475, 41.020951], [28.585237, 41.023046], [28.587672, 41.024339], [28.590264, 41.02479], [28.592641, 41.024478], [28.594785, 41.023932], [28.597093, 41.02358], [28.599518, 41.023685], [28.601802, 41.024115], [28.604152, 41.024563], [28.606849, 41.025059], [28.609241, 41.025286], [28.611475, 41.025065], [28.613761, 41.024682], [28.615906, 41.024193], [28.618077, 41.023683], [28.618845, 41.023089], [28.618845, 41.023089], [28.618845, 41.023089], [28.618845, 41.023089], [28.618845, 41.023089], [28.618845, 41.023089], [28.618845, 41.023089], [28.618845, 41.023089], [28.618845, 41.023089], [28.618845, 41.023089], [28.618845, 41.023089], [28.618845, 41.023089], [28.618828, 41.023093], [28.618828, 41.023093], [28.618828, 41.023093], [28.618828, 41.023093], [28.618828, 41.023093], [28.618828, 41.023093], [28.618828, 41.023093], [28.618828, 41.023093], [28.618828, 41.023093], [28.618828, 41.023093], [28.618828, 41.023093], [28.618828, 41.023093], [28.618828, 41.023093], [28.618828, 41.023093], [28.618812, 41.0231], [28.618812, 41.0231], [28.618812, 41.0231], [28.618812, 41.0231], [28.618812, 41.0231], [28.618812, 41.0231], [28.618812, 41.0231], [28.618812, 41.0231], [28.618812, 41.0231], [28.618812, 41.0231], [28.618812, 41.0231], [28.618812, 41.0231], [28.618812, 41.0231], [28.618812, 41.0231], [28.618812, 41.0231], [28.619941, 41.023234], [28.622273, 41.022505], [28.623459, 41.022182], [28.623322, 41.022349], [28.623556, 41.022307], [28.623899, 41.02269], [28.624107, 41.022998], [28.623969, 41.022871], [28.624313, 41.023312], [28.624443, 41.023746], [28.624723, 41.023547], [28.625255, 41.023223], [28.6274, 41.024303], [28.627149, 41.026448], [28.62704, 41.026411], [28.62676, 41.025822], [28.626863, 41.025975], [28.626995, 41.02597], [28.626995, 41.02597], [28.626995, 41.02597], [28.626998, 41.025988], [28.626865, 41.025649], [28.626865, 41.025649], [28.626833, 41.025725]]}}, {"type": "Feature", "properties": {"day_index": 39, "date": "2026-10-15", "label": "İstanbul"}, "geometry": {"type": "LineString", "coordinates": [[28.62659, 41.025202], [28.626578, 41.02353], [28.625946, 41.022685], [28.626315, 41.022591], [28.624559, 41.023407], [28.624434, 41.023747], [28.62422, 41.023197], [28.623934, 41.022834], [28.623832, 41.022481], [28.623637, 41.022269], [28.625927, 41.021455], [28.628361, 41.021014], [28.63296, 41.018442], [28.638075, 41.016516], [28.644827, 41.013968], [28.65239, 41.011027], [28.659163, 41.00855], [28.663652, 41.006802], [28.669086, 41.005869], [28.676863, 41.005617], [28.683012, 41.005006], [28.685341, 41.003853], [28.68523, 41.00386], [28.685222, 41.00384], [28.685695, 41.004208], [28.685779, 41.004304], [28.685924, 41.004211], [28.686387, 41.003872], [28.686844, 41.003689], [28.687194, 41.003367], [28.686114, 41.004015], [28.686096, 41.004023], [28.686096, 41.004023], [28.686096, 41.004023], [28.686096, 41.004023], [28.686096, 41.004023], [28.686096, 41.004023], [28.686096, 41.004023], [28.686096, 41.004023], [28.686096, 41.004023], [28.685663, 41.004335], [28.68568, 41.004341], [28.68576, 41.004294], [28.685282, 41.003812], [28.685204, 41.003835], [28.685228, 41.003861], [28.685228, 41.003861], [28.685525, 41.003742], [28.687445, 41.002275], [28.689306, 41.000761], [28.691977, 40.999595], [28.697601, 40.99949], [28.700623, 40.998079], [28.703097, 40.99655], [28.705935, 40.994852], [28.708518, 40.993486], [28.712128, 40.991354], [28.715627, 40.989304], [28.720611, 40.986385], [28.726124, 40.983149], [28.732579, 40.979385], [28.74115, 40.977149], [28.749055, 40.979131], [28.752555, 40.980237], [28.755399, 40.981211], [28.758873, 40.982584], [28.762855, 40.983966], [28.766852, 40.985283], [28.768535, 40.982607], [28.770583, 40.980157], [28.774271, 40.97766], [28.774791, 40.977577], [28.776877, 40.976183], [28.781264, 40.974645], [28.785387, 40.973412], [28.790406, 40.97154], [28.792196, 40.969199], [28.79574, 40.966464], [28.79939, 40.963602], [28.804238, 40.962001], [28.807911, 40.95936], [28.812157, 40.957372], [28.816629, 40.955726], [28.821419, 40.955077], [28.822871, 40.957176], [28.826769, 40.957231], [28.831323, 40.955676], [28.834656, 40.957461], [28.836512, 40.958319], [28.837824, 40.958474], [28.838107, 40.959772], [28.841109, 40.96207], [28.838328, 40.964086], [28.838877, 40.966468], [28.841024, 40.969547], [28.844505, 40.971055], [28.847914, 40.974012], [28.851549, 40.975863], [28.856977, 40.976544], [28.86201, 40.975971], [28.866791, 40.975428], [28.871713, 40.974689], [28.877568, 40.974611], [28.880323, 40.975791], [28.883902, 40.977527], [28.886897, 40.978983], [28.890753, 40.981012], [28.894792, 40.981539], [28.899014, 40.979699], [28.903042, 40.97996], [28.907449, 40.981754], [28.909621, 40.98405], [28.910404, 40.986932], [28.913398, 40.987647], [28.917844, 40.988038], [28.919565, 40.987994], [28.921146, 40.988042], [28.924616, 40.9897], [28.927596, 40.992033], [28.930622, 40.99438], [28.932981, 40.996784], [28.934052, 40.999255], [28.937137, 41.001426], [28.93888, 41.001844], [28.939235, 41.001968], [28.938879, 41.001962], [28.939116, 41.001976], [28.939113, 41.002404], [28.939173, 41.002388], [28.938833, 41.002601], [28.942828, 41.003445], [28.944902, 41.004494], [28.944897, 41.004495], [28.944897, 41.004495], [28.944874, 41.004497], [28.944874, 41.004497], [28.944874, 41.004497], [28.944849, 41.004491], [28.944849, 41.004491], [28.944849, 41.004491], [28.944849, 41.004491], [28.945322, 41.005021], [28.945391, 41.005412], [28.945488, 41.005583], [28.945488, 41.005583], [28.945488, 41.005583], [28.945488, 41.005583], [28.945488, 41.005583], [28.945488, 41.005583], [28.945488, 41.005583], [28.945488, 41.005583], [28.945488, 41.005583], [28.946922, 41.006785], [28.946904, 41.006758], [28.948387, 41.006888], [28.950812, 41.007008], [28.952103, 41.007085], [28.953065, 41.007129], [28.9532, 41.007122], [28.953285, 41.007284], [28.953285, 41.007284], [28.953773, 41.00728], [28.953874, 41.007266], [28.95394, 41.007263], [28.954691, 41.008289], [28.955946, 41.009539], [28.958148, 41.009543], [28.960062, 41.009517], [28.962349, 41.009505], [28.964791, 41.009277], [28.964634, 41.00998], [28.964553, 41.010224], [28.964421, 41.010464], [28.964421, 41.010464], [28.964005, 41.010675], [28.964253, 41.010884], [28.964253, 41.010884], [28.964253, 41.010884], [28.963885, 41.01081], [28.964777, 41.009851], [28.966298, 41.009011], [28.967437, 41.008827], [28.968972, 41.00864], [28.971856, 41.008393], [28.972789, 41.00965], [28.974282, 41.01062], [28.975414, 41.011849], [28.975402, 41.012651], [28.974768, 41.013583], [28.976254, 41.013038], [28.976457, 41.012935], [28.976457, 41.012935], [28.976457, 41.012935], [28.976532, 41.0129], [28.977804, 41.013066], [28.977672, 41.013136], [28.977622, 41.013212], [28.977472, 41.013128], [28.977664, 41.013133], [28.977673, 41.013244]]}}, {"type": "Feature", "properties": {"day_index": 40, "date": "2026-10-17", "label": "Ataşehir"}, "geometry": {"type": "LineString", "coordinates": [[28.975641, 41.014761], [28.975645, 41.014755], [28.975645, 41.014755], [28.975416, 41.01492], [28.97515, 41.015112], [28.975132, 41.015105], [28.975132, 41.015105], [28.975112, 41.015339], [28.975366, 41.015817], [28.975366, 41.015817], [28.975366, 41.015817], [28.975366, 41.015817], [28.975366, 41.015817], [28.975366, 41.015817], [28.975366, 41.015817], [28.975366, 41.015817], [28.975366, 41.015817], [28.975356, 41.015797], [28.97516, 41.015734], [28.973871, 41.015781], [28.972192, 41.016458], [28.971251, 41.017409], [28.970909, 41.01744], [28.970909, 41.01744], [28.970909, 41.01744], [28.971333, 41.017423], [28.972108, 41.01739], [28.972906, 41.017256], [28.973666, 41.017224], [28.973722, 41.017363], [28.973936, 41.017477], [28.974046, 41.017637], [28.97454, 41.017532], [28.975021, 41.017376], [28.974911, 41.017413], [28.974167, 41.017687], [28.973468, 41.01804], [28.972872, 41.018086], [28.972827, 41.018143], [29.015491, 41.027068], [29.01565, 41.026444], [29.015701, 41.026256], [29.016095, 41.026476], [29.016049, 41.026467], [29.015854, 41.027177], [29.016811, 41.028372], [29.01751, 41.02969], [29.018742, 41.030103], [29.020508, 41.031264], [29.020477, 41.031538], [29.02045, 41.031537], [29.020665, 41.031534], [29.022151, 41.031932], [29.023813, 41.03259], [29.025522, 41.033861], [29.026307, 41.034439], [29.027538, 41.035281], [29.029988, 41.036688], [29.031945, 41.038208], [29.034917, 41.039394], [29.037128, 41.03931], [29.038731, 41.039223], [29.03981, 41.040309], [29.041515, 41.040092], [29.042576, 41.039091], [29.043854, 41.038002], [29.04385, 41.037989], [29.044116, 41.037841], [29.044166, 41.037258], [29.043857, 41.036786], [29.042904, 41.035818], [29.043027, 41.036023], [29.043098, 41.036031], [29.043306, 41.035966], [29.043335, 41.035902], [29.043244, 41.035888], [29.044396, 41.037722], [29.042298, 41.04123], [29.042944, 41.043302], [29.041467, 41.043004], [29.041457, 41.042983], [29.041834, 41.043098], [29.041834, 41.043098], [29.041742, 41.043095], [29.041505, 41.042951], [29.041505, 41.042951], [29.041505, 41.042951], [29.041489, 41.042962], [29.041496, 41.042962], [29.041496, 41.042966], [29.041533, 41.042951], [29.041738, 41.04241], [29.041974, 41.041114], [29.04157, 41.040286], [29.038837, 41.0393], [29.034687, 41.039464], [29.032421, 41.038413], [29.030392, 41.037006], [29.028437, 41.036032], [29.027011, 41.034924], [29.024494, 41.032938], [29.022259, 41.031945], [29.020224, 41.031062], [29.018046, 41.029683], [29.015865, 41.027705], [29.01457, 41.026565], [29.012232, 41.025814], [29.010157, 41.025806], [29.008231, 41.02484], [29.007187, 41.023673], [29.007162, 41.023414], [29.00716, 41.023413], [29.00716, 41.023413], [29.00716, 41.023413], [29.007163, 41.023346], [29.006941, 41.02118], [29.008428, 41.019521], [29.009332, 41.017374], [29.010877, 41.015166], [29.011279, 41.012816], [29.010608, 41.010794], [29.011558, 41.009387], [29.011429, 41.008335], [29.012691, 41.006097], [29.01504, 41.004567], [29.016927, 41.003448], [29.018188, 41.002754], [29.019562, 41.002705], [29.021343, 41.003118], [29.022528, 41.002257], [29.02342, 41.000179], [29.024219, 40.996705], [29.024666, 40.994434], [29.024691, 40.993654], [29.024836, 40.994634], [29.025786, 40.994958], [29.02708, 40.995077], [29.028459, 40.995222], [29.030314, 40.99537], [29.032065, 40.995365], [29.032947, 40.993937], [29.034921, 40.992142], [29.03582, 40.991071], [29.035846, 40.990756], [29.036506, 40.990287], [29.036949, 40.991053], [29.037373, 40.990426], [29.037628, 40.99053], [29.03829, 40.990725], [29.038536, 40.990863], [29.039176, 40.991298], [29.040642, 40.990113], [29.042528, 40.988753], [29.043091, 40.988434], [29.043744, 40.988083], [29.043254, 40.988724], [29.043561, 40.989053], [29.044009, 40.989706], [29.044142, 40.989864], [29.044387, 40.990172], [29.044464, 40.990205], [29.045777, 40.990349], [29.047431, 40.990031], [29.049187, 40.990037], [29.051406, 40.99002], [29.053993, 40.989815], [29.05605, 40.988587], [29.058019, 40.987372], [29.059841, 40.986249], [29.061839, 40.985055], [29.063006, 40.984192], [29.063869, 40.983719], [29.065314, 40.983038], [29.066497, 40.982397], [29.069549, 40.98139], [29.073586, 40.980522], [29.076728, 40.979985], [29.078153, 40.978228], [29.079776, 40.975859], [29.081223, 40.974468], [29.082804, 40.972696], [29.083801, 40.970893], [29.085091, 40.969026], [29.085829, 40.968859], [29.088335, 40.968071], [29.09097, 40.967801], [29.093774, 40.967825], [29.096486, 40.967812], [29.098801, 40.966984], [29.100781, 40.965907], [29.103509, 40.96458], [29.103681, 40.964443], [29.104036, 40.963786], [29.104895, 40.963816], [29.105954, 40.965154], [29.106384, 40.965999], [29.107261, 40.967468], [29.107707, 40.967625], [29.107771, 40.967211], [29.107489, 40.96733]]}}, {"type": "Feature", "properties": {"day_index": 41, "date": "2026-10-19", "label": "Darıca"}, "geometry": {"type": "LineString", "coordinates": [[29.107563, 40.967641], [29.104668, 40.966159], [29.105204, 40.96618], [29.105214, 40.966167], [29.105382, 40.966229], [29.105382, 40.966229], [29.105382, 40.966229], [29.11054, 40.958861], [29.115525, 40.954861], [29.119966, 40.950991], [29.122486, 40.951597], [29.122747, 40.95168], [29.122746, 40.951686], [29.122698, 40.951873], [29.122731, 40.951934], [29.122727, 40.951648], [29.12261, 40.9516], [29.122633, 40.951627], [29.124652, 40.951779], [29.119961, 40.950869], [29.124137, 40.947616], [29.131214, 40.941888], [29.135045, 40.938788], [29.1402, 40.934594], [29.144032, 40.931472], [29.147393, 40.92872], [29.152299, 40.924975], [29.157779, 40.922979], [29.157472, 40.922285], [29.157289, 40.922279], [29.156604, 40.920459], [29.162076, 40.918025], [29.165353, 40.918612], [29.165416, 40.918565], [29.165416, 40.918565], [29.165416, 40.918565], [29.165416, 40.918565], [29.165416, 40.918565], [29.165431, 40.918557], [29.165431, 40.918557], [29.165457, 40.918537], [29.165582, 40.918482], [29.165585, 40.918065], [29.166067, 40.916829], [29.166924, 40.914463], [29.169208, 40.912986], [29.169696, 40.912869], [29.169696, 40.912869], [29.169696, 40.912869], [29.169696, 40.912869], [29.169597, 40.912874], [29.169597, 40.912874], [29.169597, 40.912874], [29.169597, 40.912874], [29.169597, 40.912874], [29.169597, 40.912874], [29.169597, 40.912874], [29.169597, 40.912874], [29.169597, 40.912874], [29.169597, 40.912874], [29.169597, 40.912874], [29.169597, 40.912874], [29.169597, 40.912874], [29.169597, 40.912874], [29.169597, 40.912874], [29.169597, 40.912874], [29.169597, 40.912874], [29.169597, 40.912874], [29.169597, 40.912874], [29.169597, 40.912874], [29.169597, 40.912874], [29.169597, 40.912874], [29.169597, 40.912874], [29.169597, 40.912874], [29.169597, 40.912874], [29.169597, 40.912874], [29.169597, 40.912874], [29.169597, 40.912874], [29.169597, 40.912874], [29.169597, 40.912874], [29.169597, 40.912874], [29.169597, 40.912874], [29.169597, 40.912874], [29.169597, 40.912874], [29.169597, 40.912874], [29.169597, 40.912874], [29.169597, 40.912874], [29.169597, 40.912874], [29.169597, 40.912874], [29.169597, 40.912874], [29.169596, 40.912851], [29.169719, 40.912858], [29.169719, 40.912858], [29.169719, 40.912858], [29.169719, 40.912858], [29.169719, 40.912858], [29.169719, 40.912858], [29.169719, 40.912858], [29.169719, 40.912858], [29.169719, 40.912858], [29.169719, 40.912858], [29.171732, 40.912561], [29.17259, 40.911722], [29.17259, 40.911722], [29.17259, 40.911722], [29.17259, 40.911722], [29.17259, 40.911722], [29.17259, 40.911722], [29.17259, 40.911722], [29.17259, 40.911722], [29.172474, 40.911372], [29.167316, 40.907938], [29.164457, 40.903644], [29.166959, 40.901398], [29.169932, 40.898822], [29.170996, 40.899644], [29.167634, 40.89702], [29.1684, 40.896395], [29.1684, 40.896395], [29.1684, 40.896395], [29.1678, 40.895329], [29.170571, 40.893557], [29.171246, 40.892757], [29.174527, 40.890667], [29.177488, 40.887294], [29.182586, 40.885541], [29.187049, 40.886874], [29.190451, 40.88689], [29.195384, 40.885116], [29.200635, 40.884503], [29.205564, 40.883545], [29.209098, 40.882362], [29.210104, 40.881411], [29.210104, 40.881411], [29.210104, 40.881411], [29.210398, 40.880572], [29.215466, 40.878362], [29.220774, 40.876551], [29.224938, 40.873213], [29.229804, 40.870741], [29.233503, 40.872124], [29.234239, 40.874748], [29.238447, 40.87548], [29.241334, 40.874117], [29.246332, 40.872112], [29.251269, 40.870141], [29.254848, 40.868303], [29.256237, 40.867605], [29.258836, 40.867437], [29.261668, 40.869688], [29.264718, 40.868292], [29.269023, 40.865912], [29.270696, 40.864288], [29.273151, 40.862523], [29.273103, 40.860392], [29.27498, 40.85693], [29.280779, 40.85609], [29.288184, 40.856058], [29.289022, 40.856624], [29.292357, 40.85428], [29.297822, 40.849531], [29.303141, 40.845432], [29.30976, 40.842415], [29.315396, 40.839836], [29.320584, 40.837507], [29.325226, 40.835341], [29.332434, 40.832115], [29.336315, 40.830342], [29.339426, 40.828932], [29.34371, 40.827011], [29.349997, 40.824182], [29.354113, 40.822313], [29.361701, 40.816621], [29.366394, 40.812738], [29.371096, 40.809009], [29.375377, 40.805659], [29.379123, 40.802628], [29.379915, 40.801979], [29.380824, 40.801279], [29.384562, 40.798306], [29.388676, 40.795372], [29.393562, 40.793731], [29.39727, 40.792718], [29.400513, 40.79129], [29.399852, 40.787472], [29.40434, 40.786094], [29.405762, 40.785739], [29.405723, 40.785689], [29.405723, 40.785689], [29.405723, 40.785689], [29.405723, 40.785689], [29.405723, 40.785689], [29.405723, 40.785689], [29.405723, 40.785689], [29.405758, 40.785691], [29.409673, 40.784695], [29.412473, 40.783692], [29.412249, 40.782619], [29.411952, 40.780677], [29.417234, 40.776902]]}}, {"type": "Feature", "properties": {"day_index": 42, "date": "2026-10-20", "label": "Kocaeli"}, "geometry": {"type": "LineString", "coordinates": [[29.417195, 40.776977], [29.417121, 40.77727], [29.417121, 40.77727], [29.416758, 40.778104], [29.415887, 40.778651], [29.414404, 40.77905], [29.413149, 40.779276], [29.414468, 40.781447], [29.414006, 40.78325], [29.413989, 40.783278], [29.415098, 40.784637], [29.416677, 40.786413], [29.418796, 40.78688], [29.420573, 40.788067], [29.421582, 40.789442], [29.422827, 40.791029], [29.42447, 40.791538], [29.427401, 40.792477], [29.430611, 40.793731], [29.429366, 40.793605], [29.43061, 40.795321], [29.432468, 40.796461], [29.435501, 40.797455], [29.437635, 40.797361], [29.440696, 40.796991], [29.44236, 40.796262], [29.443504, 40.796894], [29.441414, 40.797711], [29.447603, 40.798566], [29.454168, 40.799398], [29.457658, 40.799751], [29.460969, 40.799099], [29.460449, 40.796626], [29.46319, 40.800316], [29.467326, 40.800875], [29.471182, 40.800741], [29.477654, 40.802888], [29.482067, 40.80356], [29.485099, 40.801904], [29.486477, 40.803979], [29.492053, 40.803343], [29.497947, 40.802832], [29.500857, 40.802655], [29.506634, 40.802732], [29.513077, 40.802574], [29.513662, 40.802185], [29.513662, 40.802185], [29.513662, 40.802185], [29.513662, 40.802185], [29.513662, 40.802185], [29.517392, 40.800082], [29.523198, 40.795722], [29.524248, 40.791266], [29.526577, 40.788237], [29.529307, 40.789279], [29.532966, 40.787507], [29.536712, 40.7837], [29.539398, 40.780912], [29.540218, 40.778088], [29.540952, 40.778509], [29.544097, 40.778949], [29.547109, 40.777352], [29.549296, 40.775205], [29.55271, 40.774748], [29.560961, 40.771894], [29.567527, 40.769039], [29.573986, 40.768155], [29.57972, 40.769332], [29.583422, 40.771694], [29.588599, 40.773674], [29.592972, 40.775635], [29.595853, 40.777035], [29.597895, 40.778084], [29.600176, 40.779039], [29.604589, 40.780262], [29.608428, 40.782131], [29.611367, 40.782594], [29.615649, 40.783342], [29.619684, 40.7836], [29.622317, 40.78303], [29.626501, 40.781239], [29.62914, 40.778823], [29.631533, 40.777024], [29.635563, 40.77603], [29.639278, 40.776119], [29.642722, 40.776679], [29.646831, 40.777534], [29.651315, 40.777882], [29.656003, 40.777958], [29.660215, 40.778147], [29.662676, 40.778662], [29.667687, 40.778763], [29.673072, 40.778591], [29.678199, 40.778512], [29.683903, 40.778745], [29.68919, 40.778282], [29.694757, 40.77782], [29.699103, 40.777647], [29.703951, 40.777337], [29.708568, 40.777134], [29.711866, 40.776877], [29.711866, 40.776877], [29.711866, 40.776877], [29.711866, 40.776877], [29.711866, 40.776877], [29.711866, 40.776877], [29.711866, 40.776877], [29.711866, 40.776877], [29.711866, 40.776877], [29.711866, 40.776877], [29.711866, 40.776877], [29.711866, 40.776877], [29.711866, 40.776877], [29.711851, 40.77687], [29.711851, 40.77687], [29.711851, 40.77687], [29.711851, 40.77687], [29.711851, 40.77687], [29.711851, 40.77687], [29.711851, 40.77687], [29.711851, 40.77687], [29.711851, 40.77687], [29.711851, 40.77687], [29.711851, 40.77687], [29.711851, 40.77687], [29.711851, 40.77687], [29.711851, 40.77687], [29.711851, 40.77687], [29.711851, 40.77687], [29.711851, 40.77687], [29.711851, 40.77687], [29.711851, 40.77687], [29.711851, 40.77687], [29.713619, 40.777196], [29.717599, 40.776541], [29.720977, 40.775573], [29.725012, 40.775056], [29.729985, 40.774179], [29.732939, 40.774193], [29.733776, 40.773596], [29.736236, 40.773414], [29.736075, 40.773486], [29.736075, 40.773486], [29.736075, 40.773486], [29.736075, 40.773486], [29.737494, 40.773232], [29.737391, 40.773319], [29.737391, 40.773319], [29.737391, 40.773319], [29.737377, 40.773258], [29.74161, 40.772381], [29.744827, 40.770799], [29.750589, 40.770734], [29.753995, 40.769708], [29.75733, 40.767957], [29.760249, 40.767543], [29.761986, 40.769317], [29.764973, 40.769545], [29.769134, 40.767602], [29.771781, 40.765489], [29.775253, 40.764168], [29.778736, 40.762816], [29.784009, 40.760759], [29.787488, 40.759447], [29.790569, 40.758833], [29.79478, 40.757954], [29.79713, 40.757951], [29.801988, 40.757401], [29.806563, 40.756919], [29.810105, 40.756521], [29.814872, 40.756285], [29.821467, 40.756064], [29.827002, 40.755941], [29.832319, 40.755837], [29.837566, 40.756946], [29.839971, 40.757568], [29.840793, 40.757918], [29.845613, 40.759341], [29.850806, 40.760789], [29.856087, 40.761575], [29.861243, 40.761608], [29.868486, 40.761541], [29.873717, 40.762544], [29.874331, 40.762834], [29.873839, 40.762592], [29.878172, 40.762962], [29.884608, 40.76293], [29.890598, 40.763521], [29.892521, 40.762413], [29.896932, 40.76189], [29.901826, 40.761416], [29.906425, 40.761389], [29.909374, 40.761581], [29.911188, 40.761509], [29.912734, 40.762735], [29.913997, 40.764009], [29.919311, 40.762248], [29.92295, 40.762577], [29.926367, 40.763147], [29.928805, 40.762681]]}}, {"type": "Feature", "properties": {"day_index": 43, "date": "2026-10-21", "label": "Düzce Merkez"}, "geometry": {"type": "LineString", "coordinates": [[29.928839, 40.762408], [29.928704, 40.761929], [29.930442, 40.763776], [29.939498, 40.76518], [29.943361, 40.765104], [29.953094, 40.763768], [29.959817, 40.763422], [29.968296, 40.76244], [29.973432, 40.761053], [29.981547, 40.759746], [29.988784, 40.758922], [29.997801, 40.757675], [30.006856, 40.756308], [30.012647, 40.754703], [30.014981, 40.752736], [30.021912, 40.749355], [30.023527, 40.753155], [30.023345, 40.753052], [30.023724, 40.753156], [30.031599, 40.75195], [30.031866, 40.751932], [30.0354, 40.749059], [30.039012, 40.745857], [30.039966, 40.745791], [30.039966, 40.745791], [30.039966, 40.745791], [30.040084, 40.745706], [30.043753, 40.741326], [30.051186, 40.741093], [30.052852, 40.736261], [30.058766, 40.731916], [30.066257, 40.730205], [30.073062, 40.728663], [30.080601, 40.726934], [30.087021, 40.72507], [30.096363, 40.724118], [30.101124, 40.723217], [30.108022, 40.720285], [30.113527, 40.715444], [30.119104, 40.712548], [30.124218, 40.710146], [30.131513, 40.709796], [30.132189, 40.708163], [30.137172, 40.707971], [30.142818, 40.709353], [30.149725, 40.708509], [30.154179, 40.707981], [30.160684, 40.707134], [30.167658, 40.706304], [30.173416, 40.705476], [30.173463, 40.705462], [30.173463, 40.705462], [30.17337, 40.705516], [30.173201, 40.705502], [30.167672, 40.706294], [30.159481, 40.707295], [30.152249, 40.708207], [30.146059, 40.708926], [30.139711, 40.709576], [30.136709, 40.709793], [30.133848, 40.715507], [30.138973, 40.717158], [30.148648, 40.717849], [30.156896, 40.718303], [30.164437, 40.719899], [30.171791, 40.721442], [30.177319, 40.724343], [30.184551, 40.726624], [30.193598, 40.728724], [30.200988, 40.732365], [30.211393, 40.732784], [30.221079, 40.73357], [30.230881, 40.734583], [30.240788, 40.735631], [30.25143, 40.735295], [30.262283, 40.738499], [30.272699, 40.741888], [30.283311, 40.741469], [30.288502, 40.738388], [30.296674, 40.738888], [30.308387, 40.739789], [30.315476, 40.737891], [30.32153, 40.735583], [30.332474, 40.73405], [30.340748, 40.733104], [30.353329, 40.73293], [30.365108, 40.733955], [30.375352, 40.734747], [30.383848, 40.734414], [30.39289, 40.736135], [30.403531, 40.737313], [30.415012, 40.738642], [30.426408, 40.739898], [30.436646, 40.74059], [30.436647, 40.740591], [30.436647, 40.740591], [30.436647, 40.740591], [30.436647, 40.740591], [30.436856, 40.740693], [30.436856, 40.740693], [30.436856, 40.740693], [30.436856, 40.740693], [30.436856, 40.740693], [30.436856, 40.740693], [30.436856, 40.740693], [30.437107, 40.740675], [30.437151, 40.740518], [30.437151, 40.740518], [30.437178, 40.740501], [30.437178, 40.740501], [30.444496, 40.74191], [30.45503, 40.743101], [30.462982, 40.744013], [30.473855, 40.745231], [30.484389, 40.746415], [30.494328, 40.747527], [30.505332, 40.748775], [30.516109, 40.749977], [30.525951, 40.751076], [30.53695, 40.752299], [30.548557, 40.753603], [30.559857, 40.754968], [30.570806, 40.757344], [30.580527, 40.759553], [30.590203, 40.761756], [30.596193, 40.763088], [30.605722, 40.765234], [30.616309, 40.7676], [30.626239, 40.769831], [30.636763, 40.772187], [30.646913, 40.774457], [30.656877, 40.776672], [30.665431, 40.778588], [30.67419, 40.78055], [30.681976, 40.782314], [30.690022, 40.784225], [30.697357, 40.785986], [30.704268, 40.787651], [30.712038, 40.789515], [30.719207, 40.791246], [30.726552, 40.793022], [30.73386, 40.794795], [30.739665, 40.797696], [30.741461, 40.79891], [30.746443, 40.8023], [30.752557, 40.804858], [30.75915, 40.80652], [30.765218, 40.808465], [30.768511, 40.809841], [30.775232, 40.812382], [30.78213, 40.813908], [30.79065, 40.815724], [30.804544, 40.817866], [30.808351, 40.821215], [30.814415, 40.823115], [30.821064, 40.824264], [30.82659, 40.825201], [30.832368, 40.826219], [30.836451, 40.826782], [30.839922, 40.828322], [30.851032, 40.829402], [30.857358, 40.828659], [30.862728, 40.828036], [30.863822, 40.827879], [30.863822, 40.827879], [30.863822, 40.827879], [30.863822, 40.827879], [30.863822, 40.827879], [30.863822, 40.827879], [30.868602, 40.828476], [30.883893, 40.831274], [30.898197, 40.831535], [30.911154, 40.834337], [30.924329, 40.838307], [30.932685, 40.842483], [30.94148, 40.847072], [30.952169, 40.852324], [30.962739, 40.854979], [30.972056, 40.855973], [30.981896, 40.855067], [30.993291, 40.853998], [31.004369, 40.853012], [31.014833, 40.852061], [31.025824, 40.851064], [31.037148, 40.850027], [31.04808, 40.849684], [31.058653, 40.849353], [31.06961, 40.849002], [31.07106, 40.848953], [31.07937, 40.848722], [31.089781, 40.848436], [31.099867, 40.848154], [31.109951, 40.847998], [31.120498, 40.848077], [31.131555, 40.848112], [31.141223, 40.848151], [31.147632, 40.846079], [31.151991, 40.845631], [31.158876, 40.844862], [31.164006, 40.838904]]}}, {"type": "Feature", "properties": {"day_index": 44, "date": "2026-10-22", "label": "Gerede"}, "geometry": {"type": "LineString", "coordinates": [[31.164313, 40.839014], [31.165933, 40.839759], [31.169708, 40.838685], [31.170958, 40.835953], [31.176005, 40.83519], [31.17945, 40.832952], [31.184401, 40.830416], [31.189876, 40.827698], [31.198011, 40.823669], [31.205834, 40.819634], [31.213716, 40.815579], [31.221122, 40.811693], [31.228438, 40.807838], [31.232922, 40.803803], [31.238632, 40.799646], [31.245799, 40.796695], [31.252529, 40.793419], [31.25791, 40.790145], [31.265, 40.786113], [31.273035, 40.783337], [31.281251, 40.780477], [31.287802, 40.778552], [31.287796, 40.778552], [31.287796, 40.778552], [31.287796, 40.778552], [31.287796, 40.778552], [31.287796, 40.778552], [31.287812, 40.778564], [31.29074, 40.77723], [31.29724, 40.776044], [31.30391, 40.775079], [31.311314, 40.773826], [31.317738, 40.772367], [31.324242, 40.771824], [31.331909, 40.772856], [31.337868, 40.774304], [31.343473, 40.77537], [31.349589, 40.776278], [31.35404, 40.775232], [31.350141, 40.775205], [31.35279, 40.773729], [31.35279, 40.773729], [31.35279, 40.773729], [31.35279, 40.773729], [31.355431, 40.772848], [31.362031, 40.770497], [31.365785, 40.7675], [31.368537, 40.767023], [31.371975, 40.767181], [31.371232, 40.764784], [31.373747, 40.764303], [31.373423, 40.762236], [31.374728, 40.76078], [31.374398, 40.758913], [31.377293, 40.759373], [31.37797, 40.757325], [31.377834, 40.755572], [31.37674, 40.754344], [31.379325, 40.753622], [31.377288, 40.75344], [31.377709, 40.752432], [31.378006, 40.751071], [31.379085, 40.749699], [31.379414, 40.747923], [31.38262, 40.747328], [31.383444, 40.750008], [31.385096, 40.752299], [31.388177, 40.75355], [31.391258, 40.754666], [31.394565, 40.753321], [31.398339, 40.752331], [31.400587, 40.750211], [31.402928, 40.74816], [31.403887, 40.74837], [31.409031, 40.748892], [31.415241, 40.746547], [31.421269, 40.741135], [31.425419, 40.736701], [31.431104, 40.731588], [31.444347, 40.721704], [31.45505, 40.720292], [31.464793, 40.719032], [31.473069, 40.717308], [31.481767, 40.716998], [31.488796, 40.717621], [31.495904, 40.720177], [31.504592, 40.723089], [31.515033, 40.726116], [31.522273, 40.728221], [31.52901, 40.728636], [31.536814, 40.728656], [31.545811, 40.728916], [31.55571, 40.729356], [31.565264, 40.725074], [31.575425, 40.722394], [31.58429, 40.718589], [31.592431, 40.721112], [31.599663, 40.725529], [31.600732, 40.72614], [31.601759, 40.725604], [31.601759, 40.725604], [31.601759, 40.725604], [31.601759, 40.725604], [31.607551, 40.72706], [31.616606, 40.72891], [31.624883, 40.731046], [31.634381, 40.731545], [31.645311, 40.730431], [31.656259, 40.732043], [31.667183, 40.732367], [31.670363, 40.732244], [31.675696, 40.735938], [31.684011, 40.737137], [31.688479, 40.737179], [31.696213, 40.738046], [31.706981, 40.739255], [31.718184, 40.740805], [31.729297, 40.743876], [31.735969, 40.745974], [31.743166, 40.748252], [31.753726, 40.750779], [31.765342, 40.752485], [31.774053, 40.752302], [31.779404, 40.748363], [31.782745, 40.743515], [31.787202, 40.740052], [31.79503, 40.737012], [31.800896, 40.734762], [31.807118, 40.7331], [31.813916, 40.734475], [31.818843, 40.736052], [31.821163, 40.736806], [31.827953, 40.739083], [31.834492, 40.741148], [31.841644, 40.741978], [31.848059, 40.742709], [31.854282, 40.744307], [31.860697, 40.744888], [31.866282, 40.745337], [31.873044, 40.74597], [31.879063, 40.747218], [31.884737, 40.748436], [31.890692, 40.74894], [31.895695, 40.749512], [31.89873, 40.750492], [31.904257, 40.752177], [31.910229, 40.754042], [31.91726, 40.756578], [31.926137, 40.757794], [31.94134, 40.759487], [31.952991, 40.760858], [31.962003, 40.763109], [31.975346, 40.766273], [31.987964, 40.768441], [31.99861, 40.770019], [32.008519, 40.772547], [32.019331, 40.77217], [32.028282, 40.769777], [32.030118, 40.770112], [32.030118, 40.770112], [32.030118, 40.770112], [32.030118, 40.770112], [32.030118, 40.770112], [32.030445, 40.770186], [32.039091, 40.773351], [32.048733, 40.775845], [32.057712, 40.77801], [32.066023, 40.77993], [32.073431, 40.781776], [32.076997, 40.782488], [32.082291, 40.78222], [32.08777, 40.781089], [32.093023, 40.780385], [32.097023, 40.781249], [32.100652, 40.782081], [32.106431, 40.784349], [32.113755, 40.786084], [32.119932, 40.786881], [32.123966, 40.787409], [32.127849, 40.788534], [32.131921, 40.789956], [32.135773, 40.791132], [32.139465, 40.792055], [32.144017, 40.79318], [32.148974, 40.79441], [32.154727, 40.79584], [32.161788, 40.797426], [32.163623, 40.797696], [32.17283, 40.798651], [32.179944, 40.799355], [32.186789, 40.798451], [32.197955, 40.796339], [32.209336, 40.791657], [32.216117, 40.793416], [32.224165, 40.795394], [32.231474, 40.797186], [32.238473, 40.798674], [32.245176, 40.802912], [32.247715, 40.805781], [32.244872, 40.803885]]}}, {"type": "Feature", "properties": {"day_index": 45, "date": "2026-10-23", "label": "Atkaracalar"}, "geometry": {"type": "LineString", "coordinates": [[32.244878, 40.803917], [32.245112, 40.803372], [32.238821, 40.799475], [32.239544, 40.799185], [32.245779, 40.803812], [32.253996, 40.809134], [32.263665, 40.811091], [32.274499, 40.813298], [32.279024, 40.814227], [32.283404, 40.815127], [32.289099, 40.816281], [32.29747, 40.817988], [32.309858, 40.819991], [32.314297, 40.819998], [32.314297, 40.819998], [32.314297, 40.819998], [32.314297, 40.819998], [32.314297, 40.819998], [32.316505, 40.820994], [32.327613, 40.822682], [32.336326, 40.823982], [32.346979, 40.825588], [32.364802, 40.828244], [32.370597, 40.828734], [32.374641, 40.828699], [32.378624, 40.828677], [32.383761, 40.828744], [32.384916, 40.828717], [32.384916, 40.828717], [32.400557, 40.833733], [32.413751, 40.836361], [32.422604, 40.839126], [32.429066, 40.8412], [32.434478, 40.842937], [32.443934, 40.845589], [32.451766, 40.847531], [32.460286, 40.8496], [32.468759, 40.851743], [32.47684, 40.853605], [32.477427, 40.853543], [32.477427, 40.853543], [32.477427, 40.853543], [32.477427, 40.853543], [32.477427, 40.853543], [32.478276, 40.854015], [32.488594, 40.856664], [32.495253, 40.858316], [32.501857, 40.859954], [32.506141, 40.860985], [32.516184, 40.863467], [32.523032, 40.8625], [32.526126, 40.860876], [32.538711, 40.859329], [32.559089, 40.862407], [32.579176, 40.871416], [32.596188, 40.866758], [32.603296, 40.865743], [32.608819, 40.867197], [32.618268, 40.869919], [32.628405, 40.869585], [32.628267, 40.86956], [32.628267, 40.86956], [32.628267, 40.86956], [32.628267, 40.86956], [32.628267, 40.86956], [32.628267, 40.86956], [32.628267, 40.86956], [32.628267, 40.86956], [32.628267, 40.86956], [32.628267, 40.86956], [32.628267, 40.86956], [32.628267, 40.86956], [32.628267, 40.86956], [32.628267, 40.86956], [32.628267, 40.86956], [32.628267, 40.86956], [32.628267, 40.86956], [32.628267, 40.86956], [32.633652, 40.867597], [32.636293, 40.861696], [32.635655, 40.85665], [32.639568, 40.855433], [32.639853, 40.855138], [32.639853, 40.855138], [32.639853, 40.855138], [32.639853, 40.855138], [32.639853, 40.855138], [32.639853, 40.855138], [32.639853, 40.855138], [32.639853, 40.855138], [32.639853, 40.855138], [32.639853, 40.855138], [32.639853, 40.855138], [32.639853, 40.855138], [32.639853, 40.855138], [32.639853, 40.855138], [32.639853, 40.855138], [32.639853, 40.855138], [32.639853, 40.855138], [32.639853, 40.855138], [32.639853, 40.855138], [32.639853, 40.855138], [32.639853, 40.855138], [32.639853, 40.855138], [32.639853, 40.855138], [32.639853, 40.855138], [32.639853, 40.855138], [32.639853, 40.855138], [32.639853, 40.855138], [32.639853, 40.855138], [32.639853, 40.855138], [32.639853, 40.855138], [32.639853, 40.855138], [32.639853, 40.855138], [32.639853, 40.855138], [32.639845, 40.85515], [32.639845, 40.85515], [32.639845, 40.85515], [32.639845, 40.85515], [32.639845, 40.85515], [32.639845, 40.85515], [32.639845, 40.85515], [32.641107, 40.855007], [32.643518, 40.851166], [32.642684, 40.847705], [32.646246, 40.846815], [32.650551, 40.845767], [32.665448, 40.843144], [32.674878, 40.845008], [32.682371, 40.847571], [32.688581, 40.846224], [32.693995, 40.842807], [32.703623, 40.840081], [32.710237, 40.838507], [32.716066, 40.835409], [32.724168, 40.835264], [32.731173, 40.832807], [32.731351, 40.832741], [32.731351, 40.832741], [32.731351, 40.832741], [32.731351, 40.832741], [32.731351, 40.832741], [32.731351, 40.832741], [32.731351, 40.832741], [32.732584, 40.832817], [32.740166, 40.834487], [32.748385, 40.837718], [32.755017, 40.840176], [32.763387, 40.842055], [32.771204, 40.839332], [32.773399, 40.833825], [32.78016, 40.829959], [32.788006, 40.827577], [32.79574, 40.826104], [32.804344, 40.825438], [32.814021, 40.824943], [32.814077, 40.824917], [32.817924, 40.825355], [32.825806, 40.824804], [32.834694, 40.824144], [32.84366, 40.824041], [32.852604, 40.823268], [32.860939, 40.822214], [32.869437, 40.820771], [32.875652, 40.817534], [32.882033, 40.815005], [32.883861, 40.814335], [32.883847, 40.814328], [32.883847, 40.814328], [32.883847, 40.814328], [32.884298, 40.813938], [32.892148, 40.811553], [32.900133, 40.810659], [32.906249, 40.811596], [32.912799, 40.812315], [32.920684, 40.812918], [32.925327, 40.812453], [32.924909, 40.812403], [32.92716, 40.812573], [32.935444, 40.811177], [32.94516, 40.809531], [32.954167, 40.808006], [32.96167, 40.806584], [32.969816, 40.805343], [32.979669, 40.803668], [32.989424, 40.802012], [32.997799, 40.800643], [33.007002, 40.800451], [33.013377, 40.800997], [33.021651, 40.801764], [33.029655, 40.802443], [33.038607, 40.803264], [33.046885, 40.80401], [33.055347, 40.804751], [33.063721, 40.805406], [33.063684, 40.805333], [33.064579, 40.805545], [33.072888, 40.806107], [33.072523, 40.806553], [33.072468, 40.806617]]}}, {"type": "Feature", "properties": {"day_index": 46, "date": "2026-10-24", "label": "Tosya"}, "geometry": {"type": "LineString", "coordinates": [[33.072523, 40.806539], [33.072572, 40.806156], [33.077253, 40.806869], [33.08355, 40.808598], [33.089448, 40.810957], [33.094859, 40.813135], [33.099151, 40.814872], [33.10455, 40.817052], [33.109897, 40.819209], [33.114511, 40.821051], [33.118268, 40.822508], [33.125317, 40.825316], [33.129654, 40.827065], [33.134499, 40.82904], [33.141044, 40.831755], [33.146053, 40.833766], [33.151651, 40.836018], [33.157172, 40.838234], [33.16271, 40.840449], [33.167212, 40.841066], [33.167227, 40.841066], [33.167227, 40.841066], [33.167227, 40.841066], [33.167227, 40.841066], [33.167227, 40.841066], [33.167227, 40.841066], [33.167227, 40.841066], [33.167227, 40.841066], [33.167227, 40.841066], [33.167227, 40.841066], [33.167227, 40.841066], [33.167227, 40.841066], [33.167227, 40.841066], [33.167227, 40.841066], [33.167227, 40.841066], [33.167244, 40.841063], [33.167244, 40.841063], [33.167244, 40.841063], [33.167244, 40.841063], [33.167244, 40.841063], [33.167244, 40.841063], [33.167244, 40.841063], [33.167244, 40.841063], [33.167244, 40.841063], [33.167244, 40.841063], [33.167244, 40.841063], [33.167244, 40.841063], [33.167244, 40.841063], [33.167244, 40.841063], [33.167244, 40.841063], [33.167244, 40.841063], [33.167244, 40.841063], [33.167244, 40.841063], [33.168646, 40.841886], [33.174828, 40.84238], [33.180984, 40.842891], [33.186457, 40.84333], [33.192967, 40.843169], [33.198377, 40.840471], [33.208906, 40.842182], [33.216843, 40.84782], [33.225057, 40.849187], [33.234228, 40.847903], [33.243774, 40.846539], [33.245004, 40.846153], [33.245004, 40.846153], [33.247381, 40.845645], [33.25167, 40.845292], [33.25837, 40.844875], [33.263186, 40.843041], [33.273534, 40.840766], [33.281972, 40.840111], [33.287017, 40.839141], [33.296495, 40.836936], [33.302733, 40.83547], [33.313442, 40.832962], [33.323757, 40.830554], [33.33423, 40.830641], [33.342024, 40.832142], [33.349174, 40.833919], [33.353771, 40.835021], [33.365086, 40.837859], [33.372021, 40.8396], [33.380657, 40.84186], [33.385439, 40.843387], [33.395503, 40.846593], [33.405978, 40.848284], [33.413859, 40.849985], [33.420572, 40.852515], [33.428727, 40.853251], [33.436556, 40.853021], [33.44275, 40.853211], [33.450742, 40.854139], [33.458451, 40.855003], [33.463661, 40.855582], [33.471823, 40.858046], [33.476663, 40.859795], [33.482102, 40.863246], [33.482102, 40.863246], [33.482102, 40.863246], [33.482694, 40.863842], [33.485736, 40.866071], [33.490572, 40.868867], [33.49302, 40.87011], [33.499084, 40.873149], [33.506858, 40.876118], [33.512276, 40.877934], [33.519755, 40.880873], [33.52694, 40.88503], [33.532261, 40.888122], [33.53769, 40.89121], [33.54318, 40.89447], [33.549966, 40.897857], [33.556719, 40.900346], [33.563279, 40.902775], [33.570715, 40.905281], [33.577741, 40.906583], [33.584424, 40.906983], [33.591559, 40.907336], [33.599314, 40.908551], [33.606284, 40.908858], [33.613478, 40.907257], [33.619458, 40.907171], [33.628073, 40.908413], [33.632186, 40.90789], [33.632476, 40.907733], [33.634036, 40.908321], [33.639949, 40.907278], [33.646993, 40.905899], [33.654679, 40.904395], [33.661337, 40.903068], [33.668995, 40.901121], [33.673569, 40.897966], [33.676075, 40.893998], [33.67781, 40.890931], [33.68523, 40.887816], [33.690498, 40.886124], [33.697709, 40.885155], [33.704698, 40.884865], [33.710413, 40.884453], [33.71695, 40.883741], [33.722439, 40.884306], [33.728582, 40.885774], [33.733495, 40.888373], [33.73849, 40.891115], [33.741991, 40.895131], [33.745801, 40.89681], [33.751221, 40.8998], [33.75717, 40.903312], [33.763778, 40.903117], [33.770464, 40.904854], [33.774533, 40.905171], [33.77874, 40.906097], [33.782046, 40.907926], [33.785421, 40.91019], [33.788926, 40.911538], [33.80133, 40.911491], [33.805125, 40.910888], [33.811806, 40.915261], [33.816285, 40.919144], [33.821155, 40.922567], [33.82702, 40.925327], [33.833316, 40.926418], [33.837589, 40.92686], [33.844203, 40.931112], [33.848226, 40.933964], [33.849332, 40.934814], [33.854302, 40.937018], [33.859987, 40.9386], [33.865811, 40.93969], [33.870484, 40.940558], [33.881934, 40.94268], [33.888761, 40.943099], [33.895199, 40.943725], [33.905345, 40.947625], [33.911542, 40.949881], [33.919278, 40.950712], [33.926275, 40.952464], [33.934849, 40.954463], [33.940823, 40.956181], [33.947441, 40.957546], [33.95418, 40.95718], [33.96006, 40.956357], [33.967217, 40.958299], [33.971138, 40.961125], [33.974887, 40.963733], [33.975475, 40.964304], [33.978824, 40.966521], [33.982927, 40.967592], [33.986803, 40.968545], [33.990138, 40.969341], [33.992651, 40.970233], [33.994858, 40.971416], [33.996898, 40.972882], [33.998693, 40.974675], [34.000612, 40.976196], [34.000643, 40.976203], [34.000643, 40.976203], [34.000643, 40.976203], [34.000655, 40.976214]]}}, {"type": "Feature", "properties": {"day_index": 47, "date": "2026-10-25", "label": "Osmancık"}, "geometry": {"type": "LineString", "coordinates": [[34.000594, 40.976227], [34.002069, 40.978393], [34.0042, 40.980743], [34.006535, 40.983337], [34.0135, 40.990244], [34.018887, 40.996001], [34.023536, 40.998797], [34.027278, 41.000234], [34.031361, 41.001834], [34.037171, 41.00193], [34.041628, 41.000245], [34.04672, 40.999322], [34.05088, 40.999501], [34.057183, 41.005944], [34.068154, 41.013102], [34.074663, 41.016677], [34.080488, 41.01831], [34.087477, 41.019148], [34.094991, 41.019988], [34.108644, 41.019275], [34.119644, 41.01645], [34.128795, 41.01472], [34.137492, 41.018579], [34.145413, 41.022729], [34.150525, 41.025049], [34.156703, 41.027282], [34.163929, 41.029438], [34.171195, 41.03157], [34.179095, 41.03394], [34.185252, 41.035784], [34.192994, 41.038044], [34.19843, 41.039202], [34.203017, 41.040817], [34.212397, 41.040034], [34.218203, 41.04031], [34.218424, 41.040308], [34.218424, 41.040308], [34.218424, 41.040308], [34.218424, 41.040308], [34.218424, 41.040308], [34.222167, 41.041775], [34.229241, 41.045059], [34.236835, 41.047265], [34.243719, 41.048196], [34.249662, 41.049956], [34.254383, 41.05151], [34.258005, 41.052348], [34.262237, 41.052034], [34.269999, 41.05012], [34.275158, 41.052213], [34.278516, 41.05392], [34.281431, 41.055459], [34.284075, 41.057007], [34.286815, 41.059223], [34.292738, 41.066243], [34.295338, 41.068183], [34.298179, 41.069641], [34.302862, 41.071826], [34.306672, 41.073588], [34.313358, 41.078215], [34.318982, 41.082732], [34.32267, 41.083545], [34.325835, 41.08331], [34.336707, 41.083959], [34.343298, 41.090093], [34.346189, 41.092621], [34.349932, 41.094432], [34.353486, 41.09592], [34.361196, 41.098547], [34.375587, 41.097075], [34.385404, 41.098412], [34.391874, 41.09759], [34.39853, 41.097872], [34.405514, 41.101369], [34.411986, 41.100896], [34.417546, 41.097078], [34.420496, 41.095039], [34.424005, 41.092373], [34.42895, 41.088356], [34.434568, 41.084304], [34.440012, 41.081368], [34.445943, 41.078695], [34.449625, 41.076505], [34.452236, 41.074608], [34.454619, 41.073221], [34.458618, 41.070445], [34.46252, 41.067067], [34.469828, 41.0653], [34.475549, 41.06407], [34.48176, 41.062336], [34.489885, 41.063556], [34.494884, 41.064656], [34.50287, 41.06618], [34.50818, 41.070405], [34.514925, 41.072261], [34.521378, 41.071225], [34.527415, 41.068718], [34.533291, 41.065983], [34.537585, 41.062407], [34.541493, 41.058116], [34.544354, 41.05493], [34.548246, 41.050697], [34.554009, 41.04734], [34.558989, 41.046548], [34.561216, 41.046103], [34.562666, 41.045671], [34.569785, 41.041817], [34.576681, 41.039583], [34.581883, 41.036156], [34.585657, 41.032575], [34.588226, 41.030214], [34.595315, 41.026789], [34.600974, 41.024937], [34.604892, 41.022816], [34.609837, 41.017939], [34.613626, 41.0138], [34.617318, 41.009768], [34.62136, 41.006304], [34.624126, 41.004403], [34.625116, 41.004297], [34.630457, 41.003412], [34.636981, 41.000685], [34.639058, 40.999525], [34.643965, 40.997446], [34.648242, 40.995457], [34.653803, 40.991946], [34.65809, 40.987401], [34.663835, 40.985117], [34.669978, 40.983682], [34.677396, 40.981529], [34.681594, 40.978662], [34.687109, 40.974657], [34.691519, 40.972089], [34.699698, 40.971623], [34.706276, 40.973256], [34.710678, 40.977211], [34.715537, 40.980687], [34.721801, 40.981197], [34.728079, 40.982081], [34.734648, 40.982978], [34.739905, 40.982902], [34.746212, 40.982896], [34.754121, 40.984068], [34.761236, 40.983909], [34.766388, 40.981318], [34.770097, 40.979121], [34.776009, 40.977436], [34.783245, 40.978219], [34.788869, 40.978773], [34.793215, 40.976586], [34.798428, 40.976204], [34.799122, 40.976004], [34.799122, 40.976004], [34.799122, 40.976004], [34.7995, 40.976121], [34.799518, 40.976112], [34.799433, 40.976136], [34.80163, 40.97552], [34.80676, 40.973633], [34.812729, 40.972288], [34.818768, 40.969408], [34.825332, 40.968528], [34.830562, 40.965974], [34.837007, 40.965193], [34.843247, 40.964132], [34.848523, 40.961859], [34.853378, 40.962871], [34.85661, 40.966014], [34.858384, 40.966796], [34.861586, 40.969111], [34.86518, 40.969542], [34.868541, 40.969312], [34.872294, 40.968947], [34.877843, 40.967038], [34.883985, 40.963465], [34.892848, 40.960749], [34.898722, 40.962853], [34.899846, 40.962923], [34.902569, 40.96525], [34.905765, 40.96687], [34.905765, 40.96687], [34.905765, 40.96687], [34.905765, 40.96687], [34.905765, 40.96687], [34.905765, 40.96687], [34.905765, 40.96687], [34.905765, 40.96687], [34.905765, 40.96687], [34.905765, 40.96687], [34.905765, 40.96687], [34.905765, 40.96687], [34.905765, 40.96687], [34.905765, 40.96687], [34.905765, 40.96687], [34.905765, 40.96687], [34.905765, 40.96687], [34.905765, 40.96687], [34.905765, 40.96687], [34.905765, 40.96687], [34.905765, 40.96687]]}}, {"type": "Feature", "properties": {"day_index": 48, "date": "2026-10-26", "label": "Havza"}, "geometry": {"type": "LineString", "coordinates": [[34.905932, 40.967208], [34.908094, 40.969785], [34.91088, 40.972486], [34.913779, 40.975228], [34.918322, 40.977197], [34.923114, 40.978111], [34.928274, 40.978956], [34.932947, 40.977979], [34.935931, 40.977697], [34.935914, 40.977681], [34.935914, 40.977681], [34.935914, 40.977681], [34.935914, 40.977681], [34.935914, 40.977681], [34.935914, 40.977681], [34.935914, 40.977681], [34.935914, 40.977681], [34.935914, 40.977681], [34.935914, 40.977681], [34.935914, 40.977681], [34.935914, 40.977681], [34.939199, 40.978576], [34.943448, 40.979163], [34.947239, 40.980187], [34.951172, 40.981387], [34.956055, 40.98287], [34.961149, 40.984417], [34.965373, 40.985986], [34.968687, 40.987884], [34.971793, 40.988973], [34.975839, 40.989679], [34.981729, 40.992341], [34.986922, 40.99377], [34.990617, 40.99385], [34.993963, 40.993301], [34.99451, 40.992906], [34.99451, 40.992906], [34.99451, 40.992906], [34.99451, 40.992906], [34.99451, 40.992906], [34.99451, 40.992906], [34.99451, 40.992906], [34.99451, 40.992906], [34.994492, 40.992904], [34.994492, 40.992904], [34.996767, 40.993167], [35.002374, 40.992656], [35.009721, 40.992643], [35.014871, 40.992344], [35.020246, 40.992739], [35.025022, 40.99159], [35.0289, 40.989157], [35.032399, 40.987004], [35.037305, 40.986185], [35.042386, 40.986513], [35.047477, 40.986827], [35.052166, 40.985617], [35.055686, 40.983467], [35.05958, 40.982719], [35.063687, 40.981951], [35.066433, 40.981334], [35.066815, 40.981334], [35.066815, 40.981334], [35.068688, 40.980041], [35.07112, 40.978021], [35.073892, 40.976938], [35.0769, 40.976638], [35.080157, 40.975576], [35.082749, 40.972856], [35.084257, 40.969998], [35.087464, 40.967728], [35.090856, 40.966248], [35.095007, 40.965227], [35.097934, 40.962819], [35.101582, 40.959418], [35.104743, 40.957647], [35.10834, 40.955639], [35.111633, 40.953763], [35.113928, 40.950784], [35.117219, 40.948695], [35.120879, 40.94771], [35.124052, 40.946861], [35.128661, 40.945628], [35.133033, 40.94409], [35.135309, 40.941404], [35.137675, 40.938397], [35.141562, 40.93633], [35.144603, 40.934832], [35.148489, 40.932922], [35.15236, 40.931013], [35.156392, 40.928983], [35.160907, 40.926241], [35.161418, 40.925836], [35.161418, 40.925836], [35.162311, 40.925209], [35.165999, 40.921964], [35.168513, 40.919277], [35.170805, 40.916628], [35.172418, 40.913879], [35.173936, 40.911222], [35.176065, 40.908627], [35.178501, 40.90591], [35.185145, 40.898519], [35.192268, 40.893811], [35.192577, 40.893073], [35.192577, 40.893073], [35.192577, 40.893073], [35.192577, 40.893073], [35.192265, 40.893311], [35.198236, 40.890826], [35.200558, 40.889635], [35.201041, 40.889404], [35.207297, 40.886263], [35.213448, 40.883813], [35.221224, 40.880865], [35.229166, 40.877978], [35.236565, 40.87519], [35.244319, 40.872284], [35.250301, 40.870035], [35.256364, 40.867762], [35.265187, 40.866364], [35.273461, 40.866341], [35.280105, 40.866323], [35.287464, 40.866284], [35.29466, 40.866279], [35.301335, 40.866262], [35.31029, 40.866593], [35.317744, 40.867556], [35.322775, 40.86782], [35.329918, 40.867115], [35.337549, 40.86598], [35.342234, 40.865281], [35.349002, 40.865363], [35.354781, 40.865775], [35.362993, 40.865724], [35.372552, 40.865405], [35.379818, 40.864842], [35.387751, 40.862924], [35.394216, 40.862304], [35.401926, 40.862671], [35.409565, 40.862574], [35.416224, 40.862686], [35.422722, 40.863788], [35.430063, 40.864142], [35.436706, 40.86461], [35.442072, 40.86632], [35.448026, 40.867699], [35.455741, 40.86752], [35.459922, 40.867403], [35.464433, 40.867224], [35.471933, 40.867965], [35.474833, 40.868014], [35.474833, 40.868014], [35.478054, 40.868458], [35.483856, 40.868922], [35.493186, 40.869615], [35.503285, 40.869963], [35.51317, 40.871252], [35.52202, 40.871968], [35.527157, 40.872366], [35.535376, 40.873013], [35.536267, 40.873042], [35.542792, 40.873602], [35.552891, 40.874359], [35.562106, 40.875138], [35.570832, 40.87582], [35.579417, 40.876497], [35.586262, 40.87703], [35.592168, 40.87736], [35.599314, 40.878051], [35.605126, 40.878522], [35.610523, 40.878903], [35.618771, 40.879164], [35.628718, 40.8825], [35.632439, 40.887664], [35.631765, 40.889415], [35.631428, 40.889834], [35.633953, 40.895677], [35.634867, 40.900206], [35.637927, 40.902371], [35.63786, 40.907963], [35.640848, 40.911914], [35.645389, 40.916765], [35.64658, 40.92193], [35.648136, 40.92607], [35.645659, 40.930957], [35.646079, 40.935891], [35.653088, 40.936912], [35.657033, 40.941195], [35.656335, 40.944949], [35.661051, 40.948887], [35.665169, 40.9538], [35.666138, 40.959259], [35.6652, 40.963205], [35.66545, 40.967527], [35.663231, 40.969094], [35.659148, 40.970686], [35.657373, 40.970664], [35.657373, 40.970664], [35.65737, 40.970679]]}}, {"type": "Feature", "properties": {"day_index": 49, "date": "2026-10-27", "label": "Samsun"}, "geometry": {"type": "LineString", "coordinates": [[35.657727, 40.97065], [35.662781, 40.969255], [35.663291, 40.969213], [35.663268, 40.969188], [35.665721, 40.968485], [35.665999, 40.968604], [35.666446, 40.968346], [35.666594, 40.968241], [35.667282, 40.96796], [35.667282, 40.96796], [35.667282, 40.96796], [35.667879, 40.968009], [35.672148, 40.9704], [35.67778, 40.973864], [35.681004, 40.976603], [35.684027, 40.979182], [35.689481, 40.981565], [35.695747, 40.983793], [35.701092, 40.985662], [35.707604, 40.987807], [35.714905, 40.990458], [35.722624, 40.991922], [35.729408, 40.993173], [35.734977, 40.99415], [35.73917, 40.994886], [35.743329, 40.995599], [35.746888, 40.996237], [35.751456, 40.997038], [35.757663, 40.997865], [35.764095, 40.99782], [35.77015, 40.997604], [35.77624, 40.997347], [35.782079, 40.997188], [35.78673, 40.996894], [35.792934, 40.997611], [35.799429, 40.999005], [35.806324, 41.00048], [35.809683, 41.000812], [35.809683, 41.000812], [35.809683, 41.000812], [35.809683, 41.000812], [35.809683, 41.000812], [35.809683, 41.000812], [35.809683, 41.000812], [35.809683, 41.000812], [35.809683, 41.000812], [35.809683, 41.000812], [35.809683, 41.000812], [35.809508, 41.000848], [35.816676, 41.001546], [35.823764, 41.001827], [35.830099, 41.002034], [35.836069, 41.002424], [35.840133, 41.004234], [35.843124, 41.006532], [35.848442, 41.006969], [35.852622, 41.007305], [35.856345, 41.008523], [35.860732, 41.010154], [35.864292, 41.011431], [35.868325, 41.012971], [35.874999, 41.0219], [35.888851, 41.028035], [35.902695, 41.032991], [35.915954, 41.037327], [35.926249, 41.043508], [35.935943, 41.049757], [35.947145, 41.052554], [35.95936, 41.054759], [35.972536, 41.059078], [35.983663, 41.062781], [35.986954, 41.063869], [35.997308, 41.065724], [36.007907, 41.066345], [36.01255, 41.068019], [36.018852, 41.070997], [36.023528, 41.073254], [36.029629, 41.074051], [36.032019, 41.074682], [36.032019, 41.074682], [36.032019, 41.074682], [36.032154, 41.074674], [36.032154, 41.074674], [36.032154, 41.074674], [36.032154, 41.074674], [36.032154, 41.074674], [36.032517, 41.074729], [36.036543, 41.075988], [36.039884, 41.076884], [36.040855, 41.077705], [36.040855, 41.077705], [36.041777, 41.077506], [36.043842, 41.077682], [36.045113, 41.079547], [36.047532, 41.080875], [36.050425, 41.082597], [36.051611, 41.083283], [36.05577, 41.085857], [36.058091, 41.08871], [36.060069, 41.088428], [36.062607, 41.089409], [36.066005, 41.091887], [36.068573, 41.092828], [36.070696, 41.09468], [36.072889, 41.097131], [36.072814, 41.097807], [36.073146, 41.099721], [36.07319, 41.101669], [36.073695, 41.103467], [36.074139, 41.105093], [36.075472, 41.106273], [36.077559, 41.106947], [36.079122, 41.108656], [36.07916, 41.108693], [36.079577, 41.110708], [36.078832, 41.112926], [36.078708, 41.114999], [36.07757, 41.117898], [36.08088, 41.120337], [36.083559, 41.121989], [36.084521, 41.122467], [36.088425, 41.123524], [36.092735, 41.124629], [36.099176, 41.127846], [36.10517, 41.135906], [36.114487, 41.139108], [36.117388, 41.140885], [36.118957, 41.141418], [36.121202, 41.140893], [36.117996, 41.143275], [36.114269, 41.146393], [36.112429, 41.150162], [36.114276, 41.153646], [36.115782, 41.156635], [36.116383, 41.159231], [36.11756, 41.16165], [36.117881, 41.164422], [36.116776, 41.166953], [36.115613, 41.170048], [36.11482, 41.1731], [36.114557, 41.175312], [36.114557, 41.175312], [36.114557, 41.175312], [36.114557, 41.175312], [36.114557, 41.175312], [36.114557, 41.175312], [36.114557, 41.175312], [36.114557, 41.175312], [36.114557, 41.175312], [36.114557, 41.175312], [36.114557, 41.175312], [36.114553, 41.175325], [36.114553, 41.175325], [36.114553, 41.175325], [36.114553, 41.175325], [36.114553, 41.175325], [36.114553, 41.175325], [36.114553, 41.175325], [36.114553, 41.175325], [36.114553, 41.175325], [36.114553, 41.175325], [36.113671, 41.176968], [36.113334, 41.181015], [36.112783, 41.187234], [36.115064, 41.200077], [36.123362, 41.211415], [36.130431, 41.223839], [36.143286, 41.230039], [36.153029, 41.232499], [36.16555, 41.239873], [36.173136, 41.248402], [36.174935, 41.260284], [36.180457, 41.271657], [36.18717, 41.277433], [36.194531, 41.285654], [36.204639, 41.289024], [36.214829, 41.290989], [36.225076, 41.290803], [36.234847, 41.29154], [36.244192, 41.292233], [36.253836, 41.292875], [36.265174, 41.291994], [36.272959, 41.290892], [36.282485, 41.290129], [36.287344, 41.290106], [36.289001, 41.289563], [36.292372, 41.285499], [36.296019, 41.285853], [36.299081, 41.285661], [36.301801, 41.285443], [36.304614, 41.2853], [36.308555, 41.286488], [36.318326, 41.290381], [36.321919, 41.291448], [36.324563, 41.291814], [36.328484, 41.292976], [36.328753, 41.294817], [36.330677, 41.294937], [36.331308, 41.294986], [36.33119, 41.294967]]}}, {"type": "Feature", "properties": {"day_index": 50, "date": "2026-10-28", "label": "Ünye"}, "geometry": {"type": "LineString", "coordinates": [[36.33106, 41.295035], [36.332828, 41.295079], [36.333457, 41.294721], [36.335711, 41.290834], [36.339439, 41.287163], [36.344967, 41.283166], [36.351018, 41.279115], [36.358112, 41.275334], [36.362731, 41.273629], [36.367603, 41.271883], [36.372326, 41.269996], [36.378687, 41.266607], [36.383874, 41.26114], [36.385556, 41.254382], [36.392128, 41.249391], [36.398877, 41.24492], [36.405551, 41.240584], [36.41241, 41.236122], [36.420411, 41.230864], [36.427699, 41.226447], [36.434207, 41.224336], [36.441021, 41.22165], [36.447391, 41.219176], [36.454136, 41.216037], [36.460332, 41.214782], [36.462614, 41.212984], [36.470237, 41.213289], [36.478583, 41.212939], [36.482613, 41.211875], [36.490223, 41.212099], [36.497679, 41.211407], [36.50438, 41.209366], [36.51241, 41.21045], [36.520405, 41.210382], [36.524862, 41.208794], [36.532702, 41.208613], [36.540573, 41.208448], [36.548815, 41.208244], [36.55631, 41.208447], [36.562799, 41.208887], [36.563733, 41.214561], [36.567036, 41.217539], [36.574597, 41.215875], [36.583164, 41.213957], [36.586577, 41.214148], [36.591704, 41.216554], [36.597887, 41.217318], [36.605512, 41.217494], [36.611932, 41.21529], [36.618481, 41.215987], [36.624504, 41.213485], [36.630214, 41.209443], [36.635045, 41.206726], [36.641637, 41.206049], [36.647181, 41.206923], [36.651676, 41.210438], [36.657725, 41.210759], [36.663917, 41.211435], [36.670144, 41.210343], [36.676456, 41.208872], [36.682249, 41.210727], [36.682866, 41.210851], [36.682866, 41.210851], [36.682866, 41.210851], [36.682866, 41.210851], [36.682866, 41.210851], [36.682866, 41.210851], [36.682866, 41.210851], [36.682866, 41.210851], [36.682866, 41.210851], [36.682866, 41.210851], [36.682866, 41.210851], [36.682866, 41.210851], [36.682866, 41.210851], [36.682866, 41.210851], [36.682866, 41.210851], [36.682866, 41.210851], [36.682866, 41.210851], [36.682866, 41.210851], [36.682866, 41.210851], [36.6831, 41.210992], [36.688745, 41.208509], [36.695739, 41.205987], [36.702242, 41.205294], [36.709779, 41.20478], [36.716671, 41.204253], [36.717206, 41.204011], [36.717206, 41.204011], [36.717206, 41.204011], [36.717206, 41.204011], [36.717206, 41.204011], [36.717206, 41.204011], [36.717206, 41.204011], [36.717206, 41.204011], [36.717206, 41.204011], [36.717213, 41.204023], [36.717213, 41.204023], [36.717749, 41.204051], [36.719249, 41.204065], [36.727997, 41.203304], [36.736698, 41.204363], [36.744875, 41.207049], [36.752322, 41.209553], [36.761055, 41.211963], [36.76995, 41.21374], [36.778949, 41.21511], [36.788215, 41.216201], [36.797538, 41.217032], [36.807181, 41.218043], [36.816151, 41.218996], [36.824802, 41.219541], [36.832955, 41.220392], [36.842083, 41.220663], [36.851846, 41.220749], [36.86151, 41.220452], [36.870974, 41.220089], [36.880113, 41.219624], [36.889787, 41.219178], [36.898703, 41.218556], [36.908201, 41.217765], [36.917725, 41.216798], [36.926811, 41.215759], [36.935604, 41.21477], [36.943818, 41.213108], [36.944265, 41.212799], [36.944265, 41.212799], [36.944265, 41.212799], [36.944265, 41.212799], [36.944265, 41.212799], [36.944265, 41.212799], [36.944265, 41.212799], [36.944265, 41.212799], [36.944265, 41.212799], [36.944265, 41.212799], [36.944265, 41.212799], [36.944265, 41.212799], [36.945189, 41.212952], [36.952706, 41.212574], [36.961023, 41.211935], [36.966023, 41.211899], [36.974785, 41.212307], [36.982897, 41.211193], [36.990394, 41.209146], [36.994828, 41.209142], [37.002777, 41.205907], [37.009022, 41.200555], [37.015357, 41.195653], [37.022334, 41.191477], [37.028773, 41.187503], [37.029067, 41.187334], [37.033423, 41.184809], [37.039225, 41.181308], [37.045086, 41.177784], [37.0498, 41.173036], [37.055302, 41.169352], [37.063153, 41.167143], [37.07146, 41.164695], [37.079147, 41.162425], [37.088039, 41.159799], [37.097195, 41.157108], [37.105914, 41.154531], [37.11437, 41.152037], [37.122663, 41.1495], [37.131523, 41.146974], [37.140284, 41.144393], [37.14845, 41.142269], [37.157774, 41.141552], [37.167113, 41.142623], [37.172939, 41.143286], [37.180748, 41.141908], [37.190113, 41.140057], [37.197639, 41.138549], [37.203962, 41.136326], [37.208892, 41.133663], [37.213738, 41.131212], [37.222935, 41.136609], [37.223947, 41.142829], [37.224512, 41.143972], [37.23179, 41.143977], [37.239672, 41.144075], [37.247605, 41.144751], [37.25517, 41.145078], [37.25517, 41.145078], [37.25517, 41.145078], [37.255625, 41.145009], [37.25579, 41.14498], [37.260865, 41.144104], [37.26895, 41.143058], [37.27715, 41.143899], [37.284662, 41.143521], [37.292712, 41.142899], [37.293152, 41.138896], [37.293152, 41.138896], [37.293152, 41.138896], [37.293152, 41.138896], [37.293152, 41.138896], [37.293157, 41.138881], [37.292038, 41.13741], [37.287174, 41.133439], [37.28504, 41.132673]]}}, {"type": "Feature", "properties": {"day_index": 51, "date": "2026-10-29", "label": "Piraziz"}, "geometry": {"type": "LineString", "coordinates": [[37.284768, 41.132601], [37.285862, 41.130586], [37.288188, 41.127135], [37.288244, 41.127086], [37.289772, 41.12661], [37.292963, 41.123978], [37.296529, 41.12224], [37.297007, 41.122017], [37.303358, 41.119376], [37.310123, 41.117185], [37.314488, 41.116174], [37.321843, 41.114751], [37.324684, 41.114178], [37.318666, 41.115338], [37.312908, 41.11647], [37.310024, 41.116799], [37.312532, 41.115484], [37.319954, 41.114867], [37.327137, 41.113438], [37.333741, 41.112155], [37.34111, 41.110753], [37.347544, 41.109505], [37.355028, 41.107993], [37.363369, 41.10698], [37.371213, 41.106389], [37.378575, 41.105827], [37.383258, 41.105398], [37.391482, 41.103461], [37.398443, 41.100376], [37.404369, 41.096131], [37.409298, 41.090952], [37.413668, 41.086035], [37.418151, 41.080986], [37.425581, 41.077608], [37.433704, 41.076494], [37.442173, 41.074513], [37.448509, 41.072136], [37.456236, 41.069856], [37.462855, 41.068615], [37.468696, 41.065166], [37.469931, 41.063711], [37.469931, 41.063711], [37.469931, 41.063711], [37.469931, 41.063711], [37.469931, 41.063711], [37.469931, 41.063711], [37.469931, 41.063711], [37.469931, 41.063711], [37.469931, 41.063711], [37.469931, 41.063711], [37.469931, 41.063711], [37.469931, 41.063711], [37.469931, 41.063711], [37.469931, 41.063711], [37.469931, 41.063711], [37.469931, 41.063711], [37.469931, 41.063711], [37.472575, 41.062291], [37.472774, 41.062092], [37.472774, 41.062092], [37.475153, 41.060725], [37.478331, 41.053613], [37.481948, 41.048157], [37.486424, 41.042679], [37.488577, 41.040342], [37.492769, 41.036877], [37.497297, 41.033517], [37.503439, 41.029652], [37.511181, 41.027122], [37.518805, 41.025878], [37.525244, 41.02371], [37.531977, 41.021354], [37.540282, 41.021238], [37.548477, 41.022909], [37.556258, 41.024526], [37.563598, 41.026082], [37.570523, 41.027588], [37.577658, 41.030026], [37.583851, 41.030971], [37.588595, 41.026556], [37.595005, 41.023693], [37.601985, 41.020851], [37.607474, 41.01779], [37.612694, 41.014954], [37.615836, 41.01088], [37.619017, 41.006739], [37.623006, 41.003347], [37.626905, 41.000051], [37.632336, 40.997627], [37.636595, 40.996199], [37.638697, 40.995486], [37.642629, 40.994553], [37.645775, 40.994481], [37.650188, 40.995187], [37.652888, 40.995798], [37.656552, 40.996651], [37.660377, 40.997511], [37.664424, 40.997872], [37.667325, 40.997179], [37.671099, 40.995934], [37.67501, 40.994645], [37.679403, 40.993196], [37.684354, 40.991564], [37.686607, 40.990821], [37.69092, 40.989399], [37.695376, 40.98793], [37.70034, 40.986293], [37.701229, 40.986], [37.706231, 40.984351], [37.708531, 40.984028], [37.708526, 40.984036], [37.708526, 40.984036], [37.708526, 40.984036], [37.712905, 40.983763], [37.722795, 40.978222], [37.734722, 40.977073], [37.74553, 40.979146], [37.753965, 40.97956], [37.764851, 40.982746], [37.774999, 40.98498], [37.781107, 40.985809], [37.789374, 40.986343], [37.799527, 40.988099], [37.809143, 40.988393], [37.814139, 40.990616], [37.819518, 40.996481], [37.824399, 41.001875], [37.829079, 41.007013], [37.834237, 41.01204], [37.841549, 41.015524], [37.849207, 41.017093], [37.855653, 41.016121], [37.862142, 41.014626], [37.867107, 41.011599], [37.868128, 41.009915], [37.868128, 41.009915], [37.868128, 41.009915], [37.868128, 41.009915], [37.868128, 41.009915], [37.868128, 41.009915], [37.868128, 41.009915], [37.868128, 41.009915], [37.868128, 41.009915], [37.868128, 41.009915], [37.868128, 41.009915], [37.868128, 41.009915], [37.868128, 41.009915], [37.868128, 41.009915], [37.869341, 41.006743], [37.870817, 41.002295], [37.875768, 40.99514], [37.875342, 40.990289], [37.875782, 40.989297], [37.875808, 40.989236], [37.875808, 40.989236], [37.875808, 40.989236], [37.875808, 40.989236], [37.875808, 40.989236], [37.875808, 40.989236], [37.875808, 40.989236], [37.875808, 40.989236], [37.877503, 40.987424], [37.883546, 40.984701], [37.886712, 40.983665], [37.893235, 40.983658], [37.89965, 40.983886], [37.905743, 40.983837], [37.912962, 40.984118], [37.919342, 40.984475], [37.924014, 40.98396], [37.929069, 40.980895], [37.929093, 40.97561], [37.931734, 40.975004], [37.93466, 40.975349], [37.940559, 40.976576], [37.946215, 40.977297], [37.954434, 40.977098], [37.96142, 40.976853], [37.967891, 40.976714], [37.975438, 40.976462], [37.982699, 40.976306], [37.990183, 40.97609], [37.997322, 40.97612], [38.004764, 40.976178], [38.013484, 40.976215], [38.021019, 40.975541], [38.028237, 40.972774], [38.036604, 40.971762], [38.042437, 40.969812], [38.050578, 40.967855], [38.057559, 40.966822], [38.064612, 40.965975], [38.072172, 40.9648], [38.07915, 40.96287], [38.087701, 40.962789], [38.095312, 40.962548], [38.103474, 40.961027], [38.111499, 40.957819], [38.117428, 40.955812], [38.118651, 40.955082]]}}, {"type": "Feature", "properties": {"day_index": 52, "date": "2026-10-30", "label": "Espiye"}, "geometry": {"type": "LineString", "coordinates": [[38.118922, 40.954901], [38.125441, 40.952662], [38.134183, 40.952511], [38.143515, 40.952344], [38.152105, 40.950208], [38.161935, 40.947294], [38.170708, 40.945152], [38.179487, 40.94297], [38.183971, 40.940258], [38.183971, 40.940258], [38.184503, 40.940055], [38.194215, 40.938568], [38.204501, 40.937532], [38.215187, 40.938015], [38.224631, 40.93875], [38.233201, 40.93987], [38.243871, 40.941051], [38.252527, 40.942878], [38.261015, 40.944252], [38.268975, 40.943745], [38.268975, 40.943745], [38.268975, 40.943745], [38.268975, 40.943745], [38.268979, 40.943785], [38.27739, 40.944932], [38.285077, 40.942732], [38.292094, 40.936614], [38.301368, 40.93506], [38.307291, 40.930792], [38.31216, 40.926514], [38.313023, 40.925902], [38.313105, 40.925884], [38.317855, 40.922826], [38.317855, 40.922826], [38.317841, 40.922841], [38.317841, 40.922841], [38.31789, 40.922821], [38.31789, 40.922821], [38.317873, 40.922858], [38.317873, 40.922858], [38.317873, 40.922858], [38.317873, 40.922858], [38.317873, 40.922858], [38.317873, 40.922858], [38.317873, 40.922858], [38.317873, 40.922858], [38.317873, 40.922858], [38.317873, 40.922858], [38.317873, 40.922858], [38.317873, 40.922858], [38.317873, 40.922858], [38.317873, 40.922858], [38.317873, 40.922858], [38.317873, 40.922858], [38.317873, 40.922858], [38.317873, 40.922858], [38.317873, 40.922858], [38.317873, 40.922858], [38.317873, 40.922858], [38.317873, 40.922858], [38.317873, 40.922858], [38.317873, 40.922858], [38.317873, 40.922858], [38.317873, 40.922858], [38.317873, 40.922858], [38.317873, 40.922858], [38.318081, 40.922817], [38.324485, 40.918928], [38.331245, 40.91675], [38.337644, 40.914802], [38.344513, 40.912998], [38.345005, 40.912904], [38.345173, 40.912797], [38.35181, 40.910419], [38.359609, 40.908474], [38.367926, 40.909181], [38.374949, 40.912644], [38.381586, 40.916355], [38.385376, 40.919577], [38.388952, 40.923821], [38.390786, 40.923894], [38.391427, 40.923882], [38.394866, 40.918814], [38.40033, 40.914792], [38.405817, 40.913627], [38.412351, 40.914897], [38.417644, 40.914643], [38.417836, 40.914692], [38.417836, 40.914692], [38.417836, 40.914692], [38.417836, 40.914692], [38.417836, 40.914692], [38.418005, 40.914778], [38.422892, 40.912175], [38.424265, 40.91188], [38.424596, 40.911192], [38.431097, 40.910597], [38.431132, 40.910664], [38.431132, 40.910664], [38.431121, 40.910509], [38.431121, 40.910509], [38.431121, 40.910509], [38.431121, 40.910509], [38.431121, 40.910509], [38.431121, 40.910509], [38.431121, 40.910509], [38.431121, 40.910509], [38.431121, 40.910509], [38.431792, 40.911012], [38.439654, 40.912806], [38.443145, 40.913435], [38.443145, 40.913435], [38.443145, 40.913435], [38.443145, 40.913435], [38.443145, 40.913435], [38.446677, 40.9144], [38.449013, 40.914957], [38.45631, 40.914506], [38.464786, 40.916254], [38.473199, 40.91733], [38.481094, 40.91326], [38.492021, 40.915633], [38.499985, 40.915359], [38.51021, 40.91701], [38.51997, 40.917495], [38.52942, 40.916769], [38.538848, 40.9194], [38.547893, 40.923544], [38.556136, 40.927214], [38.558891, 40.92834], [38.559432, 40.928425], [38.559432, 40.928425], [38.559432, 40.928425], [38.559432, 40.928425], [38.559402, 40.928423], [38.559405, 40.928525], [38.559405, 40.928525], [38.564233, 40.93129], [38.570601, 40.934992], [38.576622, 40.939354], [38.582123, 40.942884], [38.589929, 40.945441], [38.594749, 40.950529], [38.602626, 40.955899], [38.608915, 40.96052], [38.613487, 40.966537], [38.620823, 40.966769], [38.626109, 40.967969], [38.632104, 40.969371], [38.642223, 40.970737], [38.651023, 40.967048], [38.653901, 40.964327], [38.653919, 40.96468], [38.653919, 40.96468], [38.653919, 40.96468], [38.653919, 40.96468], [38.653919, 40.96468], [38.653919, 40.96468], [38.653969, 40.964684], [38.653969, 40.964684], [38.653969, 40.964684], [38.653969, 40.964684], [38.653969, 40.964684], [38.653969, 40.964684], [38.653969, 40.964684], [38.653969, 40.964684], [38.653969, 40.964684], [38.653969, 40.964684], [38.653969, 40.964684], [38.653969, 40.964684], [38.653969, 40.964684], [38.653969, 40.964684], [38.653969, 40.964684], [38.653969, 40.964684], [38.653969, 40.964684], [38.653969, 40.964684], [38.653969, 40.964684], [38.653969, 40.964684], [38.653911, 40.964381], [38.65392, 40.964347], [38.657044, 40.960424], [38.657177, 40.959328], [38.662476, 40.954058], [38.668719, 40.95062], [38.675323, 40.948516], [38.679258, 40.9487], [38.678976, 40.948418], [38.678976, 40.948418], [38.678976, 40.948418], [38.678976, 40.948418], [38.678976, 40.948418], [38.678976, 40.948418], [38.678976, 40.948418], [38.678976, 40.948418], [38.678976, 40.948418], [38.678976, 40.948418], [38.678976, 40.948418], [38.678976, 40.948418], [38.678976, 40.948418], [38.678976, 40.948418]]}}, {"type": "Feature", "properties": {"day_index": 53, "date": "2026-10-31", "label": "Trabzon"}, "geometry": {"type": "LineString", "coordinates": [[38.678944, 40.94844], [38.681232, 40.948301], [38.687347, 40.94659], [38.693552, 40.947405], [38.700204, 40.948018], [38.702301, 40.947967], [38.702301, 40.947967], [38.70229, 40.948426], [38.70762, 40.949642], [38.714396, 40.950183], [38.720613, 40.952604], [38.726943, 40.955805], [38.732529, 40.95968], [38.735024, 40.961147], [38.735024, 40.961147], [38.735024, 40.961147], [38.738285, 40.962996], [38.744222, 40.96621], [38.751122, 40.969962], [38.757314, 40.974011], [38.763653, 40.978395], [38.769859, 40.98269], [38.776057, 40.9872], [38.781534, 40.991079], [38.786659, 40.992006], [38.793569, 40.996753], [38.797282, 40.998891], [38.80389, 40.999839], [38.80546, 41.000145], [38.808724, 41.000477], [38.812381, 41.00085], [38.816396, 41.001259], [38.820756, 41.001702], [38.825128, 41.002148], [38.829899, 41.002633], [38.833576, 41.004338], [38.838491, 41.006504], [38.842725, 41.009086], [38.850123, 41.009829], [38.857804, 41.011405], [38.864639, 41.010637], [38.871748, 41.010528], [38.873981, 41.011342], [38.880554, 41.014056], [38.886669, 41.017541], [38.892999, 41.021287], [38.899539, 41.025389], [38.905517, 41.02949], [38.911131, 41.03301], [38.918008, 41.037252], [38.924732, 41.038972], [38.929291, 41.040427], [38.934288, 41.041105], [38.943453, 41.037485], [38.951591, 41.036502], [38.958158, 41.03671], [38.967836, 41.036051], [38.975466, 41.037205], [38.98362, 41.037789], [38.99054, 41.037183], [38.997964, 41.037898], [39.004682, 41.033896], [39.012085, 41.031779], [39.018805, 41.03164], [39.027523, 41.032646], [39.035072, 41.033832], [39.042238, 41.035039], [39.051266, 41.036091], [39.061082, 41.038363], [39.068418, 41.041176], [39.075583, 41.043313], [39.082795, 41.044143], [39.091324, 41.045428], [39.099112, 41.046431], [39.104595, 41.04815], [39.110763, 41.049248], [39.117733, 41.051227], [39.126436, 41.055134], [39.133752, 41.059182], [39.13937, 41.062772], [39.144638, 41.066282], [39.15027, 41.069913], [39.155633, 41.073607], [39.161475, 41.077143], [39.164826, 41.077497], [39.170206, 41.075954], [39.174793, 41.073719], [39.176912, 41.072905], [39.182346, 41.072965], [39.190002, 41.073067], [39.195712, 41.072451], [39.202713, 41.071525], [39.210988, 41.070237], [39.21418, 41.066552], [39.218928, 41.061209], [39.224423, 41.056996], [39.231618, 41.054482], [39.237717, 41.05149], [39.244986, 41.04908], [39.252225, 41.047313], [39.259817, 41.047221], [39.267258, 41.048371], [39.275721, 41.049298], [39.281951, 41.04992], [39.289569, 41.051086], [39.296478, 41.052586], [39.303759, 41.055398], [39.31037, 41.057758], [39.317189, 41.06079], [39.324525, 41.061519], [39.332397, 41.063375], [39.339672, 41.066968], [39.345557, 41.068858], [39.351668, 41.071263], [39.358244, 41.075177], [39.363478, 41.078034], [39.370792, 41.078987], [39.37427, 41.080939], [39.379651, 41.084039], [39.385074, 41.087198], [39.389499, 41.090186], [39.393827, 41.093153], [39.399249, 41.096147], [39.403796, 41.100054], [39.408364, 41.103081], [39.414517, 41.105426], [39.420737, 41.106391], [39.424031, 41.104577], [39.428679, 41.100829], [39.435928, 41.100261], [39.442051, 41.100946], [39.447296, 41.10006], [39.452824, 41.098962], [39.458209, 41.098291], [39.462406, 41.096929], [39.468463, 41.09524], [39.473837, 41.093277], [39.479898, 41.091711], [39.487128, 41.090409], [39.490212, 41.087403], [39.494443, 41.08356], [39.500356, 41.081226], [39.504898, 41.075882], [39.509622, 41.072227], [39.513698, 41.069383], [39.517832, 41.066246], [39.522892, 41.062219], [39.527205, 41.05895], [39.533211, 41.055012], [39.537917, 41.051092], [39.543499, 41.048101], [39.548063, 41.044607], [39.552034, 41.041931], [39.555184, 41.038355], [39.559159, 41.033979], [39.562109, 41.029974], [39.565048, 41.025413], [39.570143, 41.022365], [39.575762, 41.021265], [39.580544, 41.019242], [39.585737, 41.017707], [39.594331, 41.015724], [39.600453, 41.014377], [39.606937, 41.012962], [39.612877, 41.011649], [39.618379, 41.009723], [39.622286, 41.007968], [39.629543, 41.004019], [39.631534, 41.002949], [39.633998, 41.001514], [39.636871, 40.99984], [39.639014, 40.998592], [39.641431, 40.997184], [39.644201, 40.99557], [39.647597, 40.993591], [39.651146, 40.991524], [39.651717, 40.989268], [39.655063, 40.988378], [39.659857, 40.989645], [39.662916, 40.989862], [39.66921, 40.99059], [39.673541, 40.990364], [39.678599, 40.992779], [39.682145, 40.991641], [39.684461, 40.988875], [39.688531, 40.990391], [39.691222, 40.99013], [39.693891, 40.988971], [39.697469, 40.990191], [39.703086, 40.992557], [39.706426, 40.996913], [39.714972, 41.000304], [39.720401, 41.002818], [39.725451, 41.003927], [39.729427, 41.004432], [39.731619, 41.004409], [39.732575, 41.005285], [39.732697, 41.007329], [39.730639, 41.007837], [39.72602, 41.008352]]}}, {"type": "Feature", "properties": {"day_index": 54, "date": "2026-11-01", "label": "Rize Merkez"}, "geometry": {"type": "LineString", "coordinates": [[39.7259, 41.008088], [39.729604, 41.008146], [39.733347, 41.007601], [39.734147, 41.00474], [39.736116, 41.00204], [39.740499, 41.00059], [39.744409, 40.99947], [39.746973, 41.000366], [39.752817, 41.001332], [39.758171, 41.00198], [39.763439, 41.00146], [39.767059, 41.000381], [39.770204, 41.001145], [39.77411, 41.001328], [39.77775, 41.000148], [39.778719, 40.999684], [39.774932, 41.001303], [39.769073, 41.000585], [39.767194, 40.999801], [39.76136, 40.99901], [39.756308, 40.99826], [39.757885, 40.998224], [39.76071, 40.998173], [39.758333, 41.001149], [39.7632, 41.001521], [39.766726, 41.00049], [39.766806, 40.999678], [39.764964, 40.999241], [39.768489, 40.999675], [39.77162, 40.998911], [39.775622, 40.996312], [39.779455, 40.993942], [39.781305, 40.993243], [39.786173, 40.992522], [39.79066, 40.991783], [39.795661, 40.991619], [39.801551, 40.989949], [39.808115, 40.987691], [39.813794, 40.985463], [39.81859, 40.984652], [39.823641, 40.984106], [39.828356, 40.982868], [39.831308, 40.979086], [39.831908, 40.973402], [39.833821, 40.970235], [39.836014, 40.966796], [39.838677, 40.963701], [39.842402, 40.961476], [39.847667, 40.959537], [39.852468, 40.958584], [39.85791, 40.957882], [39.862573, 40.95713], [39.868016, 40.955851], [39.873536, 40.954317], [39.878637, 40.953726], [39.883024, 40.953183], [39.888483, 40.953771], [39.893732, 40.95435], [39.901704, 40.952921], [39.906526, 40.952841], [39.911089, 40.953631], [39.914629, 40.953893], [39.917044, 40.95405], [39.921207, 40.954239], [39.926534, 40.953938], [39.931651, 40.953847], [39.937071, 40.954801], [39.942577, 40.956156], [39.94729, 40.95731], [39.952547, 40.958366], [39.958889, 40.959555], [39.964478, 40.960072], [39.969745, 40.960433], [39.974595, 40.961998], [39.981038, 40.961351], [39.986303, 40.962061], [39.990297, 40.963118], [39.992742, 40.963413], [39.996718, 40.96134], [40.002133, 40.958811], [40.007646, 40.956524], [40.015236, 40.956796], [40.021088, 40.957633], [40.025507, 40.957309], [40.028457, 40.956742], [40.031312, 40.956179], [40.033815, 40.955143], [40.037703, 40.952942], [40.041527, 40.950777], [40.045638, 40.94845], [40.049992, 40.945842], [40.051672, 40.943049], [40.055014, 40.939804], [40.058318, 40.937202], [40.061229, 40.934832], [40.065732, 40.931513], [40.070285, 40.92854], [40.07411, 40.926062], [40.078681, 40.923266], [40.082954, 40.921406], [40.087523, 40.919265], [40.09186, 40.917579], [40.096395, 40.91646], [40.10074, 40.91642], [40.105296, 40.915922], [40.108939, 40.915057], [40.111781, 40.913096], [40.115112, 40.913234], [40.119441, 40.912024], [40.125386, 40.911665], [40.130863, 40.912193], [40.13521, 40.912679], [40.140079, 40.912074], [40.143797, 40.911794], [40.149879, 40.912313], [40.155801, 40.912434], [40.161345, 40.913633], [40.166679, 40.913961], [40.172602, 40.913292], [40.178184, 40.913882], [40.183739, 40.914044], [40.18985, 40.915783], [40.195664, 40.918181], [40.200086, 40.920279], [40.204351, 40.921046], [40.208854, 40.921761], [40.211911, 40.921982], [40.215514, 40.923551], [40.219268, 40.925099], [40.226342, 40.926336], [40.232608, 40.928448], [40.2373, 40.931138], [40.24195, 40.93306], [40.246707, 40.935499], [40.252283, 40.937574], [40.257238, 40.940622], [40.261685, 40.943696], [40.265824, 40.946514], [40.270333, 40.948919], [40.275034, 40.951302], [40.280222, 40.952456], [40.28456, 40.955119], [40.289205, 40.958076], [40.293687, 40.960947], [40.298021, 40.963688], [40.301936, 40.966198], [40.304619, 40.967826], [40.308995, 40.97004], [40.313357, 40.972937], [40.317308, 40.976314], [40.321086, 40.979753], [40.32492, 40.983099], [40.328562, 40.986417], [40.331477, 40.98992], [40.33416, 40.993351], [40.337432, 40.996022], [40.341044, 40.998637], [40.344297, 41.001277], [40.347422, 41.004406], [40.350804, 41.007189], [40.354961, 41.009625], [40.359661, 41.01142], [40.363275, 41.014049], [40.3672, 41.015851], [40.370058, 41.017162], [40.374066, 41.019505], [40.378677, 41.021755], [40.381514, 41.023493], [40.386793, 41.024958], [40.392723, 41.025629], [40.397691, 41.025097], [40.403043, 41.024399], [40.408397, 41.024746], [40.413354, 41.024559], [40.418724, 41.024614], [40.423023, 41.02468], [40.428389, 41.025738], [40.432845, 41.027937], [40.43827, 41.028486], [40.439773, 41.029125], [40.44468, 41.030177], [40.450242, 41.029865], [40.45551, 41.030817], [40.460399, 41.030696], [40.467478, 41.031709], [40.472318, 41.03317], [40.477918, 41.034613], [40.482995, 41.036044], [40.48901, 41.037339], [40.494448, 41.039209], [40.500145, 41.040338], [40.505896, 41.038637], [40.50909, 41.035805], [40.512185, 41.032656], [40.514974, 41.029794], [40.517884, 41.026913], [40.521686, 41.025694], [40.526649, 41.025565], [40.532386, 41.025498], [40.541305, 41.025933]]}}]};
     const MAP_STYLE = "../styles/map-style.json";
@@ -488,7 +588,6 @@
           layout: { "line-cap": "round", "line-join": "round" },
         });
 
-        // Fit bounds su tutte le tracce
         const bounds = new maplibregl.LngLatBounds();
         GEOJSON.features.forEach(f => {
           f.geometry.coordinates.forEach(c => bounds.extend(c));

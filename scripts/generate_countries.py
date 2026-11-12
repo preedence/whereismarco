@@ -5,6 +5,7 @@ Genera countries/<slug>.html per ogni nazione in data/countries.json.
 - Legge countries.json (prodotto da build_countries.py)
 - Per ogni nazione, aggrega le tracce GPX dei suoi giorni in un'unica FeatureCollection
 - Scrive countries/<slug>.html con header, stats, mappa aggregata, lista tappe, diario Obsidian
+- Testi bilingui IT/EN tramite data-i18n + src/i18n.js + src/countries.js
 """
 
 import html
@@ -44,24 +45,6 @@ def weather_icon(code):
     if 85 <= code <= 86: return "🌨️"
     if code >= 95: return "⛈️"
     return "🌡️"
-
-
-def fmt_number_it(value, digits=1):
-    if value is None:
-        return "—"
-    s = f"{value:,.{digits}f}"
-    return s.replace(",", "X").replace(".", ",").replace("X", ".")
-
-
-def fmt_date_it(iso):
-    if not iso:
-        return "—"
-    try:
-        d = date_cls.fromisoformat(iso)
-    except Exception:
-        return iso
-    months = ["gen","feb","mar","apr","mag","giu","lug","ago","set","ott","nov","dic"]
-    return f"{d.day} {months[d.month-1]} {d.year}"
 
 
 def simplify_track(points, max_points):
@@ -120,7 +103,7 @@ HTML_TEMPLATE = """<!doctype html>
 <html lang="it">
 <head>
   <meta charset="utf-8" />
-  <title>{name_it} – Il viaggio – Dov'è Marco?</title>
+  <title data-title-country="{name_it}" data-title-country-en="{name_en}">{name_it} – Dov'è Marco?</title>
   <link rel="icon" href="../images/favicon.ico" type="image/x-icon" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
 
@@ -141,7 +124,7 @@ HTML_TEMPLATE = """<!doctype html>
         <div class="wm-logo-title-wrap">
           <span class="wm-logo-title">🔍 Dov'è Marco?</span>
         </div>
-        <span class="wm-logo-subtitle">Dove mi porta la bici</span>
+        <span class="wm-logo-subtitle" data-i18n="nav.subtitle">Dove mi porta la bici</span>
       </a>
 
       <button type="button" class="wm-mobile-toggle" id="menu-toggle" aria-label="Toggle Menu">
@@ -149,8 +132,8 @@ HTML_TEMPLATE = """<!doctype html>
       </button>
 
       <nav class="wm-nav" id="wm-nav-menu">
-        <a href="../about.html">Info</a>
-        <a href="../journey.html">Il viaggio</a>
+        <a href="../about.html" data-i18n="nav.about">Info</a>
+        <a href="../journey.html" data-i18n="nav.journey">Il viaggio</a>
         <div class="wm-lang" role="group" aria-label="Language">
           <button type="button" data-lang="it" aria-pressed="true">IT</button>
           <button type="button" data-lang="en" aria-pressed="false">EN</button>
@@ -162,17 +145,27 @@ HTML_TEMPLATE = """<!doctype html>
   <main class="wm-journey-main">
     <div class="wm-journey-wrap">
 
-      <a href="../journey.html" class="wm-back-link">← Torna a tutte le nazioni</a>
+            <article class="wm-page wm-country-article">
 
-      <article class="wm-page wm-country-article">
+        <a href="../journey.html" class="wm-back-link" data-i18n="country.backToAll">← Torna a tutte le nazioni</a>
 
         <header class="wm-country-header">
           <div class="wm-country-flag">{flag}</div>
           <div>
-            <h1 class="wm-country-title">{name_it}</h1>
-            <p class="wm-country-sub">
-              {days_count} tappe · {total_km} km · ↑ {total_elevation_m} m
-              · dal {first_date} al {last_date}
+            <h1 class="wm-country-title" data-name-it="{name_it}" data-name-en="{name_en}">{name_it}</h1>
+            <p class="wm-country-sub"
+               data-days="{days_count}"
+               data-km="{total_km_raw}"
+               data-up="{total_up_raw}"
+               data-first="{first_date_iso}"
+               data-last="{last_date_iso}">
+              <span data-i18n="country.stagesCount">5 tappe</span> ·
+              <span><span class="wm-sub-km">{total_km_raw}</span> km</span> ·
+              <span>↑ <span class="wm-sub-up">{total_up_raw}</span> m</span> ·
+              <span data-i18n="country.from">dal</span>
+              <span class="wm-sub-first">{first_date_iso}</span>
+              <span data-i18n="country.to">al</span>
+              <span class="wm-sub-last">{last_date_iso}</span>
             </p>
           </div>
         </header>
@@ -182,13 +175,21 @@ HTML_TEMPLATE = """<!doctype html>
         {description_section}
 
         <section class="wm-country-stages">
-          <h2>Le tappe</h2>
+          <h2 data-i18n="country.stages">Le tappe</h2>
           <div class="wm-country-stages-list">
             {stages_html}
           </div>
         </section>
 
-        <nav class="wm-country-nav">
+        <nav class="wm-country-nav"
+             data-prev-slug="{prev_slug}"
+             data-prev-it="{prev_name_it}"
+             data-prev-en="{prev_name_en}"
+             data-prev-flag="{prev_flag}"
+             data-next-slug="{next_slug}"
+             data-next-it="{next_name_it}"
+             data-next-en="{next_name_en}"
+             data-next-flag="{next_flag}">
           {prev_link}
           {next_link}
         </nav>
@@ -198,6 +199,8 @@ HTML_TEMPLATE = """<!doctype html>
   </main>
 
   <script src="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.js"></script>
+  <script src="../src/i18n.js"></script>
+  <script src="../src/countries.js"></script>
   <script>
     const GEOJSON = {geojson_json};
     const MAP_STYLE = "../styles/map-style.json";
@@ -226,7 +229,6 @@ HTML_TEMPLATE = """<!doctype html>
           layout: {{ "line-cap": "round", "line-join": "round" }},
         }});
 
-        // Fit bounds su tutte le tracce
         const bounds = new maplibregl.LngLatBounds();
         GEOJSON.features.forEach(f => {{
           f.geometry.coordinates.forEach(c => bounds.extend(c));
@@ -248,36 +250,40 @@ HTML_TEMPLATE = """<!doctype html>
 def render_stage_row(day):
     w = day.get("weather") or {}
     icon = weather_icon(w.get("code"))
-    temps = ""
+    temps_html = ""
     if w.get("tmin") is not None and w.get("tmax") is not None:
-        temps = f"{fmt_number_it(w['tmin'], 0)}° / {fmt_number_it(w['tmax'], 0)}°"
-
-    page = f"../stages/giorno-{day['day_index']:02d}.html"
+        temps_html = (
+            f'<span class="wm-csr-temps" '
+            f'data-tmin="{w["tmin"]}" data-tmax="{w["tmax"]}"></span>'
+        )
 
     return f"""
-      <a href="{page}" class="wm-country-stage-row">
+      <div class="wm-country-stage-row"
+           data-date="{day.get('date') or ''}"
+           data-km="{day.get('distance_km') if day.get('distance_km') is not None else ''}"
+           data-up="{day.get('elevation_up_m') if day.get('elevation_up_m') is not None else ''}"
+           data-hours="{day.get('moving_time_h') if day.get('moving_time_h') is not None else ''}">
         <div class="wm-csr-cover">
           <span class="wm-csr-icon">{icon}</span>
-          <span class="wm-csr-temps">{temps}</span>
+          {temps_html}
         </div>
         <div class="wm-csr-body">
           <div class="wm-csr-head">
-            <span class="wm-csr-day">GIORNO {day['day_index']:02d}</span>
-            <span class="wm-csr-date">📅 {fmt_date_it(day.get('date'))}</span>
+            <span class="wm-csr-day"><span data-i18n="country.day">GIORNO</span> {day['day_index']:02d}</span>
+            <span class="wm-csr-date">📅 <span class="wm-csr-date-text"></span></span>
           </div>
           <h3 class="wm-csr-title">{html.escape(day.get('label') or '—')}</h3>
           <div class="wm-csr-stats">
-            <span>📏 {fmt_number_it(day.get('distance_km'), 1)} km</span>
-            <span>⛰️ ↑ {fmt_number_it(day.get('elevation_up_m'), 0)} m</span>
-            <span>⏱️ {fmt_number_it(day.get('moving_time_h'), 1)} h</span>
+            <span>📏 <span class="wm-csr-km"></span> km</span>
+            <span>⛰️ ↑ <span class="wm-csr-up"></span> m</span>
+            <span>⏱️ <span class="wm-csr-hours"></span> <span data-i18n="country.h">h</span></span>
           </div>
         </div>
-      </a>
+      </div>
     """
 
 
 def render_country(country, idx, total, all_countries):
-    # Descrizione (opzionale)
     if country.get("has_description"):
         description_section = f"""
         <section class="wm-country-description">
@@ -287,31 +293,56 @@ def render_country(country, idx, total, all_countries):
     else:
         description_section = ""
 
-    # Tappe
     stages_html = "".join(render_stage_row(d) for d in country["days"])
 
-    # Prev / next
+    prev_slug = prev_it = prev_en = prev_flag = ""
+    next_slug = next_it = next_en = next_flag = ""
     prev_link = ""
     next_link = ""
     if idx > 0:
         prev_c = all_countries[idx - 1]
-        prev_link = f'<a href="{prev_c["slug"]}.html" class="wm-nav-prev">← {prev_c["flag"]} {prev_c["name_it"]}</a>'
+        prev_slug = prev_c["slug"]
+        prev_it = prev_c["name_it"]
+        prev_en = prev_c["name_en"]
+        prev_flag = prev_c["flag"]
+        prev_link = (
+            f'<a href="{prev_slug}.html" class="wm-nav-prev" '
+            f'data-name-it="{html.escape(prev_it)}" data-name-en="{html.escape(prev_en)}">'
+            f'← {prev_flag} <span class="wm-nav-name">{html.escape(prev_it)}</span></a>'
+        )
     if idx < total - 1:
         next_c = all_countries[idx + 1]
-        next_link = f'<a href="{next_c["slug"]}.html" class="wm-nav-next">{next_c["flag"]} {next_c["name_it"]} →</a>'
+        next_slug = next_c["slug"]
+        next_it = next_c["name_it"]
+        next_en = next_c["name_en"]
+        next_flag = next_c["flag"]
+        next_link = (
+            f'<a href="{next_slug}.html" class="wm-nav-next" '
+            f'data-name-it="{html.escape(next_it)}" data-name-en="{html.escape(next_en)}">'
+            f'{next_flag} <span class="wm-nav-name">{html.escape(next_it)}</span> →</a>'
+        )
 
     geojson = build_geojson(country)
 
     return HTML_TEMPLATE.format(
         name_it=html.escape(country["name_it"]),
+        name_en=html.escape(country["name_en"]),
         flag=country["flag"],
         days_count=country["days_count"],
-        total_km=fmt_number_it(country["total_km"], 1),
-        total_elevation_m=fmt_number_it(country["total_elevation_m"], 0),
-        first_date=fmt_date_it(country["first_date"]),
-        last_date=fmt_date_it(country["last_date"]),
+        total_km_raw=country["total_km"],
+        total_up_raw=country["total_elevation_m"],
+        first_date_iso=country["first_date"],
+        last_date_iso=country["last_date"],
         description_section=description_section,
         stages_html=stages_html,
+        prev_slug=prev_slug,
+        prev_name_it=html.escape(prev_it),
+        prev_name_en=html.escape(prev_en),
+        prev_flag=prev_flag,
+        next_slug=next_slug,
+        next_name_it=html.escape(next_it),
+        next_name_en=html.escape(next_en),
+        next_flag=next_flag,
         prev_link=prev_link,
         next_link=next_link,
         geojson_json=json.dumps(geojson, ensure_ascii=False),

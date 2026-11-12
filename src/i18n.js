@@ -30,8 +30,12 @@
   }
 
   async function loadDict(lang) {
-    const res = await fetch(`i18n/${lang}.json`);
-    if (!res.ok) throw new Error(`Impossibile caricare i18n/${lang}.json`);
+    // Percorso assoluto dalla root del sito: funziona da /, /countries/, /stages/, ecc.
+    // Se una pagina ha bisogno di un base diverso, può impostare window.I18N_BASE prima di i18n.js.
+    const base = window.I18N_BASE || "/i18n/";
+    const url = `${base}${lang}.json`;
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`Impossibile caricare ${url}`);
     return res.json();
   }
 
@@ -61,6 +65,18 @@
       month: "short",
       year: "numeric",
     }).format(d);
+  }
+
+  // Nome localizzato di una nazione: oggetto con { name_it, name_en }
+  function countryName(obj) {
+    if (!obj) return "";
+    const l = state.lang || "it";
+    return (
+      (l === "en" ? obj.name_en : obj.name_it) ||
+      obj.name_it ||
+      obj.name_en ||
+      ""
+    );
   }
 
   function apply() {
@@ -99,7 +115,7 @@
   async function init() {
     if (document.readyState === "loading") {
       await new Promise((r) =>
-        document.addEventListener("DOMContentLoaded", r, { once: true })
+      document.addEventListener("DOMContentLoaded", r, { once: true })
       );
     }
 
@@ -123,11 +139,12 @@
   window.t = t;
   window.fmtNum = fmtNum;
   window.fmtDate = fmtDate;
+  window.countryName = countryName;
   window.I18N = {
     ready: init(),
-    setLang,
-    get lang() {
-      return state.lang;
-    },
+ setLang,
+ get lang() {
+   return state.lang;
+ },
   };
 })();

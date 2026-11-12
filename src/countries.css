@@ -206,3 +206,92 @@
   .wm-csr-title { font-size: 0.92rem; }
   .wm-csr-stats { font-size: 0.7rem; gap: 8px; }
 }
+
+/* ===== Back link "Torna a tutte le nazioni" ===== */
+.wm-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 1.25rem 0 0.75rem;
+  padding: 0.45rem 0.95rem;
+  font-family: "Nunito", system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--waldo-red, #e63946);
+  background: #fff;
+  border: 2px solid var(--waldo-red, #e63946);
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease;
+}
+
+.wm-back-link:hover,
+.wm-back-link:focus-visible {
+  background: var(--waldo-red, #e63946);
+  color: #fff;
+  transform: translateX(-2px);
+  outline: none;
+}
+
+/* ===== Prev / next nazione ===== */
+.wm-country-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 1rem;
+  margin: 2rem 0 0;
+  padding-top: 1.5rem;
+  border-top: 1px dashed rgba(0, 0, 0, 0.15);
+  flex-wrap: wrap;
+}
+
+.wm-country-nav a {
+  flex: 1 1 0;
+  min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1rem;
+  font-family: "Nunito", system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #2b2b2b;
+  background: #f6f6f4;
+  border: 2px solid #e2e2de;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+}
+
+.wm-country-nav a:hover,
+.wm-country-nav a:focus-visible {
+  background: #fff;
+  border-color: var(--waldo-red, #e63946);
+  color: var(--waldo-red, #e63946);
+  outline: none;
+}
+
+.wm-country-nav a.wm-nav-prev {
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.wm-country-nav a.wm-nav-next {
+  justify-content: flex-end;
+  text-align: right;
+  margin-left: auto;
+}
+
+@media (max-width: 560px) {
+  .wm-country-nav {
+    flex-direction: column;
+  }
+  .wm-country-nav a {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+  .wm-country-nav a.wm-nav-next {
+    margin-left: 0;
+  }
+}

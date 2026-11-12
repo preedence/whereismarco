@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
   <meta charset="utf-8" />
-  <title>Serbia – Il viaggio – Dov'è Marco?</title>
+  <title data-title-country="Serbia" data-title-country-en="Serbia">Serbia – Dov'è Marco?</title>
   <link rel="icon" href="../images/favicon.ico" type="image/x-icon" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
 
@@ -23,7 +23,7 @@
         <div class="wm-logo-title-wrap">
           <span class="wm-logo-title">🔍 Dov'è Marco?</span>
         </div>
-        <span class="wm-logo-subtitle">Dove mi porta la bici</span>
+        <span class="wm-logo-subtitle" data-i18n="nav.subtitle">Dove mi porta la bici</span>
       </a>
 
       <button type="button" class="wm-mobile-toggle" id="menu-toggle" aria-label="Toggle Menu">
@@ -31,8 +31,8 @@
       </button>
 
       <nav class="wm-nav" id="wm-nav-menu">
-        <a href="../about.html">Info</a>
-        <a href="../journey.html">Il viaggio</a>
+        <a href="../about.html" data-i18n="nav.about">Info</a>
+        <a href="../journey.html" data-i18n="nav.journey">Il viaggio</a>
         <div class="wm-lang" role="group" aria-label="Language">
           <button type="button" data-lang="it" aria-pressed="true">IT</button>
           <button type="button" data-lang="en" aria-pressed="false">EN</button>
@@ -44,17 +44,27 @@
   <main class="wm-journey-main">
     <div class="wm-journey-wrap">
 
-      <a href="../journey.html" class="wm-back-link">← Torna a tutte le nazioni</a>
+            <article class="wm-page wm-country-article">
 
-      <article class="wm-page wm-country-article">
+        <a href="../journey.html" class="wm-back-link" data-i18n="country.backToAll">← Torna a tutte le nazioni</a>
 
         <header class="wm-country-header">
           <div class="wm-country-flag">🇷🇸</div>
           <div>
-            <h1 class="wm-country-title">Serbia</h1>
-            <p class="wm-country-sub">
-              1 tappe · 117,8 km · ↑ 1.800 m
-              · dal 27 set 2026 al 27 set 2026
+            <h1 class="wm-country-title" data-name-it="Serbia" data-name-en="Serbia">Serbia</h1>
+            <p class="wm-country-sub"
+               data-days="1"
+               data-km="117.8"
+               data-up="1800"
+               data-first="2026-09-27"
+               data-last="2026-09-27">
+              <span data-i18n="country.stagesCount">5 tappe</span> ·
+              <span><span class="wm-sub-km">117.8</span> km</span> ·
+              <span>↑ <span class="wm-sub-up">1800</span> m</span> ·
+              <span data-i18n="country.from">dal</span>
+              <span class="wm-sub-first">2026-09-27</span>
+              <span data-i18n="country.to">al</span>
+              <span class="wm-sub-last">2026-09-27</span>
             </p>
           </div>
         </header>
@@ -64,34 +74,46 @@
         
 
         <section class="wm-country-stages">
-          <h2>Le tappe</h2>
+          <h2 data-i18n="country.stages">Le tappe</h2>
           <div class="wm-country-stages-list">
             
-      <a href="../stages/giorno-22.html" class="wm-country-stage-row">
+      <div class="wm-country-stage-row"
+           data-date="2026-09-27"
+           data-km="117.8"
+           data-up="1800"
+           data-hours="7.2">
         <div class="wm-csr-cover">
           <span class="wm-csr-icon">☁️</span>
-          <span class="wm-csr-temps">6° / 13°</span>
+          <span class="wm-csr-temps" data-tmin="5.5" data-tmax="13.2"></span>
         </div>
         <div class="wm-csr-body">
           <div class="wm-csr-head">
-            <span class="wm-csr-day">GIORNO 22</span>
-            <span class="wm-csr-date">📅 27 set 2026</span>
+            <span class="wm-csr-day"><span data-i18n="country.day">GIORNO</span> 22</span>
+            <span class="wm-csr-date">📅 <span class="wm-csr-date-text"></span></span>
           </div>
           <h3 class="wm-csr-title">Општина Сурдулица</h3>
           <div class="wm-csr-stats">
-            <span>📏 117,8 km</span>
-            <span>⛰️ ↑ 1.800 m</span>
-            <span>⏱️ 7,2 h</span>
+            <span>📏 <span class="wm-csr-km"></span> km</span>
+            <span>⛰️ ↑ <span class="wm-csr-up"></span> m</span>
+            <span>⏱️ <span class="wm-csr-hours"></span> <span data-i18n="country.h">h</span></span>
           </div>
         </div>
-      </a>
+      </div>
     
           </div>
         </section>
 
-        <nav class="wm-country-nav">
-          <a href="bulgaria.html" class="wm-nav-prev">← 🇧🇬 Bulgaria</a>
-          <a href="grecia.html" class="wm-nav-next">🇬🇷 Grecia →</a>
+        <nav class="wm-country-nav"
+             data-prev-slug="bulgaria"
+             data-prev-it="Bulgaria"
+             data-prev-en="Bulgaria"
+             data-prev-flag="🇧🇬"
+             data-next-slug="grecia"
+             data-next-it="Grecia"
+             data-next-en="Greece"
+             data-next-flag="🇬🇷">
+          <a href="bulgaria.html" class="wm-nav-prev" data-name-it="Bulgaria" data-name-en="Bulgaria">← 🇧🇬 <span class="wm-nav-name">Bulgaria</span></a>
+          <a href="grecia.html" class="wm-nav-next" data-name-it="Grecia" data-name-en="Greece">🇬🇷 <span class="wm-nav-name">Grecia</span> →</a>
         </nav>
 
       </article>
@@ -99,6 +121,8 @@
   </main>
 
   <script src="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.js"></script>
+  <script src="../src/i18n.js"></script>
+  <script src="../src/countries.js"></script>
   <script>
     const GEOJSON = {"type": "FeatureCollection", "features": [{"type": "Feature", "properties": {"day_index": 22, "date": "2026-09-27", "label": "Општина Сурдулица"}, "geometry": {"type": "LineString", "coordinates": [[23.314469, 42.69449], [23.310882, 42.692465], [23.309171, 42.69544], [23.309171, 42.69544], [23.309152, 42.695439], [23.309152, 42.695439], [23.309152, 42.695439], [23.309841, 42.698445], [23.307113, 42.701741], [23.300889, 42.704792], [23.299057, 42.707482], [23.289968, 42.711986], [23.279174, 42.717564], [23.277625, 42.722557], [23.270789, 42.723876], [23.26881, 42.728027], [23.262268, 42.731216], [23.254783, 42.734371], [23.254229, 42.734537], [23.254263, 42.734623], [23.254263, 42.734623], [23.254263, 42.734623], [23.253369, 42.73365], [23.252662, 42.732959], [23.24508, 42.736405], [23.234466, 42.74219], [23.226827, 42.746376], [23.216832, 42.75207], [23.207044, 42.757894], [23.197639, 42.76384], [23.189769, 42.770382], [23.18045, 42.775963], [23.172361, 42.780769], [23.165818, 42.783045], [23.156399, 42.778645], [23.151977, 42.776108], [23.153098, 42.773658], [23.150972, 42.775027], [23.145633, 42.774755], [23.146371, 42.768089], [23.144747, 42.76989], [23.143268, 42.768732], [23.139847, 42.766414], [23.139287, 42.761137], [23.135258, 42.758458], [23.131991, 42.75564], [23.124574, 42.75723], [23.117283, 42.759385], [23.113813, 42.75949], [23.113813, 42.75949], [23.113813, 42.75949], [23.110265, 42.761701], [23.107118, 42.759734], [23.103767, 42.758153], [23.088734, 42.752618], [23.07242, 42.757445], [23.059677, 42.762827], [23.049212, 42.764658], [23.047824, 42.760279], [23.042381, 42.757721], [23.036015, 42.757703], [23.026156, 42.759805], [23.0191, 42.75849], [23.01077, 42.760257], [23.00304, 42.762752], [22.994666, 42.764526], [22.986635, 42.765845], [22.979842, 42.762847], [22.976826, 42.758683], [22.974448, 42.755891], [22.97148, 42.753415], [22.970381, 42.750704], [22.965627, 42.746361], [22.959287, 42.741865], [22.948976, 42.735515], [22.930478, 42.732661], [22.919602, 42.737536], [22.909033, 42.738754], [22.90786, 42.738268], [22.90786, 42.738268], [22.90786, 42.738268], [22.907866, 42.738281], [22.907866, 42.738281], [22.907866, 42.738281], [22.907866, 42.738281], [22.907866, 42.738281], [22.907866, 42.738281], [22.907866, 42.738281], [22.907884, 42.738284], [22.907884, 42.738284], [22.907884, 42.738284], [22.907884, 42.738284], [22.907884, 42.738284], [22.907884, 42.738284], [22.905436, 42.738732], [22.895334, 42.739937], [22.886678, 42.741056], [22.873565, 42.741653], [22.860487, 42.746368], [22.856002, 42.746541], [22.856023, 42.742741], [22.853645, 42.736071], [22.846273, 42.732626], [22.844648, 42.732895], [22.839708, 42.736232], [22.834905, 42.739667], [22.830285, 42.743138], [22.827107, 42.749027], [22.819521, 42.754586], [22.813615, 42.759632], [22.80811, 42.764407], [22.794125, 42.77232], [22.786181, 42.781334], [22.775468, 42.787653], [22.763243, 42.793631], [22.755783, 42.800325], [22.745084, 42.807708], [22.734903, 42.814959], [22.726015, 42.818306], [22.720538, 42.817769], [22.716277, 42.816065], [22.714262, 42.813115], [22.714688, 42.809593], [22.712923, 42.805354], [22.707957, 42.800692], [22.702228, 42.794902], [22.699173, 42.789459], [22.692729, 42.789677], [22.690078, 42.7927], [22.676669, 42.799805], [22.667837, 42.803718], [22.667864, 42.80371], [22.667715, 42.803827], [22.657359, 42.808547], [22.644619, 42.811366], [22.636231, 42.819047], [22.632976, 42.823619], [22.625356, 42.8189], [22.623125, 42.818317], [22.61571, 42.817179], [22.605972, 42.816507], [22.594741, 42.81711], [22.584692, 42.818541], [22.574327, 42.820053], [22.562814, 42.821254], [22.552177, 42.820468], [22.540746, 42.82048], [22.530129, 42.819312], [22.521594, 42.815007], [22.515086, 42.813396], [22.506222, 42.812163], [22.494704, 42.81101], [22.485719, 42.808787], [22.477171, 42.80667], [22.471672, 42.805371], [22.470039, 42.804943], [22.457594, 42.80177], [22.450029, 42.798445], [22.448803, 42.797733], [22.445709, 42.794367], [22.44203, 42.78962], [22.440471, 42.785521], [22.439561, 42.780966], [22.439471, 42.77873], [22.432853, 42.774494], [22.424704, 42.771804], [22.41736, 42.768955], [22.415004, 42.76348], [22.413252, 42.759325], [22.406959, 42.756141], [22.402684, 42.753965], [22.399027, 42.753275], [22.395501, 42.752723], [22.391602, 42.751889], [22.390767, 42.751502], [22.388312, 42.748804], [22.38687, 42.744834], [22.386374, 42.740655], [22.385341, 42.737654], [22.385376, 42.734336], [22.384955, 42.73115], [22.386296, 42.730544], [22.386183, 42.727487], [22.385977, 42.722912], [22.384553, 42.719873], [22.386156, 42.717627], [22.387709, 42.715091], [22.386452, 42.715607], [22.38411, 42.716934], [22.385677, 42.714367], [22.384296, 42.7116], [22.38206, 42.70852], [22.381258, 42.703622], [22.381055, 42.701879], [22.381942, 42.698376], [22.378862, 42.694168], [22.377038, 42.690682], [22.371803, 42.689653], [22.364391, 42.692272], [22.364972, 42.692533]]}}]};
     const MAP_STYLE = "../styles/map-style.json";
@@ -127,7 +151,6 @@
           layout: { "line-cap": "round", "line-join": "round" },
         });
 
-        // Fit bounds su tutte le tracce
         const bounds = new maplibregl.LngLatBounds();
         GEOJSON.features.forEach(f => {
           f.geometry.coordinates.forEach(c => bounds.extend(c));

@@ -1,4 +1,13 @@
 {
+  "nav.subtitle": "Dove mi porta la bici",
+  "country.backToAll": "← Torna a tutte le nazioni",
+  "country.stages": "Le tappe",
+  "country.day": "GIORNO",
+  "country.h": "h",
+  "country.from": "dal",
+  "country.to": "al",
+  "country.stagesCount": "{n} tappe",
+
   "title.map": "Dov'è Marco? – Mappa live",
   "title.about": "Dov'è Marco? – Info",
   "title.journey": "Dov'è Marco? – Il viaggio",
@@ -46,5 +55,12 @@
   "journey.m": "m",
   "journey.h": "h",
   "journey.empty": "Nessuna tappa pubblicata ancora.",
-  "journey.error": "Impossibile caricare data/summary.json"
+  "journey.error": "Impossibile caricare data/summary.json",
+  "journey.summary": "{countries} paesi · {stages} tappe · {km} km",
+  "journey.stagesCount": "{n} tappe",
+  "journey.km": "km",
+  "journey.m": "m",
+  "journey.empty": "Nessuna nazione ancora.",
+  "journey.loadError": "Impossibile caricare data/countries.json"
+
 }
