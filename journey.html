@@ -116,7 +116,7 @@
               <div class="wm-country-card-body">
                 <h2 class="wm-country-card-title">${cname(c)}</h2>
                 <div class="wm-country-card-meta">
-                  <span>${t('journey.stagesCount', { n: num(c.days_count, 0) })}</span>
+                  <span>${t(c.days_count === 1 ? 'journey.stagesCountOne' : 'journey.stagesCount', { n: num(c.days_count, 0) })}</span>
                   <span>${num(c.total_km, 1)} ${t('journey.km')}</span>
                   <span>↑ ${num(c.total_elevation_m, 0)} ${t('journey.m')}</span>
                 </div>

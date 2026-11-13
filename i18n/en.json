@@ -8,6 +8,7 @@
   "country.from": "from",
   "country.to": "to",
   "country.stagesCount": "{n} stages",
+  "country.stagesCountOne": "{n} stage",
 
   "title.map": "Where is Marco? – Live map",
   "title.about": "Where is Marco? – About",
@@ -62,6 +63,7 @@
   "journey.km": "km",
   "journey.m": "m",
   "journey.empty": "No countries yet.",
-  "journey.loadError": "Could not load data/countries.json"
+  "journey.loadError": "Could not load data/countries.json",
+  "journey.stagesCountOne": "{n} stage"
 
 }

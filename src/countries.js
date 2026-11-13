@@ -48,7 +48,11 @@
     const days = sub.dataset.days;
     if (days && window.t) {
       const el = sub.querySelector("[data-i18n='country.stagesCount']");
-      if (el) el.textContent = window.t("country.stagesCount", { n: days });
+      if (el) {
+        const n = Number(days);
+        const key = n === 1 ? "country.stagesCountOne" : "country.stagesCount";
+        el.textContent = window.t(key, { n: days });
+      }
     }
 
     const kmEl = sub.querySelector(".wm-sub-km");
